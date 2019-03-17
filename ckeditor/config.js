@@ -21,4 +21,9 @@ CKEDITOR.editorConfig = function( config ) {
 	];
 
 	config.removeButtons = 'Subscript,Superscript,Maximize,Source,About,HorizontalRule,Anchor,Blockquote';
+
+	config.height = '50vh';
+
+	config.removePlugins = 'resize';
 };
+
