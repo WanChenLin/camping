@@ -14,11 +14,12 @@
     <form name='form' action='#' method='post'>
         <textarea name="content" id="content" rows="10" cols="80"></textarea>
         <script>
-        CKEDITOR.replace('content', {});
-        </script>        
+            CKFinder.setupCKEditor();
+            CKEDITOR.replace('content', {});
+        </script>
         <input type='button' value='送出' onclick='processData()'>
     </form>
-        <!-- <script>
+    <!-- <script>
             ClassicEditor
                 .create(document.querySelector('#editor'))
                 .then(editor => {
