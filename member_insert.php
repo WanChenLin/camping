@@ -27,6 +27,7 @@ if(isset($_POST['gotodb'])){
         VALUES 
         (?, ?, ?, ?, ?, ?, ?, ?)";
 
+    try{
         $stmt = $pdo->prepare($sql);
 
         $stmt->execute([
@@ -39,7 +40,7 @@ if(isset($_POST['gotodb'])){
             $_POST['mobile'],
             $_POST['email']
         ]);
-
+    
         if($stmt->rowCount()==1){
             $success=true;
             $msg=[
@@ -60,6 +61,13 @@ if(isset($_POST['gotodb'])){
                 'info' => '資料新增錯誤'
             ];
         }
+    } catch(PDOException $ex) {
+        $msg=[
+            'type' => 'danger',
+            'info' => '帳號重複輸入'
+        ];
+    }
+    
 
 }
 
@@ -69,6 +77,12 @@ if(isset($_POST['gotodb'])){
 <?php include __DIR__. '/html_header.php'; ?>
 <?php include __DIR__. '/html_navbar.php'; ?>
 
+<!-- <style>
+    .form-group small{
+        color: red !important;
+    }
+</style> -->
+
 <main class=" col-9 bg-white">
 
 <aside class= "my-2">
@@ -76,21 +90,8 @@ if(isset($_POST['gotodb'])){
     <li class="nav-item">
         <a class="nav-link" href="member_list.php">會員資料清單</a>
     </li>
-    <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-    </li> -->
     <li class="nav-item">
         <a class="nav-link active" href="member_insert.php">新增資料</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
     </li>
     </ul>
 </aside>
@@ -107,32 +108,36 @@ if(isset($_POST['gotodb'])){
         <div class="card-body">
             <h5 class="card-title">新增會員資料
                 <?php 
-                    if(isset($stmt)){
-                        echo $stmt->rowCount();
+                    if(isset($stmt)) {
+                        $rowNum = $stmt->rowCount();
+                        echo '(已送出 '. $rowNum. ')';
                     }
                 ?>
             </h5>
             
-            <form name="formInsert" method="POST" onSubmit="">
+            <form name="formInsert" method="POST" onsubmit="return checkForm()">
                 <input type="hidden" name="gotodb" value="check">
                 <div class="form-group row">
                     <label for="account" class="col-sm-2 col-form-label">帳號名稱</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="account" name="account" placeholder="" value="<?= $account ?>">
+                        <small id="accountHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">密碼</label>
                     <div class="col-sm-10">
                         <input type="password" class="form-control" id="password" name="password" placeholder="" value="<?= $password ?>">
+                        <small id="passwordHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
-                <!-- <div class="form-group row">
+                <div class="form-group row">
                     <label for="password_check" class="col-sm-2 col-form-label">再次確認密碼</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password_check" name="password_check" placeholder="">
+                        <input type="password" class="form-control" id="password_check" name="password_check" placeholder="" value="">
+                        <small id="password_checkHelp" class="form-text text-muted"></small>
                     </div>
-                </div> -->
+                </div>
                 <!-- <div class="form-group row">
                     <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
                     <div class="col-sm-10">
@@ -145,15 +150,17 @@ if(isset($_POST['gotodb'])){
                     <label for="name" class="col-sm-2 col-form-label">姓名</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="name" name="name" placeholder="" value="<?= $name ?>">
+                        <small id="nameHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="nickname" name="nickname" placeholder="" value="<?= $nickname ?>">
+                        <small id="nicknameHelp" class="form-text text-muted"></small>
                     </div>
-                    <div class="col-sm-2">
-                        <small>將使用於分享樂</small>
+                    <div class="col-sm-2 d-flex align-content-center flex-wrap">
+                        <p>將使用於分享樂</p>
                     </div>
                 </div>
                 <fieldset class="form-group">
@@ -177,18 +184,21 @@ if(isset($_POST['gotodb'])){
                     <label for="birthday" class="col-sm-2 col-form-label">生日</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="birthday" name="birthday" placeholder="YYYY-MM-DD" value="<?= $birthday ?>">
+                        <small id="birthdayHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="mobile" class="col-sm-2 col-form-label">手機</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="<?= $mobile ?>">
+                        <small id="mobileHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">信箱</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="email" name="email" placeholder="必填" value="<?= $email ?>">
+                        <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="form-group row text-center">
@@ -202,5 +212,71 @@ if(isset($_POST['gotodb'])){
 </section>
 
 </main>
+
+<script>
+
+    const fields = [
+        'account',
+        'password',
+        'password_check',
+        'name',
+        'nickname',
+        'gender',
+        'birthday',
+        'mobile',
+        'email'
+    ];
+
+    const checkForm = () => {
+
+        let ispassed = true;
+
+        let name = document.formInsert.name.value;
+        let birthday = document.formInsert.birthday.value;
+        let mobile = document.formInsert.mobile.value;
+        let email = document.formInsert.email.value;
+        let password = document.formInsert.password.value;
+        let password_check = document.formInsert.password_check.value;
+
+        let email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        let mobile_pattern = /^09\d{2}\d{3}\d{3}$/;
+        let birth_pattern = /^\d{4}\-\d{2}\-\d{2}$/;
+
+        for(let k in fields){
+            document.formInsert[fields[k]].style.borderColor = '#ccc';
+            document.querySelector('#'+ fields[k] +'Help').innerHTML = '';
+        }
+        
+        if (password_check != password) {
+            document.formInsert.password_check.style.borderColor = 'red';
+            document.querySelector('#password_checkHelp').innerHTML = '密碼錯誤';
+            ispassed = false;
+        }
+
+        if(name.length < 2){
+            document.formInsert.name.style.borderColor = 'red';
+            document.querySelector('#nameHelp').innerHTML = '請輸入完整的姓名';
+            isPassed = false;
+        }
+        if(! mobile_pattern.test(mobile)){
+            document.formInsert.mobile.style.borderColor = 'red';
+            document.querySelector('#mobileHelp').innerHTML = '格式錯誤';
+            isPassed = false;
+        }
+        if(! email_pattern.test(email)){
+            document.formInsert.email.style.borderColor = 'red';
+            document.querySelector('#emailHelp').innerHTML = '請輸入完整的電子郵件';
+            isPassed = false;
+        }
+        if(! birth_pattern.test(birthday)){
+            document.formInsert.birthday.style.borderColor = 'red';
+            document.querySelector('#birthdayHelp').innerHTML = '格式錯誤';
+            isPassed = false;
+        }
+
+        return ispassed;
+    }
+
+</script>
 
 <?php include __DIR__. '/html_foot.php'; ?>

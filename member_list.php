@@ -1,21 +1,21 @@
 <?php
 
-include __DIR__ . '/__connect_db.php';
+    include __DIR__ . '/__connect_db.php';
 
-$per_page = 5;
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+    $per_page = 5;
+    $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-$total_sql = "SELECT COUNT(1) FROM member_list";
-$total_stmt = $pdo->query($total_sql);
-$total_rows = $total_stmt->fetch(PDO::FETCH_NUM)[0];
+    $total_sql = "SELECT COUNT(1) FROM member_list";
+    $total_stmt = $pdo->query($total_sql);
+    $total_rows = $total_stmt->fetch(PDO::FETCH_NUM)[0];
 
-$total_pages = ceil($total_rows / $per_page);
-if($page<1){$page=1;}
-if($page>$total_pages){$page=$total_pages;}
+    $total_pages = ceil($total_rows / $per_page);
+    if($page<1){$page=1;}
+    if($page>$total_pages){$page=$total_pages;}
 
-$sql = sprintf("SELECT * FROM member_list ORDER BY mem_id DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
-$stmt = $pdo->query($sql);
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sql = sprintf("SELECT * FROM member_list ORDER BY mem_id DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
+    $stmt = $pdo->query($sql);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -36,21 +36,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <li class="nav-item">
         <a class="nav-link active" href="member_list.php">會員資料清單</a>
     </li>
-    <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-    </li> -->
     <li class="nav-item">
         <a class="nav-link" href="member_insert.php">新增資料</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
     </li>
     </ul>
 </aside>
