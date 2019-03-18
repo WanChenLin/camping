@@ -1,6 +1,6 @@
 <?php
 require __DIR__.'/__salepage_connect_db.php';
-$page_name = '__salepage_creat.php';
+$page_name = 'salepage_creat.php';
 ?>
 <?php include __DIR__.'/__html_dbhead.php';?>
 <?php include __DIR__.'/__html_dbnavbar.php';?>

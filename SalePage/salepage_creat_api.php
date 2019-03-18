@@ -41,12 +41,12 @@ $result = [
             )";
 
     //SaleCategorycate
-    $catesql = "SELECT * FROM `SaleCategory`;
-    $catestmt = $pdo->prepare($catesql);
+    // $catesql = "SELECT * FROM `SaleCategory`;
+    // $catestmt = $pdo->prepare($catesql);
 
-    $catestmt->execute([
-        $_POST['salecate_id']]
-    );
+    // $catestmt->execute([
+    //     $_POST['salecate_id']]
+    //     );
 
         $stmt = $pdo->prepare($sql);
 

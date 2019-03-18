@@ -80,6 +80,25 @@ leftside{
                             </div>
                         </div>
 
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        商品管理
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                <a class="card-body ml-2 d-flex" href="salepage_creat.php">
+                                    建立商品頁
+                                </a>
+                                <a class="card-body ml-2 d-flex" href="salepage_list.php">
+                                    商品頁查詢
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </nav>
 
