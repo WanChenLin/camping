@@ -2,20 +2,72 @@
 
 include __DIR__ . '/__connect_db.php';
 
-$per_page = 5;
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$account = '';
+$password = '';
+$name = '';
+$nickname = '';
+$gender = '';
+$birthday = '';
+$mobile = '';
+$email = '';
 
-$total_sql = "SELECT COUNT(1) FROM member_list";
-$total_stmt = $pdo->query($total_sql);
-$total_rows = $total_stmt->fetch(PDO::FETCH_NUM)[0];
+if(isset($_POST['gotodb'])){
 
-$total_pages = ceil($total_rows / $per_page);
-if($page<1){$page=1;}
-if($page>$total_pages){$page=$total_pages;}
+    $account = ($_POST['account']);
+    $password = ($_POST['password']);
+    $name = ($_POST['name']);
+    $nickname = ($_POST['nickname']);
+    $gender = ($_POST['gender']);
+    $birthday = ($_POST['birthday']);
+    $mobile = ($_POST['mobile']);
+    $email = ($_POST['email']);
 
-$sql = sprintf("SELECT * FROM member_list ORDER BY mem_id DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
-$stmt = $pdo->query($sql);
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sql = "INSERT INTO `member_list`
+        (`mem_account`, `mem_password`, `mem_name`, `mem_nickname`, `mem_gender`, `mem_birthday`, `mem_mobile`, `mem_email`) 
+        VALUES 
+        (?, ?, ?, ?, ?, ?, ?, ?)";
+    try{
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute([
+            $_POST['account'],
+            $_POST['password'],
+            $_POST['name'],
+            $_POST['nickname'],
+            $_POST['gender'],
+            $_POST['birthday'],
+            $_POST['mobile'],
+            $_POST['email']
+        ]);
+
+        if($stmt->rowCount()==1){
+            $success=true;
+            $msg=[
+                'type' => 'success',
+                'info' => '資料新增成功'
+            ];
+            $account = '';
+            $password = '';
+            $name = '';
+            $nickname = '';
+            $gender = '';
+            $birthday = '';
+            $mobile = '';
+            $email = '';
+        } else {
+            $msg=[
+                'type' => 'danger',
+                'info' => '資料新增錯誤'
+            ];
+        }
+    } catch(PDOException $ex){
+        $msg=[
+            'type' => 'danger',
+            'info' => 'Email重複輸入'
+        ];
+    }
+
+}
 
 ?>
 
@@ -50,45 +102,61 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </aside>
 
 <section class="">
+
+    <?php if(isset($msg)): ?>
+        <div class="alert alert-<?= $msg['type'] ?>" role="alert">
+            <?= $msg['info'] ?>
+        </div>
+    <?php endif ?>
+
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">新增會員資料</h5>
+            <h5 class="card-title">新增會員資料
+                <?php 
+                    if(isset($stmt)){
+                        echo $stmt->rowCount();
+                    }
+                ?>
+            </h5>
             
-            <form>
+            <form name="formInsert" method="POST" onSubmit="">
+                <input type="hidden" name="gotodb" value="check">
                 <div class="form-group row">
                     <label for="account" class="col-sm-2 col-form-label">帳號名稱</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="account" name="account" placeholder="">
+                        <input type="text" class="form-control" id="account" name="account" placeholder="" value="<?= $account ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">密碼</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="" value="<?= $password ?>">
                     </div>
                 </div>
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <label for="password_check" class="col-sm-2 col-form-label">再次確認密碼</label>
                     <div class="col-sm-10">
                         <input type="password" class="form-control" id="password_check" name="password_check" placeholder="">
                     </div>
-                </div>
-                <div class="form-group row">
+                </div> -->
+                <!-- <div class="form-group row">
                     <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
                     <div class="col-sm-10">
+                        <div></div>
+                        <button class="btn btn-primary">選擇檔案</button>
                         <input type="text" class="form-control" id="avatar" name="avatar" placeholder="大頭貼上傳">
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">姓名</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="" value="<?= $name ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="nickname" name="nickname" placeholder="">
+                        <input type="text" class="form-control" id="nickname" name="nickname" placeholder="" value="<?= $nickname ?>">
                     </div>
                     <div class="col-sm-2">
                         <small>將使用於分享樂</small>
@@ -114,19 +182,19 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="form-group row">
                     <label for="birthday" class="col-sm-2 col-form-label">生日</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="birthday" name="birthday" placeholder="YYYY-MM-DD">
+                        <input type="text" class="form-control" id="birthday" name="birthday" placeholder="YYYY-MM-DD" value="<?= $birthday ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="mobile" class="col-sm-2 col-form-label">手機</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678">
+                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="<?= $mobile ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">信箱</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="必填">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="必填" value="<?= $email ?>">
                     </div>
                 </div>
                 <div class="form-group row text-center">
