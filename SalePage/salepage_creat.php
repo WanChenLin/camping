@@ -17,8 +17,9 @@ $page_name = '__salepage_creat.php';
 
                     <div id="saleinfo_bar" class="alert alert-success" role="alert" style="display: none"></div>
 
-                    <form name="saleform" method="post" onsubmit="return salecheckForm()"> 
-                        <input type="hidden" name="checksale" value="check123">
+                    <form name="saleform" method="post" action="" onsubmit="return salecheckForm()"> 
+                        <input type="hidden" name="checksale" value="checkcheck">
+
                         <label for="SaleCategory_Sid" >*商品分類</label>
                         <select class="custom-select custom-select-sm col-sm-4 ">
                             <option selected>請選擇</option>
@@ -90,16 +91,17 @@ $page_name = '__salepage_creat.php';
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
                             <textarea class="form-control" id="salepage_feature" name="salepage_feature" cols="30" rows="3"></textarea><br>
                         </div>
-                        <!-- 看不懂 cloudservices-no-token-url -->
+
                         <div class="form-group">
                             <label for="salepage_proddetails">詳細說明</label>
-                            <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
                             <textarea  id="salepage_proddetails" name="salepage_proddetails" rows="10" cols="80"></textarea><br>
+                            <input type='submit' value='輸入'> 
+                            <!-- 為什麼只有這個鈕可以連到資料庫 我想要下面的紐一起送出 -->
                         </div>
                         
 
 
-                        <button id="salesubmit_btn" type="submit" class="btn btn-primary">確定新增</button>
+                        <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定新增'>
                     </form>
                 </div>
             </div>
@@ -117,6 +119,8 @@ $page_name = '__salepage_creat.php';
     const saleinfo_bar = document.querySelector('#saleinfo_bar');
     const salesubmit_btn = document.querySelector('#salesubmit_btn');
     CKEDITOR.replace( 'salepage_proddetails', {});
+        
+  
 
         const salefields = [
             'salepage_name',
@@ -124,8 +128,8 @@ $page_name = '__salepage_creat.php';
             'salepage_price',
             'salepage_cost',
             'salepage_feature',
-            'salepage_proddetails',
-            'salepage_state'
+            'salepage_state',
+            'salepage_proddetails'
         ];
 
         const salefs = {}; 
@@ -154,7 +158,7 @@ $page_name = '__salepage_creat.php';
                 if(isPassed) {
                     let saleform = new FormData(document.saleform);
                     salesubmit_btn.style.display = 'none';
-
+                    console.log('1111');
                     fetch('salepage_creat_api.php', {
                         method: 'POST',
                         body: saleform

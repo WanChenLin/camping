@@ -17,8 +17,9 @@ $result = [
     $price = $_POST['salepage_price'];
     $cost= $_POST['salepage_cost'];
     $feature = $_POST['salepage_feature'];
-    $details = $_POST['salepage_proddetails'];
     $state = $_POST['salepage_state'];
+    //ckeditor
+    $details = $_POST['salepage_proddetails'];
 
     $result['post'] = $_POST;  // 做 echo 檢查
 
@@ -33,12 +34,19 @@ $result = [
     $sql = "INSERT INTO `SalePage`(
             `salepage_name`, `salepage_suggestprice`, 
             `salepage_price`, `salepage_cost`, 
-            `salepage_feature`, `salepage_proddetails`,
-            `salepage_state`
+            `salepage_feature`, `salepage_state`,
+            `salepage_proddetails`
             ) VALUES (
               ?, ?, ?, ?, ?, ?, ?
             )";
 
+    //SaleCategorycate
+    $catesql = "SELECT * FROM `SaleCategory`;
+    $catestmt = $pdo->prepare($catesql);
+
+    $catestmt->execute([
+        $_POST['salecate_id']]
+    );
 
         $stmt = $pdo->prepare($sql);
 
@@ -48,8 +56,8 @@ $result = [
             $_POST['salepage_price'],
             $_POST['salepage_cost'],
             $_POST['salepage_feature'],
-            $_POST['salepage_proddetails'],
-            $_POST['salepage_state']
+            $_POST['salepage_state'],
+            $_POST['salepage_proddetails']
         ]);
 
         if($stmt->rowCount()==1) {

@@ -11,7 +11,7 @@
     <script src="https://underscorejs.org/underscore-min.js"></script>
     <script src="./js/jquery-3.3.1.js"></script>
     <script src="./bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="ckeditor/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
 
     <title>Document</title>
 
