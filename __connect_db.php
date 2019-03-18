@@ -1,7 +1,7 @@
 <?php
 
-$db_host = '192.168.27.37';
-$db_name = 'go_camping';
+$db_host = 'localhost';
+$db_name = 'test_db';
 $db_user = 'ring';
 $db_pass = 'admin';
 
@@ -10,7 +10,7 @@ $dsn = "mysql:host={$db_host};dbname={$db_name}";
 
 try{
 
-    $pdo = new PDO($dsn, $db_user, $db_pass,[]);
+    $pdo = new PDO($dsn, $db_user, $db_pass);
 
     $pdo->query("SET NAMES utf8");
 
