@@ -1,6 +1,6 @@
 <?php
-// require __DIR__. '/__cred.php';
-require __DIR__. '/__connect_db.php';
+ // require __DIR__. '/__cred.php';
+require __DIR__ . '/__connect_db.php';
 $page_name = 'data_insert';
 
 
@@ -10,7 +10,7 @@ $mobile = '';
 $birthday = '';
 $address = '';
 
-if(isset($_POST['checkme'])){
+if (isset($_POST['checkme'])) {
     $name = htmlentities($_POST['name']);
     $email = htmlentities($_POST['email']);
     $mobile = htmlentities($_POST['mobile']);
@@ -35,7 +35,7 @@ if(isset($_POST['checkme'])){
             $_POST['address'],
         ]);
 
-        if($stmt->rowCount()==1) {
+        if ($stmt->rowCount() == 1) {
             $success = true;
             $msg = [
                 'type' => 'success',
@@ -47,7 +47,7 @@ if(isset($_POST['checkme'])){
                 'info' => '資料新增錯誤',
             ];
         }
-    } catch(PDOException $ex){
+    } catch (PDOException $ex) {
         $msg = [
             'type' => 'danger',
             'info' => 'Email 重複輸入',
@@ -77,26 +77,24 @@ if(isset($_POST['checkme'])){
     $stmt = $pdo->query($sql);
 
     */
-
 }
 
 ?>
-<?php include __DIR__. '/__html_head.php';  ?>
-<?php include __DIR__. '/__navbar.php';  ?>
-    <style>
-        .form-group small {
-            color: red !important;
-        }
-
-    </style>
+<?php include __DIR__ . '/__html_head.php';  ?>
+<?php include __DIR__ . '/__navbar.php';  ?>
+<style>
+    .form-group small {
+        color: red !important;
+    }
+</style>
 <div class="container">
 
     <div class="row">
         <div class="col-lg-6">
-            <?php if(isset($msg)): ?>
-                <div class="alert alert-<?= $msg['type'] ?>" role="alert">
-                    <?= $msg['info'] ?>
-                </div>
+            <?php if (isset($msg)) : ?>
+            <div class="alert alert-<?= $msg['type'] ?>" role="alert">
+                <?= $msg['info'] ?>
+            </div>
             <?php endif ?>
             <div class="card">
 
@@ -108,26 +106,22 @@ if(isset($_POST['checkme'])){
                         <input type="hidden" name="checkme" value="check123">
                         <div class="form-group">
                             <label for="name">姓名</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder=""
-                                   value="<?= $name ?>">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="" value="<?= $name ?>">
                             <small id="nameHelp" class="form-text text-muted"></small>
                         </div>
                         <div class="form-group">
                             <label for="email">電郵</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder=""
-                                   value="<?= $email ?>">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?= $email ?>">
                             <small id="emailHelp" class="form-text text-muted"></small>
                         </div>
                         <div class="form-group">
                             <label for="mobile">手機</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder=""
-                                   value="<?= $mobile ?>">
+                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="" value="<?= $mobile ?>">
                             <small id="mobileHelp" class="form-text text-muted"></small>
                         </div>
                         <div class="form-group">
                             <label for="birthday">生日</label>
-                            <input type="text" class="form-control" id="birthday" name="birthday" placeholder="YYYY-MM-DD"
-                                   value="<?= $birthday ?>">
+                            <input type="text" class="form-control" id="birthday" name="birthday" placeholder="YYYY-MM-DD" value="<?= $birthday ?>">
                             <small id="birthdayHelp" class="form-text text-muted"></small>
                         </div>
                         <div class="form-group">
@@ -148,62 +142,61 @@ if(isset($_POST['checkme'])){
 
 
 </div>
-    <script>
-        const fields = [
-            'name',
-            'email',
-            'mobile',
-            'birthday',
-            'address',
-        ];
+<script>
+    const fields = [
+        'name',
+        'email',
+        'mobile',
+        'birthday',
+        'address',
+    ];
 
-        // 拿到每個欄位的參照
-        const fs = {};
-        for(let v of fields){
-            fs[v] = document.form1[v];
+    // 拿到每個欄位的參照
+    const fs = {};
+    for (let v of fields) {
+        fs[v] = document.form1[v];
+    }
+    console.log(fs);
+    console.log('fs.name:', fs.name);
+
+
+    const checkForm = () => {
+        let isPassed = true;
+
+        // 拿到每個欄位的值
+        const fsv = {};
+        for (let v of fields) {
+            fsv[v] = fs[v].value;
         }
-        console.log(fs);
-        console.log('fs.name:', fs.name);
+        console.log(fsv);
 
 
-        const checkForm = ()=>{
-            let isPassed = true;
+        let email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        let mobile_pattern = /^09\d{2}\-?\d{3}\-?\d{3}$/;
 
-            // 拿到每個欄位的值
-            const fsv = {};
-            for(let v of fields){
-                fsv[v] = fs[v].value;
-            }
-            console.log(fsv);
+        for (let v of fields) {
+            fs[v].style.borderColor = '#cccccc';
+            document.querySelector('#' + v + 'Help').innerHTML = '';
+        }
 
+        if (fsv.name.length < 2) {
+            fs.name.style.borderColor = 'red';
+            document.querySelector('#nameHelp').innerHTML = '請填寫正確的姓名!';
 
-            let email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-            let mobile_pattern = /^09\d{2}\-?\d{3}\-?\d{3}$/;
+            isPassed = false;
+        }
+        if (!email_pattern.test(fsv.email)) {
+            fs.email.style.borderColor = 'red';
+            document.querySelector('#emailHelp').innerHTML = '請填寫正確的 Email!';
+            isPassed = false;
+        }
+        if (!mobile_pattern.test(fsv.mobile)) {
+            fs.mobile.style.borderColor = 'red';
+            document.querySelector('#mobileHelp').innerHTML = '請填寫正確的手機號碼!';
+            isPassed = false;
+        }
 
-            for(let v of fields){
-                fs[v].style.borderColor = '#cccccc';
-                document.querySelector('#' + v + 'Help').innerHTML = '';
-            }
-
-            if(fsv.name.length < 2){
-                fs.name.style.borderColor = 'red';
-                document.querySelector('#nameHelp').innerHTML = '請填寫正確的姓名!';
-
-                isPassed = false;
-            }
-            if(! email_pattern.test(fsv.email)){
-                fs.email.style.borderColor = 'red';
-                document.querySelector('#emailHelp').innerHTML = '請填寫正確的 Email!';
-                isPassed = false;
-            }
-            if(! mobile_pattern.test(fsv.mobile)){
-                fs.mobile.style.borderColor = 'red';
-                document.querySelector('#mobileHelp').innerHTML = '請填寫正確的手機號碼!';
-                isPassed = false;
-            }
-
-            return isPassed;
-        };
-
-    </script>
-<?php include __DIR__. '/__html_foot.php';  ?>
+        return isPassed;
+    };
+</script>
+<?php include __DIR__ . '/__html_foot.php';  ?> 
