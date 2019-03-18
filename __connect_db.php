@@ -8,7 +8,6 @@ $db_password = 'admin';
 $dsn = "mysql:host={$db_host};dbname={$db_name}";
 
 try {
-
     $pdo = new PDO($dsn, $db_user, $db_password, []);
     $pdo->query("SET NAMES utf8");
 

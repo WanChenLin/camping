@@ -15,11 +15,11 @@
                             </div>
 
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                <a class="card-body ml-2 d-flex" href="">
-                                    訂單管理
+                                <a class="card-body ml-2 d-flex" href="member_list.php">
+                                    會員清單
                                 </a>
-                                <a class="card-body ml-2 d-flex" href="">
-                                    收藏管理
+                                <a class="card-body ml-2 d-flex" href="member_insert.php">
+                                    新增會員
                                 </a>
                             </div>
                         </div>
