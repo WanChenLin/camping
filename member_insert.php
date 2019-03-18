@@ -221,7 +221,6 @@ if(isset($_POST['gotodb'])){
         'password_check',
         'name',
         'nickname',
-        'gender',
         'birthday',
         'mobile',
         'email'
@@ -246,12 +245,6 @@ if(isset($_POST['gotodb'])){
             document.formInsert[fields[k]].style.borderColor = '#ccc';
             document.querySelector('#'+ fields[k] +'Help').innerHTML = '';
         }
-        
-        if (password_check != password) {
-            document.formInsert.password_check.style.borderColor = 'red';
-            document.querySelector('#password_checkHelp').innerHTML = '密碼錯誤';
-            ispassed = false;
-        }
 
         if(name.length < 2){
             document.formInsert.name.style.borderColor = 'red';
@@ -272,6 +265,12 @@ if(isset($_POST['gotodb'])){
             document.formInsert.birthday.style.borderColor = 'red';
             document.querySelector('#birthdayHelp').innerHTML = '格式錯誤';
             isPassed = false;
+        }
+
+        if (password_check != password) {
+            document.formInsert.password_check.style.borderColor = 'red';
+            document.querySelector('#password_checkHelp').innerHTML = '密碼錯誤';
+            ispassed = false;
         }
 
         return ispassed;
