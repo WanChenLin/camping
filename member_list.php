@@ -22,16 +22,40 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include __DIR__. '/html_head.php'; ?>
 <?php include __DIR__. '/html_header.php'; ?>
 <?php include __DIR__. '/html_navbar.php'; ?>
+<style>
+    section .table th{
+        border-top: 0;
+    }
+</style>
 
-<main class=" col-9 bg-white">
 
-<aside class= "bg-warning">
-    <span>麵包屑 區域</span>
-    <p>會員管理 / 訂單管理 / 收藏管理</p>
+<main class=" col-10 bg-white">
+
+<aside class= "my-2">
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="member_list.php">會員資料清單</a>
+    </li>
+    <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+    </li> -->
+    <li class="nav-item">
+        <a class="nav-link" href="member_insert.php">新增資料</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    </li>
+    </ul>
 </aside>
 
 <section>
-
     <table class= "table table-hover table-responsive">
     <caption>List of members</caption>
     <thead>

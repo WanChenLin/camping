@@ -2,14 +2,14 @@
         <div class="container">
             <div class="row d-flex">
 
-                <nav class="col-3">
+                <nav class="col-2">
                     <div class="accordion" id="accordionExample">
 
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h2 class="mb-0">
                                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        會員管理
+                                        會員
                                     </button>
                                 </h2>
                             </div>
@@ -19,7 +19,19 @@
                                     會員清單
                                 </a>
                                 <a class="card-body ml-2 d-flex" href="member_insert.php">
-                                    新增會員
+                                    會員等級
+                                </a>
+                                <a class="card-body ml-2 d-flex" href="member_insert.php">
+                                    收藏管理
+                                </a>
+                                <a class="card-body ml-2 d-flex" href="member_insert.php">
+                                    勳章管理
+                                </a>
+                                <a class="card-body ml-2 d-flex" href="member_insert.php">
+                                    活動管理
+                                </a>
+                                <a class="card-body ml-2 d-flex" href="member_insert.php">
+                                    訂單管理
                                 </a>
                             </div>
                         </div>
