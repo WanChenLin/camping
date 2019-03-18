@@ -26,7 +26,7 @@ if(isset($_POST['gotodb'])){
         (`mem_account`, `mem_password`, `mem_name`, `mem_nickname`, `mem_gender`, `mem_birthday`, `mem_mobile`, `mem_email`) 
         VALUES 
         (?, ?, ?, ?, ?, ?, ?, ?)";
-    try{
+
         $stmt = $pdo->prepare($sql);
 
         $stmt->execute([
@@ -60,12 +60,6 @@ if(isset($_POST['gotodb'])){
                 'info' => '資料新增錯誤'
             ];
         }
-    } catch(PDOException $ex){
-        $msg=[
-            'type' => 'danger',
-            'info' => 'Email重複輸入'
-        ];
-    }
 
 }
 
