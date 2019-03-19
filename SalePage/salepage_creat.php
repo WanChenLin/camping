@@ -20,9 +20,9 @@ $page_name = 'salepage_creat.php';
                     <form name="saleform" method="post" action="" onsubmit="return salecheckForm()"> 
                         <input type="hidden" name="checksale" value="checkcheck">
 
-                        <label for="SaleCategory_Sid" >*商品分類</label>
-                        <select class="custom-select custom-select-sm col-sm-4 ">
-                            <option selected>請選擇</option>
+                        <label for="salepage_salecateid" >*商品分類</label>
+                        <select id="salepage_salecateid" name="salepage_salecateid" class="custom-select custom-select-sm col-sm-4 ">
+                            <option value="0" selected>請選擇</option>
                             <option value="1">冷凍食品</option>
                             <option value="2">冷藏食品</option>
                             <option value="3">生鮮食材</option>
@@ -88,14 +88,15 @@ $page_name = 'salepage_creat.php';
 
                         <div class="form-group">
                             <label for="salepage_feature">商品特色</label>
-                            <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
+                            <small id="salepage_featurelsHelp" class="form-text text-muted"></small>
                             <textarea class="form-control" id="salepage_feature" name="salepage_feature" cols="30" rows="3"></textarea><br>
                         </div>
 
                         <div class="form-group">
                             <label for="salepage_proddetails">詳細說明</label>
-                            <textarea  id="salepage_proddetails" name="salepage_proddetails" rows="10" cols="80"></textarea><br>
-                            <input type='submit' value='輸入'> 
+                            <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
+                            <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3"></textarea><br>
+                            <!-- <input type='submit' value='輸入'>  -->
                             <!-- 為什麼只有這個鈕可以連到資料庫 我想要下面的紐一起送出 -->
                         </div>
                         
@@ -118,7 +119,7 @@ $page_name = 'salepage_creat.php';
 <script>
     const saleinfo_bar = document.querySelector('#saleinfo_bar');
     const salesubmit_btn = document.querySelector('#salesubmit_btn');
-    CKEDITOR.replace( 'salepage_proddetails', {});
+    //CKEDITOR.replace( 'salepage_proddetails', {});
         
   
 
@@ -129,7 +130,8 @@ $page_name = 'salepage_creat.php';
             'salepage_cost',
             'salepage_feature',
             'salepage_state',
-            'salepage_proddetails'
+            'salepage_proddetails',
+            'salepage_salecateid'
         ];
 
         const salefs = {}; 
@@ -149,11 +151,6 @@ $page_name = 'salepage_creat.php';
                     salefsv[v] = salefs[v].value;
                 }
                 console.log(salefsv);
-
-                // for(let v of salefields){
-                //     salefs[v].style.borderColor = '#cccccc';
-                //     document.querySelector('#' + v + 'Help').innerHTML = '';
-                // }
 
                 if(isPassed) {
                     let saleform = new FormData(document.saleform);

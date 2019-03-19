@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/__salepage_connect_db.php';
 
-$per_page = 5;
+$per_page = 20;
 
 $result = [
     'success' => false,
@@ -37,7 +37,8 @@ $salesql = sprintf(" SELECT
                     salepage_specification, 
                     salepage_paymenttype, 
                     salepage_deliverytype, 
-                    salepage_salecateid 
+                    -- 括號裡是一個 statemen, 用 AS 給他一個欄位名稱                    
+                    (SELECT salecate_name FROM salecategory WHERE salecate_id = salepage_salecateid) AS salecate_name
                     FROM salepage ORDER BY salepage_id LIMIT %s, %s", ($salepage-1)*$per_page, $per_page);
 $stmt = $pdo->query($salesql);
 
