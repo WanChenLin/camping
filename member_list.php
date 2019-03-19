@@ -33,7 +33,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </style>
 
 
-<main class=" col-10 bg-white">
+<main class="col-9 bg-white">
 
     <aside class="my-2">
         <ul class="nav nav-tabs">
@@ -66,6 +66,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th scop e=" col">信箱</th>
                     <th scop e=" col">狀態</th>
                     <th scop e=" col">註冊日期</th>
+                    <th scop e=" col"><i class="far fa-edit"></i></th>
+                    <th scop e=" col"><i class="far fa-trash-alt"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -83,6 +85,16 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $row['mem_email'] ?></td>
                     <td><?= $row['mem_status'] ?></td>
                     <td><?= $row['mem_signUpDate'] ?></td>
+                    <td scop e=" col">
+                        <a href="member_edit.php?mem_id=<?= $row['mem_id']?>">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                    <td scop e=" col">
+                        <a href="">
+                        <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
                 </tr>
                 <?php endforeach ?>
             </tbody>

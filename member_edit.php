@@ -2,6 +2,17 @@
 
 include __DIR__ . '/__connect_db.php';
 
+$mem_id = isset($_GET['mem_id']) ? intval($_GET['mem_id']) : 0;
+
+$sql =  "SELECT * FROM member_list WHERE mem_id=$mem_id";
+
+$stmt = $pdo->query($sql);
+if($stmt->rowCount()==0){
+    header('Location: member_list.php');
+    exit;
+}
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
 
 <?php include __DIR__ . '/html_head.php'; ?>
@@ -19,13 +30,13 @@ include __DIR__ . '/__connect_db.php';
     <aside class="my-2">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="member_list.php">會員資料清單</a>
+                <a class="nav-link active" href="member_list.php">會員資料清單</a>
             </li>
             <!-- <li class="nav-item">
-            <a class="nav-link" href="member_insert.php">新增資料</a>
-        </li> -->
+                <a class="nav-link" href="member_insert.php">新增資料</a>
+            </li> -->
             <li class="nav-item">
-                <a class="nav-link active" href="member_insert2.php">新增資料</a>
+                <a class="nav-link" href="member_insert2.php">新增資料</a>
             </li>
         </ul>
     </aside>
@@ -36,21 +47,22 @@ include __DIR__ . '/__connect_db.php';
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">新增會員資料</h5>
+                <h5 class="card-title">修改會員資料</h5>
 
                 <form name="formInsert" method="POST" onsubmit="return checkForm()">
                     <input type="hidden" name="gotodb" value="check">
+                    <input type="hidden" name="mem_id" value="<?= $row['mem_id'] ?>">
                     <div class="form-group row">
                         <label for="account" class="col-sm-2 col-form-label">帳號名稱<span class="asterisk"> *</span></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="account" name="account" placeholder="" value="">
+                            <input type="text" class="form-control" id="account" name="account" placeholder="" value="<?= $row['mem_account'] ?>">
                             <small id="accountHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="password" class="col-sm-2 col-form-label">密碼<span class="asterisk"> *</span></label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="" value="">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="" value="<?= $row['mem_password'] ?>">
                             <small id="passwordHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
@@ -72,14 +84,14 @@ include __DIR__ . '/__connect_db.php';
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">姓名<span class="asterisk"> *</span></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="" value="">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="" value="<?= $row['mem_name'] ?>">
                             <small id="nameHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="">
+                            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="<?= $row['mem_nickname'] ?>">
                             <small id="nicknameHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
@@ -103,25 +115,25 @@ include __DIR__ . '/__connect_db.php';
                     <div class="form-group row">
                         <label for="birthday" class="col-sm-2 col-form-label">生日</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="birthday" name="birthday" placeholder="格式: YYYY-MM-DD" value="">
+                            <input type="text" class="form-control" id="birthday" name="birthday" placeholder="格式: YYYY-MM-DD" value="<?= $row['mem_birthday'] ?>">
                             <small id="birthdayHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="mobile" class="col-sm-2 col-form-label">手機<span class="asterisk"> *</span></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="">
+                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="<?= $row['mem_mobile'] ?>">
                             <small id="mobileHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email" class="col-sm-2 col-form-label">信箱<span class="asterisk"> *</span></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="" value="">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?= $row['mem_email'] ?>">
                             <small id="emailHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
-                    <div class="form-group row after_sub text-center">
+                    <div class="form-group row text-center">
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
                         </div>
@@ -147,23 +159,23 @@ include __DIR__ . '/__connect_db.php';
 
     const info_bar = document.querySelector('#info_bar');
     const submit_btn = document.querySelector('#submit_btn');
-    const after_sub = document.querySelector('.after_sub');
 
     const checkForm = () => {
 
         let ispassed = true;
 
         let account = document.formInsert.account.value;
+        let password = document.formInsert.password.value;
+        let password_check = document.formInsert.password_check.value;
         let name = document.formInsert.name.value;
         let birthday = document.formInsert.birthday.value;
         let mobile = document.formInsert.mobile.value;
         let email = document.formInsert.email.value;
-        let password = document.formInsert.password.value;
-        let password_check = document.formInsert.password_check.value;
 
         let email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         let mobile_pattern = /^09\d{2}\d{3}\d{3}$/;
         // let birth_pattern = /^\d{4}\-\d{2}\-\d{2}$/;
+
 
         for (let k in fields) {
             document.formInsert[fields[k]].style.borderColor = '#ccc';
@@ -211,7 +223,7 @@ include __DIR__ . '/__connect_db.php';
             let form = new FormData(document.formInsert);
             submit_btn.style.display = 'none';
 
-            fetch('member_insert2_api.php', {
+            fetch('member_edit_api.php', {
                     method: 'POST',
                     body: form
                 })
@@ -225,13 +237,13 @@ include __DIR__ . '/__connect_db.php';
                         info_bar.style.display = 'block';
                         if (obj.success) {
                             info_bar.className = 'alert alert-success';
-                            info_bar.innerHTML = '資料新增完成';
+                            info_bar.innerHTML = '資料修改完成';
                         } else {
                             info_bar.className = 'alert alert-danger';
                             info_bar.innerHTML = obj.errorMsg;
                         }
                         submit_btn.style.display = 'block';
-                        submit_btn.style = 'btn-primary';
+                        submit_btn.style = 'btn_primary';
                     })
         }
 
