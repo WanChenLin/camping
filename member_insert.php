@@ -13,14 +13,14 @@ $email = '';
 
 if(isset($_POST['gotodb'])){
 
-    $account = ($_POST['account']);
-    $password = ($_POST['password']);
-    $name = ($_POST['name']);
-    $nickname = ($_POST['nickname']);
-    $gender = ($_POST['gender']);
-    $birthday = ($_POST['birthday']);
-    $mobile = ($_POST['mobile']);
-    $email = ($_POST['email']);
+    $account = htmlentitie($_POST['account']);
+    $password = htmlentitie($_POST['password']);
+    $name = htmlentitie($_POST['name']);
+    $nickname = htmlentitie($_POST['nickname']);
+    $gender = htmlentitie($_POST['gender']);
+    $birthday = htmlentitie($_POST['birthday']);
+    $mobile = htmlentitie($_POST['mobile']);
+    $email = htmlentitie($_POST['email']);
 
     $sql = "INSERT INTO `member_list`
         (`mem_account`, `mem_password`, `mem_name`, `mem_nickname`, `mem_gender`, `mem_birthday`, `mem_mobile`, `mem_email`) 
@@ -67,7 +67,6 @@ if(isset($_POST['gotodb'])){
             'info' => '帳號重複輸入'
         ];
     }
-    
 
 }
 
@@ -77,22 +76,16 @@ if(isset($_POST['gotodb'])){
 <?php include __DIR__. '/html_header.php'; ?>
 <?php include __DIR__. '/html_navbar.php'; ?>
 
-<!-- <style>
-    .form-group small{
-        color: red !important;
-    }
-</style> -->
-
 <main class=" col-9 bg-white">
 
 <aside class= "my-2">
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link" href="member_list.php">會員資料清單</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" href="member_insert.php">新增資料</a>
-    </li>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="member_list.php">會員資料清單</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="member_insert.php">新增資料</a>
+        </li>
     </ul>
 </aside>
 
@@ -230,7 +223,7 @@ if(isset($_POST['gotodb'])){
 
         let ispassed = true;
 
-        let name = document.formInsert.name.value;
+        let name = document.querySelector('#name').value;
         let birthday = document.formInsert.birthday.value;
         let mobile = document.formInsert.mobile.value;
         let email = document.formInsert.email.value;
@@ -249,22 +242,22 @@ if(isset($_POST['gotodb'])){
         if(name.length < 2){
             document.formInsert.name.style.borderColor = 'red';
             document.querySelector('#nameHelp').innerHTML = '請輸入完整的姓名';
-            isPassed = false;
+            ispassed = false;
         }
         if(! mobile_pattern.test(mobile)){
             document.formInsert.mobile.style.borderColor = 'red';
             document.querySelector('#mobileHelp').innerHTML = '格式錯誤';
-            isPassed = false;
+            ispassed = false;
         }
         if(! email_pattern.test(email)){
             document.formInsert.email.style.borderColor = 'red';
             document.querySelector('#emailHelp').innerHTML = '請輸入完整的電子郵件';
-            isPassed = false;
+            ispassed = false;
         }
         if(! birth_pattern.test(birthday)){
             document.formInsert.birthday.style.borderColor = 'red';
             document.querySelector('#birthdayHelp').innerHTML = '格式錯誤';
-            isPassed = false;
+            ispassed = false;
         }
 
         if (password_check != password) {
