@@ -54,26 +54,36 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <caption>List of members</caption>
             <thead>
                 <tr>
-                    <th scop e=" col">#</th>
-                    <th scop e=" col">帳號</th>
-                    <th scop e=" col">密碼</th>
-                    <th scop e=" col">大頭貼</th>
-                    <th scop e=" col">姓名</th>
-                    <th scop e=" col">暱稱</th>
-                    <th scop e=" col">性別</th>
-                    <th scop e=" col">生日</th>
-                    <th scop e=" col">手機</th>
-                    <th scop e=" col">信箱</th>
-                    <th scop e=" col">狀態</th>
-                    <th scop e=" col">註冊日期</th>
-                    <th scop e=" col"><i class="far fa-edit"></i></th>
-                    <th scop e=" col"><i class="far fa-trash-alt"></i></th>
+                    <th scope=" col"><i class="far fa-edit"></i></th>
+                    <th scope=" col"><i class="far fa-trash-alt"></i></th>
+                    <th scope=" col">#</th>
+                    <th scope=" col">帳號</th>
+                    <th scope=" col">密碼</th>
+                    <th scope=" col">大頭貼</th>
+                    <th scope=" col">姓名</th>
+                    <th scope=" col">暱稱</th>
+                    <th scope=" col">性別</th>
+                    <th scope=" col">生日</th>
+                    <th scope=" col">手機</th>
+                    <th scope=" col">信箱</th>
+                    <th scope=" col">狀態</th>
+                    <th scope=" col">註冊日期</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($rows as $row) : ?>
                 <tr>
-                    <th scop e=" row"><?= $row['mem_id'] ?></th>
+                    <td>
+                        <a href="member_edit.php?mem_id=<?= $row['mem_id']?>">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="javascript: delete_row(<?= $row['mem_id']?>)">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                    <td><?= $row['mem_id'] ?></th>
                     <td><?= $row['mem_account'] ?></td>
                     <td><?= $row['mem_password'] ?></td>
                     <td><?= $row['mem_avatar'] ?></td>
@@ -85,16 +95,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $row['mem_email'] ?></td>
                     <td><?= $row['mem_status'] ?></td>
                     <td><?= $row['mem_signUpDate'] ?></td>
-                    <td scop e=" col">
-                        <a href="member_edit.php?mem_id=<?= $row['mem_id']?>">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
-                    <td scop e=" col">
-                        <a href="">
-                        <i class="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
+                    
                 </tr>
                 <?php endforeach ?>
             </tbody>
@@ -124,5 +125,13 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
 </main>
+
+<script>
+    function delete_row(mem_id){
+        if(confirm(`確定要刪除第 ${mem_id} 筆資料嗎?`)){
+            location.href = 'member_delete.php?mem_id='+ mem_id ;
+        }
+    }
+</script>
 
 <?php include __DIR__ . '/html_foot.php'; ?> 

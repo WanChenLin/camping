@@ -12,6 +12,9 @@ include __DIR__ . '/__connect_db.php';
     .asterisk {
         color: red;
     }
+    .avatar_upload{
+        color: red;
+    }
 </style>
 
 <main class=" col-9 bg-white">
@@ -61,14 +64,14 @@ include __DIR__ . '/__connect_db.php';
                             <small id="password_checkHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
-                    <!-- <div class="form-group row">
+                    <div class="form-group row">
                         <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
                         <div class="col-sm-10">
-                            <div></div>
-                            <button class="btn btn-primary">選擇檔案</button>
-                            <input type="text" class="form-control" id="avatar" name="avatar" placeholder="大頭貼上傳">
+                            <img id="myimg" src="" alt="" width="150px">
+                            <p class="avatar_upload d-inline" id="err"></p>
+                            <input type="file" id="my_file" name="my_file">
                         </div>
-                    </div> -->
+                    </div>
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">姓名<span class="asterisk"> *</span></label>
                         <div class="col-sm-10">
@@ -149,6 +152,10 @@ include __DIR__ . '/__connect_db.php';
     const submit_btn = document.querySelector('#submit_btn');
     const after_sub = document.querySelector('.after_sub');
 
+    const myimg = document.querySelector('#myimg');
+    const my_file = document.querySelector('#my_file');
+    const err = document.querySelector('#err');
+
     const checkForm = () => {
 
         let ispassed = true;
@@ -215,12 +222,10 @@ include __DIR__ . '/__connect_db.php';
                     method: 'POST',
                     body: form
                 })
-                .then(
-                    response => {
+                .then(response => {
                         return response.json();
                     })
-                .then(
-                    obj => {
+                .then(obj => {
                         console.log(obj);
                         info_bar.style.display = 'block';
                         if (obj.success) {
@@ -237,6 +242,26 @@ include __DIR__ . '/__connect_db.php';
 
         return false;
     }
+
+    my_file.addEventListener('change', event=>{
+            // console.log(event.target);
+
+            const fd = new FormData();
+            fd.append('my_file', my_file.files[0]);
+
+            fetch('member_avatar_api.php', {
+                method: 'POST',
+                body: fd
+            })
+            .then(response => {
+                    return response.json();
+                })
+            .then(obj => {
+                    console.log(obj);
+                    myimg.setAttribute('src', 'avatar_pictures/' + obj.filename); // 設定img屬性
+                    err.innerHTML = obj.info;
+                })
+        })
 </script>
 
 <?php include __DIR__ . '/html_foot.php'; ?> 
