@@ -86,6 +86,9 @@ if(isset($_POST['gotodb'])){
         <li class="nav-item">
             <a class="nav-link active" href="member_insert.php">新增資料</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="member_insert2.php">新增資料2</a>
+        </li>
     </ul>
 </aside>
 
@@ -148,12 +151,9 @@ if(isset($_POST['gotodb'])){
                 </div>
                 <div class="form-group row">
                     <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="nickname" name="nickname" placeholder="" value="<?= $nickname ?>">
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="<?= $nickname ?>">
                         <small id="nicknameHelp" class="form-text text-muted"></small>
-                    </div>
-                    <div class="col-sm-2 d-flex align-content-center flex-wrap">
-                        <p>將使用於分享樂</p>
                     </div>
                 </div>
                 <fieldset class="form-group">
