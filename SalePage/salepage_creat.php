@@ -46,8 +46,7 @@ $page_name = 'salepage_creat.php';
                             <label for="saleimg" class="col-sm-2 col-form-label">商品圖</label>
                             <div class="col-sm-10">
                                 <input type="hidden" id="salepage_image" name="salepage_image" value="">
-                                <img id="myimg" src="" alt="" width="100px">
-                                <!-- <p class="product_upload d-inline" id="err"></p> -->
+                                <img id="myimg" src="" alt="" width="100px">                                
                                 <input type="file" id="my_file" name="my_file">
                             </div>
                         </div>
@@ -100,26 +99,15 @@ $page_name = 'salepage_creat.php';
                         <div class="form-group">
                             <label for="salepage_proddetails">詳細說明</label>
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
-                            <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ></textarea><br>
-                            <!-- <script>
-                                CKFinder.setupCKEditor();
-                                CKEDITOR.replace('salepage_proddetails');
-                                function CKupdate()
-                                {
-                                    for(instance in CKEDITOR.instances)
-                                    {
-                                        CKEDITOR.instances[instance].updateElement();
-                                    }
-                                }
-                            </script> -->
+                            <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ></textarea><br>                            
                              <!--因為ckeditor編輯後無法從下面的submit送出 加上function  -->
                         </div>
                         
 
                         <div class="form-group row after_sub text-center">
                             <div class="col-sm-12">
-                                <!-- <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定新增'> -->
-                                <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定新增'>
+                                <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定新增'>
+                                <!-- <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定新增'> -->
                             </div>
                         </div>
                     </form>
@@ -142,9 +130,19 @@ $page_name = 'salepage_creat.php';
     const myimg = document.querySelector('#myimg');
     const my_file = document.querySelector('#my_file');
     const salepage_image = document.querySelector('#salepage_image');
-    
-    // CKEDITOR.replace( 'salepage_proddetails', {});
 
+
+    CKEDITOR.replace( 'salepage_proddetails', {});
+    // CKEDITOR.replace('salepage_proddetails');
+    // CKFinder.setupCKEditor();
+    
+    function CKupdate()
+    {
+        for(instance in CKEDITOR.instances)
+        {
+            CKEDITOR.instances[instance].updateElement();
+        }                
+    }
     const salefields = [
         'salepage_name',
         'salepage_suggestprice',

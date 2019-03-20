@@ -70,12 +70,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                             <small id="salepage_costHelp" class="form-text text-muted"></small>
                         </div>
 
-                        <!-- <div class="form-group">                             
-                            <form action="saleimage_upload_ajax.php" method="post" enctype="multipart/form-data">
-                                <label for="">商品主圖</label>
-                                <input type="file" id="saleimg_path" name="saleimg_path[]" multiple="multiple"><br>                    
-                            </form>
-                        </div> -->
+                        <div class="form-group row">
+                            <label for="saleimg" class="col-sm-2 col-form-label">商品圖</label>
+                            <div class="col-sm-10">
+                                <input type="hidden" id="salepage_image" name="salepage_image" value="<?= $row['salepage_image']?>">
+                                <img id="myimg" src="<?= $row['salepage_image']?>" alt="" width="100px">                                
+                                <input type="file" id="my_file" name="my_file">
+                            </div>
+                        </div>
 
                         <!-- 修改網站顯示設定 -->
 
@@ -101,17 +103,6 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                             <label for="salepage_proddetails">詳細說明</label>
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
                             <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ><?= $row['salepage_proddetails']?></textarea><br>
-                            <script>
-                                CKFinder.setupCKEditor();
-                                CKEDITOR.replace('salepage_proddetails');
-                                function CKupdate()
-                                {
-                                    for(instance in CKEDITOR.instances)
-                                    {
-                                        CKEDITOR.instances[instance].updateElement();
-                                    }
-                                }
-                            </script>
                         </div>
 
                         <!-- <div class="form-group">
@@ -119,7 +110,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
                             <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3"><?= $row['salepage_proddetails']?></textarea><br>
                         </div> -->
-                        <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定修改'>
+                        <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定修改'>
                     </form>
                 </div>
             </div>
@@ -136,74 +127,104 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <script>
     const saleinfo_bar = document.querySelector('#saleinfo_bar');
     const salesubmit_btn = document.querySelector('#salesubmit_btn');
+
+    const myimg = document.querySelector('#myimg');
+    const my_file = document.querySelector('#my_file');
+    const salepage_image = document.querySelector('#salepage_image');
+    
+    // CKEditor
     CKEDITOR.replace( 'salepage_proddetails', {});
-        
+    function CKupdate()
+    {
+        for(instance in CKEDITOR.instances)
+        {
+            CKEDITOR.instances[instance].updateElement();
+        }
+    }    
   
+    const salefields = [
+        'salepage_name',
+        'salepage_suggestprice',
+        'salepage_price',
+        'salepage_cost',
+        'salepage_feature',
+        'salepage_state',
+        'salepage_proddetails',
+        'salepage_image'
+    ];
 
-        const salefields = [
-            'salepage_name',
-            'salepage_suggestprice',
-            'salepage_price',
-            'salepage_cost',
-            'salepage_feature',
-            'salepage_state',
-            'salepage_proddetails'
-        ];
+    const salefs = {}; 
+    for(let v of salefields){
+        salefs[v] = document.saleform[v];
+    }
+    console.log(salefs);
+    console.log('salefs.salepage_name:', salefs.salepage_name);
 
-        const salefs = {}; 
-            for(let v of salefields){
-                salefs[v] = document.saleform[v];
-            }
-            console.log(salefs);
-            console.log('salefs.salepage_name:', salefs.salepage_name);
+    const salecheckForm = ()=>
+    {
+        let isPassed = true;
+        saleinfo_bar.style.display = 'none';
 
-            const salecheckForm = ()=>
-            {
-                let isPassed = true;
-                saleinfo_bar.style.display = 'none';
+        // 拿到每個欄位的值
+        const salefsv = {};
+        for(let v of salefields)
+        {
+            salefsv[v] = salefs[v].value;
+        }
+        console.log(salefsv);
 
-                // 拿到每個欄位的值
-                const salefsv = {};
-                for(let v of salefields)
-                {
-                    salefsv[v] = salefs[v].value;
-                }
-                console.log(salefsv);
+        // for(let v of salefields){
+        //     salefs[v].style.borderColor = '#cccccc';
+        //     document.querySelector('#' + v + 'Help').innerHTML = '';
+        // }
 
-                // for(let v of salefields){
-                //     salefs[v].style.borderColor = '#cccccc';
-                //     document.querySelector('#' + v + 'Help').innerHTML = '';
-                // }
+        if(isPassed) {
+            let saleform = new FormData(document.saleform);
+            salesubmit_btn.style.display = 'none';
+            console.log('1111');
+            fetch('salepage_edit_api.php', {
+                method: 'POST',
+                body: saleform
+            })
+                .then(response=>response.json())
+                .then(obj=>{
+                    console.log(obj);
 
-                if(isPassed) {
-                    let saleform = new FormData(document.saleform);
-                    salesubmit_btn.style.display = 'none';
-                    console.log('1111');
-                    fetch('salepage_edit_api.php', {
-                        method: 'POST',
-                        body: saleform
-                    })
-                        .then(response=>response.json())
-                        .then(obj=>{
-                            console.log(obj);
+                    saleinfo_bar.style.display = 'block';
 
-                            saleinfo_bar.style.display = 'block';
+                    if(obj.success)
+                    {
+                        saleinfo_bar.className = 'alert alert-success';
+                        saleinfo_bar.innerHTML = '修改資料成功';
+                    } else 
+                    {
+                        saleinfo_bar.className = 'alert alert-danger';
+                        saleinfo_bar.innerHTML = obj.errorMsg;
+                    }
 
-                            if(obj.success)
-                            {
-                                saleinfo_bar.className = 'alert alert-success';
-                                saleinfo_bar.innerHTML = '修改資料成功';
-                            } else 
-                            {
-                                saleinfo_bar.className = 'alert alert-danger';
-                                saleinfo_bar.innerHTML = obj.errorMsg;
-                            }
+                    salesubmit_btn.style.display = 'block';
+                });
+        }
+        return false;
+    };
 
-                            salesubmit_btn.style.display = 'block';
-                        });
-                }
-                return false;
-            };
+    my_file.addEventListener('change', event=>{
+        
+        const fd = new FormData();
+        fd.append('my_file', my_file.files[0]);
+
+        fetch('sale_picture_api.php', {
+            method: 'POST',
+            body: fd
+        })
+        .then(response => response.json())
+        .then(obj => {
+            console.log(obj);
+            // 設定img屬性
+            myimg.setAttribute('src', 'sale_pictures/' + obj.filename); 
+            salepage_image.setAttribute('value', 'sale_pictures/' + obj.filename); 
+        })
+    })
 </script>
     
 <?php include __DIR__.'/__html_dbfoot.php';?>
