@@ -119,7 +119,7 @@ $page_name = 'salepage_list.php';
                 saleul_pagi.innerHTML = str;
             });
     };
-    window.addEventListener('hashchange', myHashChange);
+    window.addEventListener("hashchange", myHashChange);
     myHashChange();
 
     //刪除資料

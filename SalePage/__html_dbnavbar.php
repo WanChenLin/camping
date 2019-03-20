@@ -105,8 +105,8 @@ leftside{
                 <main class="col-9 bg-white">
 
                     <aside class="bg-warning">
-                        <span>麵包屑 區域</span>
-                        <p>會員管理 / 訂單管理 / 收藏管理</p>
+                        <span> </span>
+                        <p> </p>
                     </aside>
 
                     <!-- <section>
