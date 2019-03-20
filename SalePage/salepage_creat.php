@@ -51,13 +51,6 @@ $page_name = 'salepage_creat.php';
                             </div>
                         </div>
                         
-                        <!-- <div class="form-group">                             
-                            <form action="saleimage_upload_ajax.php" method="post" enctype="multipart/form-data">
-                                <label for="">商品主圖</label>
-                                <input type="file" name="saleimg_path[]" multiple="multiple"><br>                    
-                            </form>
-                        </div> -->
-
                         <div class="form-group row">
                             <label for="salepage_suggestprice" class="col-sm-2 col-form-label">* 建議售價</label>
                             <div class="col-sm-4">
@@ -122,8 +115,11 @@ $page_name = 'salepage_creat.php';
                         </div>
                         
 
-
-                        <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定新增'>
+                        <div class="form-group row after_sub text-center">
+                            <div class="col-sm-12">
+                                <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定新增'>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -140,6 +136,12 @@ $page_name = 'salepage_creat.php';
 <script>
     const saleinfo_bar = document.querySelector('#saleinfo_bar');
     const salesubmit_btn = document.querySelector('#salesubmit_btn');
+
+    const myimg = document.querySelector('#myimg');
+    const my_file = document.querySelector('#my_file');
+    const err = document.querySelector('err');
+
+
     CKEDITOR.replace( 'salepage_proddetails', {});
         
   
@@ -196,7 +198,7 @@ $page_name = 'salepage_creat.php';
                             }
 
                             salesubmit_btn.style.display = 'block';
-                        });
+                        })
                 }
                 return false;
             };

@@ -2,8 +2,8 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- 主機: localhost
--- 產生時間： 2019 年 03 月 18 日 03:07
+-- 主機: 127.0.0.1
+-- 產生時間： 2019 年 03 月 20 日 10:05
 -- 伺服器版本: 10.1.37-MariaDB
 -- PHP 版本： 7.1.26
 
@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `SaleCategory`
+-- 資料表結構 `salecategory`
 --
 
-CREATE TABLE `SaleCategory` (
+CREATE TABLE `salecategory` (
   `salecate_id` int(11) NOT NULL COMMENT '商品分類流水號',
   `salecate_name` varchar(255) NOT NULL COMMENT '商品分類名稱',
   `salecate_parentid` int(11) NOT NULL COMMENT '上一層是',
@@ -36,10 +36,10 @@ CREATE TABLE `SaleCategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品分類';
 
 --
--- 資料表的匯出資料 `SaleCategory`
+-- 資料表的匯出資料 `salecategory`
 --
 
-INSERT INTO `SaleCategory` (`salecate_id`, `salecate_name`, `salecate_parentid`, `salecate_sort`) VALUES
+INSERT INTO `salecategory` (`salecate_id`, `salecate_name`, `salecate_parentid`, `salecate_sort`) VALUES
 (1, '冷凍食品', 0, 1),
 (2, '冷藏食品', 0, 2),
 (3, '生鮮食材', 0, 3),
@@ -48,10 +48,10 @@ INSERT INTO `SaleCategory` (`salecate_id`, `salecate_name`, `salecate_parentid`,
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `SaleImage`
+-- 資料表結構 `saleimage`
 --
 
-CREATE TABLE `SaleImage` (
+CREATE TABLE `saleimage` (
   `saleimg_id` int(11) NOT NULL COMMENT '圖片流水號',
   `salepage_id` int(11) NOT NULL COMMENT '商品流水號',
   `saleimg_name` varchar(255) NOT NULL COMMENT '圖片名稱',
@@ -62,10 +62,10 @@ CREATE TABLE `SaleImage` (
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `SalePage`
+-- 資料表結構 `salepage`
 --
 
-CREATE TABLE `SalePage` (
+CREATE TABLE `salepage` (
   `salepage_id` int(11) NOT NULL COMMENT '商品流水號',
   `salepage_name` varchar(255) NOT NULL COMMENT '產品名稱',
   `salepage_quility` int(11) NOT NULL COMMENT '商品數量',
@@ -82,35 +82,53 @@ CREATE TABLE `SalePage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品頁';
 
 --
--- 資料表的匯出資料 `SalePage`
+-- 資料表的匯出資料 `salepage`
 --
 
-INSERT INTO `SalePage` (`salepage_id`, `salepage_name`, `salepage_quility`, `salepage_suggestprice`, `salepage_price`, `salepage_cost`, `salepage_state`, `salepage_feature`, `salepage_proddetails`, `salepage_specification`, `salepage_paymenttype`, `salepage_deliverytype`, `salepage_salecateid`) VALUES
-(1, 'RRRR', 0, '99999', '99999', '99999', 0, 'WWWW', '', '', '', '', 0),
-(2, '5566', 0, '55', '66', '66', 0, 'svnefv', '', '', '', '', 0),
-(3, 'test', 0, '999', '999', '999', 0, 'eiop', 'iop', '', '', '', 0),
-(4, 'sfgerg', 0, '44', '4', '4', 1, 'dfhes', 'dfges5t', '', '', '', 0);
+INSERT INTO `salepage` (`salepage_id`, `salepage_name`, `salepage_quility`, `salepage_suggestprice`, `salepage_price`, `salepage_cost`, `salepage_state`, `salepage_feature`, `salepage_proddetails`, `salepage_specification`, `salepage_paymenttype`, `salepage_deliverytype`, `salepage_salecateid`) VALUES
+(9, 'goo', 0, '9000', '0', '0', 1, 'rrr', '<figure class=\"easyimage easyimage-full\"><img alt=\"\" src=\"blob:http://localhost/5275514e-8b62-4ae2-822d-c432bc609e12\" width=\"800\" />\r\n<figcaption></figcaption>\r\n</figure>\r\n\r\n<p>&nbsp;</p>\r\n', '', '', '', 0),
+(10, 'sksk', 0, '5555', '5555', '5553', 1, '33', '', '', '', '', 0),
+(11, 'sksk', 0, '5555', '5555', '5553', 1, '33', '<p>hhhhh</p>\r\n', '', '', '', 0),
+(12, 'efsf', 0, '500', '500', '500', 1, '', '', '', '', '', 0),
+(13, 'efsf', 0, '500', '500', '500', 1, '', '<p>123</p>\r\n', '', '', '', 0),
+(14, 'goo', 0, '88', '888', '888', 1, '8888uuu', '', '', '', '', 0),
+(16, 'wwwwwyyy', 0, '3333', '333', '333', 1, 'eeeyy', '<p>2ododod</p>\r\n', '', '', '', 0),
+(17, 'ddd', 0, '0', '0', '0', 1, 'ss', '', '', '', '', 0),
+(19, '冷藏貢丸', 0, '55', '54', '30', 0, '冷藏貢丸', '<p>冷藏貢丸</p>\r\n', '', '', '', 2),
+(20, '蒟蒻', 0, '40', '38', '25', 0, 'coco', '', '', '', '', 4),
+(24, '花雕藥膳煲雞湯', 0, '6666', '6666', '7777', 1, '花雕藥膳煲雞湯', '花雕藥膳煲雞湯', '', '', '', 4),
+(25, 'jjjj', 0, '888', '888', '888', 1, '888', '888', '', '', '', 3),
+(26, 'jjjj', 0, '888', '888', '888', 1, '888', '888', '', '', '', 3),
+(28, 'ddd', 333, '333', '333', '333', 1, '3werw', 'wrew', 'wrerw', '', '', 0),
+(29, '豆腐', 0, '50', '50', '50', 1, '333', '<p>good</p>\r\n', '', '', '', 3),
+(31, '豆腐', 0, '50', '50', '50', 1, '333', '<p>good</p>\r\n', '', '', '', 3),
+(32, '豆腐', 0, '50', '50', '50', 1, '333', '<p>good</p>\r\n', '', '', '', 3),
+(33, '豆腐', 0, '50', '50', '50', 1, '333', '<p>good</p>\r\n', '', '', '', 3),
+(36, '豆腐', 0, '50', '50', '50', 1, '333', '<p>good</p>\r\n', '', '', '', 3),
+(37, '豆腐', 0, '50', '50', '50', 1, '333', '<p>good</p>\r\n', '', '', '', 3),
+(41, '【食吧嚴選】台灣精品-高雄黑糖芭比蓮霧*1盒組(9-10顆/盒，2-2.5kg/盒)~~~', 0, '900', '999', '999', 1, '【食吧嚴選】台灣精品-高雄黑糖芭比蓮霧*1盒組(9-10顆/盒，2-2.5kg/盒)~~~', '<p>【食吧嚴選】台灣精品-高雄黑糖芭比蓮霧*1盒組(9-10顆/盒，2-2.5kg/盒)</p>\r\n', '', '', '', 2),
+(42, '亞尼克', 0, '900', '900', '900', 1, '亞尼克', '', '', '', '', 4);
 
 --
 -- 已匯出資料表的索引
 --
 
 --
--- 資料表索引 `SaleCategory`
+-- 資料表索引 `salecategory`
 --
-ALTER TABLE `SaleCategory`
+ALTER TABLE `salecategory`
   ADD PRIMARY KEY (`salecate_id`);
 
 --
--- 資料表索引 `SaleImage`
+-- 資料表索引 `saleimage`
 --
-ALTER TABLE `SaleImage`
+ALTER TABLE `saleimage`
   ADD PRIMARY KEY (`saleimg_id`);
 
 --
--- 資料表索引 `SalePage`
+-- 資料表索引 `salepage`
 --
-ALTER TABLE `SalePage`
+ALTER TABLE `salepage`
   ADD PRIMARY KEY (`salepage_id`);
 
 --
@@ -118,22 +136,22 @@ ALTER TABLE `SalePage`
 --
 
 --
--- 使用資料表 AUTO_INCREMENT `SaleCategory`
+-- 使用資料表 AUTO_INCREMENT `salecategory`
 --
-ALTER TABLE `SaleCategory`
+ALTER TABLE `salecategory`
   MODIFY `salecate_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品分類流水號', AUTO_INCREMENT=5;
 
 --
--- 使用資料表 AUTO_INCREMENT `SaleImage`
+-- 使用資料表 AUTO_INCREMENT `saleimage`
 --
-ALTER TABLE `SaleImage`
+ALTER TABLE `saleimage`
   MODIFY `saleimg_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '圖片流水號';
 
 --
--- 使用資料表 AUTO_INCREMENT `SalePage`
+-- 使用資料表 AUTO_INCREMENT `salepage`
 --
-ALTER TABLE `SalePage`
-  MODIFY `salepage_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品流水號', AUTO_INCREMENT=5;
+ALTER TABLE `salepage`
+  MODIFY `salepage_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品流水號', AUTO_INCREMENT=43;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

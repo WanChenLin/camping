@@ -1,4 +1,4 @@
-<main class="col-9 bg-white">
+<main class="col-10 bg-white">
 
 <aside class="bg-warning">
     <span>麵包屑 區域</span>

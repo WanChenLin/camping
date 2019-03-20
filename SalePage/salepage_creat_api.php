@@ -30,15 +30,16 @@ $result = [
         exit;
     }
 
-    // TODO: 檢查 name 長度
+    $filename = $FILES['my_file']['name'];
+    $file = "/sale_pictures/".$filename;
 
     $sql = "INSERT INTO `SalePage`(
             `salepage_name`, `salepage_suggestprice`, 
             `salepage_price`, `salepage_cost`, 
             `salepage_feature`, `salepage_state`,
-            `salepage_proddetails`, `salepage_salecateid`
+            `salepage_proddetails`, `salepage_salecateid`,`salepage_img`
             ) VALUES (
-              ?, ?, ?, ?, ?, ?, ?, ?
+              ?, ?, ?, ?, ?, ?, ?, ?, ?
             )";    
 
         $stmt = $pdo->prepare($sql);

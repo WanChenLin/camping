@@ -1,10 +1,10 @@
 
 
-    <div class="bg-white">
+    <div class="bg-white py-3">
         <div class="container-fluid">
             <div class="row d-flex leftside">
 
-                <nav class="col-3">
+                <nav class="col-2">
                     <div class="accordion" id="accordionExample">
 
                         <!-- <div class="card"> -->
@@ -126,7 +126,7 @@
                     </div>
                 </nav>
 
-                <main class="col-9 bg-white">
+                <main class="col-10 bg-white ">
 
                     <aside class="bg-warning">
                         <span> </span>
