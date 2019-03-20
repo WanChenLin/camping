@@ -105,12 +105,11 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                             <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ><?= $row['salepage_proddetails']?></textarea><br>
                         </div>
 
-                        <!-- <div class="form-group">
-                            <label for="salepage_proddetails">詳細說明</label>
-                            <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
-                            <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3"><?= $row['salepage_proddetails']?></textarea><br>
-                        </div> -->
-                        <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定修改'>
+                        <div class="form-group row after_sub text-center">
+                            <div class="col-sm-12">
+                                <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定修改'>                                
+                            </div>
+                        </div>                                                                
                     </form>
                 </div>
             </div>

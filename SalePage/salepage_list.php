@@ -6,7 +6,7 @@ $page_name = 'salepage_list.php';
 <?php include __DIR__.'/__html_dbheader.php';?>
 <?php include __DIR__.'/__html_dbnavbar.php';?>
 
-<div class="container-fluid table-responsive  " >
+<div class="container-fluid table-responsive" >
     <div class="row">
         <div class="col-lg-12">
             <nav>
@@ -118,7 +118,9 @@ $page_name = 'salepage_list.php';
                             active: active,
                             page: i
                         });
-                console.log(i);
+                    // console.log(ori_data.page);
+                    // console.log(i);
+                    // console.log(active);
                 }
                 ul_pagi.innerHTML = str;
             });

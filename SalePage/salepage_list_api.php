@@ -14,16 +14,21 @@ $result = [
     'errorMsg' => '',
 ];
 
-$salepage = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-$tsale_sql = "SELECT COUNT(1) FROM salepage";
-$tsale_stmt = $pdo->query($tsale_sql);
-$salet_rows = $tsale_stmt->fetch(PDO::FETCH_NUM)[0];
-$result['totalRows'] = intval($salet_rows);
+// 算總筆數
+$t_sql = "SELECT COUNT(1) FROM salepage";
+$t_stmt = $pdo->query($t_sql);
+$total_rows = $t_stmt->fetch(PDO::FETCH_NUM)[0];
+$result['totalRows'] = intval($total_rows);
 
-$salet_pages = ceil($salet_rows/$per_page);
-$result['totalPages'] = $salet_pages;
+// 總頁數
+$total_pages = ceil($total_rows/$per_page);
+$result['totalPages'] = $total_pages;
 
+if($page < 1) $page = 1;
+if($page > $total_pages) $page = $total_pages;
+$result['page'] = $page;
 
 $salesql = sprintf(" SELECT 
                     salepage_id,
@@ -41,7 +46,7 @@ $salesql = sprintf(" SELECT
                     -- 括號裡是一個 statemen, 用 AS 給他一個欄位名稱                    
                     (SELECT salecate_name FROM salecategory WHERE salecate_id = salepage_salecateid) AS salecate_name,
                     salepage_image
-                    FROM salepage ORDER BY salepage_id LIMIT %s, %s", ($salepage-1)*$per_page, $per_page);
+                    FROM salepage ORDER BY salepage_id LIMIT %s, %s", ($page-1)*$per_page, $per_page);
 $stmt = $pdo->query($salesql);
 
 $result['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
