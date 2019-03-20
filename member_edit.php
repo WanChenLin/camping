@@ -74,14 +74,16 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <small id="password_checkHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <!-- <div class="form-group row">
-                <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
-                <div class="col-sm-10">
-                    <div></div>
-                    <button class="btn btn-primary">選擇檔案</button>
-                    <input type="text" class="form-control" id="avatar" name="avatar" placeholder="大頭貼上傳">
-                </div>
-            </div> -->
+                        <div class="form-group row">
+                            <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
+                            <div class="col-sm-10">
+                                <img id="preview" src="" height="100px" width="" />
+                                <input type="file" name="my_file" id="my_file" onchange="previewImage(this)" accept="image/*"/ value="<?= $row['mem_avatar'] ?>">
+                                <!-- <img id="myimg" src="" alt="" height="100px">
+                                <p class="avatar_upload d-inline" id="err"></p>
+                                <input type="file" id="my_file" name="my_file"> -->
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="name" class="col-sm-2 col-form-label">姓名<span class="asterisk"> *</span></label>
                             <div class="col-sm-10">
@@ -251,6 +253,23 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
         return false;
+    }
+
+    function previewImage(input) {
+
+        let preview = document.getElementById('preview');
+
+        if (input.files && input.files[0]) {
+
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.setAttribute('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        } else {
+        preview.setAttribute('src', '');
+        }
     }
 </script>
 
