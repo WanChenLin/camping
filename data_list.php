@@ -3,7 +3,7 @@
 require __DIR__ . '/__connect_db.php';
 $page_name = 'data_list';
 
-$per_page = 20;
+$per_page = 10;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 
@@ -19,7 +19,14 @@ if ($page < 1) $page = 1;
 if ($page > $total_pages) $page = $total_pages;
 
 
-$sql = sprintf("SELECT * FROM share_post LIMIT %s, %s", ($page - 1) * $per_page, $per_page);
+$sql = sprintf("SELECT `share_post`.`post_id`,
+                    `share_post`.`post_cate`,
+                    `share_post`.`post_title`,
+                    `share_post`.`post_time`,
+                    `share_post`.`post_editTime`
+                FROM `share_post` LEFT JOIN `share_category`
+                ON `share_post`.`post_cate` = `share_category`.`post_cate`
+                LIMIT %s, %s", ($page - 1) * $per_page, $per_page);
 
 //echo $sql;exit;
 $stmt = $pdo->query($sql);
@@ -29,9 +36,15 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <?php include __DIR__ . '/__html_head.php';  ?>
-<?php include __DIR__ . '/__style_start.html';  ?> 
+<style>
+    .table td {
+        height: 3rem;
+        overflow: hidden;
+    }
+</style>
+<?php include __DIR__ . '/__style_start.html';  ?>
 <?php include __DIR__ . '/__navbar.php';  ?>
-<div class="container">
+<div class="container-fluid">
     <div><?= $page . " / " . $total_pages ?></div>
 
     <div class="row">
@@ -64,8 +77,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <th scope="col">分類</th>
                         <th scope="col">標題</th>
                         <th scope="col">發布時間</th>
-                        <th scope="col">內容</th>
-                        <!-- <th scope="col">瀏覽人數</th>
+                        <th scope="col">修改時間</th>
+                        <!-- <th scope="col">內容</th>
+                        <th scope="col">瀏覽人數</th>
                         <th scope="col">分享人數</th>
                         <th scope="col">評論人數</th>
                         <th scope="col">文章標籤</th>
@@ -76,14 +90,15 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </thead>
                 <tbody>
                     <?php foreach ($rows as $row) : ?>
-                    <tr>                        
+                    <tr>
                         <td><?= htmlentities($row['post_id']) ?></td>
                         <!-- <td><?= htmlentities($row['mem_nickname']) ?></td> -->
                         <td><?= htmlentities($row['post_cate']) ?></td>
                         <td><?= htmlentities($row['post_title']) ?></td>
                         <td><?= htmlentities($row['post_time']) ?></td>
-                        <td><?= html_entity_decode($row['post_content']) ?></td>
-                        <!-- <td><?= htmlentities($row['browse_num']) ?></td>
+                        <td><?= htmlentities($row['post_editTime']) ?></td>
+                        <!-- <td><?= html_entity_decode($row['post_content']) ?></td>
+                        <td><?= htmlentities($row['browse_num']) ?></td>
                         <td><?= htmlentities($row['share_num']) ?></td>
                         <td><?= htmlentities($row['cmt_num']) ?></td>
                         <td><?= htmlentities($row['post_tag']) ?></td>

@@ -17,7 +17,7 @@ if (isset($_POST['post_title']) and !empty($post_id)) {
     $post_cate = $_POST['post_cate'];
     $post_title = strip_tags($_POST['post_title']);
     $post_content = html_entity_decode($_POST['post_content']);
-    // $post_editTime = date("Y-m-d h:i:s");
+    $post_editTime = date("Y-m-d h:i:s");
 
 
     $result['post'] = $_POST;  // 做 echo 檢查
@@ -31,7 +31,7 @@ if (isset($_POST['post_title']) and !empty($post_id)) {
 
     $s_sql = "SELECT * FROM `share_post` WHERE `post_id`=?";
     $s_stmt = $pdo->prepare($s_sql);
-    $s_stmt->execute($post_id);
+    $s_stmt->execute([$post_id]);
 
     switch ($s_stmt->rowCount()) {
         case 0:
@@ -46,7 +46,7 @@ if (isset($_POST['post_title']) and !empty($post_id)) {
                 `post_cate`=?,
                 `post_title`=?,
                 `post_content`=?,
-                -- `post_editTime`=?
+                `post_editTime`=?
             WHERE `post_id`=?";
 
     // try {
@@ -56,7 +56,7 @@ if (isset($_POST['post_title']) and !empty($post_id)) {
             $post_cate,
             $post_title,
             $post_content,
-            // $post_editTime,
+            $post_editTime,
             $post_id
         ]);
 

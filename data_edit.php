@@ -31,17 +31,17 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <body>
     <?php include __DIR__ . '/__style_start.html';  ?>
     <?php include __DIR__ . '/__navbar.php';  ?>
-    <div class="container">
+    <div class="container-fluid">
         <form name="form1" method="post" onsubmit="return checkForm();">
             <input type="hidden" name="post_id" value="<?= $row['post_id'] ?>">
             <div id="info_bar" class="alert alert-success" role="alert" style="display: none"></div>
-            <div class="row">
+            <div class="row my-3">
                 <div class="col-lg-2 pr-0">
                     <select class="custom-select mr-sm-2" name="post_cate" id="post_cate">
-                        <option selected>文章分類</option>
-                        <option value="露營裝備">露營裝備</option>
-                        <option value="帳篷選擇">帳篷選擇</option>
-                        <option value="天氣對策">天氣對策</option>
+                        <option selected><?= $row['post_cate'] ?></option>
+                        <option value="1">露營裝備</option>
+                        <option value="2">帳篷選擇</option>
+                        <option value="3">天氣對策</option>
                     </select>
                 </div>
                 <div class="col-lg-10 pl-0">
@@ -50,7 +50,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <textarea name="post_content" id="post_content" rows="10" cols="80"></textarea>
+                    <textarea name="post_content" id="post_content" rows="10" cols="80" value=""><?= $row['post_content'] ?></textarea>
                     <script>
                         CKFinder.setupCKEditor();
                         CKEDITOR.replace('post_content');
@@ -63,7 +63,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     </script>
                 </div>
             </div>
-            <button id="submit_btn" class="btn btn-primary" onClick="CKupdate()">發布</button>
+            <button id="submit_btn" class="btn btn-primary mt-3" onClick="CKupdate()">發布</button>
         </form>
     </div>
     <?php include __DIR__ . '/__style_end.html';  ?>

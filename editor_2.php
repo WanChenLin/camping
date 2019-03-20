@@ -18,17 +18,17 @@ $page_name = 'data_insert';
 </style>
 <?php include __DIR__ . '/__style_start.html';  ?>
 <?php include __DIR__ . '/__navbar.php';  ?>
-<div class="container">
+<div class="container-fluid">
     <div id="info_bar" class="alert alert-success" role="alert" style="display: none"></div>
     <form name="form1" method="post" onsubmit="return checkForm();">
 
-        <div class="row">
+        <div class="row my-3">
             <div class="col-lg-2 pr-0">
                 <select class="custom-select mr-sm-2" name="post_cate" id="post_cate">
-                    <option selected>文章分類</option>
-                    <option value="露營裝備">露營裝備</option>
-                    <option value="帳篷選擇">帳篷選擇</option>
-                    <option value="天氣對策">天氣對策</option>
+                    <option selected disabled>文章分類</option>
+                    <option value="1">露營裝備</option>
+                    <option value="2">帳篷選擇</option>
+                    <option value="3">天氣對策</option>
                 </select>
             </div>
             <div class="col-lg-10 pl-0">
@@ -50,7 +50,7 @@ $page_name = 'data_insert';
                 </script>
             </div>
         </div>
-        <button id="submit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()">發布</button>
+        <button id="submit_btn" type="submit" class="btn btn-primary mt-3" onClick="CKupdate()">發布</button>
     </form>
 </div>
 
