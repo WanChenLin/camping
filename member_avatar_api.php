@@ -15,18 +15,17 @@ if (empty($_FILES['my_file'])) {
     exit;
 }
 
+// $filename = sha1($_FILES['my_file']['name'].uniqid());
 $filename = $_FILES['my_file']['name'];
 
 switch ($_FILES['my_file']['type']) {
     case 'image/jpeg':
-        $filename = $_FILES['my_file']['name'];
-        // $result['info'] = '檔案上傳成功';
-        break;
-    case 'image/jpeg':
+        // $filename .= '.jpg';
         $filename = $_FILES['my_file']['name'];
         // $result['info'] = '檔案上傳成功';
         break;
     case 'image/png':
+        // $filename .= '.png';
         $filename = $_FILES['my_file']['name'];
         // $result['info'] = '檔案上傳成功';
         break;

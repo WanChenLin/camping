@@ -80,7 +80,7 @@ if (isset($_POST['account']) and !empty($mem_id)) {
 
         if ($stmt->rowCount() == 1) {
             $result['success'] = true;
-            $result['errorCode'] = 200;
+            $result['errorCode'] = 201;
             $result['errorMsg'] = '資料修改成功';
         } else {
             $result['errorCode'] = 405;

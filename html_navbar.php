@@ -45,14 +45,14 @@
                                 </h2>
                             </div>
 
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <!-- <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                 <a class="card-body ml-2 d-flex" href="">
                                     達人帶路
                                 </a>
                                 <a class="card-body ml-2 d-flex" href="">
                                     新手指南
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="card">
@@ -64,14 +64,14 @@
                                 </h2>
                             </div>
 
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <!-- <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                                 <a class="card-body ml-2 d-flex" href="">
                                     營地列表
                                 </a>
                                 <a class="card-body ml-2 d-flex" href="">
                                     營地主管理
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
 
                     </div>

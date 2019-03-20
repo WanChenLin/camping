@@ -36,7 +36,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 <a class="nav-link" href="member_insert.php">新增資料</a>
             </li> -->
             <li class="nav-item">
-                <a class="nav-link" href="member_insert2.php">新增資料</a>
+                <a class="nav-link" href="member_insert.php">新增資料</a>
             </li>
         </ul>
     </aside>

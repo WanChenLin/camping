@@ -47,7 +47,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a class="nav-link" href="member_insert.php">新增資料</a>
             </li> -->
             <li class="nav-item">
-                <a class="nav-link" href="member_insert2.php">新增資料</a>
+                <a class="nav-link" href="member_insert.php">新增資料</a>
             </li>
         </ul>
     </aside>
@@ -91,7 +91,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $row['mem_account'] ?></td>
                     <td><?= $row['mem_password'] ?></td>
                     <td>
-                        <img src=".<?= $row['mem_avatar'] ?>" alt="" width="50">
+                        <img src="./<?= $row['mem_avatar'] ?>" alt="" height="50">
                     </td>
                     <td><?= $row['mem_name'] ?></td>
                     <td><?= $row['mem_nickname'] ?></td>
