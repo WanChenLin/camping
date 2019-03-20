@@ -29,11 +29,11 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-<?php include __DIR__ . '/__style_start.html';  ?> 
-<?php include __DIR__ . '/__navbar.php';  ?>   
+    <?php include __DIR__ . '/__style_start.html';  ?>
+    <?php include __DIR__ . '/__navbar.php';  ?>
     <div class="container">
         <form name="form1" method="post" onsubmit="return checkForm();">
-
+            <input type="hidden" name="post_id" value="<?= $row['post_id'] ?>">
             <div id="info_bar" class="alert alert-success" role="alert" style="display: none"></div>
             <div class="row">
                 <div class="col-lg-2 pr-0">
@@ -53,11 +53,17 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     <textarea name="post_content" id="post_content" rows="10" cols="80"></textarea>
                     <script>
                         CKFinder.setupCKEditor();
-                        CKEDITOR.replace('post_content', {});
+                        CKEDITOR.replace('post_content');
+
+                        function CKupdate() {
+                            for (instance in CKEDITOR.instances) {
+                                CKEDITOR.instances[instance].updateElement();
+                            }
+                        }
                     </script>
                 </div>
             </div>
-            <button id="submit_btn" class="btn btn-primary">發布</button>
+            <button id="submit_btn" class="btn btn-primary" onClick="CKupdate()">發布</button>
         </form>
     </div>
     <?php include __DIR__ . '/__style_end.html';  ?>

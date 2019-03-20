@@ -36,17 +36,24 @@ $page_name = 'data_insert';
             </div>
         </div>
         <div class="row">
-                <div class="col-lg-12">
-        <textarea name="post_content" id="post_content" rows="10" cols="80"></textarea>
-        <script>
-            CKFinder.setupCKEditor();
-            CKEDITOR.replace('post_content', {});
-        </script>
-        </div>
+            <div class="col-lg-12">
+                <textarea name="post_content" id="post_content" rows="10" cols="80"></textarea>
+                <script>
+                    CKFinder.setupCKEditor();
+                    CKEDITOR.replace('post_content');
+
+                    function CKupdate() {
+                        for (instance in CKEDITOR.instances) {
+                            CKEDITOR.instances[instance].updateElement();
+                        }
+                    }
+                </script>
             </div>
-        <button id="submit_btn" type="submit" class="btn btn-primary">發布</button>
+        </div>
+        <button id="submit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()">發布</button>
     </form>
 </div>
+
 <?php include __DIR__ . '/__style_end.html';  ?>
 <script>
     const info_bar = document.querySelector('#info_bar');
