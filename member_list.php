@@ -51,9 +51,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <section>
         <table class="table table-hover table-responsive">
-            <caption>List of members</caption>
+            <!-- <caption>List of members</caption> -->
             <thead>
-                <tr>
+                <tr style="white-space:nowrap">
                     <th scope=" col"><i class="far fa-edit"></i></th>
                     <th scope=" col"><i class="far fa-trash-alt"></i></th>
                     <th scope=" col">#</th>

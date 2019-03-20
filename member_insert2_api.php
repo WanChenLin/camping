@@ -31,10 +31,13 @@ if (isset($_POST['gotodb'])) {
         exit;
     }
 
+    $filename = $_FILES['my_file']['name'];
+    $file = "/uploads/" . $filename;
+
     $sql = "INSERT INTO `member_list`
-        (`mem_account`, `mem_password`, `mem_name`, `mem_nickname`, `mem_gender`, `mem_birthday`, `mem_mobile`, `mem_email`) 
+        (`mem_account`, `mem_password`, `mem_name`, `mem_nickname`, `mem_gender`, `mem_birthday`, `mem_mobile`, `mem_email`, `mem_avatar`) 
         VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?)";
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try {
         $stmt = $pdo->prepare($sql);
@@ -47,7 +50,8 @@ if (isset($_POST['gotodb'])) {
             $_POST['gender'],
             $_POST['birthday'],
             $_POST['mobile'],
-            $_POST['email']
+            $_POST['email'],
+            $file
         ]);
 
         if ($stmt->rowCount() == 1) {
