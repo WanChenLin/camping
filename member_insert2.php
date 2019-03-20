@@ -126,6 +126,16 @@ include __DIR__ . '/__connect_db.php';
                                 <small id="emailHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">等級<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="level" id="level">
+                                    <option value="1" selected>1 露營新手</option>
+                                    <option value="2">2 業餘露營家</option>
+                                    <option value="3">3 露營達人</option>
+                                </select>    
+                            </div>
+                        </div>
                         <div class="form-group row after_sub text-center">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>

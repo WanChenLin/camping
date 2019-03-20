@@ -17,9 +17,12 @@ if ($page > $total_pages) {
     $page = $total_pages;
 }
 
-$sql = sprintf("SELECT * FROM member_list ORDER BY mem_id DESC LIMIT %s, %s", ($page - 1) * $per_page, $per_page);
+$sql = sprintf("SELECT *, (SELECT level_title FROM member_level WHERE mem_level=memLevel_id ) AS level_title
+                FROM member_list ORDER BY mem_id DESC LIMIT %s, %s", ($page - 1) * $per_page, $per_page);
 $stmt = $pdo->query($sql);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// $level_sql = "SELECT memLevel_id_name FROM member_level WHERE mem_level = memLevel_id"
 
 ?>
 
@@ -66,6 +69,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th scope=" col">生日</th>
                     <th scope=" col">手機</th>
                     <th scope=" col">信箱</th>
+                    <th scope=" col">等級</th>
                     <th scope=" col">狀態</th>
                     <th scope=" col">註冊日期</th>
                 </tr>
@@ -93,6 +97,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $row['mem_birthday'] ?></td>
                     <td><?= $row['mem_mobile'] ?></td>
                     <td><?= $row['mem_email'] ?></td>
+                    <td><?= $row['level_title'] ?></td>
                     <td><?= $row['mem_status'] ?></td>
                     <td><?= $row['mem_signUpDate'] ?></td>
                     
