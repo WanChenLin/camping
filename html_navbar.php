@@ -18,19 +18,19 @@
                                 <a class="card-body ml-2 d-flex" href="member_list.php">
                                     會員清單
                                 </a>
-                                <a class="card-body ml-2 d-flex" href="#">
+                                <a class="card-body ml-2 d-flex" href="camp_index.html">
                                     會員等級
                                 </a>
-                                <a class="card-body ml-2 d-flex" href="#">
+                                <a class="card-body ml-2 d-flex" href="camp_index.html">
                                     收藏管理
                                 </a>
-                                <a class="card-body ml-2 d-flex" href="#">
+                                <a class="card-body ml-2 d-flex" href="camp_index.html">
                                     勳章管理
                                 </a>
-                                <a class="card-body ml-2 d-flex" href="#">
+                                <a class="card-body ml-2 d-flex" href="camp_index.html">
                                     活動管理
                                 </a>
-                                <a class="card-body ml-2 d-flex" href="#">
+                                <a class="card-body ml-2 d-flex" href="camp_index.html">
                                     訂單管理
                                 </a>
                             </div>

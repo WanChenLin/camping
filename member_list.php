@@ -90,7 +90,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $row['mem_id'] ?></th>
                     <td><?= $row['mem_account'] ?></td>
                     <td><?= $row['mem_password'] ?></td>
-                    <td><?= $row['mem_avatar'] ?></td>
+                    <td>
+                        <img src=".<?= $row['mem_avatar'] ?>" alt="" width="50">
+                    </td>
                     <td><?= $row['mem_name'] ?></td>
                     <td><?= $row['mem_nickname'] ?></td>
                     <td><?= $row['mem_gender'] ?></td>

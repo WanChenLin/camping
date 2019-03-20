@@ -31,7 +31,7 @@ if (isset($_POST['gotodb'])) {
     }
 
     $filename = $_FILES['my_file']['name'];
-    $file = "/uploads/" . $filename;
+    $file = "/avatar_pictures/" . $filename;
 
     $sql = "INSERT INTO `member_list`
         (`mem_account`, `mem_password`, `mem_name`, `mem_nickname`, `mem_gender`, `mem_birthday`, `mem_mobile`, `mem_email`, `memLevel_id`, `mem_avatar`) 
