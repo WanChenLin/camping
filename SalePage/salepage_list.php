@@ -22,9 +22,9 @@ $page_name = 'salepage_list.php';
                 <thead>
                 <tr  style=" white-space:nowrap" >
                 <!--  加就不自動換行了style=" white-space:nowrap" -->
-                    <th scope="col"><i class="fas fa-edit"></i></th>
-                    <!-- <th scope="col">商品主圖</th> -->
+                    <th scope="col"><i class="fas fa-edit"></i></th>                    
                     <th scope="col">商品頁序號</th>
+                    <th scope="col">商品主圖</th>
                     <th  style="height:100px;" scope="col">產品名稱</th>
                     <th scope="col">商品數量</th>
                     <th scope="col">建議售價</th>
@@ -62,6 +62,7 @@ $page_name = 'salepage_list.php';
                             <a href="salepage_edit.php?salepage_id=<%= salepage_id %>"><i class="fas fa-edit"></i></a>
                             </td>
                             <td><%= salepage_id %></td>
+                            <td><img src="<%= salepage_image %>" width="100px"></td>
                             <td><%= salepage_name %></td>
                             <td><%= salepage_quility %></td>
                             <td><%= salepage_suggestprice %></td>
