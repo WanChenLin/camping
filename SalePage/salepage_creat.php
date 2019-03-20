@@ -45,14 +45,15 @@ $page_name = 'salepage_creat.php';
                         <div class="form-group row">
                             <label for="saleimg" class="col-sm-2 col-form-label">商品圖</label>
                             <div class="col-sm-10">
+                                <input type="hidden" id="salepage_image" name="salepage_image" value="">
                                 <img id="myimg" src="" alt="" width="100px">
-                                <p class="product_upload d-inline" id="err"></p>
+                                <!-- <p class="product_upload d-inline" id="err"></p> -->
                                 <input type="file" id="my_file" name="my_file">
                             </div>
                         </div>
                         
                         <div class="form-group row">
-                            <label for="salepage_suggestprice" class="col-sm-2 col-form-label">* 建議售價</label>
+                            <label for="salepage_suggestprice" class="col-sm-2 col-form-label">建議售價</label>
                             <div class="col-sm-4">
                             <input type="text" class="form-control" id="salepage_suggestprice" name="salepage_suggestprice" placeholder=""
                                    value="" >
@@ -61,7 +62,7 @@ $page_name = 'salepage_creat.php';
                         </div>
 
                         <div class="form-group row">
-                            <label for="salepage_price" class="col-sm-2 col-form-label">售價</label>
+                            <label for="salepage_price" class="col-sm-2 col-form-label">* 售價</label>
                             <div class="col-sm-4">
                             <input type="text" class="form-control" id="salepage_price" name="salepage_price" placeholder=""
                                    value="">
@@ -100,7 +101,7 @@ $page_name = 'salepage_creat.php';
                             <label for="salepage_proddetails">詳細說明</label>
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
                             <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ></textarea><br>
-                            <script>
+                            <!-- <script>
                                 CKFinder.setupCKEditor();
                                 CKEDITOR.replace('salepage_proddetails');
                                 function CKupdate()
@@ -110,14 +111,15 @@ $page_name = 'salepage_creat.php';
                                         CKEDITOR.instances[instance].updateElement();
                                     }
                                 }
-                            </script>
+                            </script> -->
                              <!--因為ckeditor編輯後無法從下面的submit送出 加上function  -->
                         </div>
                         
 
                         <div class="form-group row after_sub text-center">
                             <div class="col-sm-12">
-                                <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定新增'>
+                                <!-- <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定新增'> -->
+                                <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定新增'>
                             </div>
                         </div>
                     </form>
@@ -139,87 +141,82 @@ $page_name = 'salepage_creat.php';
 
     const myimg = document.querySelector('#myimg');
     const my_file = document.querySelector('#my_file');
-    const err = document.querySelector('err');
+    const salepage_image = document.querySelector('#salepage_image');
+    
+    // CKEDITOR.replace( 'salepage_proddetails', {});
 
+    const salefields = [
+        'salepage_name',
+        'salepage_suggestprice',
+        'salepage_price',
+        'salepage_cost',
+        'salepage_feature',
+        'salepage_state',
+        'salepage_proddetails',
+        'salepage_salecateid',
+        'salepage_image'      
+    ];
 
-    CKEDITOR.replace( 'salepage_proddetails', {});
+    const salefs = {}; 
+    for(let v of salefields){
+        salefs[v] = document.saleform[v];
+    }    
+
+    const salecheckForm = ()=>{
+        let isPassed = true;
+        saleinfo_bar.style.display = 'none';
+
+        // 拿到每個欄位的值
+        const salefsv = {};
+        for(let v of salefields){
+            salefsv[v] = salefs[v].value;
+        }        
         
-  
+        console.log(salefsv);
 
-        const salefields = [
-            'salepage_name',
-            'salepage_suggestprice',
-            'salepage_price',
-            'salepage_cost',
-            'salepage_feature',
-            'salepage_state',
-            'salepage_proddetails',
-            'salepage_salecateid'
-        ];
+        if(isPassed) {
+            let saleform = new FormData(document.saleform);
+            salesubmit_btn.style.display = 'none';
+            console.log(saleform);
+            fetch('salepage_creat_api.php', {
+                method: 'POST',
+                body: saleform,                
+            })
+                .then(response=>response.json())
+                .then(obj=>{
+                    console.log(obj);
 
-        const salefs = {}; 
-            for(let v of salefields){
-                salefs[v] = document.saleform[v];
-            }
-            console.log(salefs);
-            console.log('salefs.salepage_name:', salefs.salepage_name);
+                    saleinfo_bar.style.display = 'block';
 
-            const salecheckForm = ()=>{
-                let isPassed = true;
-                saleinfo_bar.style.display = 'none';
+                    if(obj.success){
+                        saleinfo_bar.className = 'alert alert-success';
+                        saleinfo_bar.innerHTML = '資料新增成功';
+                    } else {
+                        saleinfo_bar.className = 'alert alert-danger';
+                        saleinfo_bar.innerHTML = obj.errorMsg;
+                    }
 
-                // 拿到每個欄位的值
-                const salefsv = {};
-                for(let v of salefields){
-                    salefsv[v] = salefs[v].value;
-                }
-                console.log(salefsv);
-
-                if(isPassed) {
-                    let saleform = new FormData(document.saleform);
-                    salesubmit_btn.style.display = 'none';
-                    console.log('1111');
-                    fetch('salepage_creat_api.php', {
-                        method: 'POST',
-                        body: saleform
-                    })
-                        .then(response=>response.json())
-                        .then(obj=>{
-                            console.log(obj);
-
-                            saleinfo_bar.style.display = 'block';
-
-                            if(obj.success){
-                                saleinfo_bar.className = 'alert alert-success';
-                                saleinfo_bar.innerHTML = '資料新增成功';
-                            } else {
-                                saleinfo_bar.className = 'alert alert-danger';
-                                saleinfo_bar.innerHTML = obj.errorMsg;
-                            }
-
-                            salesubmit_btn.style.display = 'block';
-                        })
-                }
-                return false;
-            };
+                    salesubmit_btn.style.display = 'block';
+                })
+        }
+        return false;
+    };
 
     my_file.addEventListener('change', event=>{
-    // console.log(event.target);
+        
+        const fd = new FormData();
+        fd.append('my_file', my_file.files[0]);
 
-    const fd = new FormData();
-    fd.append('my_file', my_file.files[0]);
-
-    fetch('sale_picture_api.php', {
-        method: 'POST',
-        body: fd
-    })
-    .then(response => {
-            return response.json();
+        fetch('sale_picture_api.php', {
+            method: 'POST',
+            body: fd
         })
-    .then(obj => {
+        .then(response => response.json())
+        .then(obj => {
             console.log(obj);
-            myimg.setAttribute('src', 'sale_pictures/' + obj.filename); // 設定img屬性
-            err.innerHTML = obj.info;
+            // 設定img屬性
+            myimg.setAttribute('src', 'sale_pictures/' + obj.filename); 
+            salepage_image.setAttribute('value', 'sale_pictures/' + obj.filename); 
         })
     })
 </script>

@@ -11,7 +11,7 @@ $result = [
         
 ];
 
-// if(isset($_POST['checksale'])){
+    // if(isset($_POST['checksale'])){
     $name = $_POST['salepage_name'];
     $sutprice = $_POST['salepage_suggestprice'];
     $price = $_POST['salepage_price'];
@@ -20,7 +20,7 @@ $result = [
     $state = $_POST['salepage_state'];
     //ckeditor
     $details = $_POST['salepage_proddetails'];
-    $salecateid = $_POST['salepage_salecateid'];
+    $salecateid = $_POST['salepage_salecateid'];    
 
     $result['post'] = $_POST;  // 做 echo 檢查
 
@@ -30,14 +30,14 @@ $result = [
         exit;
     }
 
-    $filename = $FILES['my_file']['name'];
-    $file = "/sale_pictures/".$filename;
+    // $filename = sha1($_FILES['my_file']['name']);
+    // $file = "/sale_pictures/".$filename;
 
     $sql = "INSERT INTO `SalePage`(
             `salepage_name`, `salepage_suggestprice`, 
             `salepage_price`, `salepage_cost`, 
             `salepage_feature`, `salepage_state`,
-            `salepage_proddetails`, `salepage_salecateid`,`salepage_img`
+            `salepage_proddetails`, `salepage_salecateid`,`salepage_image`
             ) VALUES (
               ?, ?, ?, ?, ?, ?, ?, ?, ?
             )";    
@@ -52,7 +52,8 @@ $result = [
             $_POST['salepage_feature'],
             $_POST['salepage_state'],
             $_POST['salepage_proddetails'],
-            $_POST['salepage_salecateid']
+            $_POST['salepage_salecateid'],
+            $_POST['salepage_image']
         ]);
 
         if($stmt->rowCount()==1) {
