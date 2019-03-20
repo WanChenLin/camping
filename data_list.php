@@ -29,6 +29,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <?php include __DIR__ . '/__html_head.php';  ?>
+<?php include __DIR__ . '/__style_start.html';  ?> 
 <?php include __DIR__ . '/__navbar.php';  ?>
 <div class="container">
     <div><?= $page . " / " . $total_pages ?></div>
@@ -58,16 +59,17 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">文章編號</th>
+                        <th scope="col">編號</th>
                         <!-- <th scope="col">文章作者</th> -->
-                        <th scope="col">文章分類</th>
-                        <th scope="col">文章標題</th>
+                        <th scope="col">分類</th>
+                        <th scope="col">標題</th>
                         <th scope="col">發布時間</th>
-                        <th scope="col">瀏覽人數</th>
+                        <th scope="col">內容</th>
+                        <!-- <th scope="col">瀏覽人數</th>
                         <th scope="col">分享人數</th>
                         <th scope="col">評論人數</th>
-                        <!-- <th scope="col">文章標籤</th> -->
-                        <th scope="col">文章開關</th>
+                        <th scope="col">文章標籤</th>
+                        <th scope="col">文章開關</th> -->
                         <th scope="col"><i class="fas fa-trash-alt"></i></th>
                         <th scope="col"><i class="fas fa-edit"></i></th>
                     </tr>
@@ -80,17 +82,18 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlentities($row['post_cate']) ?></td>
                         <td><?= htmlentities($row['post_title']) ?></td>
                         <td><?= htmlentities($row['post_time']) ?></td>
-                        <td><?= htmlentities($row['browse_num']) ?></td>
+                        <td><?= html_entity_decode($row['post_content']) ?></td>
+                        <!-- <td><?= htmlentities($row['browse_num']) ?></td>
                         <td><?= htmlentities($row['share_num']) ?></td>
                         <td><?= htmlentities($row['cmt_num']) ?></td>
-                        <!-- <td><?= htmlentities($row['post_tag']) ?></td> -->
-                        <td><?= htmlentities($row['post_visible']) ?></td>
-                        <td><a href="javascript: delete_it(<?= $row['sid'] ?>)">
+                        <td><?= htmlentities($row['post_tag']) ?></td>
+                        <td><?= htmlentities($row['post_visible']) ?></td> -->
+                        <td><a href="javascript: delete_it(<?= $row['post_id'] ?>)">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
                         <td>
-                            <a href="data_edit.php?sid=<?= $row['sid'] ?>"><i class="fas fa-edit"></i></a>
+                            <a href="data_edit.php?post_id=<?= $row['post_id'] ?>"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -99,13 +102,13 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
     </div>
-
+    <?php include __DIR__ . '/__style_end.html';  ?>
 
 </div>
 <script>
-    function delete_it(sid) {
+    function delete_it(post_id) {
         if (confirm(`確定要刪除這篇文章嗎?`)) {
-            location.href = 'data_delete.php?sid=' + sid;
+            location.href = 'data_delete.php?post_id=' + post_id;
         }
     }
 </script>

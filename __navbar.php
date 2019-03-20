@@ -12,23 +12,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item <?= $page_name=='index' ? 'active' : '' ?>">
-                    <a class="nav-link" href="index_.php">Home <span class="sr-only">(current)</span></a>
+                                <li class="nav-item <?= $page_name == 'data_list' ? 'active' : '' ?>">
+                    <a class="nav-link" href="data_list.php">文章列表</a>
                 </li>
-                <li class="nav-item <?= $page_name=='data_list' ? 'active' : '' ?>">
-                    <a class="nav-link" href="data_list.php">列表</a>
+                <li class="nav-item <?= $page_name == 'data_insert' ? 'active' : '' ?>">
+                    <a class="nav-link" href="editor_2.php">新增文章</a>
                 </li>
-                <li class="nav-item <?= $page_name=='data_list2' ? 'active' : '' ?>">
-                    <a class="nav-link" href="data_list2.php">列表2</a>
-                </li>
-                <li class="nav-item <?= $page_name=='data_insert' ? 'active' : '' ?>">
-                    <a class="nav-link" href="data_insert.php">新增資料</a>
-                </li>
-                <li class="nav-item <?= $page_name=='data_insert2' ? 'active' : '' ?>">
-                    <a class="nav-link" href="data_insert2.php">新增資料2</a>
-                </li>
+
             </ul>
 
         </div>
     </div>
-</nav>
+</nav> 

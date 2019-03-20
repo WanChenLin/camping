@@ -1,164 +1,129 @@
 <?php
-// require __DIR__. '/__cred.php';
-require __DIR__. '/__connect_db.php';
+ // require __DIR__. '/__cred.php';
+require __DIR__ . '/__connect_db.php';
 $page_name = 'data_edit';
 
-$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+$post_id = isset($_GET['post_id']) ? intval($_GET['post_id']) : 0;
 
-$sql = "SELECT * FROM address_book WHERE sid=$sid";
+$sql = "SELECT * FROM share_post WHERE post_id=$post_id";
 
 $stmt = $pdo->query($sql);
-if($stmt->rowCount()==0){
+if ($stmt->rowCount() == 0) {
     header('Location: data_list.php');
     exit;
 }
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
-<?php include __DIR__. '/__html_head.php';  ?>
-<?php include __DIR__. '/__navbar.php';  ?>
-    <style>
-        .form-group small {
-            color: red !important;
-        }
+<?php include __DIR__ . '/__html_head.php';  ?>
 
-    </style>
-<div class="container">
+<style>
+    .form-control {
+        border-radius: 0;
+    }
 
-    <div class="row">
-        <div class="col-lg-6">
+    .custom-select {
+        border-radius: 0;
+    }
+</style>
+</head>
 
-                <div id="info_bar" class="alert alert-success" role="alert" style="display: none">
+<body>
+<?php include __DIR__ . '/__style_start.html';  ?> 
+<?php include __DIR__ . '/__navbar.php';  ?>   
+    <div class="container">
+        <form name="form1" method="post" onsubmit="return checkForm();">
+
+            <div id="info_bar" class="alert alert-success" role="alert" style="display: none"></div>
+            <div class="row">
+                <div class="col-lg-2 pr-0">
+                    <select class="custom-select mr-sm-2" name="post_cate" id="post_cate">
+                        <option selected>文章分類</option>
+                        <option value="露營裝備">露營裝備</option>
+                        <option value="帳篷選擇">帳篷選擇</option>
+                        <option value="天氣對策">天氣對策</option>
+                    </select>
                 </div>
-
-            <div class="card">
-
-                <div class="card-body">
-                    <h5 class="card-title">修改資料
-                    </h5>
-
-                    <form name="form1" method="post" onsubmit="return checkForm();">
-                        <input type="hidden" name="checkme" value="check123">
-                        <input type="hidden" name="sid" value="<?= $row['sid']?>">
-                        <div class="form-group">
-                            <label for="name">姓名</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder=""
-                                   value="<?= $row['name']?>">
-                            <small id="nameHelp" class="form-text text-muted"></small>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">電郵</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder=""
-                                   value="<?= $row['email']?>">
-                            <small id="emailHelp" class="form-text text-muted"></small>
-                        </div>
-                        <div class="form-group">
-                            <label for="mobile">手機</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder=""
-                                   value="<?= $row['mobile']?>">
-                            <small id="mobileHelp" class="form-text text-muted"></small>
-                        </div>
-                        <div class="form-group">
-                            <label for="birthday">生日</label>
-                            <input type="text" class="form-control" id="birthday" name="birthday" placeholder="YYYY-MM-DD"
-                                   value="<?= $row['birthday']?>">
-                            <small id="birthdayHelp" class="form-text text-muted"></small>
-                        </div>
-                        <div class="form-group">
-                            <label for="address">地址</label>
-                            <textarea class="form-control" id="address" name="address" cols="30" rows="3"><?= $row['address']?></textarea>
-                            <small id="addressHelp" class="form-text text-muted"></small>
-                        </div>
-
-                        <button id="submit_btn" type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-
+                <div class="col-lg-10 pl-0">
+                    <input type="text" class="form-control" id="post_title" name="post_title" placeholder="文章標題" value="<?= $row['post_title'] ?>">
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <textarea name="post_content" id="post_content" rows="10" cols="80"></textarea>
+                    <script>
+                        CKFinder.setupCKEditor();
+                        CKEDITOR.replace('post_content', {});
+                    </script>
+                </div>
+            </div>
+            <button id="submit_btn" class="btn btn-primary">發布</button>
+        </form>
     </div>
+    <?php include __DIR__ . '/__style_end.html';  ?>
 
-
-
-
-</div>
     <script>
         const info_bar = document.querySelector('#info_bar');
         const submit_btn = document.querySelector('#submit_btn');
 
         const fields = [
-            'name',
-            'email',
-            'mobile',
-            'birthday',
-            'address',
+            'post_cate',
+            'post_title',
+            'post_content'
         ];
 
         // 拿到每個欄位的參照
         const fs = {};
-        for(let v of fields){
+        for (let v of fields) {
             fs[v] = document.form1[v];
         }
         console.log(fs);
         console.log('fs.name:', fs.name);
 
 
-        const checkForm = ()=>{
+        const checkForm = () => {
             let isPassed = true;
             info_bar.style.display = 'none';
 
             // 拿到每個欄位的值
             const fsv = {};
-            for(let v of fields){
+            for (let v of fields) {
                 fsv[v] = fs[v].value;
             }
             console.log(fsv);
 
 
-            let email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-            let mobile_pattern = /^09\d{2}\-?\d{3}\-?\d{3}$/;
-
-            for(let v of fields){
+            for (let v of fields) {
                 fs[v].style.borderColor = '#cccccc';
-                document.querySelector('#' + v + 'Help').innerHTML = '';
             }
 
-            if(fsv.name.length < 2){
-                fs.name.style.borderColor = 'red';
-                document.querySelector('#nameHelp').innerHTML = '請填寫正確的姓名!';
-
+            if (fsv.post_title.length < 1) {
+                fs.post_title.style.borderColor = 'red';
                 isPassed = false;
             }
-            if(! email_pattern.test(fsv.email)){
-                fs.email.style.borderColor = 'red';
-                document.querySelector('#emailHelp').innerHTML = '請填寫正確的 Email!';
-                isPassed = false;
-            }
-            if(! mobile_pattern.test(fsv.mobile)){
-                fs.mobile.style.borderColor = 'red';
-                document.querySelector('#mobileHelp').innerHTML = '請填寫正確的手機號碼!';
+            if (fsv.post_content.length < 1) {
+                fs.post_content.style.borderColor = 'red';
                 isPassed = false;
             }
 
-
-            if(isPassed) {
+            if (isPassed) {
                 let form = new FormData(document.form1);
 
                 submit_btn.style.display = 'none';
 
                 fetch('data_edit_api.php', {
-                    method: 'POST',
-                    body: form
-                })
-                    .then(response=>response.json())
-                    .then(obj=>{
+                        method: 'POST',
+                        body: form
+                    })
+                    .then(response => response.json())
+                    .then(obj => {
                         console.log(obj);
 
                         info_bar.style.display = 'block';
 
-                        if(obj.success){
+                        if (obj.success) {
                             info_bar.className = 'alert alert-success';
-                            info_bar.innerHTML = '資料修改成功';
+                            info_bar.innerHTML = '文章修改成功';
                         } else {
                             info_bar.className = 'alert alert-danger';
                             info_bar.innerHTML = obj.errorMsg;
@@ -167,11 +132,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         submit_btn.style.display = 'block';
                     });
 
-
-
             }
             return false;
         };
-
     </script>
-<?php include __DIR__. '/__html_foot.php';  ?>
+    <?php include __DIR__ . '/__html_foot.php';  ?> 

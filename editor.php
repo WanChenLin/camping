@@ -1,7 +1,7 @@
 <?php
  // require __DIR__. '/__cred.php';
 require __DIR__ . '/__connect_db.php';
-$page_name = 'data_insert';
+// $page_name = 'data_insert';
 
 $post_cate = '';
 $post_title = '';
@@ -11,8 +11,8 @@ $post_time = '';
 if (isset($_POST['post_title'])) {
     $slct = array('文章分類', '露營裝備', '帳篷選擇', '天氣對策');
     $post_cate = $_POST['slct'];
-    $post_title = htmlentities($_POST['post_title']);
-    $post_content = htmlentities($_POST['content']);
+    $post_title = strip_tags($_POST['post_title']);
+    $post_content = strip_tags($_POST['content']);
     $post_time = date("Y-m-d h:i:s");
 
     $sql = "INSERT INTO `share_post`(
@@ -46,24 +46,15 @@ if (isset($_POST['post_title'])) {
 
 ?>
 
+<?php include __DIR__ . '/__html_head.php';  ?>
+<?php include __DIR__ . '/__navbar.php';  ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="ckeditor/ckeditor.js"></script>
-    <script src="ckfinder/ckfinder.js"></script>
     <style>
         .form-control {
             border-radius: 0;
         }
 
-        .input-group-prepend .btn {
+        .custom-select {
             border-radius: 0;
         }
     </style>
@@ -82,7 +73,7 @@ if (isset($_POST['post_title'])) {
                     </select>
                 </div>
                 <div class="col-lg-10 p-0">
-                    <input type="text" class="form-control" id="post_title" name="post_title" placeholder="文章標題" value="<?= $post_title ?>">
+                    <input type="text" class="form-control" id="post_title" name="slct" placeholder="文章標題" value="<?= $post_title ?>">
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -99,20 +90,43 @@ if (isset($_POST['post_title'])) {
 
     <script>
         const fields = [
-            'post_cate',
+            'slct',
             'post_title',
-            'post_content'
+            'content'
         ];
 
         const fs = {};
         for (let v of fields) {
             fs[v] = document.form1[v];
         }
+
         console.log(fs);
         console.log('fs.name:', fs.name);
-
+               
         const checkForm = () => {
-           return true;
+            let isPassed = true;
+
+            const fsv = {};
+            for (let v of fields) {
+                console.log(v)
+                fsv[v] = fs[v].value;
+            }
+            console.log(fsv);
+
+            // for (let v of fields) {
+            //     fs[v].style.borderColor = '#cccccc';
+            //     }
+
+            if (fsv.post_title.length < 1) {
+                fs.post_title.style.borderColor = 'red';
+                isPassed = false;
+            }
+            // if (fsv.post_content.length < 1) {
+            //     fs.post_content.style.borderColor = 'red';
+            //     isPassed = false;
+            // }
+
+            return isPassed;
         };
     </script>
 
