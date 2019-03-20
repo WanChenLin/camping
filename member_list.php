@@ -2,7 +2,7 @@
 
 include __DIR__ . '/__connect_db.php';
 
-$per_page = 5;
+$per_page = 10;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 $total_sql = "SELECT COUNT(1) FROM member_list";
@@ -33,7 +33,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </style>
 
 
-<main class="col-9 bg-white">
+<main class="col-10 bg-white">
 
     <aside class="my-2">
         <ul class="nav nav-tabs">

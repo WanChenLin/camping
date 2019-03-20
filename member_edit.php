@@ -7,7 +7,7 @@ $mem_id = isset($_GET['mem_id']) ? intval($_GET['mem_id']) : 0;
 $sql =  "SELECT * FROM member_list WHERE mem_id=$mem_id";
 
 $stmt = $pdo->query($sql);
-if($stmt->rowCount()==0){
+if ($stmt->rowCount() == 0) {
     header('Location: member_list.php');
     exit;
 }
@@ -25,7 +25,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     }
 </style>
 
-<main class=" col-9 bg-white">
+<main class="col-10 bg-white">
 
     <aside class="my-2">
         <ul class="nav nav-tabs">
@@ -43,104 +43,107 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     <section class="">
 
-        <div id="info_bar" role="alert"></div>
+        <div class="container">
+            <div id="info_bar" role="alert"></div>
 
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">修改會員資料</h5>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">修改會員資料</h5>
 
-                <form name="formInsert" method="POST" onsubmit="return checkForm()">
-                    <input type="hidden" name="gotodb" value="check">
-                    <input type="hidden" name="mem_id" value="<?= $row['mem_id'] ?>">
-                    <div class="form-group row">
-                        <label for="account" class="col-sm-2 col-form-label">帳號名稱<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="account" name="account" placeholder="" value="<?= $row['mem_account'] ?>">
-                            <small id="accountHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">密碼<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="" value="<?= $row['mem_password'] ?>">
-                            <small id="passwordHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password_check" class="col-sm-2 col-form-label">確認密碼<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password_check" name="password_check" placeholder="" value="">
-                            <small id="password_checkHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <!-- <div class="form-group row">
-                        <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
-                        <div class="col-sm-10">
-                            <div></div>
-                            <button class="btn btn-primary">選擇檔案</button>
-                            <input type="text" class="form-control" id="avatar" name="avatar" placeholder="大頭貼上傳">
-                        </div>
-                    </div> -->
-                    <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">姓名<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="" value="<?= $row['mem_name'] ?>">
-                            <small id="nameHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="<?= $row['mem_nickname'] ?>">
-                            <small id="nicknameHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <fieldset class="form-group">
-                        <div class="row">
-                            <legend class="col-form-label col-sm-2 pt-0">性別</legend>
-                            <div class="col-sm-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="gender" value="male" checked>
-                                    <label class="form-check-label" for="genderM">男 Male</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderF" value="female">
-                                    <label class="form-check-label" for="genderF">女 Female</label>
-                                </div>
+                    <form name="formInsert" method="POST" onsubmit="return checkForm()">
+                        <input type="hidden" name="gotodb" value="check">
+                        <input type="hidden" name="mem_id" value="<?= $row['mem_id'] ?>">
+                        <div class="form-group row">
+                            <label for="account" class="col-sm-2 col-form-label">帳號名稱<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="account" name="account" placeholder="" value="<?= $row['mem_account'] ?>">
+                                <small id="accountHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                    </fieldset>
-                    <div class="form-group row">
-                        <label for="birthday" class="col-sm-2 col-form-label">生日</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="birthday" name="birthday" placeholder="格式: YYYY-MM-DD" value="<?= $row['mem_birthday'] ?>">
-                            <small id="birthdayHelp" class="form-text text-muted"></small>
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-2 col-form-label">密碼<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="" value="<?= $row['mem_password'] ?>">
+                                <small id="passwordHelp" class="form-text text-muted"></small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="mobile" class="col-sm-2 col-form-label">手機<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="<?= $row['mem_mobile'] ?>">
-                            <small id="mobileHelp" class="form-text text-muted"></small>
+                        <div class="form-group row">
+                            <label for="password_check" class="col-sm-2 col-form-label">確認密碼<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password_check" name="password_check" placeholder="" value="">
+                                <small id="password_checkHelp" class="form-text text-muted"></small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="email" class="col-sm-2 col-form-label">信箱<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?= $row['mem_email'] ?>">
-                            <small id="emailHelp" class="form-text text-muted"></small>
+                        <!-- <div class="form-group row">
+                <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
+                <div class="col-sm-10">
+                    <div></div>
+                    <button class="btn btn-primary">選擇檔案</button>
+                    <input type="text" class="form-control" id="avatar" name="avatar" placeholder="大頭貼上傳">
+                </div>
+            </div> -->
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">姓名<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="" value="<?= $row['mem_name'] ?>">
+                                <small id="nameHelp" class="form-text text-muted"></small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row text-center">
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
+                        <div class="form-group row">
+                            <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="<?= $row['mem_nickname'] ?>">
+                                <small id="nicknameHelp" class="form-text text-muted"></small>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-2 pt-0">性別</legend>
+                                <div class="col-sm-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender" value="male" checked>
+                                        <label class="form-check-label" for="genderM">男 Male</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderF" value="female">
+                                        <label class="form-check-label" for="genderF">女 Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group row">
+                            <label for="birthday" class="col-sm-2 col-form-label">生日</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="birthday" name="birthday" placeholder="格式: YYYY-MM-DD" value="<?= $row['mem_birthday'] ?>">
+                                <small id="birthdayHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mobile" class="col-sm-2 col-form-label">手機<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="<?= $row['mem_mobile'] ?>">
+                                <small id="mobileHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">信箱<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?= $row['mem_email'] ?>">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row text-center">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+
     </section>
 
 </main>

@@ -12,12 +12,13 @@ include __DIR__ . '/__connect_db.php';
     .asterisk {
         color: red;
     }
-    .avatar_upload{
+
+    .avatar_upload {
         color: red;
     }
 </style>
 
-<main class=" col-9 bg-white">
+<main class="col-10 bg-white">
 
     <aside class="my-2">
         <ul class="nav nav-tabs">
@@ -35,103 +36,106 @@ include __DIR__ . '/__connect_db.php';
 
     <section class="">
 
-        <div id="info_bar" role="alert"></div>
+        <div class="container">
+            <div id="info_bar" role="alert"></div>
 
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">新增會員資料</h5>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">新增會員資料</h5>
 
-                <form name="formInsert" method="POST" onsubmit="return checkForm()">
-                    <input type="hidden" name="gotodb" value="check">
-                    <div class="form-group row">
-                        <label for="account" class="col-sm-2 col-form-label">帳號名稱<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="account" name="account" placeholder="" value="">
-                            <small id="accountHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password" class="col-sm-2 col-form-label">密碼<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="" value="">
-                            <small id="passwordHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password_check" class="col-sm-2 col-form-label">確認密碼<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password_check" name="password_check" placeholder="" value="">
-                            <small id="password_checkHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
-                        <div class="col-sm-10">
-                            <img id="myimg" src="" alt="" width="150px">
-                            <p class="avatar_upload d-inline" id="err"></p>
-                            <input type="file" id="my_file" name="my_file">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">姓名<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="" value="">
-                            <small id="nameHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="">
-                            <small id="nicknameHelp" class="form-text text-muted"></small>
-                        </div>
-                    </div>
-                    <fieldset class="form-group">
-                        <div class="row">
-                            <legend class="col-form-label col-sm-2 pt-0">性別</legend>
-                            <div class="col-sm-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="gender" value="male" checked>
-                                    <label class="form-check-label" for="genderM">男 Male</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderF" value="female">
-                                    <label class="form-check-label" for="genderF">女 Female</label>
-                                </div>
+                    <form name="formInsert" method="POST" onsubmit="return checkForm()">
+                        <input type="hidden" name="gotodb" value="check">
+                        <div class="form-group row">
+                            <label for="account" class="col-sm-2 col-form-label">帳號名稱<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="account" name="account" placeholder="" value="">
+                                <small id="accountHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                    </fieldset>
-                    <div class="form-group row">
-                        <label for="birthday" class="col-sm-2 col-form-label">生日</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="birthday" name="birthday" placeholder="格式: YYYY-MM-DD" value="">
-                            <small id="birthdayHelp" class="form-text text-muted"></small>
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-2 col-form-label">密碼<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="" value="">
+                                <small id="passwordHelp" class="form-text text-muted"></small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="mobile" class="col-sm-2 col-form-label">手機<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="">
-                            <small id="mobileHelp" class="form-text text-muted"></small>
+                        <div class="form-group row">
+                            <label for="password_check" class="col-sm-2 col-form-label">確認密碼<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password_check" name="password_check" placeholder="" value="">
+                                <small id="password_checkHelp" class="form-text text-muted"></small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="email" class="col-sm-2 col-form-label">信箱<span class="asterisk"> *</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="" value="">
-                            <small id="emailHelp" class="form-text text-muted"></small>
+                        <div class="form-group row">
+                            <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
+                            <div class="col-sm-10">
+                                <img id="myimg" src="" alt="" width="150px">
+                                <p class="avatar_upload d-inline" id="err"></p>
+                                <input type="file" id="my_file" name="my_file">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row after_sub text-center">
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">姓名<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="" value="">
+                                <small id="nameHelp" class="form-text text-muted"></small>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="form-group row">
+                            <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="">
+                                <small id="nicknameHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-2 pt-0">性別</legend>
+                                <div class="col-sm-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender" value="male" checked>
+                                        <label class="form-check-label" for="genderM">男 Male</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="genderF" value="female">
+                                        <label class="form-check-label" for="genderF">女 Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group row">
+                            <label for="birthday" class="col-sm-2 col-form-label">生日</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="birthday" name="birthday" placeholder="格式: YYYY-MM-DD" value="">
+                                <small id="birthdayHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mobile" class="col-sm-2 col-form-label">手機<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="">
+                                <small id="mobileHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">信箱<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="" value="">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row after_sub text-center">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+
     </section>
 
 </main>
@@ -223,45 +227,45 @@ include __DIR__ . '/__connect_db.php';
                     body: form
                 })
                 .then(response => {
-                        return response.json();
-                    })
+                    return response.json();
+                })
                 .then(obj => {
-                        console.log(obj);
-                        info_bar.style.display = 'block';
-                        if (obj.success) {
-                            info_bar.className = 'alert alert-success';
-                            info_bar.innerHTML = '資料新增完成';
-                        } else {
-                            info_bar.className = 'alert alert-danger';
-                            info_bar.innerHTML = obj.errorMsg;
-                        }
-                        submit_btn.style.display = 'block';
-                        submit_btn.style = 'btn-primary';
-                    })
+                    console.log(obj);
+                    info_bar.style.display = 'block';
+                    if (obj.success) {
+                        info_bar.className = 'alert alert-success';
+                        info_bar.innerHTML = '資料新增完成';
+                    } else {
+                        info_bar.className = 'alert alert-danger';
+                        info_bar.innerHTML = obj.errorMsg;
+                    }
+                    submit_btn.style.display = 'block';
+                    submit_btn.style = 'btn-primary';
+                })
         }
 
         return false;
     }
 
-    my_file.addEventListener('change', event=>{
-            // console.log(event.target);
+    my_file.addEventListener('change', event => {
+        // console.log(event.target);
 
-            const fd = new FormData();
-            fd.append('my_file', my_file.files[0]);
+        const fd = new FormData();
+        fd.append('my_file', my_file.files[0]);
 
-            fetch('member_avatar_api.php', {
+        fetch('member_avatar_api.php', {
                 method: 'POST',
                 body: fd
             })
             .then(response => {
-                    return response.json();
-                })
+                return response.json();
+            })
             .then(obj => {
-                    console.log(obj);
-                    myimg.setAttribute('src', 'avatar_pictures/' + obj.filename); // 設定img屬性
-                    err.innerHTML = obj.info;
-                })
-        })
+                console.log(obj);
+                myimg.setAttribute('src', 'avatar_pictures/' + obj.filename); // 設定img屬性
+                err.innerHTML = obj.info;
+            })
+    })
 </script>
 
 <?php include __DIR__ . '/html_foot.php'; ?> 

@@ -1,5 +1,5 @@
-    <div class="bg-dark">
-        <div class="container">
+    <div class="bg-white py-3">
+        <div class="container-fluid">
             <div class="row d-flex">
 
                 <nav class="col-2">
