@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: localhost
--- 產生時間： 2019 年 03 月 20 日 02:18
+-- 產生時間： 2019 年 03 月 20 日 17:01
 -- 伺服器版本: 10.1.37-MariaDB
 -- PHP 版本： 7.1.26
 
@@ -67,6 +67,7 @@ CREATE TABLE `SaleImage` (
 
 CREATE TABLE `SalePage` (
   `salepage_id` int(11) NOT NULL COMMENT '商品流水號',
+  `salepage_image` varchar(4000) NOT NULL COMMENT '商品圖',
   `salepage_name` varchar(255) NOT NULL COMMENT '產品名稱',
   `salepage_quility` int(11) NOT NULL COMMENT '商品數量',
   `salepage_suggestprice` decimal(10,0) NOT NULL COMMENT '商品建議售價',
@@ -85,20 +86,24 @@ CREATE TABLE `SalePage` (
 -- 資料表的匯出資料 `SalePage`
 --
 
-INSERT INTO `SalePage` (`salepage_id`, `salepage_name`, `salepage_quility`, `salepage_suggestprice`, `salepage_price`, `salepage_cost`, `salepage_state`, `salepage_feature`, `salepage_proddetails`, `salepage_specification`, `salepage_paymenttype`, `salepage_deliverytype`, `salepage_salecateid`) VALUES
-(8, '烏魚子', 0, '590', '999', '999', 1, '999', '', '', '', '', 3),
-(9, 'goo', 0, '9000', '0', '0', 1, 'rrr', '<figure class=\"easyimage easyimage-full\"><img alt=\"\" src=\"blob:http://localhost/5275514e-8b62-4ae2-822d-c432bc609e12\" width=\"800\" />\r\n<figcaption></figcaption>\r\n</figure>\r\n\r\n<p>&nbsp;</p>\r\n', '', '', '', 0),
-(10, 'sksk', 0, '5555', '5555', '5553', 1, '33', '', '', '', '', 0),
-(11, 'sksk', 0, '5555', '5555', '5553', 1, '33', '<p>hhhhh</p>\r\n', '', '', '', 0),
-(12, 'efsf', 0, '500', '500', '500', 1, '', '', '', '', '', 0),
-(13, 'efsf', 0, '500', '500', '500', 1, '', '<p>123</p>\r\n', '', '', '', 0),
-(14, 'goo', 0, '88', '888', '888', 1, '8888uuu', '', '', '', '', 0),
-(15, 'wwwww', 0, '3333', '333', '333', 1, 'eee', '', '', '', '', 0),
-(16, 'wwwww', 0, '3333', '333', '333', 1, 'eee', '<p>2ododod</p>\r\n', '', '', '', 0),
-(17, 'ddd', 0, '0', '0', '0', 1, 'ss', '', '', '', '', 0),
-(19, '冷藏貢丸', 0, '55', '54', '30', 0, '冷藏貢丸', '<p>冷藏貢丸</p>\r\n', '', '', '', 2),
-(20, '蒟蒻', 0, '40', '38', '25', 0, 'coco', '', '', '', '', 4),
-(21, 'cool素雞', 0, '566', '55', '19', 0, '素雞', '素雞', '', '', '', 4);
+INSERT INTO `SalePage` (`salepage_id`, `salepage_image`, `salepage_name`, `salepage_quility`, `salepage_suggestprice`, `salepage_price`, `salepage_cost`, `salepage_state`, `salepage_feature`, `salepage_proddetails`, `salepage_specification`, `salepage_paymenttype`, `salepage_deliverytype`, `salepage_salecateid`) VALUES
+(8, '', '烏魚子', 0, '590', '999', '999', 1, '999', '', '', '', '', 3),
+(9, '', 'goo', 0, '9000', '0', '0', 1, 'rrr', '<figure class=\"easyimage easyimage-full\"><img alt=\"\" src=\"blob:http://localhost/5275514e-8b62-4ae2-822d-c432bc609e12\" width=\"800\" />\r\n<figcaption></figcaption>\r\n</figure>\r\n\r\n<p>&nbsp;</p>\r\n', '', '', '', 0),
+(10, '', 'sksk', 0, '5555', '5555', '5553', 1, '33', '', '', '', '', 0),
+(11, '', 'sksk', 0, '5555', '5555', '5553', 1, '33', '<p>hhhhh</p>\r\n', '', '', '', 0),
+(12, '', 'efsf', 0, '500', '500', '500', 1, '', '', '', '', '', 0),
+(13, '', 'efsf', 0, '500', '500', '500', 1, '', '<p>123</p>\r\n', '', '', '', 0),
+(14, '', 'goo', 0, '88', '888', '888', 1, '8888uuu', '', '', '', '', 0),
+(15, '', 'wwwww', 0, '3333', '333', '333', 1, 'eee', '', '', '', '', 0),
+(16, '', 'wwwww', 0, '3333', '333', '333', 1, 'eee', '<p>2ododod</p>\r\n', '', '', '', 0),
+(17, '', 'ddd', 0, '0', '0', '0', 1, 'ss', '', '', '', '', 0),
+(20, '', '蒟蒻', 0, '40', '38', '25', 0, 'coco', '', '', '', '', 4),
+(21, '', 'cool素雞', 0, '566', '55', '19', 0, '素雞', '素雞', '', '', '', 4),
+(23, 'sale_pictures/4bc54fb0564eb1bbe0378175f4c764cae986fe4a.jpg', '素素', 0, '99', '98', '10', 0, '素素', '<p>素素</p>\r\n', '', '', '', 4),
+(24, 'sale_pictures/7d8b42b903c605887efbf11a81e14add649cc9d3.png', '皮', 0, '99', '98', '10', 0, '生鮮', '<p>生鮮</p>\r\n', '', '', '', 3),
+(25, 'sale_pictures/262fd91a69d54775503960f68e373c89da0a7c38.jpg', '薯條', 0, '99', '98', '10', 0, '薯條', '薯條', '', '', '', 4),
+(26, 'sale_pictures/d7520832a4d3fb603423e26df92d21a5776451d1.jpg', '薯餅', 0, '999', '99', '9', 0, 'kdvbaejkrlbfef', '<p>我是88</p>\r\n', '', '', '', 1),
+(27, 'sale_pictures/2891b839f5d4fc89700a0e444a66d47094325f7d.jpg', '定春fresh', 0, '5555', '5555', '4335', 1, '定春fresh', '<p>定春fresh</p>\r\n', '', '', '', 3);
 
 --
 -- 已匯出資料表的索引
@@ -142,7 +147,7 @@ ALTER TABLE `SaleImage`
 -- 使用資料表 AUTO_INCREMENT `SalePage`
 --
 ALTER TABLE `SalePage`
-  MODIFY `salepage_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品流水號', AUTO_INCREMENT=23;
+  MODIFY `salepage_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品流水號', AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
