@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/__salepage_connect_db.php';
 
-$per_page = 20;
+$per_page = 10;
 
 $result = [
     'success' => false,
@@ -23,6 +23,7 @@ $result['totalRows'] = intval($salet_rows);
 
 $salet_pages = ceil($salet_rows/$per_page);
 $result['totalPages'] = $salet_pages;
+
 
 $salesql = sprintf(" SELECT 
                     salepage_id,

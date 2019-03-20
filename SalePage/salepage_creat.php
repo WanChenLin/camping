@@ -3,8 +3,10 @@ require __DIR__.'/__salepage_connect_db.php';
 $page_name = 'salepage_creat.php';
 ?>
 <?php include __DIR__.'/__html_dbhead.php';?>
+<?php include __DIR__.'/__html_dbheader.php';?>
 <?php include __DIR__.'/__html_dbnavbar.php';?>
 <style>
+
 
 </style>
 
@@ -38,7 +40,16 @@ $page_name = 'salepage_creat.php';
                             <small id="salepage_nameHelp" class="form-text text-muted">最多100字</small>
                             <textarea class="form-control" id="salepage_name" name="salepage_name" cols="30" rows="3"></textarea><br>
                         </div>
-                        
+
+
+                        <div class="form-group row">
+                            <label for="saleimg" class="col-sm-2 col-form-label">商品圖</label>
+                            <div class="col-sm-10">
+                                <img id="myimg" src="" alt="" width="100px">
+                                <p class="product_upload d-inline" id="err"></p>
+                                <input type="file" id="my_file" name="my_file">
+                            </div>
+                        </div>
                         
                         <!-- <div class="form-group">                             
                             <form action="saleimage_upload_ajax.php" method="post" enctype="multipart/form-data">
@@ -48,7 +59,7 @@ $page_name = 'salepage_creat.php';
                         </div> -->
 
                         <div class="form-group row">
-                            <label for="salepage_suggestprice" class="col-sm-2 col-form-label">建議售價</label>
+                            <label for="salepage_suggestprice" class="col-sm-2 col-form-label">* 建議售價</label>
                             <div class="col-sm-4">
                             <input type="text" class="form-control" id="salepage_suggestprice" name="salepage_suggestprice" placeholder=""
                                    value="" >
@@ -95,14 +106,24 @@ $page_name = 'salepage_creat.php';
                         <div class="form-group">
                             <label for="salepage_proddetails">詳細說明</label>
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
-                            <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3"></textarea><br>
-                            <!-- <input type='submit' value='輸入'>  -->
-                            <!-- 為什麼只有這個鈕可以連到資料庫 我想要下面的紐一起送出 -->
+                            <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ></textarea><br>
+                            <script>
+                                CKFinder.setupCKEditor();
+                                CKEDITOR.replace('salepage_proddetails');
+                                function CKupdate()
+                                {
+                                    for(instance in CKEDITOR.instances)
+                                    {
+                                        CKEDITOR.instances[instance].updateElement();
+                                    }
+                                }
+                            </script>
+                             <!--因為ckeditor編輯後無法從下面的submit送出 加上function  -->
                         </div>
                         
 
 
-                        <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定新增'>
+                        <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定新增'>
                     </form>
                 </div>
             </div>
@@ -119,7 +140,7 @@ $page_name = 'salepage_creat.php';
 <script>
     const saleinfo_bar = document.querySelector('#saleinfo_bar');
     const salesubmit_btn = document.querySelector('#salesubmit_btn');
-    //CKEDITOR.replace( 'salepage_proddetails', {});
+    CKEDITOR.replace( 'salepage_proddetails', {});
         
   
 
@@ -179,6 +200,26 @@ $page_name = 'salepage_creat.php';
                 }
                 return false;
             };
+
+    my_file.addEventListener('change', event=>{
+    // console.log(event.target);
+
+    const fd = new FormData();
+    fd.append('my_file', my_file.files[0]);
+
+    fetch('sale_picture_api.php', {
+        method: 'POST',
+        body: fd
+    })
+    .then(response => {
+            return response.json();
+        })
+    .then(obj => {
+            console.log(obj);
+            myimg.setAttribute('src', 'sale_pictures/' + obj.filename); // 設定img屬性
+            err.innerHTML = obj.info;
+        })
+    })
 </script>
     
 <?php include __DIR__.'/__html_dbfoot.php';?>

@@ -13,6 +13,7 @@ if($stmt->rowCount()==0)
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <?php include __DIR__.'/__html_dbhead.php';?>
+<?php include __DIR__.'/__html_dbheader.php';?>
 <?php include __DIR__.'/__html_dbnavbar.php';?>
 <style>
     
@@ -42,7 +43,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         <!-- https://stackoverflow.com/questions/6197377/how-to-set-the-value-for-radio-buttons-when-edit -->
 
                         <div class="form-group">
-                            <label for="salepage_name">產品名稱</label>
+                            <label for="salepage_name">*產品名稱</label>
                             <input type="text" class="form-control" id="salepage_name" name="salepage_name" placeholder=""
                                    value="<?= $row['salepage_name']?>">
                             <small id="salepage_nameHelp" class="form-text text-muted"></small>
@@ -56,7 +57,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         </div>
 
                         <div class="form-group">
-                            <label for="salepage_price">售價</label>
+                            <label for="salepage_price">*售價</label>
                             <input type="text" class="form-control" id="salepage_price" name="salepage_price" placeholder=""
                                    value="<?= $row['salepage_price']?>">
                             <small id="salepage_priceHelp" class="form-text text-muted"></small>
@@ -99,8 +100,25 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         <div class="form-group">
                             <label for="salepage_proddetails">詳細說明</label>
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
-                            <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3"><?= $row['salepage_proddetails']?></textarea><br>
+                            <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ><?= $row['salepage_proddetails']?></textarea><br>
+                            <script>
+                                CKFinder.setupCKEditor();
+                                CKEDITOR.replace('salepage_proddetails');
+                                function CKupdate()
+                                {
+                                    for(instance in CKEDITOR.instances)
+                                    {
+                                        CKEDITOR.instances[instance].updateElement();
+                                    }
+                                }
+                            </script>
                         </div>
+
+                        <!-- <div class="form-group">
+                            <label for="salepage_proddetails">詳細說明</label>
+                            <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
+                            <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3"><?= $row['salepage_proddetails']?></textarea><br>
+                        </div> -->
                         <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定修改'>
                     </form>
                 </div>
@@ -118,7 +136,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <script>
     const saleinfo_bar = document.querySelector('#saleinfo_bar');
     const salesubmit_btn = document.querySelector('#salesubmit_btn');
-    //CKEDITOR.replace( 'salepage_proddetails', {});
+    CKEDITOR.replace( 'salepage_proddetails', {});
         
   
 
