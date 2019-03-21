@@ -45,9 +45,10 @@ $result = [
             `salepage_name`, `salepage_suggestprice`, 
             `salepage_price`, `salepage_cost`, 
             `salepage_feature`, `salepage_state`,
-            `salepage_proddetails`, `salepage_salecateid`,`salepage_image`
+            `salepage_proddetails`, `salepage_salecateid`,
+            `salepage_image`, `salepage_quility`
             ) VALUES (
-              ?, ?, ?, ?, ?, ?, ?, ?, ?
+              ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             )";    
 
         $stmt = $pdo->prepare($sql);
@@ -61,7 +62,8 @@ $result = [
             $_POST['salepage_state'],
             $_POST['salepage_proddetails'],
             $_POST['salepage_salecateid'],
-            $_POST['salepage_image']
+            $_POST['salepage_image'],
+            $_POST['salepage_quility']
         ]);
 
         if($stmt->rowCount()==1) {

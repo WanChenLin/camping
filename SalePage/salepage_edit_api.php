@@ -40,7 +40,8 @@ if(isset($_POST['salepage_name']) and !empty($salepage_id))
                 `salepage_feature`=?,
                 `salepage_state`=?,
                 `salepage_proddetails`=?,
-                `salepage_image`=?
+                `salepage_image`=?,
+                `salepage_quility`=?
                 WHERE `salepage_id`=?";
 
     try {
@@ -56,6 +57,7 @@ if(isset($_POST['salepage_name']) and !empty($salepage_id))
             $_POST['salepage_state'],
             $_POST['salepage_proddetails'],
             $_POST['salepage_image'],
+            $_POST['salepage_quility'],
             $salepage_id
         ]);
 

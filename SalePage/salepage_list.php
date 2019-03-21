@@ -6,6 +6,21 @@ $page_name = 'salepage_list.php';
 <?php include __DIR__.'/__html_dbheader.php';?>
 <?php include __DIR__.'/__html_dbnavbar.php';?>
 
+<main class="col-10 bg-white ">
+        <aside class="my-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="salepage_list.php">商品清單</a>
+                </li>
+                <!-- <li class="nav-item">
+                <a class="nav-link" href="member_insert.php">新增資料</a>
+            </li> -->
+                <li class="nav-item">
+                    <a class="nav-link " href="salepage_creat.php">建立商品頁</a>
+                </li>
+            </ul>
+        </aside>
+
 <div class="container-fluid table-responsive" >
     <div class="row">
         <div class="col-lg-12">
@@ -51,6 +66,7 @@ $page_name = 'salepage_list.php';
         </div>
     </div>
 </div>
+</main>
 <script>    
     let page = 1;
     let  ori_data;

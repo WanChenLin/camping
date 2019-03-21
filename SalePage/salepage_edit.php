@@ -48,29 +48,44 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                             <textarea class="form-control" id="salepage_name" name="salepage_name" cols="30" rows="3" placeholder=""
                                    value=""><?= $row['salepage_name']?></textarea>
                             <small id="salepage_nameHelp" class="form-text text-muted"></small>
-                            
                         </div>
 
-                        <div class="form-group">
-                            <label for="salepage_suggestprice">商品建議售價</label>
+                        <div class="form-group row">
+                            <label for="salepage_quility" class="col-sm-4 col-form-label">商品數量</label>
+                            <div class="col-sm-4">
+                            <input type="text" class="form-control" id="salepage_quility" name="salepage_quility" placeholder=""
+                                   value="<?= $row['salepage_quility']?>" >
+                                   <small id="salepage_quilityHelp" class="form-text text-muted"></small>       
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="salepage_suggestprice" class="col-sm-4 col-form-label">商品建議售價</label>
+                            <div class="col-sm-4">
                             <input type="text" class="form-control" id="salepage_suggestprice" name="salepage_suggestprice" placeholder=""
-                                   value="<?= $row['salepage_suggestprice']?>">
-                            <small id="salepage_suggestpriceHelp" class="form-text text-muted"></small>
+                                   value="<?= $row['salepage_suggestprice']?>" >
+                                   <small id="salepage_suggestpriceHelp" class="form-text text-muted"></small>       
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="salepage_price">*售價</label>
+                        <div class="form-group row">
+                            <label for="salepage_price" class="col-sm-4 col-form-label">售價</label>
+                            <div class="col-sm-4">
                             <input type="text" class="form-control" id="salepage_price" name="salepage_price" placeholder=""
-                                   value="<?= $row['salepage_price']?>">
-                            <small id="salepage_priceHelp" class="form-text text-muted"></small>
+                                   value="<?= $row['salepage_price']?>" >
+                                   <small id="salepage_priceHelp" class="form-text text-muted"></small>       
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="salepage_cost">成本</label>
+                        <div class="form-group row">
+                            <label for="salepage_cost" class="col-sm-4 col-form-label">成本</label>
+                            <div class="col-sm-4">
                             <input type="text" class="form-control" id="salepage_cost" name="salepage_cost" placeholder=""
-                                   value="<?= $row['salepage_cost']?>">
-                            <small id="salepage_costHelp" class="form-text text-muted"></small>
+                                   value="<?= $row['salepage_cost']?>" >
+                                   <small id="salepage_costHelp" class="form-text text-muted"></small>       
+                            </div>
                         </div>
+
 
                         <div class="form-group row">
                             <label for="saleimg" class="col-sm-2 col-form-label">商品圖</label>
@@ -106,13 +121,16 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
                             <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ><?= $row['salepage_proddetails']?></textarea><br>
                         </div>
-                        
-                        <div class="form-group row after_sub text-center">
-                            <div class="col-sm-12">
-                                <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定修改'>                                
+
+                        <div id="saleinfo_bar" class="alert alert-success " role="alert" style="display:none; "></div>    
+                            
+                            <div class="form-group row after_sub text-center">
+                                <div class="col-sm-12">
+                                    <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定修改'>
+                                    <!-- <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定新增'> -->
+                                </div>
                             </div>
-                        </div>  
-                        <div id="saleinfo_bar" class="alert alert-success" role="alert" style="display: none">                                                              
+                                     
                     </form>
                 </div>
             </div>
