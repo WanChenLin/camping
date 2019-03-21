@@ -16,18 +16,18 @@ if (empty($_FILES['my_file'])) {
 }
 
 // $filename = sha1($_FILES['my_file']['name'].uniqid());
-$filename = $_FILES['my_file']['name'];
+$filename = sha1($_FILES['my_file']['name'].uniqid());
 
 switch ($_FILES['my_file']['type']) {
     case 'image/jpeg':
-        // $filename .= '.jpg';
-        $filename = $_FILES['my_file']['name'];
-        // $result['info'] = '檔案上傳成功';
+        $filename .= '.jpg';
+        // $filename = $_FILES['my_file']['name'];
+        $result['info'] = '檔案上傳成功';
         break;
     case 'image/png':
-        // $filename .= '.png';
-        $filename = $_FILES['my_file']['name'];
-        // $result['info'] = '檔案上傳成功';
+        $filename .= '.png';
+        // $filename = $_FILES['my_file']['name'];
+        $result['info'] = '檔案上傳成功';
         break;
     default:
         $result['info'] = '格式不符';

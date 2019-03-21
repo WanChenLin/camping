@@ -58,9 +58,9 @@ if (isset($_POST['account']) and !empty($mem_id)) {
             }
     }
 
-    $folder = "avatar_pictures/"; 
-    $file = sha1($_FILES['my_file']['name']); 
-    $full_path = $folder.$file; 
+    // $folder = "avatar_pictures/"; 
+    // $file = sha1($_FILES['my_file']['name']); 
+    // $full_path = $folder.$file; 
 
     $sql = "UPDATE `member_list`
             SET `mem_account`=?, `mem_password`=?, `mem_name`=?, `mem_nickname`=?, `mem_gender`=?, `mem_birthday`=?, `mem_mobile`=?, `mem_email`=?, `mem_avatar`=?
@@ -69,14 +69,14 @@ if (isset($_POST['account']) and !empty($mem_id)) {
     try {
         $stmt = $pdo->prepare($sql);
 
-        if (move_uploaded_file($_FILES['my_file']['tmp_name'], $full_path)) {
-            $result['success'] = true;
-            $result['errorCode'] = 202;
-            $result['errorMsg'] = '大頭貼新增成功';
-        } else {
-            $result['errorCode'] = 411;
-            $result['errorMsg'] = '大頭貼暫存檔無法搬移';
-        }
+        // if (move_uploaded_file($_FILES['my_file']['tmp_name'], $full_path)) {
+        //     $result['success'] = true;
+        //     $result['errorCode'] = 202;
+        //     $result['errorMsg'] = '大頭貼新增成功';
+        // } else {
+        //     $result['errorCode'] = 411;
+        //     $result['errorMsg'] = '大頭貼暫存檔無法搬移';
+        // }
 
         $stmt->execute([
             $_POST['account'],
@@ -87,7 +87,8 @@ if (isset($_POST['account']) and !empty($mem_id)) {
             $_POST['birthday'],
             $_POST['mobile'],
             $_POST['email'],
-            $full_path,
+            $_POST['avatar_pictures'],
+            // $full_path,
             $mem_id
         ]);
 

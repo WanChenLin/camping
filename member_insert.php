@@ -25,11 +25,11 @@ include __DIR__ . '/__connect_db.php';
             <li class="nav-item">
                 <a class="nav-link" href="member_list.php">會員資料清單</a>
             </li>
-            <!-- <li class="nav-item">
-            <a class="nav-link" href="member_insert.php">新增資料</a>
-        </li> -->
             <li class="nav-item">
                 <a class="nav-link active" href="member_insert.php">新增資料</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="member_search.php">搜尋會員</a>
             </li>
         </ul>
     </aside>
@@ -69,8 +69,11 @@ include __DIR__ . '/__connect_db.php';
                         <div class="form-group row">
                             <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
                             <div class="col-sm-10">
-                                <img id="preview" src="" height="100px" width="" />
-                                <input type="file" name="my_file" id="my_file" onchange="previewImage(this)" accept="image/*"/>
+                                <input type="hidden" id="avatar_pictures" name="avatar_pictures" value="">
+                                <img id="myimg" src="" height="100px" width="" />
+                                <!-- <img id="preview" src="" height="100px" width="" /> -->
+                                <input type="file" name="my_file" id="my_file" accept="image/*">
+                                <!-- <input type="file" name="my_file" id="my_file" onchange="previewImage(this)" accept="image/*"/> -->
                                 <!-- <img id="myimg" src="" alt="" height="100px">
                                 <p class="avatar_upload d-inline" id="err"></p>
                                 <input type="file" id="my_file" name="my_file"> -->
@@ -170,6 +173,7 @@ include __DIR__ . '/__connect_db.php';
 
     const myimg = document.querySelector('#myimg');
     const my_file = document.querySelector('#my_file');
+    const avatar_picutres = document.querySelector('#avatar_picutres');
     const err = document.querySelector('#err');
 
     const checkForm = () => {
@@ -259,42 +263,43 @@ include __DIR__ . '/__connect_db.php';
         return false;
     }
 
-    // my_file.addEventListener('change', event => {
-    //     // console.log(event.target);
+    my_file.addEventListener('change', event => {
+        // console.log(event.target);
 
-    //     const fd = new FormData();
-    //     fd.append('my_file', my_file.files[0]);
+        const fd = new FormData();
+        fd.append('my_file', my_file.files[0]);
 
-    //     fetch('member_avatar_api.php', {
-    //             method: 'POST',
-    //             body: fd
-    //         })
-    //         .then(response => {
-    //             return response.json();
-    //         })
-    //         .then(obj => {
-    //             console.log(obj);
-    //             myimg.setAttribute('src', 'avatar_pictures/' + obj.filename); // 設定img屬性
-    //             err.innerHTML = obj.info;
-    //         })
-    // })
+        fetch('member_avatar_api.php', {
+                method: 'POST',
+                body: fd
+            })
+            .then(response => {
+                return response.json();
+            })
+            .then(obj => {
+                console.log(obj);
+                myimg.setAttribute('src', 'avatar_pictures/' + obj.filename); // 設定img屬性
+                avatar_pictures.setAttribute('value', 'avatar_pictures/' + obj.filename);
+                err.innerHTML = obj.info;
+            })
+    })
 
-    function previewImage(input) {
+    // function previewImage(input) {
 
-        let preview = document.getElementById('preview');
+    //     let preview = document.getElementById('preview');
 
-        if (input.files && input.files[0]) {
+    //     if (input.files && input.files[0]) {
 
-        let reader = new FileReader();
+    //     let reader = new FileReader();
 
-        reader.onload = function (e) {
-            preview.setAttribute('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-        } else {
-        preview.setAttribute('src', '');
-        }
-    }
+    //     reader.onload = function (e) {
+    //         preview.setAttribute('src', e.target.result);
+    //     }
+    //     reader.readAsDataURL(input.files[0]);
+    //     } else {
+    //     preview.setAttribute('src', '');
+    //     }
+    // }
 </script>
 
 <?php include __DIR__ . '/html_foot.php'; ?> 

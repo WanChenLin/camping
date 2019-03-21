@@ -22,8 +22,6 @@ $sql = sprintf("SELECT *, (SELECT level_title FROM member_level WHERE mem_level=
 $stmt = $pdo->query($sql);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// $level_sql = "SELECT memLevel_id_name FROM member_level WHERE mem_level = memLevel_id"
-
 ?>
 
 <?php include __DIR__ . '/html_head.php'; ?>
@@ -43,11 +41,11 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li class="nav-item">
                 <a class="nav-link active" href="member_list.php">會員資料清單</a>
             </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="member_insert.php">新增資料</a>
-            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="member_insert.php">新增資料</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="member_search.php">搜尋會員</a>
             </li>
         </ul>
     </aside>
