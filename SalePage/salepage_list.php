@@ -20,6 +20,7 @@ $page_name = 'salepage_list.php';
                 </li>
             </ul>
         </aside>
+        <div id="saleinfo_bar" class="alert alert-success " role="alert" style="display:none; "></div>
 
 <div class="container-fluid table-responsive" >
     <div class="row">
@@ -63,8 +64,10 @@ $page_name = 'salepage_list.php';
                 </tbody>
 
             </table>
+            
         </div>
     </div>
+   
 </div>
 </main>
 <script>    
@@ -148,9 +151,27 @@ $page_name = 'salepage_list.php';
     function saledelete(salepage_id){
         if(confirm(`確定要刪除編號為 ${salepage_id} 的資料嗎?`)){                
         fetch('salepage_delete.php?salepage_id=' + salepage_id)
-            .then(myHashChange());
+        .then(response=>response.json())
+        .then(obj=>{
+            console.log(obj);
+
+            if(obj.success){
+                        saleinfo_bar.className = 'alert alert-success';
+                        saleinfo_bar.innerHTML = '資料刪除成功';
+                        saleinfo_bar.style.display = 'block';
+                        myHashChange();
+                    } else {
+                        saleinfo_bar.className = 'alert alert-danger';
+                        saleinfo_bar.style.display = 'block';
+                        saleinfo_bar.innerHTML = obj.errorMsg;
+                        myHashChange();
+                    }
+        })
+                
+        
         //按刪除後會顯示是否確定刪除，確定後就fetch delete php，
         //成功執行delete.php後就使用myHashChange重整
+        //myHashChange();
         }
     }        
 </script>

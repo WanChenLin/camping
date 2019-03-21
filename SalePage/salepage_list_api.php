@@ -46,7 +46,7 @@ $salesql = sprintf(" SELECT
                     -- 括號裡是一個 statemen, 用 AS 給他一個欄位名稱                    
                     (SELECT salecate_name FROM salecategory WHERE salecate_id = salepage_salecateid) AS salecate_name,
                     salepage_image
-                    FROM salepage ORDER BY salepage_id LIMIT %s, %s", ($page-1)*$per_page, $per_page);
+                    FROM salepage ORDER BY salepage_id DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
 $stmt = $pdo->query($salesql);
 
 $result['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
