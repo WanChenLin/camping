@@ -27,17 +27,16 @@ include __DIR__ . '/__connect_db.php';
     <section>
 
         <div class="my-3">
-            <div id="info_bar" role="alert"></div>
-            <div class="container">
+            <!-- <div class="container-fluid"> -->
                 <nav class="navbar navbar-light bg-light">
                     <!-- <form name="formSearch" class="form-inline" method="POST" onsubmit="return gosearch();"> -->
-                    <form name="formSearch" id="formSearch" class="form-inline" method="POST">
+                    <form name="formSearch" id="formSearch" class="form-inline" method="POST" onsubmit="return false">
                         <input type="hidden" name="searchdb" value="check">
                         <input class="form-control mr-sm-2" type="search" name="search" placeholder="搜尋會員資料" aria-label="Search" value="">
                         <button class="btn btn-primary my-2 my-sm-0" type="submit" id="submit">Search</button>
                     </form>
                 </nav>
-            </div>
+            <!-- </div> -->
         </div>
 
         <div>
@@ -123,27 +122,23 @@ include __DIR__ . '/__connect_db.php';
     const tr_func = _.template(tr_str);
     
     submit.addEventListener('mousedown', function(event){
-
         let form = new FormData(document.formSearch)
-
         fetch('member_search_api.php', {
                 method: 'POST',
                 body: form
             })
-            .then(
-                response => {
+            .then(response => {
                     return response.json();
                 })
-            .then(
-                obj => {
+            .then(obj => {
                     console.log(obj);
                     ori_data = obj; // 讓ori_data的內容為SQL的資料
                     console.log(ori_data);
                     info_bar.style.display = 'block';
 
-                    if (obj.success) { // 這邊可以用success是因為我們在設定api.php的時候，就有在obj裡面放置success的key
-                        info_bar.className = 'alert alert-success'; // 這個class是因為bootstrap有預設alert的class
-                        info_bar.innerHTML = '資料新增完成';
+                    if (obj.success) {
+                        info_bar.className = 'alert alert-success';
+                        info_bar.innerHTML = '搜尋到的資料如下';
                     } else {
                         info_bar.className = 'alert alert-danger';
                         info_bar.innerHTML = obj.errorMsg;
@@ -151,19 +146,12 @@ include __DIR__ . '/__connect_db.php';
 
                     //  資料內的表格
                     let str = '';
-                    for (let s in ori_data.data) { // forIn拿到的是key，forOf拿到的是value
+                    for (let s in ori_data.data) {
                         str += tr_func(ori_data.data[s]);
                     }
                     data_body.innerHTML = str;
                 })
     });
-
-    // window.addEventListener('click', gosearch);
-
-    // gosearch();
-
-    // formSearch.removeEventListener('click', gosearch);
-    // submit.removeEventListener('mousedown', gosearch);
 </script>
 
 <?php include __DIR__ . '/html_foot.php'; ?> 

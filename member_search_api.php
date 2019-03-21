@@ -25,7 +25,7 @@ if (isset($_POST['searchdb'])) {
     }
 
     // $sql = "INSERT INTO `member_list`(`mem_account`) VALUES (?)";
-    $sql = " SELECT * FROM member_list WHERE mem_account LIKE :search ";
+    $sql = " SELECT * FROM member_list WHERE mem_account LIKE :search ORDER BY mem_id DESC";
 
     try {
         $stmt = $pdo->prepare($sql);
@@ -38,7 +38,7 @@ if (isset($_POST['searchdb'])) {
         // ]);
         $stmt->execute();
 
-        if ($stmt->rowCount() == 1) {
+        if ($stmt->rowCount() != 0) {
             $result['success'] = true;
             $result['errorCode'] = 200;
             $result['errorMsg'] = '搜尋資料如下';
