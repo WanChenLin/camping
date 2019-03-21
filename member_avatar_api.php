@@ -22,12 +22,14 @@ switch ($_FILES['my_file']['type']) {
     case 'image/jpeg':
         $filename .= '.jpg';
         // $filename = $_FILES['my_file']['name'];
-        $result['info'] = '檔案上傳成功';
+        // $result['info'] = '檔案上傳成功';
+        $result['info'] = '';
         break;
     case 'image/png':
         $filename .= '.png';
         // $filename = $_FILES['my_file']['name'];
-        $result['info'] = '檔案上傳成功';
+        // $result['info'] = '檔案上傳成功';
+        $result['info'] = '';
         break;
     default:
         $result['info'] = '格式不符';

@@ -74,9 +74,9 @@ include __DIR__ . '/__connect_db.php';
                                 <!-- <img id="preview" src="" height="100px" width="" /> -->
                                 <input type="file" name="my_file" id="my_file" accept="image/*">
                                 <!-- <input type="file" name="my_file" id="my_file" onchange="previewImage(this)" accept="image/*"/> -->
-                                <!-- <img id="myimg" src="" alt="" height="100px">
-                                <p class="avatar_upload d-inline" id="err"></p>
-                                <input type="file" id="my_file" name="my_file"> -->
+                                <!-- <img id="myimg" src="" alt="" height="100px"> -->
+                                <span class="avatar_upload d-block" id="err"></span>
+                                <!-- <input type="file" id="my_file" name="my_file"> -->
                             </div>
                         </div>
                         <div class="form-group row">
@@ -259,6 +259,8 @@ include __DIR__ . '/__connect_db.php';
                     submit_btn.style = 'btn-primary';
                 })
         }
+
+        
 
         return false;
     }
