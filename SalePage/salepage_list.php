@@ -20,12 +20,12 @@ $page_name = 'salepage_list.php';
         <div class="col-lg-12">
             <table class="table table-striped table-bordered table-hove">
                 <thead>
-                <tr  style=" white-space:nowrap" >
+                <tr  style=" white-space:nowrap;" >
                 <!--  加就不自動換行了style=" white-space:nowrap" -->
                     <th scope="col"><i class="fas fa-edit"></i></th>                    
-                    <th scope="col">商品頁序號</th>
-                    <th scope="col">商品主圖</th>
-                    <th  style="height:100px;" scope="col">產品名稱</th>
+                    <th scope="col" style= "width:20px;">商品頁序號</th>
+                    <th scope="col"  style= "width:100px;">商品主圖</th>
+                    <th  style="height:100px; width:100px; overflow:hidden; " scope="col">產品名稱</th>
                     <th scope="col">商品數量</th>
                     <th scope="col">建議售價</th>
                     <th scope="col">售價</th>
@@ -62,7 +62,7 @@ $page_name = 'salepage_list.php';
                             <a href="salepage_edit.php?salepage_id=<%= salepage_id %>"><i class="fas fa-edit"></i></a>
                             </td>
                             <td><%= salepage_id %></td>
-                            <td><img src="<%= salepage_image %>" width="100px"></td>
+                            <td><img src="<%= salepage_image %>" width="80px"></td>
                             <td><%= salepage_name %></td>
                             <td><%= salepage_quility %></td>
                             <td><%= salepage_suggestprice %></td>
@@ -73,7 +73,7 @@ $page_name = 'salepage_list.php';
                             <td><%= salepage_proddetails %></td>
                             <td><%= salecate_name %></td>
                             <td><a href="javascript: saledelete(<%= salepage_id %>)">
-                                刪除</a></td>
+                            <i class="fas fa-trash-alt"></i></a></td>
                         </tr>`;
                         
                         // tr_str.style.height =50 + 'px';                

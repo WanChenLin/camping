@@ -24,8 +24,16 @@ $result = [
 
     $result['post'] = $_POST;  // 做 echo 檢查
 
-    if(empty($name) or empty($price)){
+    if(empty($price) ){
         $result['errorCode'] = 400;
+        $result['errorMsg'] = '請輸入售價';
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    if(empty($name)){
+        $result['errorCode'] = 405;
+        $result['errorMsg'] = '請輸入商品名稱';
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
         exit;
     }

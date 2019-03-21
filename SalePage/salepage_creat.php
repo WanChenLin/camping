@@ -6,6 +6,9 @@ $page_name = 'salepage_creat.php';
 <?php include __DIR__.'/__html_dbheader.php';?>
 <?php include __DIR__.'/__html_dbnavbar.php';?>
 <style>
+    span {
+            color: red !important;
+        }  
 
 
 </style>
@@ -17,12 +20,13 @@ $page_name = 'salepage_creat.php';
                 <div class="card-body">
                     <h3 class="card-title">新增商品</h3>
 
-                    <div id="saleinfo_bar" class="alert alert-success" role="alert" style="display: none"></div>
+                    <!-- <div id="saleinfo_bar" class="alert alert-success" role="alert" style="display: none"></div> -->
 
                     <form name="saleform" method="post" action="" onsubmit="return salecheckForm()"> 
                         <input type="hidden" name="checksale" value="checkcheck">
 
-                        <label for="salepage_salecateid" >*商品分類</label>
+                        <div class="form-group">
+                        <label for="salepage_salecateid" class="must" > <span>*</span> 商品分類</label>
                         <select id="salepage_salecateid" name="salepage_salecateid" class="custom-select custom-select-sm col-sm-4 ">
                             <option value="0" selected>請選擇</option>
                             <option value="1">冷凍食品</option>
@@ -30,13 +34,14 @@ $page_name = 'salepage_creat.php';
                             <option value="3">生鮮食材</option>
                             <option value="4">素料理專區</option>
                         </select>
+                        </div>
                         
                         <br>
                         <br>
 
                         <h5>商品資訊</h5>
                         <div class="form-group">
-                            <label for="salepage_name">*商品名稱</label>
+                            <label for="salepage_name"><span>*</span>商品名稱</label>
                             <small id="salepage_nameHelp" class="form-text text-muted">最多100字</small>
                             <textarea class="form-control" id="salepage_name" name="salepage_name" cols="30" rows="3"></textarea><br>
                         </div>
@@ -61,7 +66,7 @@ $page_name = 'salepage_creat.php';
                         </div>
 
                         <div class="form-group row">
-                            <label for="salepage_price" class="col-sm-2 col-form-label">* 售價</label>
+                            <label for="salepage_price" class="col-sm-2 col-form-label"><span>*</span>售價</label>
                             <div class="col-sm-4">
                             <input type="text" class="form-control" id="salepage_price" name="salepage_price" placeholder=""
                                    value="">
@@ -101,8 +106,9 @@ $page_name = 'salepage_creat.php';
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
                             <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ></textarea><br>                            
                              <!--因為ckeditor編輯後無法從下面的submit送出 加上function  -->
-                        </div>
-                        
+                        </div>   
+
+                        <div id="saleinfo_bar" class="alert alert-success" role="alert" style="display:none; "></div>                                            
 
                         <div class="form-group row after_sub text-center">
                             <div class="col-sm-12">
@@ -110,6 +116,8 @@ $page_name = 'salepage_creat.php';
                                 <!-- <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定新增'> -->
                             </div>
                         </div>
+
+                        
                     </form>
                 </div>
             </div>
@@ -143,6 +151,7 @@ $page_name = 'salepage_creat.php';
             CKEDITOR.instances[instance].updateElement();
         }                
     }
+
     const salefields = [
         'salepage_name',
         'salepage_suggestprice',
@@ -158,19 +167,25 @@ $page_name = 'salepage_creat.php';
     const salefs = {}; 
     for(let v of salefields){
         salefs[v] = document.saleform[v];
+        console.log(salefs);
+        console.log('salefs.salepage_name' , salefs.name);
+
     }    
 
-    const salecheckForm = ()=>{
+    const salecheckForm = ()=>
+    {
         let isPassed = true;
         saleinfo_bar.style.display = 'none';
 
         // 拿到每個欄位的值
         const salefsv = {};
-        for(let v of salefields){
+        for(let v of salefields)
+        {
             salefsv[v] = salefs[v].value;
         }        
-        
         console.log(salefsv);
+
+       
 
         if(isPassed) {
             let saleform = new FormData(document.saleform);
@@ -195,6 +210,8 @@ $page_name = 'salepage_creat.php';
                     }
 
                     salesubmit_btn.style.display = 'block';
+                    salesubmit_btn.style = 'btn-primary';
+                    //因為按下btn後位置會跑掉，所以要加上面這一行固定原來的位置
                 })
         }
         return false;

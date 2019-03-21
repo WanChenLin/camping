@@ -22,7 +22,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <div class="container">
     <div class="row">
         <div class="col-lg-9"> 
-        <div id="saleinfo_bar" class="alert alert-success" role="alert" style="display: none">
+        <!-- <div id="saleinfo_bar" class="alert alert-success" role="alert" style="display: none"> -->
         </div>
             <div class="card">
                 <div class="card-body">
@@ -34,19 +34,21 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         
                         <label for="salepage_salecateid" >*商品分類</label>
                         <select id="salepage_salecateid" name="salepage_salecateid" class="custom-select custom-select-sm col-sm-4 ">
-                            <option value="0" selected>請選擇</option>
+                            <option value="5" selected>請選擇</option>
                             <option value="1" <?php echo ($row['salepage_salecateid']==1)?'selected':'' ?>>冷凍食品</option>
                             <option value="2" <?php echo ($row['salepage_salecateid']==2)?'selected':'' ?>>冷藏食品</option>
                             <option value="3" <?php echo ($row['salepage_salecateid']==3)?'selected':'' ?>>生鮮食材</option>
                             <option value="4" <?php echo ($row['salepage_salecateid']==4)?'selected':'' ?>>素料理專區</option>
                         </select>
+                        <br><br>
                         <!-- https://stackoverflow.com/questions/6197377/how-to-set-the-value-for-radio-buttons-when-edit -->
 
                         <div class="form-group">
                             <label for="salepage_name">*產品名稱</label>
-                            <input type="text" class="form-control" id="salepage_name" name="salepage_name" placeholder=""
-                                   value="<?= $row['salepage_name']?>">
+                            <textarea class="form-control" id="salepage_name" name="salepage_name" cols="30" rows="3" placeholder=""
+                                   value=""><?= $row['salepage_name']?></textarea>
                             <small id="salepage_nameHelp" class="form-text text-muted"></small>
+                            
                         </div>
 
                         <div class="form-group">
@@ -104,12 +106,13 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                             <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
                             <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ><?= $row['salepage_proddetails']?></textarea><br>
                         </div>
-
+                        
                         <div class="form-group row after_sub text-center">
                             <div class="col-sm-12">
                                 <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定修改'>                                
                             </div>
-                        </div>                                                                
+                        </div>  
+                        <div id="saleinfo_bar" class="alert alert-success" role="alert" style="display: none">                                                              
                     </form>
                 </div>
             </div>
@@ -202,6 +205,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     }
 
                     salesubmit_btn.style.display = 'block';
+                    salesubmit_btn.style = 'btn-primary';
+                    //因為按下btn後位置會跑掉，所以要加上面這一行固定原來的位置
                 });
         }
         return false;
