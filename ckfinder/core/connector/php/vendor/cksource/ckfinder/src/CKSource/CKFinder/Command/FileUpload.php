@@ -91,6 +91,7 @@ class FileUpload extends CommandAbstract
         }
 
         $fileName = $uploadedFile->getFilename();
+        $fileName = sha1(uniqid()) . '.' . $uploadedFile->getExtension();
 
         if (!$uploadedFile->isAllowedHtmlFile() && $uploadedFile->containsHtml()) {
             throw new InvalidUploadException('HTML detected in disallowed file type', Error::UPLOADED_WRONG_HTML_FILE);

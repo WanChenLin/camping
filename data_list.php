@@ -19,14 +19,9 @@ if ($page < 1) $page = 1;
 if ($page > $total_pages) $page = $total_pages;
 
 
-$sql = sprintf("SELECT `share_post`.`post_id`,
-                    `share_post`.`post_cate`,
-                    `share_post`.`post_title`,
-                    `share_post`.`post_time`,
-                    `share_post`.`post_editTime`
-                FROM `share_post` LEFT JOIN `share_category`
-                ON `share_post`.`post_cate` = `share_category`.`post_cate`
-                LIMIT %s, %s", ($page - 1) * $per_page, $per_page);
+$sql = sprintf("SELECT * FROM share_post LEFT JOIN share_category
+ON share_post.post_cate = share_category.cate_id
+ORDER BY post_id DESC LIMIT %s, %s", ($page - 1) * $per_page, $per_page);
 
 //echo $sql;exit;
 $stmt = $pdo->query($sql);
@@ -82,8 +77,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <th scope="col">瀏覽人數</th>
                         <th scope="col">分享人數</th>
                         <th scope="col">評論人數</th>
-                        <th scope="col">文章標籤</th>
-                        <th scope="col">文章開關</th> -->
+                        <th scope="col">文章標籤</th> -->
+                        <th scope="col">文章開關</th>
                         <th scope="col"><i class="fas fa-trash-alt"></i></th>
                         <th scope="col"><i class="fas fa-edit"></i></th>
                     </tr>
@@ -93,7 +88,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <td><?= htmlentities($row['post_id']) ?></td>
                         <!-- <td><?= htmlentities($row['mem_nickname']) ?></td> -->
-                        <td><?= htmlentities($row['post_cate']) ?></td>
+                        <td><?= htmlentities($row['cate_name']) ?></td>
                         <td><?= htmlentities($row['post_title']) ?></td>
                         <td><?= htmlentities($row['post_time']) ?></td>
                         <td><?= htmlentities($row['post_editTime']) ?></td>
@@ -101,8 +96,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlentities($row['browse_num']) ?></td>
                         <td><?= htmlentities($row['share_num']) ?></td>
                         <td><?= htmlentities($row['cmt_num']) ?></td>
-                        <td><?= htmlentities($row['post_tag']) ?></td>
-                        <td><?= htmlentities($row['post_visible']) ?></td> -->
+                        <td><?= htmlentities($row['post_tag']) ?></td> -->
+                        <td><?= htmlentities($row['post_visible']) ?></td>
                         <td><a href="javascript: delete_it(<?= $row['post_id'] ?>)">
                                 <i class="fas fa-trash-alt"></i>
                             </a>

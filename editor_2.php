@@ -50,6 +50,19 @@ $page_name = 'data_insert';
                 </script>
             </div>
         </div>
+        <div class="row">
+            <div class="form-check form-check-inline m-3">
+                要顯示這篇文章嗎？
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="post_visible" id="visible" value="顯示" checked>
+                <label class="form-check-label" for="visible">顯示</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="post_visible" id="invisible" value="隱藏">
+                <label class="form-check-label" for="invisible">隱藏</label>
+            </div>
+        </div>
         <button id="submit_btn" type="submit" class="btn btn-primary mt-3" onClick="CKupdate()">發布</button>
     </form>
 </div>
@@ -62,7 +75,8 @@ $page_name = 'data_insert';
     const fields = [
         'post_cate',
         'post_title',
-        'post_content'
+        'post_content',
+        'post_visible'
     ];
 
     const fs = {};

@@ -18,7 +18,7 @@ if (isset($_POST['post_title']) and !empty($post_id)) {
     $post_title = strip_tags($_POST['post_title']);
     $post_content = html_entity_decode($_POST['post_content']);
     $post_editTime = date("Y-m-d h:i:s");
-
+    $post_visible = $_POST['post_visible'];
 
     $result['post'] = $_POST;  // 做 echo 檢查
 
@@ -46,7 +46,8 @@ if (isset($_POST['post_title']) and !empty($post_id)) {
                 `post_cate`=?,
                 `post_title`=?,
                 `post_content`=?,
-                `post_editTime`=?
+                `post_editTime`=?,
+                `post_visible`=?
             WHERE `post_id`=?";
 
     // try {
@@ -57,6 +58,7 @@ if (isset($_POST['post_title']) and !empty($post_id)) {
             $post_title,
             $post_content,
             $post_editTime,
+            $post_visible,
             $post_id
         ]);
 

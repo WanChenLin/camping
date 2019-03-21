@@ -18,6 +18,7 @@ if (isset($_POST['post_title'])) {
     $post_title = strip_tags($_POST['post_title']);
     $post_content = html_entity_decode($_POST['post_content']);
     $post_time = date("Y-m-d h:i:s");
+    $post_visible = $_POST['post_visible'];
 
     $result['post'] = $_POST;
 
@@ -28,9 +29,9 @@ if (isset($_POST['post_title'])) {
     }
 
     $sql = "INSERT INTO `share_post`(
-       `post_cate`, `post_title`, `post_content`, `post_time`
+       `post_cate`, `post_title`, `post_content`, `post_time`,`post_visible`
     ) VALUES (
-        ?, ?, ?, ?
+        ?, ?, ?, ?, ?
     )";
 
     $stmt = $pdo->prepare($sql);
@@ -40,6 +41,7 @@ if (isset($_POST['post_title'])) {
         $post_title,
         $post_content,
         $post_time,
+        $post_visible
     ]);
 
     if ($stmt->rowCount() == 1) {
