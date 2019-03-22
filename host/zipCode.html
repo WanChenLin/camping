@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>郵遞區號</title>
+    <script src="./bootstrap/js/jquery-3.3.1.js"></script>
+    <script src="./TWzipcode/jquery.twzipcode.min.js"></script>
+</head>
+<style>
+    #zipcode {
+        display: flex;
+    }
+</style>
+
+<body>
+    <div id="zipcode">
+        <div class="f1" data-role="county"></div>
+        <div class="f2" data-role="district"></div>
+    </div>
+    <input name="Address" type="text" class="f3 address form-control">
+
+    <script>
+        $("#zipcode").twzipcode({
+            "zipcodeIntoDistrict": true,
+            "css": ["city form-control", "town form-control"],
+            "countyName": "city", // 指定城市 select name
+            "districtName": "town" // 指定地區 select name
+        });
+    </script>
+</body>
+
+</html>
