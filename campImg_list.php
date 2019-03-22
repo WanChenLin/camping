@@ -63,7 +63,7 @@ if($page>$total_pages) $page=$total_pages;
     </ul>
     
   </nav>
- 
+
 <table class="table table-striped table-bordered">
   <thead>
     <tr>

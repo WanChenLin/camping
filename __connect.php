@@ -6,7 +6,6 @@ $db_pass='password';
 
 $dbn="mysql:host={$db_host};dbname={$db_name}";
 
-
 try{
     $pdo = new PDO ($dbn,$db_user,$db_pass);
     $pdo->query("SET NAMES utf8");//顯示中文字

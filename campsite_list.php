@@ -6,6 +6,7 @@ require __DIR__.'/__connect.php';
  $per_page=10;
  $page=isset($_GET['page']) ? intval($_GET['page']) : 1;
 
+ 
 //計算總筆數
  $t_sql="SELECT COUNT(1) FROM `campsite_list`";
  $t_stmt=$pdo->query($t_sql);

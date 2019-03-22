@@ -11,6 +11,7 @@ header('Content-Type:application/json');
 
  ];
 
+ 
  $camp_id=isset($_POST['camp_id']) ? intval($_POST['camp_id']) : 0;
 
  if (isset($_POST['camp_name']) and !empty($camp_id)){

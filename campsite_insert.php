@@ -27,7 +27,6 @@ require __DIR__.'/__connect.php';
     $openTime = $_POST['camp_openTime'];
     $target = $_POST['camp_target'];
    
-
 $sql="INSERT INTO `campsite_list`(
      `camp_name`, `camp_address`, `camp_location`, `camp_tel`, `camp_fax`, `camp_email`, `camp_ownerName`, `camp_openTime`, `camp_target`, `city`, `dist`
     ) VALUES (

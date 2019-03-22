@@ -7,7 +7,6 @@ require __DIR__.'/__connect.php';
  $sql="SELECT * FROM `campsite_list` WHERE `camp_id`=$camp_id";
  
  $stmt=$pdo->query($sql);
-
  //防止跳到不存在的頁面，會導回列表頁
  if($stmt->rowCount()==0){
      header('Location:campsite_list.php');

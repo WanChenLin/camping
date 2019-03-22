@@ -24,5 +24,4 @@
  
 </main>
 
-
 <?php include __DIR__.'/__html_footer.php'; ?>

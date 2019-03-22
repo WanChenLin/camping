@@ -10,5 +10,6 @@ require __DIR__.'/__connect.php';
 if(isset($_SERVER['HTTP_REFERER'])){
     $goto=$_SERVER['HTTP_REFERER'];
 }
+
 //資料刪除後會自動轉向回到資料列表的頁面
 header("Location:$goto");

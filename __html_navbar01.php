@@ -9,7 +9,6 @@
             </div>
         </div>
     </header>
-
     <div class="bg-white py-3">
         <div class="container-fluid">
             <div class="row d-flex">

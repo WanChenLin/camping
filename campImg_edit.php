@@ -12,7 +12,6 @@ require __DIR__.'/__connect.php';
      exit;
  }
  $row=$stmt->fetch(PDO::FETCH_ASSOC);
-
 ?>
 <?php include __DIR__.'/__html_header.php'; ?>
 <?php include __DIR__.'/__html_navbar01.php'; ?>
