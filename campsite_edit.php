@@ -18,7 +18,7 @@ require __DIR__.'/__connect.php';
 <?php include __DIR__.'/__html_header.php'; ?>
 <?php include __DIR__.'/__html_navbar01.php'; ?>
 <style>
-.form-group small{
+.form-group span{
     color:red !important;
 }
 </style>
@@ -42,7 +42,7 @@ require __DIR__.'/__connect.php';
                 <input type="hidden" name="checkme" value="check123">
                 <input type="hidden" name="camp_id" value="<?= $row['camp_id']?>">
                 <div class="form-group">
-                <label for="camp_name">1.營區名稱</label>
+                <label for="camp_name">1.營區名稱<span>(必填)</span></label>
                 <input type="text" class="form-control" id="camp_name" name="camp_name" placeholder=""
                 value="<?= $row['camp_name'] ?>">
                 <small id="camp_nameHelp" class="form-text text-muted"></small>
@@ -76,7 +76,7 @@ require __DIR__.'/__connect.php';
                 <small id="distHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group">
-                <label for="camp_address">4.地址</label>
+                <label for="camp_address">4.地址<span>(必填)</span></label>
                 <textarea class="form-control" id="camp_address" name="camp_address" cols="30" rows="3"><?= $row['camp_address'] ?></textarea>
                 <small id="camp_addressHelp" class="form-text text-muted"></small>
             </div>
@@ -87,7 +87,7 @@ require __DIR__.'/__connect.php';
                 <small id="camp_locationHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group">
-                <label for="camp_tel">6.聯絡電話</label>
+                <label for="camp_tel">6.聯絡電話<span>(必填)</span></label>
                 <input type="text" class="form-control" id="camp_tel" name="camp_tel" placeholder=""
                 value="<?= $row['camp_tel'] ?>">
                 <small id="camp_telHelp" class="form-text text-muted"></small>
@@ -99,7 +99,7 @@ require __DIR__.'/__connect.php';
                 <small id="camp_faxHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group">
-                <label for="camp_email">8.電子郵件</label>
+                <label for="camp_email">8.電子郵件<span>(必填)</span></label>
                 <input type="text" class="form-control" id="camp_email" name="camp_email" placeholder=""
                 value="<?= $row['camp_email'] ?>">
                 <small id="camp_emailHelp" class="form-text text-muted"></small>
