@@ -6,6 +6,22 @@ $page_name = 'salepage_list.php';
 <?php include __DIR__.'/__html_dbheader.php';?>
 <?php include __DIR__.'/__html_dbnavbar.php';?>
 
+<style>
+.table-hidden tbody{
+  overflow-y: auto;/*設定卷軸 auto 是有超過我的高度的時候才會出現卷軸*/
+	height: 100%;/*自己設定*/
+}
+.table-hidden tr {
+	width: 100%;
+	/* display: inline-table; */
+}
+
+.table-hidden thead th[data-th="其他"]{ width:400px;}
+/*因為 tbody 多了卷軸 尺寸多了 17px*/
+.table-hidden tbody td[data-th="其他"]{ width:383px;}
+
+
+</style>
 <main class="col-10 bg-white ">
         <aside class="my-2">
             <ul class="nav nav-tabs">
@@ -32,9 +48,9 @@ $page_name = 'salepage_list.php';
         </div>
     </div>
 
-    <div class="row table-responsive">
+    <div class="row table-responsive ">
         <div class="col-lg-12">
-            <table class="table table-striped table-bordered table-hove">
+            <table class="table table-striped table-bordered table-hove table-hidden ">
                 <thead>
                 <tr  style=" white-space:nowrap;" >
                 <!--  加就不自動換行了style=" white-space:nowrap" -->
@@ -57,10 +73,14 @@ $page_name = 'salepage_list.php';
                 </tr>
                 </thead>
 
-                <tbody id="data_body" style=" max-height:200px;overflow-y: scroll; font-size:14px;" >
-                <td >
+                <tbody id="data_body" style="font-size:14px;" >
+                <tr>
+
+                </tr>
+                
+                    
                     <!-- <i class="fas fa-trash-alt"></i>                                 -->
-                </td>
+                
                 </tbody>
 
             </table>
@@ -94,8 +114,10 @@ $page_name = 'salepage_list.php';
                             <td><a href="javascript: saledelete(<%= salepage_id %>)">
                             <i class="fas fa-trash-alt"></i></a></td>
                         </tr>`;
+
                         
-                        // tr_str.style.height =50 + 'px';                
+                        // tr_str.td.className = 'h';
+                        // h.style.height = size + 'px';                
     
 
     
