@@ -103,17 +103,17 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         </div>
                         <fieldset class="form-group">
                             <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">性別</legend>
+                                <label for="gender" class="col-form-label col-sm-2 pt-0">性別</label>
                                 <div class="col-sm-2">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" id="gender" value="male" checked>
-                                        <label class="form-check-label" for="genderM">男 Male</label>
+                                        <input class="form-check-input" type="radio" name="gender" id="gender" value="male" <?= ($row['mem_gender']=='male') ? 'checked':'' ?>>
+                                        <label class="form-check-label" for="gender">男 Male</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" id="genderF" value="female">
-                                        <label class="form-check-label" for="genderF">女 Female</label>
+                                        <input class="form-check-input" type="radio" name="gender" id="gender" value="female" <?= ($row['mem_gender']=='female') ? 'checked':'' ?>>
+                                        <label class="form-check-label" for="gender">女 Female</label>
                                     </div>
                                 </div>
                             </div>
