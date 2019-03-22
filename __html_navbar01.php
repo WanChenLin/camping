@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-    <script src="./js/jquery-3.3.1.js"></script>
-    <script src="./bootstrap/js/bootstrap.bundle.js"></script>
-
-    <title>Document</title>
-
-    <style>
-        body {
-            font-family: Arial, "微軟正黑體";
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <header class="bg-primary">
-        <div class="container">
+<header class="bg-dark">
+        <div class="container-fluid">
             <div class="row d-flex justify-content-center">
                 <div class="col-6 mt-2">
                     <h1 class=" text-white text-center">
@@ -36,11 +10,11 @@
         </div>
     </header>
 
-    <div class="bg-dark">
-        <div class="container">
+    <div class="bg-white py-3">
+        <div class="container-fluid">
             <div class="row d-flex">
 
-                <nav class="col-3">
+                <nav class="col-2">
                     <div class="accordion" id="accordionExample">
 
                         <div class="card">
@@ -52,7 +26,7 @@
                                 </h2>
                             </div>
 
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <a class="card-body ml-2 d-flex" href="">
                                     訂單管理
                                 </a>
@@ -90,8 +64,8 @@
                                 </h2>
                             </div>
 
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                <a class="card-body ml-2 d-flex" href="">
+                            <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <a class="card-body ml-2 d-flex" href="./camp_list.php">
                                     營地列表
                                 </a>
                                 <a class="card-body ml-2 d-flex" href="">
@@ -103,24 +77,10 @@
                     </div>
                 </nav>
 
-                <main class="col-9 bg-white">
+                
 
-                    <aside class="bg-warning">
-                        <span>麵包屑 區域</span>
-                        <p>會員管理 / 訂單管理 / 收藏管理</p>
-                    </aside>
+                  
 
-                    <section>
-                        <span>主要頁面 區域</span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente laudantium aspernatur debitis rem sequi quaerat ullam at. Incidunt ipsum cum quis perferendis natus aspernatur molestias adipisci pariatur, at quas corrupti!</p>
-                    </section>
+                
 
-                </main>
-
-            </div>
-        </div>
-    </div>
-
-</body>
-
-</html>
+      
