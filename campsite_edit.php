@@ -21,6 +21,7 @@ require __DIR__.'/__connect.php';
 .form-group span{
     color:red !important;
 }
+
 </style>
 <main class="col-10 bg-white">
 <aside class="bg-warning">
