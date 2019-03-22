@@ -76,7 +76,19 @@ foreach ($rows_countMem as $v) {
             <a class="nav-link" href="event_intro.php?event_id=<?= $row['event_id'] ?>">活動內容</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="apply_orderInsert.php?event_id=<?= $row['event_id'] ?>">新增報名</a>
+            <a class="nav-link" href="apply_orderInsert.php?event_id=<?= $row['event_id'] ?>">
+                <?php 
+
+                $count_num = $num_data[$row['event_id']];
+                // echo (int)$count_num;
+
+                if ((int)$count_num >= (int)$row['event_upLimit']) {
+                    echo '額滿';
+                } else {
+                    echo '新增報名';
+                }
+                ?>
+            </a>
         </li>
     </ul>
     <table class="table">
@@ -101,7 +113,7 @@ foreach ($rows_countMem as $v) {
                 <td><?= $row['event_price'] ?></td>
                 <td><?= $row['event_upLimit'] ?></td>
                 <td>
-                    <?= isset($num_data[$row['event_id']])?$num_data[$row['event_id']]:0 ?><br><a href="apply_orderlist.php?event_id=<?= $row['event_id'] ?>" class="btn btn-outline-primary" role="button" aria-pressed="true" style="font-size:12px">明細</a>
+                    <?= isset($num_data[$row['event_id']]) ? $num_data[$row['event_id']] : 0 ?><br><a href="apply_orderlist.php?event_id=<?= $row['event_id'] ?>" class="btn btn-outline-primary" role="button" aria-pressed="true" style="font-size:12px">明細</a>
                 </td>
                 <td><?= $row['event_remark'] ?></td>
             </tr>
