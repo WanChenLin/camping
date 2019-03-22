@@ -1,6 +1,34 @@
 <?php include __DIR__ . './_header.php' ?>
-<?php include __DIR__ . './_coupon_nav.php' ?>
+<?php include __DIR__ . './_coupon_nav.php';
 
+include __DIR__ . './_connectDB.php';
+try {
+  $mem_sql = "SELECT * FROM member_level";
+  $mem_stmt = $pdo->query($mem_sql);
+  $mem_rows = $mem_stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $ex) {
+  echo $ex->getMessage();
+}
+
+?>
+
+
+    <style>
+        /*#assign_to_user {*/
+            /*width: 300px;*/
+            /*height: 200px;*/
+            /*position: fixed;*/
+            /*top: 50%;*/
+            /*left: 50%;*/
+            /*background: rgba(0, 0, 0, 0.6);*/
+            /*transform: translateY(-50%) translateX(-50%);*/
+            /*border-radius: 10px;*/
+        /*}*/
+
+        /*body {*/
+            /*position: relative;*/
+        /*}*/
+    </style>
 
     <div class="container-fluid">
 
@@ -62,39 +90,108 @@
 
         </div>
 
-        <div class="row" id="assign_to_user" style="display: none">
-            <button class="close" type="button" onclick="">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="col-lg-12">
-                <form>
-                    <div class="form-group">
-                        <input type="text" placeholder="輸入欲指派使用者ID" id="assign_by_id">
+<!--        <div class="row" id="assign_to_user" style="display: none">-->
+<!--            <button class="close" type="button" onclick="">-->
+<!--                <span aria-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--            <div >-->
+<!--                <form class="d-flex  justify-content-center">-->
+<!--                    <div class="form-group align-items-center" >-->
+<!--                        <input type="text" placeholder="輸入欲指派使用者ID" id="assign_by_id">-->
+<!--                    </div>-->
+<!--                    <button class="btn btn-primary align-items-center" onclick="group_assign()" type="button">Submit</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!---->
+<!---->
+<!--        <div class="row" id="issue_by_level" style="display: none">-->
+<!--            <div class="">-->
+<!--                <form>-->
+<!--                    <select class="form-control" name="issue_level" id="issue_level">-->
+<!--                      --><?php //foreach ($mem_rows as $mem_row): ?>
+<!--                          <option value="--><?//= $mem_row['mem_level'] ?><!--">--><?//= $mem_row['level_title'] ?><!--</option>-->
+<!--                      --><?php //endforeach; ?>
+<!--                    </select>-->
+<!--                    <button class="btn btn-primary" onclick="issue_by_level()" type="button">Submit</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <button class="btn btn-warning" onclick="assign_to_user.style.display = 'block';" type="button">依使用者ID指定</button>-->
+<!--        <button class="btn btn-warning" onclick="document.getElementById('issue_by_level').style.display = 'block'" type="button">依使用者LEVEL指定</button>-->
+        <button class="btn btn-danger" onclick="group_delete()" type="button">刪除</button>
+
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userIdModal" data-whatever="">依使用者ID指定</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userLevelModal" data-whatever="">依使用者LEVEL指定</button>
+
+        <div class="modal fade" id="userIdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <button class="btn btn-primary" onclick="group_assign()" type="button">Submit</button>
-                </form>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">使用者ID</label>
+                                <input type="text" placeholder="輸入欲指派使用者ID" id="assign_by_id" class="form-control">
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="group_assign()">配發</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <button class="btn btn-warning" onclick="assign_to_user.style.display = 'block';" type="button">依使用者ID指定
-        </button>
-        <!--TODO-->
-        <!--        <div class="row" id="" style="display: none">-->
-        <!--            <div class="col-lg-12">-->
-        <!--                <form class="update_form">-->
-        <!---->
-        <!---->
-        <!--                    <button class="btn btn-primary" onclick="" type="button">Submit</button>-->
-        <!--                </form>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <button class="btn btn-warning" onclick="" type="button">依使用者LEVEL指定</button>-->
 
+        <div class="modal fade" id="userLevelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <select class="form-control" name="issue_level" id="issue_level">
+                              <?php foreach ($mem_rows as $mem_row): ?>
+                                  <option value="<?= $mem_row['mem_level'] ?>"><?= $mem_row['level_title'] ?></option>
+                              <?php endforeach; ?>
+                            </select>
 
-        <button class="btn btn-danger" onclick="group_delete()" type="button">刪除</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="issue_by_level()">配發</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
     <script>
+        // $('#exampleModal').on('show.bs.modal', function (event) {
+        //     var button = $(event.relatedTarget) // Button that triggered the modal
+        //     var recipient = button.data('whatever') // Extract info from data-* attributes
+        //     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        //     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        //     var modal = $(this)
+        //     modal.find('.modal-title').text('New message to ' + recipient)
+        //     modal.find('.modal-body input').val(recipient)
+        // });
         // const update_coupon_name = document.getElementById('update_coupon_name');
         // const update_dis_num = document.getElementById('update_dis_num');
         // const update_dis_type =document.getElementById('update_dis_type');
@@ -103,13 +200,14 @@
         // const update_expire = document.getElementById('update_expire');
         const assign_to_user = document.getElementById('assign_to_user');
         let according_val;
+
         function switch_input(e) {
             const coupon_output = document.getElementById('coupon_output');
-            if(document.getElementById('according_to').value){
+            if (document.getElementById('according_to').value) {
                 according_val = document.getElementById('according_to').value;
                 console.log(according_val)
-            }else {
-                according_val= 1;
+            } else {
+                according_val = 1;
                 console.log(according_val);
             }
 
@@ -180,7 +278,9 @@
                     }
                 )
         }
+
         switch_input();
+
         function send_search_condition(e) {
             const according_to = document.getElementById('according_to').value;
             const coupon_table = document.getElementById('coupon_table');
@@ -273,7 +373,7 @@
                     .then(result => {
                         console.log(result);
                         info_bar.style.display = 'block';
-                        switch_input()
+                        switch_input();
                         if (result['success']) {
                             info_bar.className = 'alert alert-success';
                             info_bar.innerHTML = '刪除成功';
@@ -298,16 +398,16 @@
                 }
 
             });
-            if(confirm('確認刪除資料')){
+            if (confirm('確認刪除資料')) {
                 info_bar.style.display = 'block';
-                if(delete_coupons.length<1){
+                if (delete_coupons.length < 1) {
                     info_bar.className = 'alert alert-danger';
                     info_bar.innerHTML = "未選擇資料";
                     setTimeout(function () {
-                        info_bar.style.display='none'
-                    },2000);
+                        info_bar.style.display = 'none'
+                    }, 2000);
                     return false;
-                }else {
+                } else {
                     delete_coupons = JSON.stringify(delete_coupons);
                     form.append('delete_coupons', delete_coupons);
                     fetch('_group_delete_api.php', {
@@ -321,8 +421,8 @@
                             info_bar.className = 'alert alert-success';
                             info_bar.innerHTML = "刪除成功";
                             setTimeout(function () {
-                                info_bar.style.display='none'
-                            },2000);
+                                info_bar.style.display = 'none'
+                            }, 2000);
                         })
                 }
             }
@@ -347,7 +447,7 @@
 
         function group_assign() {
             if (confirm('確認指派給此使用者')) {
-                document.getElementById('assign_to_user').style.display = 'none'
+                // document.getElementById('assign_to_user').style.display = 'none';
                 const selected_coupons = document.getElementsByClassName('selected_coupon');
 
                 let form = new FormData();
@@ -372,7 +472,19 @@
                     body: form
                 })
                     .then(response => response.text())
-                    .then(data => console.log(data))
+                    .then(data => {
+                        console.log(data);
+                        info_bar.style.display='block';
+                        if(data['success']==true){
+                            info_bar.className = 'alert alert-success';
+                            info_bar.innerHTML = "指派成功";
+                        }else {
+                            info_bar.className = 'alert alert-danger';
+                            info_bar.innerHTML = "指派發生錯誤成功";
+                        }
+
+                        switch_input();
+                    })
             }
         }
 
@@ -405,9 +517,38 @@
         //             .then(data=>console.log(data))
         //     }
         // }
-        window.addEventListener('hashchange',function () {
-            alert('jsifjwfjiwofji');
-        });
+        // window.addEventListener('hashchange', function () {
+        //     alert('jsifjwfjiwofji');
+        // });
+        const issue_level_field = document.getElementById('issue_level')
+        function issue_by_level() {
+            // document.getElementById('issue_by_level').style.display = 'none';
+            let form = new FormData();
+            form.append('issue_level', issue_level_field.value)
+            fetch('_issue_by_level_api.php',{
+                method:'POST',
+                body:form
+            })
+                .then(response=>response.json())
+                .then(data=>{
+                    console.log(data);
+                    info_bar.style.display='block'
+                    if(data['success']==true){
+                        info_bar.className = 'alert alert-success';
+                        info_bar.innerHTML = "指派成功";
+                    }else {
+                        info_bar.className = 'alert alert-danger';
+                        info_bar.innerHTML = data['errorMsg'];
+                    }
+                    setTimeout(function () {
+                        info_bar.style.display='none'
+                    },2000);
+                    switch_input();
+                })
+
+        }
+
+
     </script>
 
 
