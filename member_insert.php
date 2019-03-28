@@ -132,6 +132,13 @@ include __DIR__ . '/__connect_db.php';
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="address" class="col-sm-2 col-form-label">地址</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="" value="">
+                                <small id="addressHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">等級<span class="asterisk"> *</span></label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="level" id="level">

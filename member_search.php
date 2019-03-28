@@ -46,10 +46,10 @@ include __DIR__ . '/__connect_db.php';
             <table class="table table-hover table-responsive">
                 <thead>
                     <tr style="white-space:nowrap">
-                        <!-- <th scope=" col"><i class="far fa-edit"></i></th> -->
-                        <th scope=" col">#</th>
+                        <th scope=" col"><i class="far fa-edit"></i></th>
+                        <th scope=" col">#會員編號</th>
                         <th scope=" col">帳號</th>
-                        <th scope=" col">密碼</th>
+                        <!-- <th scope=" col">密碼</th> -->
                         <th scope=" col">大頭貼</th>
                         <th scope=" col">姓名</th>
                         <th scope=" col">暱稱</th>
@@ -105,9 +105,13 @@ include __DIR__ . '/__connect_db.php';
     const submit = document.querySelector('#submit');
     const data_body = document.querySelector('.data_body');
     const tr_str = `<tr>
+                        <td>
+                            <a href="member_edit.php?mem_id=<%= mem_id %>">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
                         <td><%= mem_id %></td>
                         <td><%= mem_account %></td>
-                        <td><%= mem_password %></td>
                         <td><img src="./<%= mem_avatar %>" alt="" height="50"></td>
                         <td><%= mem_name %></td>
                         <td><%= mem_nickname %></td>

@@ -23,9 +23,15 @@ if (isset($_POST['searchdb'])) {
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
         exit;
     }
-
+    
     // $sql = "INSERT INTO `member_list`(`mem_account`) VALUES (?)";
-    $sql = " SELECT * FROM member_list WHERE mem_account LIKE :search ORDER BY mem_id DESC";
+    $sql = " SELECT * FROM member_list 
+            WHERE mem_account LIKE :search 
+            OR mem_name LIKE :search 
+            OR mem_nickname LIKE :search 
+            OR mem_mobile LIKE :search 
+            OR mem_email LIKE :search 
+            ORDER BY mem_id DESC";
 
     try {
         $stmt = $pdo->prepare($sql);

@@ -56,10 +56,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <thead>
                 <tr style="white-space:nowrap">
                     <th scope=" col"><i class="far fa-edit"></i></th>
-                    <th scope=" col"><i class="far fa-trash-alt"></i></th>
-                    <th scope=" col">#</th>
+                    <th scope=" col">#會員編號</th>
                     <th scope=" col">帳號</th>
-                    <th scope=" col">密碼</th>
+                    <!-- <th scope=" col">密碼</th> -->
                     <th scope=" col">大頭貼</th>
                     <th scope=" col">姓名</th>
                     <th scope=" col">暱稱</th>
@@ -67,9 +66,11 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th scope=" col">生日</th>
                     <th scope=" col">手機</th>
                     <th scope=" col">信箱</th>
+                    <th scope=" col">地址</th>
                     <th scope=" col">等級</th>
                     <th scope=" col">狀態</th>
                     <th scope=" col">註冊日期</th>
+                    <th scope=" col"><i class="far fa-trash-alt"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -80,14 +81,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <i class="fas fa-edit"></i>
                         </a>
                     </td>
-                    <td>
-                        <a href="javascript: delete_row(<?= $row['mem_id']?>)">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
                     <td><?= $row['mem_id'] ?></th>
                     <td><?= $row['mem_account'] ?></td>
-                    <td><?= $row['mem_password'] ?></td>
+                    <!-- <td><?= $row['mem_password'] ?></td> -->
                     <td>
                         <img src="./<?= $row['mem_avatar'] ?>" alt="" height="50">
                     </td>
@@ -97,10 +93,15 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $row['mem_birthday'] ?></td>
                     <td><?= $row['mem_mobile'] ?></td>
                     <td><?= $row['mem_email'] ?></td>
+                    <td><?= $row['mem_address'] ?></td>
                     <td><?= $row['level_title'] ?></td>
                     <td><?= $row['mem_status'] ?></td>
                     <td><?= $row['mem_signUpDate'] ?></td>
-                    
+                    <td>
+                        <a href="javascript: delete_row(<?= $row['mem_id']?>)">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
                 </tr>
                 <?php endforeach ?>
             </tbody>

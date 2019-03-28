@@ -139,6 +139,13 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <small id="emailHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="address" class="col-sm-2 col-form-label">地址</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="" value="<?= $row['mem_address'] ?>">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div>
                         <div class="form-group row text-center">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>

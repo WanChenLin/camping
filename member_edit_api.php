@@ -18,8 +18,6 @@ if (isset($_POST['account']) and !empty($mem_id)) {
     $account = htmlentities($_POST['account']);
     $password = htmlentities($_POST['password']);
     $name = htmlentities($_POST['name']);
-    $nickname = htmlentities($_POST['nickname']);
-    $birthday = htmlentities($_POST['birthday']);
     $mobile = htmlentities($_POST['mobile']);
     $email = htmlentities($_POST['email']);
 
@@ -63,7 +61,7 @@ if (isset($_POST['account']) and !empty($mem_id)) {
     // $full_path = $folder.$file; 
 
     $sql = "UPDATE `member_list`
-            SET `mem_account`=?, `mem_password`=?, `mem_name`=?, `mem_nickname`=?, `mem_gender`=?, `mem_birthday`=?, `mem_mobile`=?, `mem_email`=?, `mem_avatar`=?
+            SET `mem_account`=?, `mem_password`=?, `mem_name`=?, `mem_nickname`=?, `mem_gender`=?, `mem_birthday`=?, `mem_mobile`=?, `mem_email`=?, `mem_address`=?, `mem_avatar`=?
             WHERE `mem_id`=?";
 
     try {
@@ -86,6 +84,7 @@ if (isset($_POST['account']) and !empty($mem_id)) {
             $_POST['gender'],
             $_POST['birthday'],
             $_POST['mobile'],
+            $_POST['address'],
             $_POST['email'],
             $_POST['avatar_pictures'],
             // $full_path,

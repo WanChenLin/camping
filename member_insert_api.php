@@ -16,8 +16,6 @@ if (isset($_POST['gotodb'])) {
     $account = htmlentities($_POST['account']);
     $password = htmlentities($_POST['password']);
     $name = htmlentities($_POST['name']);
-    $nickname = htmlentities($_POST['nickname']);
-    $birthday = htmlentities($_POST['birthday']);
     $mobile = htmlentities($_POST['mobile']);
     $email = htmlentities($_POST['email']);
 
@@ -36,9 +34,9 @@ if (isset($_POST['gotodb'])) {
     // $full_path = $folder.$file; 
 
     $sql = "INSERT INTO `member_list`
-        (`mem_account`, `mem_password`, `mem_name`, `mem_nickname`, `mem_gender`, `mem_birthday`, `mem_mobile`, `mem_email`, `memLevel_id`, `mem_avatar`) 
+        (`mem_account`, `mem_password`, `mem_name`, `mem_nickname`, `mem_gender`, `mem_birthday`, `mem_mobile`, `mem_email`, `mem_address`, `memLevel_id`, `mem_avatar`) 
         VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try {
         $stmt = $pdo->prepare($sql);
@@ -61,6 +59,7 @@ if (isset($_POST['gotodb'])) {
             $_POST['birthday'],
             $_POST['mobile'],
             $_POST['email'],
+            $_POST['address'],
             $_POST['level'],
             $_POST['avatar_pictures']
             // $full_path
