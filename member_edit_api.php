@@ -84,8 +84,8 @@ if (isset($_POST['account']) and !empty($mem_id)) {
             $_POST['gender'],
             $_POST['birthday'],
             $_POST['mobile'],
-            $_POST['address'],
             $_POST['email'],
+            implode("", $_POST['address']),
             $_POST['avatar_pictures'],
             // $full_path,
             $mem_id
