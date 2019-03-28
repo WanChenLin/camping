@@ -3,6 +3,7 @@
 require __DIR__ . '/__connect_db.php';
 
 header('Content-Type: application/json');
+date_default_timezone_set('Asia/Taipei');
 
 $result = [
     'success' => false,
@@ -12,13 +13,16 @@ $result = [
 
 ];
 
+
 if (isset($_POST['post_title'])) {
+    
     $slct = array('文章分類', '露營裝備', '帳篷選擇', '天氣對策');
     $post_cate = $_POST['post_cate'];
     $post_title = strip_tags($_POST['post_title']);
     $post_content = html_entity_decode($_POST['post_content']);
-    $post_time = date("Y-m-d h:i:s");
+    $post_time = date("Y-m-d H:i:s");
     $post_visible = $_POST['post_visible'];
+
 
     $result['post'] = $_POST;
 

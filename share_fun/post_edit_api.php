@@ -3,6 +3,7 @@
 require __DIR__ . '/__connect_db.php';
 
 header('Content-Type: application/json');
+date_default_timezone_set('Asia/Taipei');
 
 $result = [
     'success' => false,
@@ -17,7 +18,7 @@ if (isset($_POST['post_title']) and !empty($post_id)) {
     $post_cate = $_POST['post_cate'];
     $post_title = strip_tags($_POST['post_title']);
     $post_content = html_entity_decode($_POST['post_content']);
-    $post_editTime = date("Y-m-d h:i:s");
+    $post_editTime = date("Y-m-d H:i:s");
     $post_visible = $_POST['post_visible'];
 
     $result['post'] = $_POST;  // 做 echo 檢查

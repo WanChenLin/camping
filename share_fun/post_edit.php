@@ -103,7 +103,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         const checkForm = () => {
             let isPassed = true;
-            info_bar.style.display = 'none';
+            // info_bar.style.display = 'none';
 
             // 拿到每個欄位的值
             const fsv = {};
@@ -113,23 +113,23 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             console.log(fsv);
 
 
-            // for (let v of fields) {
-            //     fs[v].style.borderColor = '#cccccc';
-            // }
+            for (let v of fields) {
+                fs[v].style.borderColor = '#cccccc';
+            }
 
             if (fsv.post_title.length < 1) {
                 fs.post_title.style.borderColor = 'red';
                 isPassed = false;
             }
             if (fsv.post_content.length < 1) {
-                fs.post_content.style.borderColor = 'red';
+                // fs.post_content.style.borderColor = 'red';
                 isPassed = false;
             }
 
             if (isPassed) {
                 let form = new FormData(document.form1);
 
-                submit_btn.style.display = 'none';
+                // submit_btn.style.display = 'none';
 
                 fetch('post_edit_api.php', {
                         method: 'POST',

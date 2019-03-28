@@ -1,8 +1,13 @@
 <?php
 
-$db_host = '192.168.27.37';
-$db_name = 'go_camping';
-$db_user = 'sammie';
+// $db_host = '192.168.27.37';
+// $db_name = 'go_camping';
+// $db_user = 'sammie';
+// $db_pass = 'admin';
+
+$db_host = 'localhost';
+$db_name = 'test_db';
+$db_user = 'ring';
 $db_pass = 'admin';
 
 

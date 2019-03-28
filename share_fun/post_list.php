@@ -32,10 +32,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <?php include __DIR__ . '/__html_head.php';  ?>
 <style>
+   
     .table td {
         height: 3rem;
         overflow: hidden;
     }
+
 </style>
 <?php include __DIR__ . '/__style_start.html';  ?>
 <?php include __DIR__ . '/__navbar.php';  ?>
@@ -89,7 +91,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlentities($row['post_id']) ?></td>
                         <!-- <td><?= htmlentities($row['mem_nickname']) ?></td> -->
                         <td><?= htmlentities($row['cate_name']) ?></td>
-                        <td><?= htmlentities($row['post_title']) ?></td>
+                        <td><a id="to_preview" href="post_preview.php?post_id=<?= $row['post_id'] ?>"><?= htmlentities($row['post_title']) ?></a></td>
                         <td><?= htmlentities($row['post_time']) ?></td>
                         <td><?= htmlentities($row['post_editTime']) ?></td>
                         <!-- <td><?= html_entity_decode($row['post_content']) ?></td>
@@ -112,14 +114,18 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </div>
     </div>
+
     <?php include __DIR__ . '/__style_end.html';  ?>
 
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
 <script>
     function delete_it(post_id) {
         if (confirm(`確定要刪除這篇文章嗎?`)) {
             location.href = 'post_delete.php?post_id=' + post_id;
         }
-    }
+    };
+    
 </script>
 <?php include __DIR__ . '/__html_foot.php';  ?> 
