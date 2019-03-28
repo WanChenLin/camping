@@ -57,6 +57,7 @@ include __DIR__ . '/__connect_db.php';
                         <th scope=" col">生日</th>
                         <th scope=" col">手機</th>
                         <th scope=" col">信箱</th>
+                        <th scope=" col">地址</th>
                         <th scope=" col">等級</th>
                         <th scope=" col">狀態</th>
                         <th scope=" col">註冊日期</th>
@@ -119,6 +120,7 @@ include __DIR__ . '/__connect_db.php';
                         <td><%= mem_birthday %></td>
                         <td><%= mem_mobile %></td>
                         <td><%= mem_email %></td>
+                        <td><%= mem_address %></td>
                         <td><%= memLevel_id %></td>
                         <td><%= mem_status %></td>
                         <td><%= mem_signUpDate %></td>

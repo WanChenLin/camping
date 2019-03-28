@@ -153,6 +153,16 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">等級<span class="asterisk"> *</span></label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="level" id="level">
+                                    <option value="1" <?= ($row['memLevel_id']=='1') ? 'selected':'' ?>>1 露營新手</option>
+                                    <option value="2" <?= ($row['memLevel_id']=='2') ? 'selected':'' ?>>2 業餘露營家</option>
+                                    <option value="3" <?= ($row['memLevel_id']=='3') ? 'selected':'' ?>>3 露營達人</option>
+                                </select>    
+                            </div>
+                        </div>
                         <div class="form-group row text-center">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>

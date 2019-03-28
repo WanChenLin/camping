@@ -31,6 +31,7 @@ if (isset($_POST['searchdb'])) {
             OR mem_nickname LIKE :search 
             OR mem_mobile LIKE :search 
             OR mem_email LIKE :search 
+            OR mem_address LIKE :search 
             ORDER BY mem_id DESC";
 
     try {

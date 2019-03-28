@@ -61,7 +61,7 @@ if (isset($_POST['account']) and !empty($mem_id)) {
     // $full_path = $folder.$file; 
 
     $sql = "UPDATE `member_list`
-            SET `mem_account`=?, `mem_password`=?, `mem_name`=?, `mem_nickname`=?, `mem_gender`=?, `mem_birthday`=?, `mem_mobile`=?, `mem_email`=?, `mem_address`=?, `mem_avatar`=?
+            SET `mem_account`=?, `mem_password`=?, `mem_name`=?, `mem_nickname`=?, `mem_gender`=?, `mem_birthday`=?, `mem_mobile`=?, `mem_email`=?, `mem_address`=?, `mem_avatar`=?, `memLevel_id`=?
             WHERE `mem_id`=?";
 
     try {
@@ -87,6 +87,7 @@ if (isset($_POST['account']) and !empty($mem_id)) {
             $_POST['email'],
             implode("", $_POST['address']),
             $_POST['avatar_pictures'],
+            $_POST['level'],
             // $full_path,
             $mem_id
         ]);
