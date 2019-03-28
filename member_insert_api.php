@@ -59,7 +59,7 @@ if (isset($_POST['gotodb'])) {
             $_POST['birthday'],
             $_POST['mobile'],
             $_POST['email'],
-            $_POST['address'],
+            implode("", $_POST['address']),
             $_POST['level'],
             $_POST['avatar_pictures']
             // $full_path

@@ -131,11 +131,25 @@ include __DIR__ . '/__connect_db.php';
                                 <small id="emailHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div role="tw-city-selector" data-bootstrap-style data-has-zipcode>
+                        <!-- <div class="form-group row">
                             <label for="address" class="col-sm-2 col-form-label">地址</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-10" >
                                 <input type="text" class="form-control" id="address" name="address" placeholder="" value="">
                                 <small id="addressHelp" class="form-text text-muted"></small>
+                            </div>
+                        </div> -->
+                            <div class="form-group row address_api">
+                                <label for="address" class="col-sm-2 col-form-label">地址</label>
+                                <div class="col-sm-4 d-flex pr-0">
+                                    <input type="text" name="address[]" class="zipcode border-0" readonly placeholder="郵遞區號" size="5" autocomplete="off">
+                                    <select class="form-control county" name="county"></select>
+                                    <select class="form-control mx-1 district" name="district"></select>
+                                </div>
+                                <div class="col-sm-6 pl-0">
+                                    <input type="text" class="form-control flex-grow-1" id="address" name="address[]" placeholder="">
+                                    <small id="addressHelp" class="form-text text-muted"></small>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -309,6 +323,23 @@ include __DIR__ . '/__connect_db.php';
     //     preview.setAttribute('src', '');
     //     }
     // }
+
+</script>
+
+<!-- tw-city-selector.js -->
+<script src="./tw-city-selector-master/dist/tw-city-selector.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/tw-city-selector@2.0.2/dist/tw-city-selector.min.js" integrity="sha256-A5spLuZOMU0/G4RzZn45BoSBIpoWmV4xwp+LouIldsI=" crossorigin="anonymous"></script> -->
+<script>
+    new TwCitySelector({
+        el: '.address_api',
+        elCounty: '.county', // 在 el 裡查找 element
+        countyFieldName: 'address[]',
+        elDistrict: '.district', // 在 el 裡查找 element
+        districtFieldName: 'address[]',
+        elZipcode: '.zipcode', // 在 el 裡查找 element
+        zipcodeFieldName: 'address[]', // input區域裡的zipcode name也要改成address[]才能夠接上
+        // bootstrapStyle: true
+    });
 </script>
 
 <?php include __DIR__ . '/html_foot.php'; ?> 
