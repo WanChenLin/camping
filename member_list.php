@@ -31,9 +31,16 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     section .table th {
         border-top: 0;
     }
-    .user_book {
+    .userbook_wrap {
         top: 100px;
         left: 20%;
+    }
+    .userbook_close {
+        top: 0;
+        right: 0;
+    }
+    .close_btn {
+        font-size: 20px;
     }
 </style>
 
@@ -98,7 +105,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $row['mem_status'] ?></td>
                     <td><?= $row['mem_signUpDate'] ?></td>
                     <td class="d-flex">
-                        <a href="" class="d-block mx-1"><i class="fas fa-user-circle"></i></a>
+                        <a href="" class="d-block mx-1 member_card">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
                         <!-- <a href="" class="d-block mx-1"><i class="fas fa-address-card"></i></a> -->
                         <a href="member_edit.php?mem_id=<?= $row['mem_id']?>" class="d-block mx-1">
                             <i class="fas fa-edit"></i>
@@ -110,7 +119,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </td>
                 </tr>
                 <?php endforeach ?>
-            </tbody>
+            </td>
         </table>
 
         <nav aria-label="Page navigation">
@@ -135,16 +144,25 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </ul>
         </nav>
 
-        <!-- <div class="user_book position-absolute">
-            <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="userbook_wrap position-absolute">
+            <div class="card my-3 p-2 border-primary " style="max-width: 540px;">
+                <div class="row no-gutters position-relative">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <img src="./<?= $row['mem_avatar'] ?>" class="card-img" alt="">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">#<?= $row['mem_id'] ?> 會員詳細資料</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                    <div class="userbook_close position-absolute">
+                        <a href="" class="close_btn"><i class="far fa-times-circle"></i></a>
+                    </div>
+                </div>
             </div>
-            </div>
-        </div> -->
+        </div>
     </section>
 
 </main>
@@ -200,6 +218,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         })
     }
+
+
+
+    $(".member_card").on("click", function(mem_id){
+        
+    })
     
 </script>
 
