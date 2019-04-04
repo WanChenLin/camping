@@ -177,6 +177,10 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 </main>
 
+
+<!-- SweetAlert2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
 <script>
     const fields = [
         'account',
@@ -191,6 +195,23 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     const info_bar = document.querySelector('#info_bar');
     const submit_btn = document.querySelector('#submit_btn');
+
+    const edit_success = () => {
+        Swal.fire({
+            type: 'success',
+            title: '資料修改成功',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+    const edit_error = () => {
+        Swal.fire({
+            type: 'error',
+            title: '資料修改失敗',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 
     const checkForm = () => {
 
@@ -239,11 +260,6 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             document.querySelector('#emailHelp').innerHTML = '請輸入完整的電子郵件';
             ispassed = false;
         }
-        // if(! birth_pattern.test(birthday)){
-        //     document.formInsert.birthday.style.borderColor = 'red';
-        //     document.querySelector('#birthdayHelp').innerHTML = '格式錯誤';
-        //     ispassed = false;
-        // }
 
         if (password_check != password) {
             document.formInsert.password_check.style.borderColor = 'red';
@@ -270,9 +286,11 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         if (obj.success) {
                             info_bar.className = 'alert alert-success';
                             info_bar.innerHTML = '資料修改完成';
+                            edit_success();
                         } else {
                             info_bar.className = 'alert alert-danger';
                             info_bar.innerHTML = obj.errorMsg;
+                            edit_error();
                         }
                         submit_btn.style.display = 'block';
                         submit_btn.style = 'btn_primary';

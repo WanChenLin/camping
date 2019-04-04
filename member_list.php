@@ -59,7 +59,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <!-- <caption>List of members</caption> -->
             <thead>
                 <tr style="white-space:nowrap">
-                    <th scope=" col">#會員編號</th>
+                    <th scope=" col">#員編</th>
                     <th scope=" col">帳號</th>
                     <!-- <th scope=" col">密碼</th> -->
                     <!-- <th scope=" col">大頭貼</th> -->
@@ -81,7 +81,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tbody>
                 <?php foreach ($rows as $row) : ?>
                 <tr>
-                    <td><?= $row['mem_id'] ?></th>
+                    <td class="text-center"><?= $row['mem_id'] ?></th>
                     <td><?= $row['mem_account'] ?></td>
                     <!-- <td><?= $row['mem_password'] ?></td> -->
                     <!-- <td>

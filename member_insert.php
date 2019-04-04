@@ -176,6 +176,9 @@ include __DIR__ . '/__connect_db.php';
 
 </main>
 
+<!-- SweetAlert2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
 <script>
     const fields = [
         'account',
@@ -196,6 +199,23 @@ include __DIR__ . '/__connect_db.php';
     const my_file = document.querySelector('#my_file');
     const avatar_picutres = document.querySelector('#avatar_picutres');
     const err = document.querySelector('#err');
+
+    const add_success = () => {
+        Swal.fire({
+            type: 'success',
+            title: '資料新增成功',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+    const add_error = () => {
+        Swal.fire({
+            type: 'error',
+            title: '資料新增錯誤',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 
     const checkForm = () => {
 
@@ -243,11 +263,6 @@ include __DIR__ . '/__connect_db.php';
             document.querySelector('#emailHelp').innerHTML = '請輸入完整的電子郵件';
             ispassed = false;
         }
-        // if(! birth_pattern.test(birthday)){
-        //     document.formInsert.birthday.style.borderColor = 'red';
-        //     document.querySelector('#birthdayHelp').innerHTML = '格式錯誤';
-        //     ispassed = false;
-        // }
 
         if (password_check != password) {
             document.formInsert.password_check.style.borderColor = 'red';
@@ -271,17 +286,17 @@ include __DIR__ . '/__connect_db.php';
                     info_bar.style.display = 'block';
                     if (obj.success) {
                         info_bar.className = 'alert alert-success';
-                        info_bar.innerHTML = '資料新增完成';
+                        info_bar.innerHTML = '會員 '+$('#account').val()+' 資料已新增完成';
+                        add_success();
                     } else {
                         info_bar.className = 'alert alert-danger';
                         info_bar.innerHTML = obj.errorMsg;
+                        add_error();
                     }
                     submit_btn.style.display = 'block';
                     submit_btn.style = 'btn-primary';
                 })
         }
-
-        
 
         return false;
     }
