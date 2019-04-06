@@ -30,23 +30,50 @@ if($page < 1) $page = 1;
 if($page > $total_pages) $page = $total_pages;
 $result['page'] = $page;
 
-$salesql = sprintf(" SELECT 
-                    salepage_id,
-                    salepage_name, 
-                    salepage_quility, 
-                    salepage_suggestprice, 
-                    salepage_price, 
-                    salepage_cost, 
-                    salepage_state, 
-                    salepage_feature, 
-                    salepage_proddetails, 
-                    salepage_specification, 
-                    salepage_paymenttype, 
-                    salepage_deliverytype, 
-                    -- 括號裡是一個 statemen, 用 AS 給他一個欄位名稱                    
-                    (SELECT salecate_name FROM salecategory WHERE salecate_id = salepage_salecateid) AS salecate_name,
-                    salepage_image
-                    FROM salepage ORDER BY salepage_id DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);
+if(isset($_POST["query"]))
+{
+    $q = $_POST["query"];
+
+    $salesql = sprintf(" SELECT 
+    salepage_id,
+    salepage_name, 
+    salepage_quility, 
+    salepage_suggestprice, 
+    salepage_price, 
+    salepage_cost, 
+    salepage_state, 
+    salepage_feature, 
+    salepage_proddetails, 
+    salepage_specification, 
+    salepage_paymenttype, 
+    salepage_deliverytype, 
+    -- 括號裡是一個 statemen, 用 AS 給他一個欄位名稱                    
+    (SELECT salecate_name FROM salecategory WHERE salecate_id = salepage_salecateid) AS salecate_name,
+    salepage_image
+    FROM salepage 
+    WHERE salepage_name LIKE '%%%s%%'
+    ORDER BY salepage_id DESC LIMIT %s, %s", $q, ($page-1)*$per_page, $per_page);    
+}
+else 
+{
+    $salesql = sprintf(" SELECT 
+    salepage_id,
+    salepage_name, 
+    salepage_quility, 
+    salepage_suggestprice, 
+    salepage_price, 
+    salepage_cost, 
+    salepage_state, 
+    salepage_feature, 
+    salepage_proddetails, 
+    salepage_specification, 
+    salepage_paymenttype, 
+    salepage_deliverytype, 
+    -- 括號裡是一個 statemen, 用 AS 給他一個欄位名稱                    
+    (SELECT salecate_name FROM salecategory WHERE salecate_id = salepage_salecateid) AS salecate_name,
+    salepage_image
+    FROM salepage ORDER BY salepage_id DESC LIMIT %s, %s", ($page-1)*$per_page, $per_page);    
+}  
 $stmt = $pdo->query($salesql);
 
 $result['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC);

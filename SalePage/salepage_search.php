@@ -1,6 +1,6 @@
 <?php
 require __DIR__.'/__salepage_connect_db.php';
-$page_name = 'salepage_search.php';
+$page_name = 'salepage_list.php';
 ?>
 <?php include __DIR__.'/__html_dbhead.php';?>
 <?php include __DIR__.'/__html_dbheader.php';?>
@@ -26,41 +26,29 @@ $page_name = 'salepage_search.php';
         <aside class="my-2">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link " href="salepage_list.php">商品清單</a>
+                    <a class="nav-link active" href="salepage_list.php">商品清單</a>
                 </li>
+                <!-- <li class="nav-item">
+                <a class="nav-link" href="member_insert.php">新增資料</a>
+            </li> -->
                 <li class="nav-item">
                     <a class="nav-link " href="salepage_creat.php">建立商品頁</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="salepage_search.php">查詢商品頁</a>
                 </li>
             </ul>
         </aside>
         <div id="saleinfo_bar" class="alert alert-success " role="alert" style="display:none; "></div>
+        <!-- search input -->
+        <div class="form-group row">
+            
+            <label for="salepage_quility" class="col-sm-2 col-form-label">搜尋</label>
+            <div class="col-sm-4">
+            <input type="text" class="form-control" id="search_name" name="search_name" placeholder="請輸入關鍵字"
+                value="" >       
+            </div>
+        </div>
 
 <div class="container-fluid table-responsive" >
-    
-
-    <div class="row table-responsive ">
-    <div class="col-lg-12">
-        <form>
-            <div class="form-group">
-            <label for="salepage_salecateid" class="must" > <span>*</span> 商品分類</label>
-            <select id="salepage_salecateid" name="salepage_salecateid" class="custom-select custom-select-sm col-sm-4 ">
-                <option value="0" selected>請選擇</option>
-                <option value="1">冷凍食品</option>
-                <option value="2">冷藏食品</option>
-                <option value="3">生鮮食材</option>
-                <option value="4">素料理專區</option>
-            </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary" onclick="myHashChange();" >Search</button>
-        </form>
-    </div>
-
-    <!-- 頁碼 -->
-    <div class="row pt-5">
+    <div class="row">
         <div class="col-lg-12">
             <nav>
                 <ul class="pagination pagination-sm">                    
@@ -69,6 +57,7 @@ $page_name = 'salepage_search.php';
         </div>
     </div>
 
+    <div class="row table-responsive ">
         <div class="col-lg-12">
             <table class="table table-striped table-bordered table-hove table-hidden ">
                 <thead>
@@ -94,7 +83,13 @@ $page_name = 'salepage_search.php';
                 </thead>
 
                 <tbody id="data_body" style="font-size:14px;" >
-                    <!-- <i class="fas fa-trash-alt"></i>-->
+                <!-- <tr>
+
+                </tr> -->
+                
+                    
+                    <!-- <i class="fas fa-trash-alt"></i>                                 -->
+                
                 </tbody>
 
             </table>
@@ -105,13 +100,12 @@ $page_name = 'salepage_search.php';
 </div>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>    
     let page = 1;
-    let  ori_data;
+    let ori_data;
     const ul_pagi = document.querySelector('.pagination');
-    const data_body = document.querySelector('#data_body'); 
-    //以下是search
-    let salepage_salecateid = document.querySelector('#salepage_salecateid').value; 
+    const data_body = document.querySelector('#data_body');    
 
     const tr_str = `<tr>
                             <td>
@@ -146,19 +140,18 @@ $page_name = 'salepage_search.php';
                     </li>`;
     const pagi_func = _.template(pagi_str);
 
-
-    const myHashChange =() =>
+    //search    
+    function load_data(query)
     {
-        let h = location.hash.slice(1);
-        page = parseInt(h);
-        if(isNaN(page)){
-            page = 1;
-        }
-
-        fetch('salepage_search_api.php?page=' + page + '&salepage_salecateid=' + salepage_salecateid )
-            .then(response=>response.json())
-            .then(json=>{
-                ori_data = json;
+        $.ajax({
+            url:"salepage_search_api.php?page=" + page,
+            method:"POST",
+            dataType: "json",
+            data:{query:query},
+            success:function(data)
+            {
+                //$("#data_body").html(data);
+                ori_data = data;
                 console.log(ori_data);
 
                 let str = '';
@@ -176,16 +169,97 @@ $page_name = 'salepage_search.php';
                     str += pagi_func({
                             active: active,
                             page: i
-                        });
-                    // console.log(ori_data.page);
-                    // console.log(i);
-                    // console.log(active);
+                        });                
                 }
-                ul_pagi.innerHTML = str;
-            });
+                ul_pagi.innerHTML = str;  
+            }
+        });
+    }
+
+    $("#search_name").keyup(function(){
+        var search = $(this).val();
+        if (search != '') 
+        {
+            load_data(search);
+        } else 
+        {
+            load_data();
+        }
+    });    
+
+    //list
+    const myHashChange =() =>
+    {
+        let h = location.hash.slice(1);
+        page = parseInt(h);
+        if(isNaN(page)){
+            page = 1;
+        }
+
+        $.ajax({
+            method: "POST",
+            url: "salepage_search_api.php?page=" + page,
+            dataType: "json"
+        })
+        .done(function(data) 
+        {
+            ori_data = data;
+            console.log(ori_data);
+
+            let str = '';
+            for(let v of ori_data.data )
+            {
+                str += tr_func(v);
+            }
+            data_body.innerHTML = str;
+
+            str = '';
+            for(let i=1; i<=ori_data.totalPages; i++)
+            {
+                let active = ori_data.page === i ? 'active' : '';
+
+                str += pagi_func({
+                        active: active,
+                        page: i
+                    });                
+            }
+            ul_pagi.innerHTML = str;                        
+            
+        }) .fail(function() {
+            alert( "error" );
+        });
+
+        // fetch('salepage_list_api.php?page=' + page)
+        //     .then(response=>response.json())
+        //     .then(json=>{
+        //         ori_data = json;
+        //         console.log(ori_data);
+
+        //         let str = '';
+        //         for(let v of ori_data.data )
+        //         {
+        //             str += tr_func(v);
+        //         }
+        //         data_body.innerHTML = str;
+
+        //         str = '';
+        //         for(let i=1; i<=ori_data.totalPages; i++)
+        //         {
+        //             let active = ori_data.page === i ? 'active' : '';
+
+        //             str += pagi_func({
+        //                     active: active,
+        //                     page: i
+        //                 });
+        //             // console.log(ori_data.page);
+        //             // console.log(i);
+        //             // console.log(active);
+        //         }
+        //         ul_pagi.innerHTML = str;
+        //     });
     };
-    // window.addEventListener("hashchange", myHashChange);
-    // myHashChange();
+    window.addEventListener("hashchange", myHashChange);
+    myHashChange();
 
     //刪除資料
     function saledelete(salepage_id){
