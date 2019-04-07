@@ -15,6 +15,7 @@ $result = [
 if (isset($_POST['searchdb'])) {
 
     $search = htmlentities($_POST['search']);
+    $filter_gender = htmlentities($_POST['filter_gender']);
     $result['post'] = $_POST;
 
     if (empty($search)) {
@@ -23,16 +24,22 @@ if (isset($_POST['searchdb'])) {
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
         exit;
     }
-    
+
     // $sql = "INSERT INTO `member_list`(`mem_account`) VALUES (?)";
     $sql = " SELECT * FROM member_list 
-            WHERE mem_account LIKE :search 
+            WHERE (mem_account LIKE :search 
             OR mem_name LIKE :search 
             OR mem_nickname LIKE :search 
             OR mem_mobile LIKE :search 
             OR mem_email LIKE :search 
-            OR mem_address LIKE :search 
-            ORDER BY mem_id DESC";
+            OR mem_address LIKE :search)
+            ";
+
+    if ($filter_gender != 'all'){
+        $sql .= " AND mem_gender = '$filter_gender' ORDER BY mem_id DESC"; // ORDER BY一定要在SQL語法的最後面(不能在AND前面)
+    } else {
+        $sql .= " ORDER BY mem_id DESC";
+    }
 
     try {
         $stmt = $pdo->prepare($sql);

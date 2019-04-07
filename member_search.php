@@ -43,6 +43,11 @@ include __DIR__ . '/__connect_db.php';
                     <form name="formSearch" id="formSearch" class="form-inline" method="POST" onsubmit="return false">
                         <input type="hidden" name="searchdb" value="check">
                         <input class="form-control mr-sm-2" type="search" name="search" placeholder="搜尋會員資料" aria-label="Search" value="">
+                        <select class="form-control mr-sm-2" name="filter_gender" id="filter_gender">
+                            <option value="all">性別</option>
+                            <option value="male">男</option>
+                            <option value="female">女</option>
+                        </select>
                         <button class="btn btn-primary my-2 my-sm-0" type="submit" id="submit">Search</button>
                     </form>
                 </nav>
@@ -181,7 +186,7 @@ include __DIR__ . '/__connect_db.php';
                     } else {
                         info_bar.className = 'alert alert-danger';
                         info_bar.innerHTML = obj.errorMsg;
-                    }
+                    }    
 
                     //  資料內的表格
                     let str = '';
