@@ -28,7 +28,7 @@
         <a class="nav-link <?= $page_name == 'data_list' ? 'active' : '' ?>" href="post_list.php">文章列表</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link <?= $page_name == 'data_insert' ? 'active' : '' ?>" href="new_post.php">新增文章</a>
+        <a class="nav-link <?= $page_name == 'data_insert' ? 'active' : '' ?>" href="new_post_jq.php">新增文章</a>
     </li>
 </ul> 
 <!-- </nav> -->

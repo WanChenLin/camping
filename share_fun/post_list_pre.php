@@ -1,5 +1,5 @@
 <?php
-    // require __DIR__. '/__cred.php';
+// require __DIR__. '/__cred.php';
 require __DIR__ . '/__connect_db.php';
 $page_name = 'data_list';
 
@@ -46,6 +46,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         top: 0;
         left: 0;
         z-index: 20;
+        height: 100%;
         visibility: hidden;
     }
 
@@ -75,9 +76,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <a class="page-link" href="?page=<?= $page - 1 ?>">&lt;</a>
                     </li>
                     <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                    <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                    </li>
+                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
                     <?php endfor ?>
                     <li class="page-item <?= $page >= $total_pages ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page + 1 ?>">&gt;</a>
@@ -110,27 +111,27 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </thead>
                 <tbody>
                     <?php foreach ($rows as $row) : ?>
-                    <tr>
-                        <td><?= htmlentities($row['post_id']) ?></td>
-                        <!-- <td><?= htmlentities($row['mem_nickname']) ?></td> -->
-                        <td><?= htmlentities($row['cate_name']) ?></td>
-                        <td><a id="to_preview" href=""><?= htmlentities($row['post_title']) ?></a></td>
-                        <td><?= htmlentities($row['post_time']) ?></td>
-                        <td><?= htmlentities($row['post_editTime']) ?></td>
-                        <!-- <td><?= html_entity_decode($row['post_content']) ?></td>
-                        <td><?= htmlentities($row['browse_num']) ?></td>
-                        <td><?= htmlentities($row['share_num']) ?></td>
-                        <td><?= htmlentities($row['cmt_num']) ?></td>
-                        <td><?= htmlentities($row['post_tag']) ?></td> -->
-                        <td><?= htmlentities($row['post_visible']) ?></td>
-                        <td><a href="javascript: delete_it(<?= $row['post_id'] ?>)">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="post_edit.php?post_id=<?= $row['post_id'] ?>"><i class="fas fa-edit"></i></a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td class="post_id" data-postid="<?= $row['post_id'] ?>"><?= htmlentities($row['post_id']) ?></td>
+                            <!-- <td><?= htmlentities($row['mem_nickname']) ?></td> -->
+                            <td><?= htmlentities($row['cate_name']) ?></td>
+                            <td class="post_title" data-title="<?= htmlentities($row['post_title']) ?>"><a class="to_preview" href=""><?= htmlentities($row['post_title']) ?></a></td>
+                            <td><?= htmlentities($row['post_time']) ?></td>
+                            <td><?= htmlentities($row['post_editTime']) ?></td>
+                            <!-- <td><?= html_entity_decode($row['post_content']) ?></td>
+                                                    <td><?= htmlentities($row['browse_num']) ?></td>
+                                                    <td><?= htmlentities($row['share_num']) ?></td>
+                                                    <td><?= htmlentities($row['cmt_num']) ?></td>
+                                                    <td><?= htmlentities($row['post_tag']) ?></td> -->
+                            <td><?= htmlentities($row['post_visible']) ?></td>
+                            <td class="delete"><a href="javascript: delete_it(<?= $row['post_id'] ?>)">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="post_edit.php?post_id=<?= $row['post_id'] ?>"><i class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
 
                 </tbody>
@@ -155,16 +156,52 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include __DIR__ . '/__style_end.html';  ?>
 
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 
 <script>
+    // $(window).ready();
+
     function delete_it(post_id) {
-        if (confirm(`確定要刪除這篇文章嗎?`)) {
-            location.href = 'post_delete.php?post_id=' + post_id;
-        }
+
+        $("table").on("click", ".delete", function() {
+            let post_title = $(this).closest("tr").find(".post_title").data("title");
+
+            $.confirm.show({
+                "message": `確定要刪除【${post_title}】這篇文章嗎？`,
+                "yesText": "刪啦刪啦",
+                "noText": "不要好了",
+
+                "yes": function() {
+                    // fired once you click on the confirm button
+                    location.href = 'post_delete.php?post_id=' + post_id;
+                },
+                "no": function() {
+                    // fired once you click on the cancel button
+                },
+            })
+        })
     };
-    $("#to_preview").click(function(){
+
+
+
+
+    $("table").on("click", ".to_preview", function() {
+        console.log("nah")
+
         $(".preview").addClass("active");
+
+        let post_id = $(this).closest("tr").find(".post_id").data("postid");
+        console.log(post_id);
+
+
+        $.ajax({
+            method: "POST",
+            url: 'post_preview.php?post_id=' + post_id,
+            data: $('body'),
+            dataType: "json"
+        });
+        return false;
+
     });
 </script>
-<?php include __DIR__ . '/__html_foot.php';  ?> 
+<?php include __DIR__ . '/__html_foot.php';  ?>
