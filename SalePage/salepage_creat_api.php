@@ -74,6 +74,7 @@ $result = [
             $result['errorCode'] = 402;
             $result['errorMsg'] = '資料新增錯誤';
         }
+        
 // }
 
 echo json_encode($result, JSON_UNESCAPED_UNICODE);

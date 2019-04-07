@@ -229,6 +229,8 @@ $page_name = 'salepage_creat.php';
                     if(obj.success){
                         saleinfo_bar.className = 'alert alert-success';
                         saleinfo_bar.innerHTML = '資料新增成功';
+                        window.location.href='salepage_list.php';
+                        //跳轉至list    
                     } else {
                         saleinfo_bar.className = 'alert alert-danger';
                         saleinfo_bar.innerHTML = obj.errorMsg;
@@ -237,7 +239,8 @@ $page_name = 'salepage_creat.php';
                     salesubmit_btn.style.display = 'block';
                     salesubmit_btn.style = 'btn-primary';
                     //因為按下btn後位置會跑掉，所以要加上面這一行固定原來的位置
-                })
+                    
+                },2000)
         }
         return false;
     };

@@ -230,6 +230,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     {
                         saleinfo_bar.className = 'alert alert-success';
                         saleinfo_bar.innerHTML = '修改資料成功';
+                        window.location.href='salepage_list.php';
+                        //跳轉至list
                     } else 
                     {
                         saleinfo_bar.className = 'alert alert-danger';
@@ -239,7 +241,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     salesubmit_btn.style.display = 'block';
                     salesubmit_btn.style = 'btn-primary';
                     //因為按下btn後位置會跑掉，所以要加上面這一行固定原來的位置
-                });
+                },2000);
         }
         return false;
     };
