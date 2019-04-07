@@ -10,6 +10,9 @@ include __DIR__ . '/__connect_db.php';
 
 <style>
     .btn-top {
+        background: rgba(150, 150, 150, .7);
+        color: white;
+        border-radius: 50%;
         bottom: 20px;
         right: 20px;
     }
@@ -54,7 +57,7 @@ include __DIR__ . '/__connect_db.php';
                 <thead>
                     <tr style="white-space:nowrap">
                         <th scope=" col"><i class="far fa-edit"></i></th>
-                        <th scope=" col">#會員編號</th>
+                        <th scope=" col">#員編</th>
                         <th scope=" col">帳號</th>
                         <!-- <th scope=" col">密碼</th> -->
                         <th scope=" col">大頭貼</th>
@@ -103,7 +106,7 @@ include __DIR__ . '/__connect_db.php';
 
         </div>
 
-        <button class="btn btn-primary position-fixed btn-top" id="goTop" >Top</button>
+        <button class="btn position-fixed btn-top" id="goTop" ><i class="fas fa-chevron-up"></i></button>
     </section>
 
 </main>
@@ -121,7 +124,7 @@ include __DIR__ . '/__connect_db.php';
                         </td>
                         <td><%= mem_id %></td>
                         <td><%= mem_account %></td>
-                        <td><img src="./<%= mem_avatar %>" alt="" height="50"></td>
+                        <td><img src="./<%= mem_avatar %>" alt="" height="40"></td>
                         <td><%= mem_name %></td>
                         <td><%= mem_nickname %></td>
                         <td><%= mem_gender %></td>
