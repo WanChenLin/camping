@@ -30,9 +30,10 @@ if($page < 1) $page = 1;
 if($page > $total_pages) $page = $total_pages;
 $result['page'] = $page;
 
-if(isset($_POST["query"]))
+if(isset($_POST["query"]) || isset($_POST["cate"]))  
 {
     $q = $_POST["query"];
+    $c = $_POST["cate"];
 
     $salesql = sprintf(" SELECT 
     salepage_id,
@@ -52,7 +53,8 @@ if(isset($_POST["query"]))
     salepage_image
     FROM salepage 
     WHERE salepage_name LIKE '%%%s%%'
-    ORDER BY salepage_id DESC LIMIT %s, %s", $q, ($page-1)*$per_page, $per_page);    
+    OR salepage_salecateid = %s
+    ORDER BY salepage_id DESC LIMIT %s, %s", $q, $c, ($page-1)*$per_page, $per_page);    
 }
 else 
 {

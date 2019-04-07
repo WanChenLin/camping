@@ -38,20 +38,36 @@ $page_name = 'salepage_list.php';
         </aside>
         <div id="saleinfo_bar" class="alert alert-success " role="alert" style="display:none; "></div>
         <!-- search input -->
+        <div class="form-group">
+            <label for="salepage_salecateid" class="must" >選擇商品分類</label>
+            <select id="salecateid" name="salecateid" class="custom-select custom-select-sm col-sm-2 ">
+                <option value="0" selected>請選擇</option>
+                <option value="1">冷凍食品</option>
+                <option value="2">冷藏食品</option>
+                <option value="3">生鮮食材</option>
+                <option value="4">素料理專區</option>
+            </select>  
+            </div>
         <div class="form-group row">
-            
-            <label for="salepage_quility" class="col-sm-2 col-form-label">搜尋</label>
-            <div class="col-sm-4">
+            <label for="salepage_quility" class="col-form-label ml-3 ">搜尋商品名稱</label>
+            <div class="ml-1">
             <input type="text" class="form-control" id="search_name" name="search_name" placeholder="請輸入關鍵字"
                 value="" >       
             </div>
         </div>
 
-<div class="container-fluid table-responsive" >
-    <div class="row">
+        <div class="form-group row after_sub text-center mr-2 ml-2">
+            <div class="">
+            <button id="search_btn" type="submit" class="btn btn-primary btn-sm" >  搜尋  </button>
+            </div>
+        </div>
+        <!-- <button id="search_btn" type="submit" class="btn btn-primary btn-sm" >搜尋</button> -->
+
+<div class="container-fluid table-responsive " >
+    <div class="row text-center">
         <div class="col-lg-12">
             <nav>
-                <ul class="pagination pagination-sm">                    
+                <ul class="pagination pagination-sm justify-content-end">                    
                 </ul>
             </nav>
         </div>
@@ -63,7 +79,7 @@ $page_name = 'salepage_list.php';
                 <thead>
                 <tr  style=" white-space:nowrap;" >
                 <!--  加就不自動換行了style=" white-space:nowrap" -->
-                    <th scope="col"><i class="fas fa-edit"></i></th>                    
+                    <th scope="col">修改</i></th>                    
                     <th scope="col" style= "width:20px;">商品頁序號</th>
                     <th scope="col"  style= "width:100px;">商品主圖</th>
                     <th  style="height:100px; width:100px; overflow:hidden; " scope="col">產品名稱</th>
@@ -73,12 +89,12 @@ $page_name = 'salepage_list.php';
                     <th scope="col">成本</th>
                     <th scope="col">顯示設定</th>
                     <th scope="col">商品特色</th>
-                    <th scope="col">詳細說明</th>
+                    <!-- <th scope="col">詳細說明</th> -->
                     <!-- <th scope="col">商品規格</th>
                     <th scope="col">付款方式</th>
                     <th scope="col">配送方式</th> -->
                     <th scope="col">商品分類名稱</th>
-                    <th scope="col"><i class="fas fa-trash-alt"></i></th>
+                    <th scope="col">刪除</i></th>
                 </tr>
                 </thead>
 
@@ -95,7 +111,9 @@ $page_name = 'salepage_list.php';
             </table>
             
         </div>
+        
     </div>
+
    
 </div>
 </main>
@@ -120,7 +138,6 @@ $page_name = 'salepage_list.php';
                             <td><%= salepage_cost %></td>
                             <td><%= salepage_state == 1 ? "顯示" : "不顯示" %></td>
                             <td><%= salepage_feature %></td>
-                            <td><%= salepage_proddetails %></td>
                             <td><%= salecate_name %></td>
                             <td><a href="javascript: saledelete(<%= salepage_id %>)">
                             <i class="fas fa-trash-alt"></i></a></td>
@@ -141,13 +158,13 @@ $page_name = 'salepage_list.php';
     const pagi_func = _.template(pagi_str);
 
     //search    
-    function load_data(query)
+    function load_data(query,cate)
     {
         $.ajax({
             url:"salepage_search_api.php?page=" + page,
             method:"POST",
             dataType: "json",
-            data:{query:query},
+            data:{query:query,cate:cate},
             success:function(data)
             {
                 //$("#data_body").html(data);
@@ -176,16 +193,60 @@ $page_name = 'salepage_list.php';
         });
     }
 
-    $("#search_name").keyup(function(){
-        var search = $(this).val();
-        if (search != '') 
-        {
-            load_data(search);
-        } else 
-        {
-            load_data();
-        }
-    });    
+    // function cate_data(cate)
+    // {
+    //     $.ajax({
+    //         url:"salepage_search_api.php?page=" + page,
+    //         method:"POST",
+    //         dataType: "json",
+    //         data:{cate:cate},
+    //         success:function(data)
+    //         {
+    //             //$("#data_body").html(data);
+    //             ori_data = data;
+    //             console.log(ori_data);
+
+    //             let str = '';
+    //             for(let v of ori_data.data )
+    //             {
+    //                 str += tr_func(v);
+    //             }
+    //             data_body.innerHTML = str;
+
+    //             str = '';
+    //             for(let i=1; i<=ori_data.totalPages; i++)
+    //             {
+    //                 let active = ori_data.page === i ? 'active' : '';
+
+    //                 str += pagi_func({
+    //                         active: active,
+    //                         page: i
+    //                     });                
+    //             }
+    //             ul_pagi.innerHTML = str;  
+    //         }
+    //     });
+    // }
+
+    $("#search_btn").click(function(){
+        var search = $("#search_name").val();
+        var search_cate =$("#salecateid").val();
+        // console.log(search_cate)
+        load_data(search,search_cate);
+        
+
+    });
+
+    // $("#search_name").keyup(function(){
+    //     var search = $(this).val();
+    //     if (search != '') 
+    //     {
+    //         load_data(search);
+    //     } else 
+    //     {
+    //         load_data();
+    //     }
+    // });    
 
     //list
     const myHashChange =() =>
@@ -269,18 +330,22 @@ $page_name = 'salepage_list.php';
         .then(obj=>{
             console.log(obj);
 
-            if(obj.success){
-                        saleinfo_bar.className = 'alert alert-success';
-                        saleinfo_bar.innerHTML = '資料刪除成功';
-                        saleinfo_bar.style.display = 'block';
-                        myHashChange();
-                    } else {
-                        saleinfo_bar.className = 'alert alert-danger';
-                        saleinfo_bar.style.display = 'block';
-                        saleinfo_bar.innerHTML = obj.errorMsg;
-                        myHashChange();
-                    }
-        })
+            if(obj.success)
+            {
+                // saleinfo_bar.className = 'alert alert-success';
+                // saleinfo_bar.innerHTML = '資料刪除成功';
+                // saleinfo_bar.style.display = 'block';
+                alert("刪除成功");
+                myHashChange();
+            } 
+            else
+                {
+                    saleinfo_bar.className = 'alert alert-danger';
+                    saleinfo_bar.style.display = 'block';
+                    saleinfo_bar.innerHTML = obj.errorMsg;
+                    myHashChange();
+                }
+        },2000)
                 
         
         //按刪除後會顯示是否確定刪除，確定後就fetch delete php，
