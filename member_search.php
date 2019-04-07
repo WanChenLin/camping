@@ -8,6 +8,13 @@ include __DIR__ . '/__connect_db.php';
 <?php include __DIR__ . '/html_header.php'; ?>
 <?php include __DIR__ . '/html_navbar.php'; ?>
 
+<style>
+    .btn-top {
+        bottom: 20px;
+        right: 20px;
+    }
+</style>
+
 <main class="col-10 bg-white">
 
     <aside class="my-2">
@@ -96,6 +103,7 @@ include __DIR__ . '/__connect_db.php';
 
         </div>
 
+        <button class="btn btn-primary position-fixed btn-top" id="goTop" >Top</button>
     </section>
 
 </main>
@@ -158,6 +166,14 @@ include __DIR__ . '/__connect_db.php';
                     data_body.innerHTML = str;
                 })
     });
+
+    $("#goTop").click(function(){
+        $("html").animate({ 
+            scrollTop: 0
+        }, 500)
+    })
+    
+    
 </script>
 
 <?php include __DIR__ . '/html_foot.php'; ?> 
