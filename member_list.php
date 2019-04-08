@@ -111,8 +111,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td class="d-flex">
                         <a href="#" class="d-block mx-1 member_card"
                             data-mem-id="<?= $row['mem_id'] ?>" 
-                            data-mem-account="<?= $row['mem_account'] ?>" 
-                            data-mem-password="<?= $row['mem_password'] ?>" 
+                            data-mem-account="<?= $row['mem_account'] ?>"
                             data-mem-avatar="<?= $row['mem_avatar'] ?>" 
                             data-mem-name="<?= $row['mem_name'] ?>" 
                             data-mem-nickname="<?= $row['mem_nickname'] ?>" 
@@ -224,7 +223,6 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     // $(".member_card").on("click", function(){
     //     let mem_id = $(this).data("memId");
     //     let mem_account = $(this).data("memAccount");
-    //     let mem_password = $(this).data("memPassword");
     //     let mem_avatar = $(this).data("memAvatar");
     //     let mem_name = $(this).data("memName");
     //     let mem_nickname = $(this).data("memNickname");
@@ -246,10 +244,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     //                         <h5 class="card-title">#${mem_id} 會員詳細資料</h5>
     //                         <div class="row px-3 my-1">
     //                             <div class="col-lg-2 p-0 d-flex align-items-center text-primary ">帳號</div>
-    //                             <div class="col-lg-4 p-0 d-flex align-items-center ">&nbsp;${mem_account}</div>
-    //                             <hr>
-    //                             <div class="col-lg-2 p-0 d-flex align-items-center text-primary">密碼</div>
-    //                             <div class="col-lg-4 p-0 d-flex align-items-center ">&nbsp;${mem_password}</div>
+    //                             <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_account}</div>
     //                             <hr>
     //                             <div class="col-lg-2 p-0 d-flex align-items-center text-primary">姓名</div>
     //                             <div class="col-lg-4 p-0 d-flex align-items-center ">&nbsp;${mem_name}</div>
@@ -295,7 +290,6 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $(".member_card").on("click", function(){
         let mem_id = $(this).data("memId");
         let mem_account = $(this).data("memAccount");
-        let mem_password = $(this).data("memPassword");
         let mem_avatar = $(this).data("memAvatar");
         let mem_name = $(this).data("memName");
         let mem_nickname = $(this).data("memNickname");
@@ -318,48 +312,45 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="card-body">
                                 <div class="">
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">帳號</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_account}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">帳號</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_account}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">密碼</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_password}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">姓名</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_name}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">姓名</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_name}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">暱稱</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_nickname}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">暱稱</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_nickname}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">性別</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_gender}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">性別</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_gender}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">生日</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_birthday}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">生日</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_birthday}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">手機</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_mobile}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">手機</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${mem_mobile}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">信箱</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center">&nbsp;${mem_email}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">信箱</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center">&nbsp;${mem_email}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">地址</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center text-left">&nbsp;${mem_address}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">地址</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center text-left">&nbsp;${mem_address}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">等級</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center">&nbsp;${level_title}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">等級</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center">&nbsp;${level_title}</div>
+                                        <div class="col-lg-2 p-0 d-flex align-items-center text-primary">狀態</div>
+                                        <div class="col-lg-10 p-0 d-flex align-items-center">&nbsp;${mem_status}</div>
                                     </div>
-                                    <div class="row px-3 py-1 my-1 border-bottom">
-                                    <div class="col-lg-2 p-0 d-flex align-items-center text-primary">狀態</div>
-                                    <div class="col-lg-10 p-0 d-flex align-items-center">&nbsp;${mem_status}</div>
                                 </div>
                                 <p class="card-text"><small class="text-muted">註冊日期：${mem_signUpDate}</small></p>
                             </div>
