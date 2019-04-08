@@ -233,6 +233,7 @@ $page_name = 'salepage_list.php';
         var search_cate =$("#salecateid").val();
         // console.log(search_cate)
         load_data(search,search_cate);
+
         
 
     });
