@@ -119,10 +119,10 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?= htmlentities($row['post_time']) ?></td>
                             <td><?= htmlentities($row['post_editTime']) ?></td>
                             <!-- <td><?= html_entity_decode($row['post_content']) ?></td>
-                                                    <td><?= htmlentities($row['browse_num']) ?></td>
-                                                    <td><?= htmlentities($row['share_num']) ?></td>
-                                                    <td><?= htmlentities($row['cmt_num']) ?></td>
-                                                    <td><?= htmlentities($row['post_tag']) ?></td> -->
+                                                        <td><?= htmlentities($row['browse_num']) ?></td>
+                                                        <td><?= htmlentities($row['share_num']) ?></td>
+                                                        <td><?= htmlentities($row['cmt_num']) ?></td>
+                                                        <td><?= htmlentities($row['post_tag']) ?></td> -->
                             <td><?= htmlentities($row['post_visible']) ?></td>
                             <td class="delete"><a href="javascript: delete_it(<?= $row['post_id'] ?>)">
                                     <i class="fas fa-trash-alt"></i>
@@ -161,32 +161,30 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script>
     // $(window).ready();
 
-    function delete_it(post_id) {
+    $("table").on("click", ".delete", function delete_it(post_id) {
+        let post_title = $(this).closest("tr").find(".post_title").data("title");
+        let delete_it = $(this).find(".delete_it").data("delete");
 
-        $("table").on("click", ".delete", function() {
-            let post_title = $(this).closest("tr").find(".post_title").data("title");
+        $.confirm.show({
+            "message": `確定要刪除【${post_title}】這篇文章嗎？`,
+            "yesText": "刪啦刪啦",
+            "noText": "不要好了",
 
-            $.confirm.show({
-                "message": `確定要刪除【${post_title}】這篇文章嗎？`,
-                "yesText": "刪啦刪啦",
-                "noText": "不要好了",
-
-                "yes": function() {
-                    // fired once you click on the confirm button
-                    location.href = 'post_delete.php?post_id=' + post_id;
-                },
-                "no": function() {
-                    // fired once you click on the cancel button
-                },
-            })
+            "yes": function() {
+                // fired once you click on the confirm button
+                location.href = 'post_delete.php?post_id=' + delete_it;
+            },
+            "no": function() {
+                // fired once you click on the cancel button
+            },
         })
-    };
+    });
 
 
 
 
     $("table").on("click", ".to_preview", function() {
-        console.log("nah")
+        // console.log("nah")
 
         $(".preview").addClass("active");
 
@@ -194,12 +192,14 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         console.log(post_id);
 
 
-        $.ajax({
-            method: "POST",
-            url: 'post_preview.php?post_id=' + post_id,
-            data: $('body'),
-            dataType: "json"
-        });
+        // $.ajax({
+        //     method: "POST",
+        //     url: `post_preview.php?post_id=${post_id}`,
+        //     data: $('body'),
+        //     dataType: "json"
+        // }).done(function(response) {
+            
+        // });
         return false;
 
     });
