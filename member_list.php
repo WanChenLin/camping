@@ -28,9 +28,6 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include __DIR__ . '/html_header.php'; ?>
 <?php include __DIR__ . '/html_navbar.php'; ?>
 <style>
-    section .table th {
-        border-top: 0;
-    }
     .userbook_wrap {
         top: 100px;
         left: calc( 50% - 300px );
@@ -66,7 +63,32 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </aside>
 
     <section class="postition-relative">
-        <table class="table table-hover table-responsive">
+
+    
+    <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-end">
+                <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page == 1 ?>" tabindex="-1" aria-disabled="true">&lt;&lt;</a>
+                </li>
+                <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1" aria-disabled="true">&lt;</a>
+                </li>
+                <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                <li class="page-item <?= $i == $page ? 'active' : '' ?>" aria-current="page">
+                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                </li>
+                <?php endfor ?>
+                <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page + 1 ?>">&gt;</a>
+                </li>
+                <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page = $total_pages ?>">&gt;&gt;</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered">
             <!-- <caption>List of members</caption> -->
             <thead>
                 <tr style="white-space:nowrap">
@@ -108,8 +130,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= $row['level_title'] ?></td>
                     <td><?= $row['mem_status'] ?></td>
                     <td><?= $row['mem_signUpDate'] ?></td>
-                    <td class="d-flex">
-                        <a href="#" class="d-block mx-1 member_card"
+                    <td class="d-flex" style="font-size: 18px;">
+                        <a href="#" class="d-block mx-1 member_card p-1"
                             data-mem-id="<?= $row['mem_id'] ?>" 
                             data-mem-account="<?= $row['mem_account'] ?>"
                             data-mem-avatar="<?= $row['mem_avatar'] ?>" 
@@ -126,10 +148,10 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <i class="fas fa-user-circle"></i>
                         </a>
                         <!-- <a href="" class="d-block mx-1"><i class="fas fa-address-card"></i></a> -->
-                        <a href="member_edit.php?mem_id=<?= $row['mem_id']?>" class="d-block mx-1">
+                        <a href="member_edit.php?mem_id=<?= $row['mem_id']?>" class="d-block mx-1 p-1">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="javascript: delete_row(<?= $row['mem_id']?>)" class="d-block mx-1">
+                        <a href="javascript: delete_row(<?= $row['mem_id']?>)" class="d-block mx-1 p-1">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                         
@@ -138,28 +160,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach ?>
             </td>
         </table>
+        </table>
 
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= $page == 1 ?>" tabindex="-1" aria-disabled="true">&lt;&lt;</a>
-                </li>
-                <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1" aria-disabled="true">&lt;</a>
-                </li>
-                <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                <li class="page-item <?= $i == $page ? 'active' : '' ?>" aria-current="page">
-                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                </li>
-                <?php endfor ?>
-                <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= $page + 1 ?>">&gt;</a>
-                </li>
-                <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= $page = $total_pages ?>">&gt;&gt;</a>
-                </li>
-            </ul>
-        </nav>
 
         <div class="userbook_wrap position-absolute"></div>
     </section>

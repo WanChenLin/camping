@@ -58,7 +58,8 @@ include __DIR__ . '/__connect_db.php';
 
             <div id="info_bar" role="alert"></div>
 
-            <table class="table table-hover table-responsive">
+            <div class="table-responsive">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr style="white-space:nowrap">
                         <th scope=" col"><i class="fas fa-user-circle"></i></th>
@@ -108,7 +109,7 @@ include __DIR__ . '/__connect_db.php';
                     */ ?>
                 </tbody>
             </table>
-
+            </div>
         </div>
 
         <button class="btn position-fixed btn-top" id="goTop" ><i class="fas fa-chevron-up"></i></button>

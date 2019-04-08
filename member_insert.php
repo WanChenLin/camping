@@ -41,33 +41,33 @@ include __DIR__ . '/__connect_db.php';
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">新增會員資料</h5>
+                    <h5 class="card-title text-center">新增會員資料</h5>
 
                     <form name="formInsert" method="POST" onsubmit="return checkForm()">
                         <input type="hidden" name="gotodb" value="check">
                         <div class="form-group row">
-                            <label for="account" class="col-sm-2 col-form-label">帳號名稱<span class="asterisk"> *</span></label>
-                            <div class="col-sm-10">
+                            <label for="account" class="col-sm-2 col-form-label text-right"><span class="asterisk">* </span>帳號名稱</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" id="account" name="account" placeholder="" value="">
                                 <small id="accountHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password" class="col-sm-2 col-form-label">密碼<span class="asterisk"> *</span></label>
-                            <div class="col-sm-10">
+                            <label for="password" class="col-sm-2 col-form-label text-right"><span class="asterisk">* </span>密碼</label>
+                            <div class="col-sm-6">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="" value="">
                                 <small id="passwordHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password_check" class="col-sm-2 col-form-label">確認密碼<span class="asterisk"> *</span></label>
-                            <div class="col-sm-10">
+                            <label for="password_check" class="col-sm-2 col-form-label text-right"><span class="asterisk">* </span>確認密碼</label>
+                            <div class="col-sm-7">
                                 <input type="password" class="form-control" id="password_check" name="password_check" placeholder="" value="">
                                 <small id="password_checkHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
+                            <label for="avatar" class="col-sm-2 col-form-label text-right">大頭貼</label>
                             <div class="col-sm-10">
                                 <input type="hidden" id="avatar_pictures" name="avatar_pictures" value="">
                                 <img id="myimg" src="" height="100px" width="" />
@@ -80,14 +80,14 @@ include __DIR__ . '/__connect_db.php';
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">姓名<span class="asterisk"> *</span></label>
+                            <label for="name" class="col-sm-2 col-form-label text-right"><span class="asterisk">* </span>姓名</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="" value="">
                                 <small id="nameHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
+                            <label for="nickname" class="col-sm-2 col-form-label text-right">暱稱</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="">
                                 <small id="nicknameHelp" class="form-text text-muted"></small>
@@ -95,7 +95,7 @@ include __DIR__ . '/__connect_db.php';
                         </div>
                         <fieldset class="form-group">
                             <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">性別</legend>
+                                <legend class="col-form-label col-sm-2 pt-0 text-right">性別</legend>
                                 <div class="col-sm-2">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gender" id="gender" value="male" checked>
