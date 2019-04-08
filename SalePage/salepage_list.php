@@ -15,6 +15,15 @@ $page_name = 'salepage_list.php';
 	width: 100%;
 	/* display: inline-table; */
 }
+.fa-edit {
+   font-size:16px;
+   margin:5px;
+}
+.fa-info-circle
+{
+   font-size:16px;
+   margin:5px;
+}
 
 .table-hidden thead th[data-th="其他"]{ width:400px;}
 /*因為 tbody 多了卷軸 尺寸多了 17px*/
@@ -79,7 +88,7 @@ $page_name = 'salepage_list.php';
                 <thead>
                 <tr  style=" white-space:nowrap;" >
                 <!--  加就不自動換行了style=" white-space:nowrap" -->
-                    <th scope="col">修改</i></th>                    
+                                        
                     <th scope="col" style= "width:20px;">商品頁序號</th>
                     <th scope="col"  style= "width:100px;">商品主圖</th>
                     <th  style="height:100px; width:100px; overflow:hidden; " scope="col">產品名稱</th>
@@ -94,7 +103,7 @@ $page_name = 'salepage_list.php';
                     <th scope="col">付款方式</th>
                     <th scope="col">配送方式</th> -->
                     <th scope="col">商品分類名稱</th>
-                    <th scope="col">刪除</i></th>
+                    <th scope="col">操作</th>
                 </tr>
                 </thead>
 
@@ -126,9 +135,7 @@ $page_name = 'salepage_list.php';
     const data_body = document.querySelector('#data_body');    
 
     const tr_str = `<tr>
-                            <td>
-                            <a href="salepage_edit.php?salepage_id=<%= salepage_id %>"><i class="fas fa-edit"></i></a>
-                            </td>
+                            
                             <td><%= salepage_id %></td>
                             <td><img src="<%= salepage_image %>" width="80px"></td>
                             <td><%= salepage_name %></td>
@@ -139,8 +146,15 @@ $page_name = 'salepage_list.php';
                             <td><%= salepage_state == 1 ? "顯示" : "不顯示" %></td>
                             <td><%= salepage_feature %></td>
                             <td><%= salecate_name %></td>
-                            <td><a href="javascript: saledelete(<%= salepage_id %>)">
-                            <i class="fas fa-trash-alt"></i></a></td>
+                            <td>
+                            <a href="salepage_edit.php?salepage_id=<%= salepage_id %>"><i class="fas fa-edit"></i></a>
+                            
+                            <a href="javascript: saledelete(<%= salepage_id %>)">
+                            <i class="fas fa-trash-alt"></i></a>
+                            <br>
+                            <a href="salepage_edit.php?salepage_id=<%= salepage_id %>"><i class="fas fa-info-circle"></i></a>
+                            
+                            </td>
                         </tr>`;
 
                         
@@ -231,11 +245,21 @@ $page_name = 'salepage_list.php';
     $("#search_btn").click(function(){
         var search = $("#search_name").val();
         var search_cate =$("#salecateid").val();
-        // console.log(search_cate)
         load_data(search,search_cate);
-
+        // if (search != '') 
+        // {
+            
+        //     load_data(search,search_cate);
+        // }
+        // ifelse()
+        // {
+            
+        // } 
+        // else 
+        // {
+        //     load_data();
+        // }
         
-
     });
 
     // $("#search_name").keyup(function(){
