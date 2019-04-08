@@ -102,10 +102,10 @@
                         </div>
 
                         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-                            <a class="card-body ml-2 d-flex" href="">
+                            <a class="card-body ml-2 d-flex" href="..\campsite\camp_list.php">
                                 營地列表
                             </a>
-                            <a class="card-body ml-2 d-flex" href="..\host_menu.php">
+                            <a class="card-body ml-2 d-flex" href="..\host_new\host_menu.php">
                                 營地主管理
                             </a>
                         </div>
