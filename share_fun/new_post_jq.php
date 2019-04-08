@@ -85,11 +85,12 @@ $page_name = 'data_insert';
     // const info_bar = document.querySelector('#info_bar');
     // const submit_btn = document.querySelector('#submit_btn');
 
-
+    
 
 
     $("#form1").submit(function() {
         if ($(this).parent().find(".form-control").change()) {
+            
             $.ajax({
                     method: "POST",
                     url: "new_post_api.php",
@@ -97,16 +98,20 @@ $page_name = 'data_insert';
                     dataType: "json"
                 })
                 .done(function() {
+                    
                     // let info_bar = `<div id="info_bar" class="alert alert-success" role="alert" style="display: none">文章發布成功</div>`
                     $("#success_bar").addClass("active");
+                    $("#submit_btn").addClass("disabled");
                 }).fail(function() {
                     $("#failed_bar").addClass("active");
+                    // $("#submit_btn").css("display", "none")
                 });
 
             event.preventDefault();
-
+            
         }
-        $("#submit_btn").css("display", "none")
+        $("#submit_btn").css("display", "block")
+       
     });
 
     $(".form-control").change(function() {

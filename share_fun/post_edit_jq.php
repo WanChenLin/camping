@@ -116,7 +116,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 event.preventDefault();
 
             }
-            $("#submit_btn").css("display", "none")
+            // $("#submit_btn").css("display", "none")
         });
 
         $(".form-control").change(function() {

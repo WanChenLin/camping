@@ -6,7 +6,7 @@
 // $db_pass = 'admin';
 
 $db_host = 'localhost';
-$db_name = 'test';
+$db_name = 'test_db';
 $db_user = 'ring';
 $db_pass = 'admin';
 

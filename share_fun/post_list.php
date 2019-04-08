@@ -81,8 +81,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <th scope="col">評論人數</th>
                         <th scope="col">文章標籤</th> -->
                         <th scope="col">文章開關</th>
-                        <th scope="col"><i class="fas fa-trash-alt"></i></th>
-                        <th scope="col"><i class="fas fa-edit"></i></th>
+                        <th scope="col">編輯</th>
+                        <!-- <th scope="col"><i class="fas fa-edit"></i></th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -100,13 +100,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlentities($row['cmt_num']) ?></td>
                         <td><?= htmlentities($row['post_tag']) ?></td> -->
                         <td><?= htmlentities($row['post_visible']) ?></td>
-                        <td class="delete"><a href="javascript: delete_it(<?= $row['post_id'] ?>)">
+                        <td class="delete"><a class="delete_it" data-delete="<?= $row['post_id'] ?>" href="#">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
+                            <a href="post_edit_jq.php?post_id=<?= $row['post_id'] ?>"><i class="fas fa-edit"></i></a>
                         </td>
-                        <td>
-                            <a href="post_edit.php?post_id=<?= $row['post_id'] ?>"><i class="fas fa-edit"></i></a>
-                        </td>
+                        
                     </tr>
                     <?php endforeach; ?>
 
@@ -120,10 +119,11 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <script>
-   function delete_it(post_id) {
+//    function delete_it(post_id) {
 
-$("table").on("click", ".delete", function() {
+$("table").on("click", ".delete", function delete_it(post_id) {
     let post_title = $(this).closest("tr").find(".post_title").data("title");
+    let delete_it = $(this).find(".delete_it").data("delete");
 
     $.confirm.show({
         "message": `確定要刪除【${post_title}】這篇文章嗎？`,
@@ -132,14 +132,14 @@ $("table").on("click", ".delete", function() {
 
         "yes": function() {
             // fired once you click on the confirm button
-            location.href = 'post_delete.php?post_id=' + post_id;
+            location.href = 'post_delete.php?post_id=' + delete_it;
         },
         "no": function() {
             // fired once you click on the cancel button
         },
     })
 })
-};
+// };
     
 </script>
 <?php include __DIR__ . '/__html_foot.php';  ?> 
