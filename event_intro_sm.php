@@ -1,4 +1,5 @@
 <?php
+// require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 $event_id = isset($_GET['event_id']) ? intval($_GET['event_id']) : 0;
@@ -21,29 +22,35 @@ $row = $pdo_query->fetch(PDO::FETCH_ASSOC);
 
         <form method="post" name="form1">
             <input type="hidden" name="checkme">
-            <div class="form-group container d-flex">
+            <div class="form-group ">
                 <label for="event_name" style="width:120px">活動名稱：</label>
                 <div class="form-control" id="event_name" name="event_name"> <?= $row['event_name'] ?></div>
-                <small id="event_nameHelp" class="form-text text-muted"></small>
+                <!-- <small id="event_nameHelp" class="form-text text-muted"></small> -->
             </div>
-            <div class="form-group container d-flex">
+            <div class="form-group ">
                 <label for="event_intro" style="width:120px">活動內容一：</label>
                 <div class="form-control" id="event_intro" name="event_intro" style="height:150px"> <?= $row['event_intro'] ?> </div>
-                <small id="event_introHelp" class="form-text text-muted"></small>
+                <!-- <small id="event_introHelp" class="form-text text-muted"></small> -->
             </div>
-            <div class="form-group container d-flex">
+            <div class="form-group ">
                 <label for="event_intro2" style="width:120px">活動內容二：</label>
                 <div class="form-control" id="event_intro2" name="event_intro2" style="height:150px"> <?= $row['event_intro2'] ?> </div>
-                <small id="event_intro2Help" class="form-text text-muted"></small>
+                <!-- <small id="event_intro2Help" class="form-text text-muted"></small> -->
             </div>
-            <div class="form-group container d-flex">
+            <div class="form-group ">
                 <label for="event_intro3" style="width:120px">活動內容三：</label>
                 <div class="form-control" id="event_intro3" name="event_intro3" style="height:150px"> <?= $row['event_intro3'] ?> </div>
-                <small id="event_intro3Help" class="form-text text-muted"></small>
+                <!-- <small id="event_intro3Help" class="form-text text-muted"></small> -->
             </div>
-            
-            <a class="btn btn-primary" href="event_edit.php?event_id=<?= $row['event_id'] ?>" role="button">修改內容</a>
-            <a class="btn btn-primary" href="event_list.php" role="button">回列表頁</a>
+            <div class="form-group ">
+                <label for="event_remark" style="width:120px">備註：</label>
+                <div class="form-control" id="event_remark" name="event_remark" style="height:150px"> <?= $row['event_remark'] ?> </div>
+                <!-- <small id="event_intro3Help" class="form-text text-muted"></small> -->
+            </div>
+            <ul class="nav nav-pills justify-content-center">
+                <li><a class="btn btn-primary mr-2" href="event_edit.php?event_id=<?= $row['event_id'] ?>" role="button">修改內容</a></li>
+                <li><a class="btn btn-primary" href="event_list.php" role="button">回列表頁</a></li>
+            </ul>
         </form>
     </div>
 </div>

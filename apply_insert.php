@@ -120,7 +120,7 @@ if (isset($_POST['checkme'])) {
             </div>
             <div class="form-group container d-flex">
                 <label for="apply_num" style="width:100px">報名人數：</label>
-                <input type="text" class="form-control" id="apply_num" name="apply_num">
+                <input type="number" value="1" min=1 class="form-control" id="apply_num" name="apply_num" >
                 <small id="apply_numHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group container d-flex">

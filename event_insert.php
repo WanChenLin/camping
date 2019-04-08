@@ -1,6 +1,11 @@
 <?php
 require __DIR__ . '/__connect_acDB.php';
 
+$sql_camp = "SELECT `camp_id` ,`camp_name`FROM `campsite_list`";
+$pdo_query = $pdo->query($sql_camp);
+$rows = $pdo_query->fetchAll(PDO::FETCH_ASSOC);
+// echo print_r($rows);
+
 $event_name = '';
 $event_intro = '';
 $event_intro2 = '';
@@ -13,6 +18,8 @@ $event_price = '';
 $camp_id = '';
 $event_upLimit = '';
 $event_remark = '';
+$event_img = '';
+
 
 if (isset($_POST['checkme'])) {
 
@@ -28,6 +35,8 @@ if (isset($_POST['checkme'])) {
     $camp_id = htmlentities($_POST['camp_id']);
     $event_upLimit = htmlentities($_POST['event_upLimit']);
     $event_remark = htmlentities($_POST['event_remark']);
+    $event_img = htmlentities($_POST['event_img']);
+      
 
     if (empty($event_name) or empty($event_intro) or empty($event_applyStart) or empty($event_applyEnd) or empty($event_dateStart) or empty($event_dateEnd) or empty($event_price) or empty($camp_id) or empty($event_upLimit)) {
         $result['errorCode'] = 400;
@@ -35,13 +44,14 @@ if (isset($_POST['checkme'])) {
         exit;
     }
 
-    $sql = "INSERT INTO `event_list`(
-    `event_name`, `event_intro`,`event_intro2`,`event_intro3`, `event_applyStart`, `event_applyEnd`,`event_dateStart`,`event_dateEnd`, `event_price`, `camp_id`, `event_upLimit`, `event_remark`
-    ) VALUES (
-        ?,?,?,?,?,?,?,?,?,?,?,?
-        )";
+        $sql = "INSERT INTO `event_list`(
+            `event_name`, `event_intro`,`event_intro2`,`event_intro3`, `event_applyStart`, `event_applyEnd`,`event_dateStart`,`event_dateEnd`, `event_price`, `camp_id`, `event_upLimit`, `event_remark`,`event_img`
+            ) VALUES (
+                ?,?,?,?,?,?,?,?,?,?,?,?,?
+                )";
 
     try {
+
         $pdo_pre = $pdo->prepare($sql);
         $pdo_pre->execute([
             $_POST['event_name'],
@@ -56,13 +66,14 @@ if (isset($_POST['checkme'])) {
             $_POST['camp_id'],
             $_POST['event_upLimit'],
             $_POST['event_remark'],
+            $_POST['event_img'],
         ]);
 
         if ($pdo_pre->rowCount() == 1) {
             //$success = true;
             $msg = [
                 'type' => 'success',
-                'info' => '資料新增成功',
+                'info' => '活動已新增至列表',
             ];
         } else {
             $msg = [
@@ -107,49 +118,61 @@ if (isset($_POST['checkme'])) {
     <form name="form1" method="post" onsubmit="return checkForm();">
         <input type="hidden" name="checkme" value="checkme">
         <div class="form-group">
-            <img id="myimg" src="" alt="" width="200px">
-            <br>
-            <label for="my_file" style="width:130px">圖片上傳：</label>
-            <input type="file" name="my_file" id="my_file">
+            <div class="form-row mb-2">
+                <label for="my_file" class="col-md-2"></label>
+                <div class="col-md-10"><img class="" id="myimg" src="" alt="" width="200px"></div>
+            </div>
+            <div class="form-row">
+                <label for="my_file" class="col-md-2">圖片上傳：</label>
+                <input class="col-md-10" type="file" name="my_file" id="my_file">
+            </div>
+            <div class="form-row d-none">
+                <label for="event_img" class="col-md-2"></label>
+                <input class="form-control col-md-10" type="text" name="event_img" id="event_img" value="<?= $event_img ?>">
+            </div>
         </div>
-        <div class="form-group  d-flex">
-            <label for="event_name" style="width:130px">活動名稱：</label>
-            <input type="text" class="form-control" id="event_name" name="event_name" value="<?= $event_name ?>">
+        <div class="form-group form-row">
+            <label for="event_name" class="col-md-2">活動名稱：</label>
+            <input type="text" class="form-control col-md-10" id="event_name" name="event_name" value="<?= $event_name ?>">
             <small id="event_nameHelp" class="form-text text-muted"></small>
         </div>
-        <div class="form-group  d-flex">
-            <label for="event_intro" style="width:130px">活動內容一：</label>
-            <textarea class="form-control" id="event_intro" name="event_intro" style="height:150px"></textarea>
+        <div class="form-group  form-row">
+            <label for="event_intro" class="col-md-2">活動內容一：</label>
+            <textarea class="form-control col-md-10" id="event_intro" name="event_intro" style="height:150px"></textarea>
             <small id="event_introHelp" class="form-text text-muted"></small>
         </div>
-        <div class="form-group  d-flex">
-            <label for="event_intro2" style="width:130px">活動內容二：</label>
-            <textarea class="form-control" id="event_intro2" name="event_intro2" style="height:150px"></textarea>
+        <div class="form-group  form-row">
+            <label for="event_intro2" class="col-md-2">活動內容二：</label>
+            <textarea class="form-control col-md-10" id="event_intro2" name="event_intro2" style="height:150px"></textarea>
             <small id="event_intro2Help" class="form-text text-muted"></small>
         </div>
-        <div class="form-group  d-flex">
-            <label for="event_intro3" style="width:130px">活動內容三：</label>
-            <textarea class="form-control" id="event_intro3" name="event_intro3" style="height:150px"></textarea>
+        <div class="form-group  form-row">
+            <label for="event_intro3" class="col-md-2">活動內容三：</label>
+            <textarea class="form-control col-md-10" id="event_intro3" name="event_intro3" style="height:150px"></textarea>
             <small id="event_intro3Help" class="form-text text-muted"></small>
         </div>
-        <div class="form-group  d-flex">
-            <label for="camp_id" style="width:130px">營地編號：</label>
-            <input type="text" class="form-control" id="camp_id" name="camp_id">
+        <div class="form-group  form-row">
+            <label for="camp_id" class="col-md-2">營地(編號)名稱：</label>
+            <!-- <input type="text" class="form-control" id="camp_id" name="camp_id"> -->
+            <select name="camp_id" id="camp_id" class="form-control col-md-10">
+                <?php foreach ($rows as $row) : ?>
+                <option value="<?= $row['camp_id'] ?>">(<?= $row['camp_id'] ?>) <?= $row['camp_name'] ?></option>
+                <?php endforeach ?>
+            </select>
             <small id="camp_idHelp" class="form-text text-muted"></small>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <div class="form-row">
-                    <label for="event_applyStart" class=" col-md-3">開始報名日期：</label>
-                    <!-- <input type="text" class="form-control col-md-9" id="event_applyStart" name="event_applyStart"> -->
-                    <input type="date" class="form-control col-md-9" id="event_applyStart" name="event_applyStart">
+                    <label for="event_applyStart" class=" col-md-4">開始報名日期：</label>
+                    <input type="date" class="form-control col-md-8" id="event_applyStart" name="event_applyStart">
                 </div>
                 <small id="event_applyStartHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group col-md-6">
                 <div class="form-row">
-                    <label for="event_applyEnd" class="col-md-3">截止報名日期：</label>
-                    <input type="date" class="form-control col-md-9" id="event_applyEnd" name="event_applyEnd">
+                    <label for="event_applyEnd" class="col-md-4 text-right">截止報名日期：</label>
+                    <input type="date" class="form-control col-md-8" id="event_applyEnd" name="event_applyEnd">
                 </div>
                 <small id="event_applyEndHelp" class="form-text text-muted"></small>
             </div>
@@ -157,34 +180,34 @@ if (isset($_POST['checkme'])) {
         <div class="form-row">
             <div class="form-group col-md-6">
                 <div class="form-row">
-                    <label for="event_dateStart" class=" col-md-3">活動開始日期：</label>
-                    <input type="date" class="form-control col-md-9" id="event_dateStart" name="event_dateStart">
+                    <label for="event_dateStart" class=" col-md-4">活動開始日期：</label>
+                    <input type="date" class="form-control col-md-8" id="event_dateStart" name="event_dateStart">
                 </div>
                 <small id="event_dateStarttHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group col-md-6">
                 <div class="form-row">
-                    <label for="event_dateEnd" class="col-md-3">活動結束日期：</label>
-                    <input type="date" class="form-control col-md-9" id="event_dateEnd" name="event_dateEnd">
+                    <label for="event_dateEnd" class="col-md-4 text-right">活動結束日期：</label>
+                    <input type="date" class="form-control col-md-8" id="event_dateEnd" name="event_dateEnd">
                 </div>
                 <small id="event_dateEndHelp" class="form-text text-muted"></small>
             </div>
         </div>
-        <div class="form-group  d-flex">
-            <label for="event_price" style="width:130px">活動價格：</label>
-            <input type="text" class="form-control" id="event_price" name="event_price" value="<?= $event_price ?>">
+        <div class="form-group form-row form-row">
+            <label for="event_price" class="col-md-2">活動價格：</label>
+            <input type="number" min=1 class="form-control col-md-10" id="event_price" name="event_price" value="<?= $event_price ?>">
             <small id="event_priceHelp" class="form-text text-muted"></small>
         </div>
-        <div class="form-group  d-flex">
-            <label for="event_upLimit" style="width:130px">人數上限：</label>
-            <input type="text" class="form-control" id="event_upLimit" name="event_upLimit" value="<?= $event_upLimit ?>">
+        <div class="form-group  form-row">
+            <label for="event_upLimit" class="col-md-2">人數上限：</label>
+            <input type="number" min=1 class="form-control col-md-10" id="event_upLimit" name="event_upLimit" value="<?= $event_upLimit ?>">
             <small id="event_upLimitHelp" class="form-text text-muted"></small>
         </div>
         <div class="form-group ">
             <label for="event_remark" style="width:100px">備註</label>
             <textarea class="form-control" id="event_remark" name="event_remark" style="height:100px"></textarea>
         </div>
-        <div class="d-flex justify-content-center">
+        <div class="form-row justify-content-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
@@ -214,46 +237,12 @@ if (isset($_POST['checkme'])) {
             .then(obj => {
                 console.log(obj);
                 myimg.setAttribute('src', 'uploads/' + obj.filename);
+                let name = obj['filename'];
+                console.log(name);
+                $("#event_img").val(name);
             });
     });
 
-    const checkForm = () => {
-        let isPassed = true;
-
-        let event_name = document.form1.event_name.value;
-        let event_price = document.form1.event_price.value;
-        let event_upLimit = document.form1.event_upLimit.value;
-
-        const fields = [
-            'event_name',
-            'event_price',
-            'event_upLimit',
-        ];
-
-        let num_pattern = /^\d{n}$/;
-
-        for (let k in fields) {
-            document.querySelector('#' + fields[k] + 'Help').innerHTML = '';
-        }
-
-        // if (!num_pattern.test(event_price)) {
-        //     document.querySelector('#event_priceHelp').innerHTML = '請輸入正確金額';
-        //     isPassed = false;
-        // }
-        if (event_price.length < 1) {
-            document.querySelector('#event_priceHelp').innerHTML = '請輸入正確金額';
-            isPassed = false;
-        }
-        if (event_upLimit.length < 1) {
-            document.querySelector('#event_upLimitHelp').innerHTML = '請輸入正確人數';
-            isPassed = false;
-        }
-        if (event_name.length < 1) {
-            document.querySelector('#event_nameHelp').innerHTML = '請輸入活動名稱!';
-            isPassed = false;
-        }
-
-        return isPassed;
-    }
+    
 </script>
 <?php include __DIR__ . '/__footer.php'; ?> 

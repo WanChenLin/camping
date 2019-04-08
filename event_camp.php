@@ -1,4 +1,5 @@
 <?php
+// require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 $camp_id = isset($_GET['camp_id']) ? intval($_GET['camp_id']) : 0;
@@ -9,7 +10,23 @@ $rows = $pdo_query->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <?php include __DIR__ . '/__head.php'; ?>
-
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" href="event_insert.php">
+            <h5>新增活動</h5>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="event_list.php">
+            <h5>活動列表</h5>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="#">
+            <h5>營地資訊</h5>
+        </a>
+    </li>
+</ul>
 <table class="table table-bordered">
     <tbody>
         <?php foreach ($rows as $row) : ?>
@@ -32,7 +49,9 @@ $rows = $pdo_query->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach ?>
     </tbody>
 </table>
-<a class="btn btn-primary" href="event_list.php" role="button">回活動列表頁</a>
+<div class="d-flex justify-content-center">
+    <a class="btn btn-primary" href="event_list.php" role="button">回活動列表頁</a>
+</div>
 
 
 <?php include __DIR__ . '/__md.php'; ?>

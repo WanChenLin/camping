@@ -1,10 +1,13 @@
 <?php
+// require __DIR__.'/__cred.php';
 require __DIR__.'/__connect_acDB.php';
 
 
-$apply_id = isset($_GET['apply_id']) ? intval($_GET['apply_id']) : 0;
+$apply_id = isset($_GET['apply_id']) ? substr($_GET['apply_id'], 0) : 0;
 
-$pdo->query("DELETE FROM `event_applyorder` WHERE `apply_id`=$apply_id");
+echo $apply_id;
+
+$pdo->query("DELETE FROM `event_applyorder` WHERE `apply_id`='$apply_id'");
 
 
 $goto = 'apply_orderList.php'; // 預設值

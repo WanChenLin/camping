@@ -1,4 +1,5 @@
 <?php
+// require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 $apply_id = isset($_GET['apply_id']) ? intval($_GET['apply_id']) : 0;
@@ -10,8 +11,8 @@ $row = $pdo_query->fetch(PDO::FETCH_ASSOC);
 
 if (isset($_POST['apply_pay'])) {
 
-    $apply_pay = $_POST['apply_pay'];
-    $apply_order = $_POST['apply_order'];
+    $apply_pay = htmlentities($_POST['apply_pay']);
+    $apply_order = htmlentities($_POST['apply_order']);
 
     $sql_edit = "UPDATE `event_applyorder` SET 
     `apply_pay`=?,
@@ -57,8 +58,23 @@ if (isset($_POST['apply_pay'])) {
     }
 </style> -->
 
-<h3>訂單修改</h3>
-
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" href="event_insert.php">
+            <h5>新增活動</h5>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="event_list.php">
+            <h5>活動列表</h5>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="#">
+            <h5>訂單修改</h5>
+        </a>
+    </li>
+</ul>
 
 <div class="card m-2">
     <?php if (isset($msg)) : ?>
@@ -84,8 +100,10 @@ if (isset($_POST['apply_pay'])) {
                 </div>
                 <small id="apply_orderHelp" class="form-text text-muted" style="padding-left:120px">1=>取消訂單</small>
             </div>
+            <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary">確定修改</button>
-            <a class="btn btn-primary" href="apply_orderList.php?event_id=<?= $row['event_id']?>" role="button">回報名列表頁</a>
+            <a class="btn btn-outline-primary ml-2" href="apply_orderList.php?event_id=<?= $row['event_id']?>" role="button">回上一頁</a>
+            </div>
         </form>
 
     </div>

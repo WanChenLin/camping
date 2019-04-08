@@ -1,4 +1,20 @@
 <?php
+
+// $upload_dir = __DIR__ . '/uploads/';;
+
+
+// if (empty($_FILES['my_file'])) {
+//     exit;
+// }
+
+// $upload_file = $upload_dir . $_FILES['my_file']['name'];
+
+// if (move_uploaded_file($_FILES['my_file']['tmp_name'], $upload_file)) {
+//     header('Location:event_list.php');
+// } else {
+//     echo 'no';
+// }
+
 $upload_dir = __DIR__. '/uploads/';
 
 header('Content-Type: application/json');
@@ -15,6 +31,8 @@ if(empty($_FILES['my_file'])){
 }
 
 $filename = sha1($_FILES['my_file']['name']. uniqid());
+// $filename = $_FILES['my_file']['name'];
+
 
 switch($_FILES['my_file']['type']){
     case 'image/jpeg':
@@ -38,10 +56,9 @@ if(move_uploaded_file($_FILES['my_file']['tmp_name'], $upload_file)){
 }
 echo json_encode($result, JSON_UNESCAPED_UNICODE);
 
+// require __DIR__ . '/__connect_acDB.php';
+// $file = "../upload/".$filename;
+// $sql = "INSERT INTO `event_list`(`event_imgName`) VALUES ('$filename')";
+// $pdo_query = $pdo->query($sql);
 
-
-
-
-
-
-
+?>
