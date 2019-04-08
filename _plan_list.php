@@ -1,6 +1,18 @@
 <?php include __DIR__ . './_header.php' ?>
-<?php include __DIR__. './_plan_nav.php' ?>
+<main class="col-10 bg-white">
 
+          <aside class="my-2">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active"href="./_plan_list.php">查詢促銷方案</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./_insert.php">新增促銷方案</a>
+              </li>
+            </ul>
+          </aside>
+
+          <section class="container-fluid" style="height: 100%;background:#ccc">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lo-12">
@@ -52,7 +64,6 @@
         let ori_data = []; // data
         let ori_obj = {}; // data
         const info_bar = document.getElementById('info_bar');
-        console.log(info_bar)
         const planType = document.getElementById('planType');
         planType.addEventListener('change', sendPlanType);
         let condi;

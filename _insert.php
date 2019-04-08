@@ -1,5 +1,5 @@
 <?php include __DIR__ . './_header.php' ?>
-<?php include __DIR__. './_plan_nav.php' ?>
+
 <?php
 require __DIR__ . '/_connectDB.php';
 
@@ -32,7 +32,20 @@ $dis_type_rows = $dis_type_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
+<main class="col-10 bg-white">
 
+<aside class="my-2">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link"href="./_plan_list.php">查詢促銷方案</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="./_insert.php">新增促銷方案</a>
+    </li>
+  </ul>
+</aside>
+
+<section class="container-fluid" style="height: 100%;background:#ccc">
 
     <div class="container">
         <div class="row">

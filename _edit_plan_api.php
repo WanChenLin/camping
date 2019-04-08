@@ -21,7 +21,7 @@ if (isset($_POST['planType'])) {
   $dis_type = htmlentities($_POST['dis_type']);
   $start = htmlentities($_POST['start']);
   $end = htmlentities($_POST['end']);
-
+//TODO: check if any input is empty
 
 
 

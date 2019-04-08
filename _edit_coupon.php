@@ -1,5 +1,4 @@
 <?php include __DIR__ . './_header.php' ?>
-<?php include __DIR__ . './_coupon_nav.php' ?>
 <?php
 require __DIR__ . '/_connectDB.php';
 if(isset($_GET['coupon_id'])){
@@ -46,6 +45,8 @@ try {
         <div class="card-body">
 
           <form method="POST"  name="coupon_form"  onsubmit="return sendForm()">
+            <h4>coupon ID: <?= $coupon_id ?></h4>
+            <h4>coupon code: <?= $row['coupon_code'] ?></h4>
             <input type="hidden" name="coupon_id" value="<?= $coupon_id ?>">
             <div class="form-group">
               <label>coupon名稱</label>

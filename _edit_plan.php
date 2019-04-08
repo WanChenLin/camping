@@ -1,5 +1,5 @@
-<?php include __DIR__ . './_header.php' ?>
-<?php include __DIR__. './_plan_nav.php' ?>
+<?php include __DIR__ . './_header.php'?>
+
 
 <style>
     .form-group small {
@@ -17,8 +17,8 @@ $sql = "SELECT * FROM $playType WHERE id=$id";
 $stmt = $pdo->query($sql);
 
 if ($stmt->rowCount() == 0) {
-  header('Location: _list.php');
-  exit;
+    header('Location: _list.php');
+    exit;
 }
 
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -27,7 +27,6 @@ $mem_sql = "SELECT * FROM member_level";
 $mem_stmt = $pdo->query($mem_sql);
 $mem_rows = $mem_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
 $camp_type_sql = "SELECT * FROM campsite_type";
 $camp_type_stmt = $pdo->query($camp_type_sql);
 $camp_type_rows = $camp_type_stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -35,7 +34,6 @@ $camp_type_rows = $camp_type_stmt->fetchAll(PDO::FETCH_ASSOC);
 $dis_type_sql = "SELECT * FROM dis_type";
 $dis_type_stmt = $pdo->query($dis_type_sql);
 $dis_type_rows = $dis_type_stmt->fetchAll(PDO::FETCH_ASSOC);
-
 
 ?>
 
@@ -55,12 +53,12 @@ $dis_type_rows = $dis_type_stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h5 class="card-title">修改資料</h5>
 
                     <form method="post" name="update_form" onsubmit="return sendForm()">
-                        <input type="hidden" name="planType" value="<?= $playType ?>">
-                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                        <input type="hidden" name="planType" value="<?=$playType?>">
+                        <input type="hidden" name="id" value="<?=$row['id']?>">
                         <div class="form-group">
                             <label for="name">方案名稱</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder=""
-                                   value="<?= $row['name'] ?>">
+                                   value="<?=$row['name']?>">
                             <small id="" class="form-text text-muted"></small>
                         </div>
 
@@ -69,16 +67,16 @@ $dis_type_rows = $dis_type_stmt->fetchAll(PDO::FETCH_ASSOC);
                               <label>適用條件</label>
                               <select class="form-control" name="condi">
                                 <?php foreach ($mem_rows as $mem_row): ?>
-                                    <option <?= $row['user_condi'] == $mem_row['mem_level'] ? "selected" : ""; ?>
-                                            value="<?= $mem_row['mem_level'] ?>"><?= $mem_row['level_title'] ?></option>
-                                <?php endforeach; ?>
+                                    <option <?=$row['user_condi'] == $mem_row['mem_level'] ? "selected" : "";?>
+                                            value="<?=$mem_row['mem_level']?>"><?=$mem_row['level_title']?></option>
+                                <?php endforeach;?>
                               </select>
                               <small id="" class="form-text text-muted"></small>
                           </div>
                       <?php elseif ($playType == 'price_plan'): ?>
                           <div class="form-group">
                               <label>訂單價格條件</label>
-                              <input type="text" value="<?= $row['price_condi'] ?>" name="condi">
+                              <input type="text" value="<?=$row['price_condi']?>" name="condi">
                               <small id="emailHelp" class="form-text text-muted"></small>
                           </div>
                       <?php elseif ($playType == 'prod_plan'): ?>
@@ -86,24 +84,24 @@ $dis_type_rows = $dis_type_stmt->fetchAll(PDO::FETCH_ASSOC);
                               <label>營地類型</label>
                               <select class="form-control" name="condi">
                                 <?php foreach ($camp_type_rows as $camp_type_row): ?>
-                                    <option <?= $row['prod_condi'] == $camp_type_row['campType_id'] ? "selected" : ""; ?>
-                                            value="<?= $camp_type_row['campType_id'] ?>"><?= $camp_type_row['campType_name'] ?></option>
-                                <?php endforeach; ?>
+                                    <option <?=$row['prod_condi'] == $camp_type_row['campType_id'] ? "selected" : "";?>
+                                            value="<?=$camp_type_row['campType_id']?>"><?=$camp_type_row['campType_name']?></option>
+                                <?php endforeach;?>
                               </select>
                               <small id="" class="form-text text-muted"></small>
                           </div>
                       <?php elseif ($playType == 'amount_plan'): ?>
                           <div class="form-group">
                               <label>訂單數量條件</label>
-                              <input type="text" value="<?= $row['amount_condi'] ?>" name="condi">
+                              <input type="text" value="<?=$row['amount_condi']?>" name="condi">
                               <small id="" class="form-text text-muted"></small>
                           </div>
-                      <?php endif; ?>
+                      <?php endif;?>
 
 
                         <div class="form-group">
                             <label>折扣數值</label>
-                            <input type="text" class="form-control" name="dis_num" placeholder="輸入折扣數值" value="<?= $row['dis_num'] ?>">
+                            <input type="text" class="form-control" name="dis_num" placeholder="輸入折扣數值" value="<?=$row['dis_num']?>">
                             <small id="" class="form-text text-muted"></small>
                         </div>
 
@@ -111,23 +109,23 @@ $dis_type_rows = $dis_type_stmt->fetchAll(PDO::FETCH_ASSOC);
                             <label for="address">折扣類型</label>
                             <select class="form-control" name="dis_type">
                                 <?php foreach ($dis_type_rows as $dis_type_row): ?>
-                                <option <?= $row['dis_type'] == $dis_type_row['id'] ? "selected" : ""; ?>
-                                        value="<?=$dis_type_row['id'] ?>"><?= $dis_type_row['dis_type'] ?></option>
-                                <?php endforeach; ?>
+                                <option <?=$row['dis_type'] == $dis_type_row['id'] ? "selected" : "";?>
+                                        value="<?=$dis_type_row['id']?>"><?=$dis_type_row['dis_type']?></option>
+                                <?php endforeach;?>
                             </select>
                             <small id="" class="form-text text-muted"></small>
                         </div>
                         <div class="form-group">
                             <label for="address">開始時間</label>
                             <input type="date" id="start" name="start"
-                                   value="<?= $row['start'] ?>"
+                                   value="<?=$row['start']?>"
                                    min="2018-01-01" max="2020-12-31">
                             <small id="addressHelp" class="form-text text-muted"></small>
                         </div>
                         <div class="form-group">
                             <label for="address">結束時間</label>
                             <input type="date" id="end" name="end"
-                                   value="<?= $row['end'] ?>"
+                                   value="<?=$row['end']?>"
                                    min="2018-01-01" max="2020-12-31">
                             <small id="" class="form-text text-muted"></small>
                         </div>
@@ -245,12 +243,14 @@ $dis_type_rows = $dis_type_stmt->fetchAll(PDO::FETCH_ASSOC);
                             info_bar.className = 'alert alert-danger';
                             info_bar.innerHTML = obj.errorMsg;
                         }
-                        submit_btn.style.display = "block";
+                        submit_btn.style.display = "";setTimeout(function () {
+                            info_bar.css('display', 'none')
+                        },3000);
                     });
                 return false;
     }
 </script>
 
 
-<?php include __DIR__ . './_footer.php' ?>
+<?php include __DIR__ . './_footer.php'?>
 

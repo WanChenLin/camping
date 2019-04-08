@@ -9,6 +9,7 @@ function check_codes($pdo,$rand_str){
   $stmt = $pdo->prepare($sql);
   $stmt->execute([]);
   $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $code_exists = false;
   foreach ($rows as $row){
     if($row['coupon_code']==$rand_str){
       $code_exists = true;
