@@ -39,36 +39,41 @@ include __DIR__ . '/__connect_db.php';
         <div class="container">
             <div id="info_bar" role="alert"></div>
 
-            <div class="card">
+            <!-- <div class="card"> -->
                 <div class="card-body">
-                    <h5 class="card-title text-center">新增會員資料</h5>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-sm-8">
+                            <h5 class="card-title text-center">新增會員資料</h5>
+                        </div>
+                    </div>
+                    
 
                     <form name="formInsert" method="POST" onsubmit="return checkForm()">
                         <input type="hidden" name="gotodb" value="check">
-                        <div class="form-group row">
-                            <label for="account" class="col-sm-2 col-form-label text-right"><span class="asterisk">* </span>帳號名稱</label>
-                            <div class="col-sm-8">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="account" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>帳號名稱</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" id="account" name="account" placeholder="" value="">
                                 <small id="accountHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="password" class="col-sm-2 col-form-label text-right"><span class="asterisk">* </span>密碼</label>
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="password" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>密碼</label>
                             <div class="col-sm-6">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="" value="">
                                 <small id="passwordHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="password_check" class="col-sm-2 col-form-label text-right"><span class="asterisk">* </span>確認密碼</label>
-                            <div class="col-sm-7">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="password_check" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>確認密碼</label>
+                            <div class="col-sm-6">
                                 <input type="password" class="form-control" id="password_check" name="password_check" placeholder="" value="">
                                 <small id="password_checkHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="avatar" class="col-sm-2 col-form-label text-right">大頭貼</label>
-                            <div class="col-sm-10">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="avatar" class="col-sm-2 col-form-label text-right rwd-text">大頭貼</label>
+                            <div class="col-sm-6">
                                 <input type="hidden" id="avatar_pictures" name="avatar_pictures" value="">
                                 <img id="myimg" src="" height="100px" width="" />
                                 <!-- <img id="preview" src="" height="100px" width="" /> -->
@@ -79,23 +84,23 @@ include __DIR__ . '/__connect_db.php';
                                 <!-- <input type="file" id="my_file" name="my_file"> -->
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label text-right"><span class="asterisk">* </span>姓名</label>
-                            <div class="col-sm-10">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="name" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>姓名</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="" value="">
                                 <small id="nameHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="nickname" class="col-sm-2 col-form-label text-right">暱稱</label>
-                            <div class="col-sm-10">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="nickname" class="col-sm-2 col-form-label text-right rwd-text">暱稱</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="">
                                 <small id="nicknameHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <fieldset class="form-group">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0 text-right">性別</legend>
+                            <div class="row d-flex justify-content-center">
+                                <legend class="col-form-label col-sm-2 pt-0 text-right rwd-text">性別</legend>
                                 <div class="col-sm-2">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gender" id="gender" value="male" checked>
@@ -108,30 +113,31 @@ include __DIR__ . '/__connect_db.php';
                                         <label class="form-check-label" for="genderF">女 Female</label>
                                     </div>
                                 </div>
+                                <div class="col-sm-2"></div>
                             </div>
                         </fieldset>
-                        <div class="form-group row">
-                            <label for="birthday" class="col-sm-2 col-form-label">生日</label>
-                            <div class="col-sm-10">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="birthday" class="col-sm-2 col-form-label text-right rwd-text">生日</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" id="birthday" name="birthday" placeholder="格式: YYYY-MM-DD" value="">
                                 <small id="birthdayHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="mobile" class="col-sm-2 col-form-label">手機<span class="asterisk"> *</span></label>
-                            <div class="col-sm-10">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="mobile" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>手機</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="">
                                 <small id="mobileHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-2 col-form-label">信箱<span class="asterisk"> *</span></label>
-                            <div class="col-sm-10">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="email" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>信箱</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" id="email" name="email" placeholder="" value="">
                                 <small id="emailHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <div role="tw-city-selector" data-bootstrap-style data-has-zipcode>
+                        <div class="" role="tw-city-selector" data-bootstrap-style data-has-zipcode>
                         <!-- <div class="form-group row">
                             <label for="address" class="col-sm-2 col-form-label">地址</label>
                             <div class="col-sm-10" >
@@ -139,22 +145,33 @@ include __DIR__ . '/__connect_db.php';
                                 <small id="addressHelp" class="form-text text-muted"></small>
                             </div>
                         </div> -->
-                            <div class="form-group row address_api">
-                                <label for="address" class="col-sm-2 col-form-label">地址</label>
-                                <div class="col-sm-4 d-flex pr-0">
-                                    <input type="text" name="address[]" class="zipcode border-0" readonly placeholder="郵遞區號" size="5" autocomplete="off">
-                                    <select class="form-control county" name="county"></select>
-                                    <select class="form-control mx-1 district" name="district"></select>
+                            <div class="form-group address_api">
+                                <div class="row d-flex justify-content-center">
+                                    <label for="address" class="col-sm-2 col-form-label text-right rwd-text">地址</label>
+                                    <div class="col-sm-1 d-flex">
+                                        <input type="text" name="address[]" class="zipcode border-0" readonly placeholder="郵遞區號" size="5" autocomplete="off">
+                                    </div>
+                                    <div class="col-sm-2 d-flex p-0">
+                                        <select class="form-control county" name="county"></select>
+                                    </div>
+                                    <div class="col-sm-2 d-flex p-0">
+                                        <select class="form-control district" name="district"></select>
+                                    </div>
+                                    <div class="col-sm-1 d-flex"></div>
                                 </div>
-                                <div class="col-sm-6 pl-0">
-                                    <input type="text" class="form-control flex-grow-1" id="address" name="address[]" placeholder="">
-                                    <small id="addressHelp" class="form-text text-muted"></small>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-6 mt-1">
+                                        <input type="text" class="form-control flex-grow-1" id="address" name="address[]" placeholder="">
+                                        <small id="addressHelp" class="form-text text-muted"></small>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-2 col-form-label">等級<span class="asterisk"> *</span></label>
-                            <div class="col-sm-10">
+                        <div class="form-group row d-flex justify-content-center">
+                            <label for="email" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>等級</label>
+                            <div class="col-sm-6">
                                 <select class="form-control" name="level" id="level">
                                     <option value="1" selected>1 露營新手</option>
                                     <option value="2">2 業餘露營家</option>
@@ -162,14 +179,14 @@ include __DIR__ . '/__connect_db.php';
                                 </select>    
                             </div>
                         </div>
-                        <div class="form-group row after_sub text-center">
-                            <div class="col-sm-12">
+                        <div class="form-group row after_sub text-center d-flex justify-content-center">
+                            <div class="col-sm-8">
                                 <button type="submit" class="btn btn-primary" id="submit_btn">Submit</button>
                             </div>
                         </div>
                     </form>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
 
     </section>
@@ -338,6 +355,16 @@ include __DIR__ . '/__connect_db.php';
     //     preview.setAttribute('src', '');
     //     }
     // }
+
+    $(window).resize(function(){
+        var windowWidth = $(this).width();
+        console.log(windowWidth);
+        if(windowWidth<=768){
+            $(".rwd-text").removeClass("text-right");
+        } else {
+            $(".rwd-text").addClass("text-right");
+        }
+    });
 
 </script>
 

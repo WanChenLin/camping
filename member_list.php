@@ -28,6 +28,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include __DIR__ . '/html_header.php'; ?>
 <?php include __DIR__ . '/html_navbar.php'; ?>
 <style>
+    .add_member{
+        font-size: 16px;
+    }
     .userbook_wrap {
         top: 100px;
         left: calc( 50% - 300px );
@@ -42,6 +45,13 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     .close_btn {
         font-size: 20px;
+    }
+    .btn-top {
+        background: rgba(150, 150, 150, .7);
+        color: white;
+        border-radius: 50%;
+        bottom: 20px;
+        right: 20px;
     }
 </style>
 
@@ -64,106 +74,127 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <section class="postition-relative">
 
-    
-    <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-end">
-                <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= $page == 1 ?>" tabindex="-1" aria-disabled="true">&lt;&lt;</a>
-                </li>
-                <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1" aria-disabled="true">&lt;</a>
-                </li>
-                <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                <li class="page-item <?= $i == $page ? 'active' : '' ?>" aria-current="page">
-                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                </li>
-                <?php endfor ?>
-                <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= $page + 1 ?>">&gt;</a>
-                </li>
-                <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?>">
-                    <a class="page-link" href="?page=<?= $page = $total_pages ?>">&gt;&gt;</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="d-flex justify-content-between align-items-center my-3">
+            <div class="">
+                <button href="member_insert.php" class="add_member btn btn-primary"><i class="fas fa-user-plus"></i> 新增會員</button>
+            </div>
+            <div class="">
+                <form name="formSearch" id="formSearch" class="form-inline" method="POST" onsubmit="return false">
+                    <input type="hidden" name="searchdb" value="check">
+                    <input class="form-control mr-sm-2" type="search" name="search" placeholder="搜尋會員資料" aria-label="Search" value="">
+                    <select class="form-control mr-sm-2" name="filter_gender" id="filter_gender">
+                        <option value="all">性別</option>
+                        <option value="male">男</option>
+                        <option value="female">女</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit" id="submit">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-sm">
+                    <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page == 1 ?>" tabindex="-1" aria-disabled="true">&lt;&lt;</a>
+                    </li>
+                    <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1" aria-disabled="true">&lt;</a>
+                    </li>
+                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                    <li class="page-item <?= $i == $page ? 'active' : '' ?>" aria-current="page">
+                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                    <?php endfor ?>
+                    <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page + 1 ?>">&gt;</a>
+                    </li>
+                    <li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page = $total_pages ?>">&gt;&gt;</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
         <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <!-- <caption>List of members</caption> -->
-            <thead>
-                <tr style="white-space:nowrap">
-                    <th scope=" col">#員編</th>
-                    <th scope=" col">帳號</th>
-                    <!-- <th scope=" col">密碼</th> -->
-                    <!-- <th scope=" col">大頭貼</th> -->
-                    <th scope=" col">姓名</th>
-                    <!-- <th scope=" col">暱稱</th> -->
-                    <th scope=" col">性別</th>
-                    <th scope=" col">生日</th>
-                    <th scope=" col">手機</th>
-                    <th scope=" col">信箱</th>
-                    <!-- <th scope=" col">地址</th> -->
-                    <th scope=" col">等級</th>
-                    <th scope=" col">狀態</th>
-                    <th scope=" col">註冊日期</th>
-                    <th scope=" col" colspan="2">操作</th>
-                    <!-- <th scope=" col"><i class="far fa-edit"></i></th> -->
-                    <!-- <th scope=" col"><i class="far fa-trash-alt"></i></th> -->
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($rows as $row) : ?>
-                <tr>
-                    <td class="text-center"><?= $row['mem_id'] ?></th>
-                    <td><?= $row['mem_account'] ?></td>
-                    <!-- <td><?= $row['mem_password'] ?></td> -->
-                    <!-- <td>
-                        <img src="./<?= $row['mem_avatar'] ?>" alt="" height="50">
-                    </td> -->
-                    <td><?= $row['mem_name'] ?></td>
-                    <!-- <td><?= $row['mem_nickname'] ?></td> -->
-                    <td><?= $row['mem_gender'] ?></td>
-                    <td><?= $row['mem_birthday'] ?></td>
-                    <td><?= $row['mem_mobile'] ?></td>
-                    <td><?= $row['mem_email'] ?></td>
-                    <!-- <td><?= $row['mem_address'] ?></td> -->
-                    <td><?= $row['level_title'] ?></td>
-                    <td><?= $row['mem_status'] ?></td>
-                    <td><?= $row['mem_signUpDate'] ?></td>
-                    <td class="d-flex" style="font-size: 18px;">
-                        <a href="#" class="d-block mx-1 member_card p-1"
-                            data-mem-id="<?= $row['mem_id'] ?>" 
-                            data-mem-account="<?= $row['mem_account'] ?>"
-                            data-mem-avatar="<?= $row['mem_avatar'] ?>" 
-                            data-mem-name="<?= $row['mem_name'] ?>" 
-                            data-mem-nickname="<?= $row['mem_nickname'] ?>" 
-                            data-mem-gender="<?= $row['mem_gender'] ?>" 
-                            data-mem-birthday="<?= $row['mem_birthday'] ?>" 
-                            data-mem-mobile="<?= $row['mem_mobile'] ?>" 
-                            data-mem-email="<?= $row['mem_email'] ?>" 
-                            data-mem-address="<?= $row['mem_address'] ?>" 
-                            data-mem-level="<?= $row['level_title'] ?>" 
-                            data-mem-status="<?= $row['mem_status'] ?>" 
-                            data-mem-signup="<?= $row['mem_signUpDate'] ?>">
-                            <i class="fas fa-user-circle"></i>
-                        </a>
-                        <!-- <a href="" class="d-block mx-1"><i class="fas fa-address-card"></i></a> -->
-                        <a href="member_edit.php?mem_id=<?= $row['mem_id']?>" class="d-block mx-1 p-1">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="javascript: delete_row(<?= $row['mem_id']?>)" class="d-block mx-1 p-1">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                        
-                    </td>
-                </tr>
-                <?php endforeach ?>
-            </td>
-        </table>
-        </table>
-
+            <table class="table table-striped table-bordered">
+                <!-- <caption>List of members</caption> -->
+                <thead>
+                    <tr style="white-space:nowrap">
+                        <th scope=" col">#員編</th>
+                        <th scope=" col">帳號</th>
+                        <!-- <th scope=" col">密碼</th> -->
+                        <!-- <th scope=" col">大頭貼</th> -->
+                        <th scope=" col">姓名</th>
+                        <!-- <th scope=" col">暱稱</th> -->
+                        <th scope=" col">性別</th>
+                        <th scope=" col">生日</th>
+                        <th scope=" col">手機</th>
+                        <th scope=" col">信箱</th>
+                        <!-- <th scope=" col">地址</th> -->
+                        <th scope=" col">等級</th>
+                        <th scope=" col">狀態</th>
+                        <th scope=" col">註冊日期</th>
+                        <th scope=" col" colspan="2">操作</th>
+                        <!-- <th scope=" col"><i class="far fa-edit"></i></th> -->
+                        <!-- <th scope=" col"><i class="far fa-trash-alt"></i></th> -->
+                    </tr>
+                </thead>
+                <tbody class="data_body">
+                    <?php foreach ($rows as $row) : ?>
+                    <tr>
+                        <td class="text-center"><?= $row['mem_id'] ?></th>
+                        <td><?= $row['mem_account'] ?></td>
+                        <!-- <td><?= $row['mem_password'] ?></td> -->
+                        <!-- <td>
+                            <img src="./<?= $row['mem_avatar'] ?>" alt="" height="50">
+                        </td> -->
+                        <td><?= $row['mem_name'] ?></td>
+                        <!-- <td><?= $row['mem_nickname'] ?></td> -->
+                        <td><?= $row['mem_gender'] ?></td>
+                        <td><?= $row['mem_birthday'] ?></td>
+                        <td><?= $row['mem_mobile'] ?></td>
+                        <td><?= $row['mem_email'] ?></td>
+                        <!-- <td><?= $row['mem_address'] ?></td> -->
+                        <td><?= $row['level_title'] ?></td>
+                        <td><?= $row['mem_status'] ?></td>
+                        <td><?= $row['mem_signUpDate'] ?></td>
+                        <td class="d-flex" style="font-size: 18px;">
+                            <a href="#" class="d-block member_card mx-1 p-1"
+                                data-mem-id="<?= $row['mem_id'] ?>" 
+                                data-mem-account="<?= $row['mem_account'] ?>"
+                                data-mem-avatar="<?= $row['mem_avatar'] ?>" 
+                                data-mem-name="<?= $row['mem_name'] ?>" 
+                                data-mem-nickname="<?= $row['mem_nickname'] ?>" 
+                                data-mem-gender="<?= $row['mem_gender'] ?>" 
+                                data-mem-birthday="<?= $row['mem_birthday'] ?>" 
+                                data-mem-mobile="<?= $row['mem_mobile'] ?>" 
+                                data-mem-email="<?= $row['mem_email'] ?>" 
+                                data-mem-address="<?= $row['mem_address'] ?>" 
+                                data-mem-level="<?= $row['level_title'] ?>" 
+                                data-mem-status="<?= $row['mem_status'] ?>" 
+                                data-mem-signup="<?= $row['mem_signUpDate'] ?>">
+                                <i class="fas fa-user-circle"></i>
+                            </a>
+                            <!-- <a href="" class="d-block mx-1"><i class="fas fa-address-card"></i></a> -->
+                            <a href="member_edit.php?mem_id=<?= $row['mem_id']?>" class="d-block mx-1 p-1">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="javascript: delete_row(<?= $row['mem_id']?>)" class="d-block mx-1 p-1">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            
+                        </td>
+                    </tr>
+                    <?php endforeach ?>
+                </td>
+            </table>
+        </div>
+        <div id="info_bar" role="alert"></div>
 
         <div class="userbook_wrap position-absolute"></div>
+
+        <button class="btn position-fixed btn-top" id="goTop" ><i class="fas fa-chevron-up"></i></button>
     </section>
 
 </main>
@@ -178,6 +209,83 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             cancelButton: 'btn btn-primary mx-1'
         },
         buttonsStyling: false,
+    })
+
+    const info_bar = document.querySelector('#info_bar');
+    const formSearch = document.querySelector('#formSearch');
+    const submit = document.querySelector('#submit');
+    const data_body = document.querySelector('.data_body');
+    const tr_str = `<tr>
+                        <td><%= mem_id %></td>
+                        <td><%= mem_account %></td>
+                        <td><%= mem_name %></td>
+                        <td><%= mem_gender %></td>
+                        <td><%= mem_birthday %></td>
+                        <td><%= mem_mobile %></td>
+                        <td><%= mem_email %></td>
+                        <td><%= level_title %></td>
+                        <td><%= mem_status %></td>
+                        <td><%= mem_signUpDate %></td>
+                        <td class="d-flex" style="font-size: 18px;">
+                            <a href="#" class="d-block member_card mx-1 p-1"
+                                data-mem-id="<%= mem_id %>" 
+                                data-mem-account="<%= mem_account %>" 
+                                data-mem-avatar="<%= mem_avatar %>" 
+                                data-mem-name="<%= mem_name %>" 
+                                data-mem-nickname="<%= mem_nickname %>" 
+                                data-mem-gender="<%= mem_gender %>" 
+                                data-mem-birthday="<%= mem_birthday %>" 
+                                data-mem-mobile="<%= mem_mobile %>" 
+                                data-mem-email="<%= mem_email %>" 
+                                data-mem-address="<%= mem_address %>" 
+                                data-mem-level="<%= level_title %>" 
+                                data-mem-status="<%= mem_status %>" 
+                                data-mem-signup="<%= mem_signUpDate %>">
+                                <i class="fas fa-user-circle"></i>
+                            </a>
+                            <a href="member_edit.php?mem_id=<%= mem_id %>" class="d-block mx-1 p-1">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="javascript: delete_row(<%= mem_id %>)" class="d-block mx-1 p-1">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>`;
+    const tr_func = _.template(tr_str);
+
+    submit.addEventListener('mousedown', function(event){
+        let form = new FormData(document.formSearch)
+        fetch('member_search_api.php', {
+                method: 'POST',
+                body: form
+            })
+            .then(response => {
+                    return response.json();
+                })
+            .then(obj => {
+                    console.log(obj);
+                    ori_data = obj; // 讓ori_data的內容為SQL的資料
+                    console.log(ori_data);
+                    info_bar.style.display = 'block';
+
+                    if (! obj.success) {
+                        info_bar.className = 'alert alert-danger';
+                        info_bar.innerHTML = obj.errorMsg;
+                    }    
+
+                    //  資料內的表格
+                    let str = '';
+                    for (let s in ori_data.data) {
+                        str += tr_func(ori_data.data[s]);
+                    }
+                    data_body.innerHTML = str;
+                })
+    });
+
+    $("#goTop").click(function(){
+        $("html").animate({ 
+            scrollTop: 0
+        }, 500)
     })
 
     function delete_row(mem_id){
