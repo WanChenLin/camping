@@ -29,7 +29,13 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include __DIR__ . '/html_navbar.php'; ?>
 <style>
     .add_member{
+        color: white;
         font-size: 16px;
+    }
+    .add_member:hover{
+        color: white;
+        font-size: 16px;
+        text-decoration: none;
     }
     .userbook_wrap {
         top: 100px;
@@ -76,7 +82,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="d-flex justify-content-between align-items-center my-3">
             <div class="">
-                <button href="member_insert.php" class="add_member btn btn-primary"><i class="fas fa-user-plus"></i> 新增會員</button>
+                <button class="btn btn-primary">
+                    <a href="member_insert.php" class="add_member"><i class="fas fa-user-plus"></i> 新增會員</a>
+                </button>
             </div>
             <div class="">
                 <form name="formSearch" id="formSearch" class="form-inline" method="POST" onsubmit="return false">
@@ -268,10 +276,13 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     console.log(ori_data);
                     info_bar.style.display = 'block';
 
-                    if (! obj.success) {
-                        info_bar.className = 'alert alert-danger';
+                    if (obj.success) {
+                        info_bar.className = 'alert alert-light text-center border-top';
+                        info_bar.innerHTML = '資料尾端';
+                    } else {
+                        info_bar.className = 'alert alert-danger text-center';
                         info_bar.innerHTML = obj.errorMsg;
-                    }    
+                    }      
 
                     //  資料內的表格
                     let str = '';
@@ -397,7 +408,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     //     $(".userbook_wrap").remove();
     // })
     
-    $(".member_card").on("click", function(){
+    $(".data_body").on("click", ".member_card", function(){
         let mem_id = $(this).data("memId");
         let mem_account = $(this).data("memAccount");
         let mem_avatar = $(this).data("memAvatar");
