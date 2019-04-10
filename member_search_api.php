@@ -26,7 +26,7 @@ if (isset($_POST['searchdb'])) {
     }
 
     // $sql = "INSERT INTO `member_list`(`mem_account`) VALUES (?)";
-    $sql = " SELECT * FROM member_list 
+    $sql = " SELECT *, (SELECT level_title FROM member_level WHERE mem_level=memLevel_id ) AS level_title FROM member_list 
             WHERE (mem_account LIKE :search 
             OR mem_name LIKE :search 
             OR mem_nickname LIKE :search 
