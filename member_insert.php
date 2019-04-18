@@ -100,7 +100,7 @@ include __DIR__ . '/__connect_db.php';
                         </div>
                         <fieldset class="form-group">
                             <div class="row d-flex justify-content-center">
-                                <legend class="col-form-label col-sm-2 pt-0 text-right rwd-text">性別</legend>
+                                <label class="col-form-label col-sm-2 pt-0 text-right rwd-text">性別</label>
                                 <div class="col-sm-2">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gender" id="gender" value="male" checked>
