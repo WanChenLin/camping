@@ -173,7 +173,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <a class="mx-1 p-1" href="javascript: delete_it(<?= $row['post_id'] ?>)">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                                <a class="mx-1 p-1" href="post_edit.php?post_id=<?= $row['post_id'] ?>">
+                                <a class="mx-1 p-1" href="post_edit_jq.php?post_id=<?= $row['post_id'] ?>">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </td>

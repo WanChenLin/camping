@@ -20,11 +20,7 @@ $page_name = 'data_insert';
         display: none;
     }
 
-    #success_bar.active {
-        display: block;
-    }
-
-    #failed_bar.active {
+    .active {
         display: block;
     }
 </style>
@@ -32,7 +28,8 @@ $page_name = 'data_insert';
 <?php include __DIR__ . '/__navbar.php';  ?>
 <div class="container-fluid">
     <div id="success_bar" class="alert alert-success mt-3" role="alert">文章發布成功</div>
-    <div id="failed_bar" class="alert alert-danger mt-3" role="alert">請確認 [文章分類] 與 [文章標題]</div>
+    <div id="title_failed" class="alert alert-danger mt-3" role="alert">請確認 [文章分類] 與 [文章標題]</div>
+    <div id="content_failed" class="alert alert-danger mt-3" role="alert">文章內容不得少於20字</div>
     <form name="form1" id="form1" method="post">
 
         <div class="row my-3">
@@ -85,12 +82,17 @@ $page_name = 'data_insert';
     // const info_bar = document.querySelector('#info_bar');
     // const submit_btn = document.querySelector('#submit_btn');
 
-    
+
 
 
     $("#form1").submit(function() {
-        if ($(this).parent().find(".form-control").change()) {
-            
+        event.preventDefault();
+        let title = $("#post_title").val();
+        let content = CKEDITOR.instances[instance].getData();
+        console.log(title);
+        console.log(content.length);
+        if (title && content) {
+
             $.ajax({
                     method: "POST",
                     url: "new_post_api.php",
@@ -98,28 +100,28 @@ $page_name = 'data_insert';
                     dataType: "json"
                 })
                 .done(function() {
-                    
+
                     // let info_bar = `<div id="info_bar" class="alert alert-success" role="alert" style="display: none">文章發布成功</div>`
                     $("#success_bar").addClass("active");
-                    $("#submit_btn").addClass("disabled");
+                    $("#submit_btn").css("display", "none");
                 }).fail(function() {
                     $("#failed_bar").addClass("active");
                     // $("#submit_btn").css("display", "none")
                 });
-
-            event.preventDefault();
-            
+        } else if (!title) {
+            $("#title_failed").addClass("active");
+        } else if (content.length < 20) {
+            $("#content_failed").addClass("active");
         }
         $("#submit_btn").css("display", "block")
-       
+
     });
 
     $(".form-control").change(function() {
-        $("#failed_bar").removeClass("active");
+        $("#title_failed").removeClass("active");
     });
 
-    
-
+    $("#content_failed").removeClass("active");
 </script>
 
 
