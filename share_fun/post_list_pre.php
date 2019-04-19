@@ -32,17 +32,24 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <?php include __DIR__ . '/__html_head.php';  ?>
 <style>
-    html {
+    /* html {
         position: relative;
-    }
+    } */
 
     .table td {
         height: 3rem;
         overflow: hidden;
     }
 
+    /* .edit i {
+        font-size: 20px;
+    } */
+
     .preview {
-        position: absolute;
+        width: 100vw;
+        overflow-y: scroll;
+        background: rgba(0, 0, 0, .8);
+        position: fixed;
         top: 0;
         left: 0;
         z-index: 20;
@@ -55,36 +62,53 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     .article {
-        background: #fff;
+        min-width: 50vw;
+        min-height: 100vh;
     }
 
     .preview img {
         max-width: 100% !important;
         height: auto !important;
     }
+
+    .fa-times-circle {
+        font-size: 2.5rem;
+        color: #aaaaaa;
+    }
+
+    
 </style>
 <?php include __DIR__ . '/__style_start.html';  ?>
-<?php include __DIR__ . '/__navbar.php';  ?>
 <div class="container-fluid">
-    <div><?= $page . " / " . $total_pages ?></div>
-
     <div class="row">
-        <div class="col-lg-12">
-            <nav>
-                <ul class="pagination pagination-sm">
-                    <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">&lt;</a>
+        <div class="col-lg-12 d-flex justify-content-between my-3">
+            <div>
+                <a class="<?= $page_name == 'data_insert' ? 'active' : '' ?>" href="new_post_jq.php"><button type="button" class="btn btn-primary">新增文章</button></a>
+            </div>
+            <div>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="搜尋文章" aria-label="Search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12 d-flex justify-content-end">
+            <ul class="pagination pagination-sm">
+                <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page - 1 ?>">&lt;</a>
+                </li>
+                <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                    <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                        <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
                     </li>
-                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                        </li>
-                    <?php endfor ?>
-                    <li class="page-item <?= $page >= $total_pages ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">&gt;</a>
-                    </li>
-                </ul>
-            </nav>
+                <?php endfor ?>
+                <li class="page-item <?= $page >= $total_pages ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page + 1 ?>">&gt;</a>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -105,8 +129,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <th scope="col">評論人數</th>
                         <th scope="col">文章標籤</th> -->
                         <th scope="col">文章開關</th>
-                        <th scope="col"><i class="fas fa-trash-alt"></i></th>
-                        <th scope="col"><i class="fas fa-edit"></i></th>
+                        <th scope="col">操作</i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -115,21 +138,44 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td class="post_id" data-postid="<?= $row['post_id'] ?>"><?= htmlentities($row['post_id']) ?></td>
                             <!-- <td><?= htmlentities($row['mem_nickname']) ?></td> -->
                             <td><?= htmlentities($row['cate_name']) ?></td>
-                            <td class="post_title" data-title="<?= htmlentities($row['post_title']) ?>"><a class="to_preview" href=""><?= htmlentities($row['post_title']) ?></a></td>
+                            <td class="post_title" data-title="<?= htmlentities($row['post_title']) ?>">
+                                <a class="to_preview" href=""><?= htmlentities($row['post_title']) ?></a>
+                                <div class="preview">
+                                    <!-- <input type="hidden" name="post_id" value="<?= $row['post_id'] ?>"> -->
+                                    <div class="d-flex justify-content-center">
+                                        <div class="to_close col-lg-2"></div>
+                                        <div class="article col-lg-8 bg-white p-5 ">
+                                            <div class="d-flex justify-content-end">
+                                                <a href="" id="close_pre"><i class="fas fa-times-circle"></i></a>
+                                            </div>
+                                            <div class="px-5">
+                                                <h2 class="py-3 px-5 text-left"><?= $row['post_title'] ?></h2>
+                                                <div class="px-5"><?= $row['post_content'] ?></div>
+                                            </div>
+                                        </div>
+                                        <div class="to_close col-lg-2"></div>
+                                    </div>
+                                </div>
+
+                            </td>
                             <td><?= htmlentities($row['post_time']) ?></td>
                             <td><?= htmlentities($row['post_editTime']) ?></td>
                             <!-- <td><?= html_entity_decode($row['post_content']) ?></td>
-                                                        <td><?= htmlentities($row['browse_num']) ?></td>
-                                                        <td><?= htmlentities($row['share_num']) ?></td>
-                                                        <td><?= htmlentities($row['cmt_num']) ?></td>
-                                                        <td><?= htmlentities($row['post_tag']) ?></td> -->
+                                                                        <td><?= htmlentities($row['browse_num']) ?></td>
+                                                                        <td><?= htmlentities($row['share_num']) ?></td>
+                                                                        <td><?= htmlentities($row['cmt_num']) ?></td>
+                                                                        <td><?= htmlentities($row['post_tag']) ?></td> -->
                             <td><?= htmlentities($row['post_visible']) ?></td>
-                            <td class="delete"><a href="javascript: delete_it(<?= $row['post_id'] ?>)">
+                            <td class="edit">
+                                <a class="to_preview mx-1 p-1" href="">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a class="mx-1 p-1" href="javascript: delete_it(<?= $row['post_id'] ?>)">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                            </td>
-                            <td>
-                                <a href="post_edit.php?post_id=<?= $row['post_id'] ?>"><i class="fas fa-edit"></i></a>
+                                <a class="mx-1 p-1" href="post_edit.php?post_id=<?= $row['post_id'] ?>">
+                                    <i class="fas fa-edit"></i>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -139,24 +185,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-    <div class="container-fluid preview bg-dark">
-        <input type="hidden" name="post_id" value="<?= $row['post_id'] ?>">
-        <div class="article container mt-3">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-9">
-                    <h2><?= $row['post_title'] ?></h2>
-                </div>
-                <div class="col-lg-9 article">
-                    <?= $row['post_content'] ?>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <?php include __DIR__ . '/__style_end.html';  ?>
 
 </div>
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 
 <script>
     // $(window).ready();
@@ -181,27 +212,22 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     });
 
 
-
-
     $("table").on("click", ".to_preview", function() {
-        // console.log("nah")
-
-        $(".preview").addClass("active");
-
-        let post_id = $(this).closest("tr").find(".post_id").data("postid");
-        console.log(post_id);
-
-
-        // $.ajax({
-        //     method: "POST",
-        //     url: `post_preview.php?post_id=${post_id}`,
-        //     data: $('body'),
-        //     dataType: "json"
-        // }).done(function(response) {
-            
-        // });
+        $(this).closest("tr").find(".preview").addClass("active");
         return false;
-
     });
+    $(".preview").on("click", "#close_pre", function() {
+        $(this).closest("td").find(".preview").removeClass("active");
+        return false;
+    });
+    $("html").on("click", ".to_close", function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if ($(this) !== $(".article")) {
+
+            $(this).closest("td").find(".preview").removeClass("active");
+            return false;
+        }
+    })
 </script>
 <?php include __DIR__ . '/__html_foot.php';  ?>
