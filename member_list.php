@@ -95,7 +95,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <option value="male">男</option>
                         <option value="female">女</option>
                     </select>
-                    <button class="btn btn-primary" type="submit" id="submit">Search</button>
+                    <button class="btn btn-primary" type="submit" id="submit"><i class="fas fa-search"></i></button>
                 </form>
             </div>
         </div>
@@ -167,31 +167,32 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= $row['level_title'] ?></td>
                         <td><?= $row['mem_status'] ?></td>
                         <td><?= $row['mem_signUpDate'] ?></td>
-                        <td class="d-flex" style="font-size: 18px;">
-                            <a href="#" class="d-block member_card mx-1 p-1"
-                                data-mem-id="<?= $row['mem_id'] ?>" 
-                                data-mem-account="<?= $row['mem_account'] ?>"
-                                data-mem-avatar="<?= $row['mem_avatar'] ?>" 
-                                data-mem-name="<?= $row['mem_name'] ?>" 
-                                data-mem-nickname="<?= $row['mem_nickname'] ?>" 
-                                data-mem-gender="<?= $row['mem_gender'] ?>" 
-                                data-mem-birthday="<?= $row['mem_birthday'] ?>" 
-                                data-mem-mobile="<?= $row['mem_mobile'] ?>" 
-                                data-mem-email="<?= $row['mem_email'] ?>" 
-                                data-mem-address="<?= $row['mem_address'] ?>" 
-                                data-mem-level="<?= $row['level_title'] ?>" 
-                                data-mem-status="<?= $row['mem_status'] ?>" 
-                                data-mem-signup="<?= $row['mem_signUpDate'] ?>">
-                                <i class="fas fa-user-circle"></i>
-                            </a>
-                            <!-- <a href="" class="d-block mx-1"><i class="fas fa-address-card"></i></a> -->
-                            <a href="member_edit.php?mem_id=<?= $row['mem_id']?>" class="d-block mx-1 p-1">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="javascript: delete_row(<?= $row['mem_id']?>)" class="d-block mx-1 p-1">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-                            
+                        <td style="font-size: 18px;">
+                            <div class="d-flex">
+                                <a href="#" class="d-block member_card mx-1 p-1"
+                                    data-mem-id="<?= $row['mem_id'] ?>" 
+                                    data-mem-account="<?= $row['mem_account'] ?>"
+                                    data-mem-avatar="<?= $row['mem_avatar'] ?>" 
+                                    data-mem-name="<?= $row['mem_name'] ?>" 
+                                    data-mem-nickname="<?= $row['mem_nickname'] ?>" 
+                                    data-mem-gender="<?= $row['mem_gender'] ?>" 
+                                    data-mem-birthday="<?= $row['mem_birthday'] ?>" 
+                                    data-mem-mobile="<?= $row['mem_mobile'] ?>" 
+                                    data-mem-email="<?= $row['mem_email'] ?>" 
+                                    data-mem-address="<?= $row['mem_address'] ?>" 
+                                    data-mem-level="<?= $row['level_title'] ?>" 
+                                    data-mem-status="<?= $row['mem_status'] ?>" 
+                                    data-mem-signup="<?= $row['mem_signUpDate'] ?>">
+                                    <i class="fas fa-user-circle"></i>
+                                </a>
+                                <!-- <a href="" class="d-block mx-1"><i class="fas fa-address-card"></i></a> -->
+                                <a href="member_edit.php?mem_id=<?= $row['mem_id']?>" class="d-block mx-1 p-1">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="javascript: delete_row(<?= $row['mem_id']?>)" class="d-block mx-1 p-1">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     <?php endforeach ?>
@@ -209,6 +210,10 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- SweetAlert2 JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<!-- Tiny Nice Confirmation -->
+<link rel="stylesheet" href="Tiny-Nice-Confirmation-Popup-Plugin-With-jQuery-H-confirm-alert/HPCF/H-confirm-alert.css" />
+<script type="text/javascript" src="Tiny-Nice-Confirmation-Popup-Plugin-With-jQuery-H-confirm-alert/HPCF/H-confirm-alert.js" ></script>
+
 <script>
 
     const swalWithBootstrapButtons = Swal.mixin({
@@ -234,29 +239,31 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><%= level_title %></td>
                         <td><%= mem_status %></td>
                         <td><%= mem_signUpDate %></td>
-                        <td class="d-flex" style="font-size: 18px;">
-                            <a href="#" class="d-block member_card mx-1 p-1"
-                                data-mem-id="<%= mem_id %>" 
-                                data-mem-account="<%= mem_account %>" 
-                                data-mem-avatar="<%= mem_avatar %>" 
-                                data-mem-name="<%= mem_name %>" 
-                                data-mem-nickname="<%= mem_nickname %>" 
-                                data-mem-gender="<%= mem_gender %>" 
-                                data-mem-birthday="<%= mem_birthday %>" 
-                                data-mem-mobile="<%= mem_mobile %>" 
-                                data-mem-email="<%= mem_email %>" 
-                                data-mem-address="<%= mem_address %>" 
-                                data-mem-level="<%= level_title %>" 
-                                data-mem-status="<%= mem_status %>" 
-                                data-mem-signup="<%= mem_signUpDate %>">
-                                <i class="fas fa-user-circle"></i>
-                            </a>
-                            <a href="member_edit.php?mem_id=<%= mem_id %>" class="d-block mx-1 p-1">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="javascript: delete_row(<%= mem_id %>)" class="d-block mx-1 p-1">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
+                        <td style="font-size: 18px;">
+                            <div class="d-flex">
+                                <a href="#" class="d-block member_card mx-1 p-1"
+                                    data-mem-id="<%= mem_id %>" 
+                                    data-mem-account="<%= mem_account %>" 
+                                    data-mem-avatar="<%= mem_avatar %>" 
+                                    data-mem-name="<%= mem_name %>" 
+                                    data-mem-nickname="<%= mem_nickname %>" 
+                                    data-mem-gender="<%= mem_gender %>" 
+                                    data-mem-birthday="<%= mem_birthday %>" 
+                                    data-mem-mobile="<%= mem_mobile %>" 
+                                    data-mem-email="<%= mem_email %>" 
+                                    data-mem-address="<%= mem_address %>" 
+                                    data-mem-level="<%= level_title %>" 
+                                    data-mem-status="<%= mem_status %>" 
+                                    data-mem-signup="<%= mem_signUpDate %>">
+                                    <i class="fas fa-user-circle"></i>
+                                </a>
+                                <a href="member_edit.php?mem_id=<%= mem_id %>" class="d-block mx-1 p-1">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="javascript: delete_row(<%= mem_id %>)" class="d-block mx-1 p-1">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
                         </td>
                     </tr>`;
     const tr_func = _.template(tr_str);
@@ -278,7 +285,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     if (obj.success) {
                         info_bar.className = 'alert alert-light text-center border-top';
-                        info_bar.innerHTML = '資料尾端';
+                        info_bar.innerHTML = '<a href="member_list.php">回到會員資料清單頁</a>';
                     } else {
                         info_bar.className = 'alert alert-danger text-center';
                         info_bar.innerHTML = obj.errorMsg;
