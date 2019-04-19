@@ -28,17 +28,13 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <main class="col-10 bg-white">
 
     <aside class="my-2">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="member_list.php">會員資料清單</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="member_insert.php">新增資料</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="member_search.php">搜尋會員</a>
-            </li>
-        </ul>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="member_list.php">會員</a></li>
+                <li class="breadcrumb-item"><a href="member_list.php">會員清單</a></li>
+                <li class="breadcrumb-item active">修改會員資料</li>
+            </ol>
+        </nav>
     </aside>
 
     <section class="">
