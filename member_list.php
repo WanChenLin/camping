@@ -320,43 +320,60 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     })
 
     function delete_row(mem_id){
-        swalWithBootstrapButtons.fire({
-            title: '警告',
-            html: '<h5>確定要刪除第 '+mem_id+' 筆會員資料嗎?</h5><span style="color:red">注意：刪除後將無法復原</span>',
-            type: 'warning',
-            showCloseButton: true,
-            showCancelButton: true,
-            confirmButtonText: '確認刪除',
-            confirmButtonColor: '#aaa',
-            cancelButtonText: '取消',
-            cancelButtonColor: '#3085d6',
-            focusCancel: true,
-        }).then((result) => {
-            if (result.value) {
-                swalWithBootstrapButtons.fire({
-                    title: '刪除成功',
-                    html: '已刪除該筆會員資料',
-                    type: 'success',
-                    timer: 1000,
-                    onBeforeOpen: () => {
-                        timerInterval = setInterval(() => {}, 100)
-                    },
-                    onClose: () => {
-                        clearInterval(timerInterval)
-                        location.href = 'member_delete.php?mem_id='+ mem_id ;
-                    }
-                })
-            } else if (
-                // Read more about handling dismissals
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire({
-                    title: '取消刪除',
-                    html: '尚未刪除該筆會員資料',
-                    type: 'info'
-                })
-            }
-        })
+        $.confirm.show({
+				"message": '確定要刪除 #會員編號('+mem_id+') 的資料嗎?', // 顯示內容
+                "type": "danger", //標題顏色類型  success:綠色  danger:紅色  warning:橘色  default:藍色
+                "yesText": "確定", // 「確認」按鈕文字
+                "noText": "取消", // 「取消」按鈕文字
+                "yes": function(){ // 確認按鈕觸發方法 function(){}
+					$.confirm.show({
+                        "message": "注意：刪除後將無法復原",
+                        "type": "success",
+                        "yesText": "確認刪除",
+                        "noText": "返回",
+                        "yes": function(){
+                            location.href = 'member_delete.php?mem_id='+ mem_id ;
+                        }
+					})
+                }
+			})
+        // swalWithBootstrapButtons.fire({
+        //     title: '警告',
+        //     html: '<h5>確定要刪除第 '+mem_id+' 筆會員資料嗎?</h5><span style="color:red">注意：刪除後將無法復原</span>',
+        //     type: 'warning',
+        //     showCloseButton: true,
+        //     showCancelButton: true,
+        //     confirmButtonText: '確認刪除',
+        //     confirmButtonColor: '#aaa',
+        //     cancelButtonText: '取消',
+        //     cancelButtonColor: '#3085d6',
+        //     focusCancel: true,
+        // }).then((result) => {
+        //     if (result.value) {
+        //         swalWithBootstrapButtons.fire({
+        //             title: '刪除成功',
+        //             html: '已刪除該筆會員資料',
+        //             type: 'success',
+        //             timer: 1000,
+        //             onBeforeOpen: () => {
+        //                 timerInterval = setInterval(() => {}, 100)
+        //             },
+        //             onClose: () => {
+        //                 clearInterval(timerInterval)
+        //                 location.href = 'member_delete.php?mem_id='+ mem_id ;
+        //             }
+        //         })
+        //     } else if (
+        //         // Read more about handling dismissals
+        //         result.dismiss === Swal.DismissReason.cancel
+        //     ) {
+        //         swalWithBootstrapButtons.fire({
+        //             title: '取消刪除',
+        //             html: '尚未刪除該筆會員資料',
+        //             type: 'info'
+        //         })
+        //     }
+        // })
     }
     
     $(".data_body").on("click", ".member_card", function(){
