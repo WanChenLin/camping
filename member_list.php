@@ -86,7 +86,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div>
                 <form name="formSearch" id="formSearch" class="form-inline" method="POST" onsubmit="return false">
                     <input type="hidden" name="searchdb" value="check">
-                    <input class="form-control mr-sm-2" type="search" name="search" placeholder="搜尋會員資料" aria-label="Search" value="">
+                    <input class="form-control mr-sm-2" type="search" name="search" class="search_input" placeholder="搜尋會員資料" aria-label="Search" value="">
                     <select class="form-control mr-sm-2" name="filter_gender" id="filter_gender">
                         <option value="all">性別</option>
                         <option value="male">男</option>
@@ -265,7 +265,15 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tr>`;
     const tr_func = _.template(tr_str);
 
-    search_btn.addEventListener('mousedown', function(event){
+    search_btn.addEventListener('mousedown', searching);
+    $("body").on('keydown', function(){
+        let keycode = event.which;
+        if(keycode == 13){ // Enter鍵的keycode是13
+            searching();
+        }
+    });
+
+    function searching(event){
         let form = new FormData(document.formSearch)
         fetch('member_search_api.php', {
                 method: 'POST',
@@ -275,9 +283,9 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     return response.json();
                 })
             .then(obj => {
-                    console.log(obj);
+                    // console.log(obj);
                     ori_data = obj; // 讓ori_data的內容為SQL的資料
-                    console.log(ori_data);
+                    // console.log(ori_data);
                     info_bar.style.display = 'block';
 
                     if (obj.success) {
@@ -294,16 +302,16 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         str += tr_func(ori_data.data[s]);
                     }
                     data_body.innerHTML = str;
-                })
-    });
-
-    $("#search_btn").click(function(){
+                });
+        // 以下是改變麵包屑
         let list_li = `<li class="breadcrumb-item active bread_list"><a href="member_list.php">會員清單</a></li>`;
         let search_li = `<li class="breadcrumb-item active">搜尋會員</li>`;
-        $(".bread_list").css("display","none");
-        $(".bread ol").append(list_li);
-        $(".bread ol").append(search_li);
-    })
+        if($(".bread li").length == 2){
+            $(".bread_list").css("display","none");
+            $(".bread ol").append(list_li);
+            $(".bread ol").append(search_li);
+        }
+    }
 
     $("#goTop").click(function(){
         $("html").animate({ 
