@@ -208,8 +208,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- SweetAlert2 JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <!-- Tiny Nice Confirmation -->
-<link rel="stylesheet" href="Tiny-Nice-Confirmation-Popup-Plugin-With-jQuery-H-confirm-alert/HPCF/H-confirm-alert.css" />
-<script type="text/javascript" src="Tiny-Nice-Confirmation-Popup-Plugin-With-jQuery-H-confirm-alert/HPCF/H-confirm-alert.js" ></script>
+<link rel="stylesheet" href="HPCF/H-confirm-alert.css" />
+<script type="text/javascript" src="HPCF/H-confirm-alert.js" ></script>
 
 <script>
 
