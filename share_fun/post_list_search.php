@@ -88,7 +88,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="搜尋文章" aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">搜尋</button>
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
         </div>
