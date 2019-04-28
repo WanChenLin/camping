@@ -1,6 +1,7 @@
 <?php
 // require __DIR__. '/__cred.php';
 require __DIR__ . '/__connect_db.php';
+@$search = $_GET['search'];
 $page_name = 'data_list';
 
 $per_page = 10;
@@ -8,7 +9,8 @@ $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 
 // 算總筆數
-$t_sql = "SELECT COUNT(1) FROM share_post";
+$t_sql = "SELECT COUNT(*) FROM share_post
+WHERE (`post_title` LIKE '%".$search."%') OR (`post_content` LIKE '%".$search."%')";
 $t_stmt = $pdo->query($t_sql);
 $total_rows = $t_stmt->fetch(PDO::FETCH_NUM)[0];
 
@@ -18,10 +20,13 @@ $total_pages = ceil($total_rows / $per_page);
 if ($page < 1) $page = 1;
 if ($page > $total_pages) $page = $total_pages;
 
+$p_start = ($page - 1) * $per_page;
 
-$sql = sprintf("SELECT * FROM share_post LEFT JOIN share_category
+$sql = "SELECT * FROM share_post LEFT JOIN share_category
 ON share_post.post_cate = share_category.cate_id
-ORDER BY post_id DESC LIMIT %s, %s", ($page - 1) * $per_page, $per_page);
+WHERE (`post_title` LIKE '%".$search."%') OR (`post_content` LIKE '%".$search."%')
+ORDER BY post_id DESC LIMIT $p_start, $per_page";
+
 
 //echo $sql;exit;
 $stmt = $pdo->query($sql);
@@ -81,14 +86,14 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php include __DIR__ . '/__style_start.html';  ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 d-flex justify-content-between my-3">
+        <div class="col-lg-12 d-flex justify-content-between mb-3">
             <div>
                 <a class="<?= $page_name == 'data_insert' ? 'active' : '' ?>" href="new_post_jq.php"><button type="button" class="btn btn-primary">新增文章</button></a>
             </div>
             <div>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="搜尋文章" aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">搜尋</button>
+                <form class="form-inline my-2 my-lg-0" method="get">
+                    <input class="form-control mr-sm-2" type="search" placeholder="搜尋文章" aria-label="Search" name="search" value="<?= $search ?>">
+                    <input class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="搜尋">
                 </form>
             </div>
         </div>
