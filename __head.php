@@ -117,10 +117,16 @@
                             </div>
     
                             <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                <a class="card-body ml-2 d-flex" href="..\event\event_insert.php">
+                                <!-- <a class="card-body ml-2 d-flex" href="..\event\event_insert.php">
+                                    新增活動
+                                </a> -->
+                                <a class="card-body ml-2 d-flex" href="event_insert.php">
                                     新增活動
                                 </a>
-                                <a class="card-body ml-2 d-flex" href="..\event\event_list.php">
+                                <!-- <a class="card-body ml-2 d-flex" href="..\event\event_list.php">
+                                    活動列表
+                                </a> -->
+                                <a class="card-body ml-2 d-flex" href="event_list_search.php">
                                     活動列表
                                 </a>
                             </div>

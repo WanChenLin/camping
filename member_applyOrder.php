@@ -19,10 +19,10 @@ $rows = $pdo_query->fetchAll(PDO::FETCH_ASSOC);
 <?php foreach ($rows as $row) : ?>
 <div class="card mb-3">
     <div class="row no-gutters">
-        <div class="col-3">
-            <img src="uploads\<?= $row['event_img'] ?>" class="card-img-top" alt="...">
+        <div class="col-md-3">
+            <img src="uploads\<?= $row['event_img'] ?> ?>" class="" alt="...">
         </div>
-        <div class="col-9">
+        <div class="col-md-9">
             <div class="card-body">
                 <p class="card-text">訂單編號<?= $row['apply_id'] ?></p>
                 <h5 class="card-title">活動名稱：<?= $row['event_name'] ?></h5>
@@ -43,6 +43,6 @@ $rows = $pdo_query->fetchAll(PDO::FETCH_ASSOC);
 </div>
 <?php endforeach ?>
 <ul class="nav nav-pills justify-content-center">
-    <li><a class="btn btn-primary" href="event_list.php" role="button">回活動列表頁</a></li>
+    <li><a class="btn btn-primary" href="event_list_search.php" role="button">回活動列表頁</a></li>
 </ul>
 <?php include __DIR__ . '/__footer.php'; ?> 

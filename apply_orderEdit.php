@@ -2,12 +2,14 @@
 // require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
-$apply_id = isset($_GET['apply_id']) ? intval($_GET['apply_id']) : 0;
+$apply_id = isset($_GET['apply_id']) ? substr($_GET['apply_id'],0) : 0;
+// echo $apply_id;
 
-$sql = "SELECT * FROM `event_applyorder` WHERE apply_id=$apply_id";
+$sql = "SELECT * FROM `event_applyorder` WHERE apply_id='$apply_id'";
 $pdo_query = $pdo->query($sql);
 $row = $pdo_query->fetch(PDO::FETCH_ASSOC);
-
+// echo $row['event_id'];
+// echo $row['apply_id'];
 
 if (isset($_POST['apply_pay'])) {
 
@@ -57,7 +59,7 @@ if (isset($_POST['apply_pay'])) {
         color: red !important;
     }
 </style> -->
-
+<!-- 
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link" href="event_insert.php">
@@ -74,31 +76,41 @@ if (isset($_POST['apply_pay'])) {
             <h5>訂單修改</h5>
         </a>
     </li>
-</ul>
+</ul> -->
 
-<div class="card m-2">
+<aside class="bg-warning">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb my-2">
+            <li class="breadcrumb-item">主題活動</li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="event_list_search.php">活動列表</a></li>
+            <li class="breadcrumb-item active" aria-current="page">報名資訊</li>
+            <li class="breadcrumb-item active" aria-current="page">訂單修改</li>
+        </ol>
+    </nav>
+</aside>
+
+<!-- <div class="card m-2"> -->
     <?php if (isset($msg)) : ?>
     <div class="alert alert-<?= $msg['type'] ?>" role="alert">
         <?= $msg['info'] ?>
     </div>
     <?php endif ?>
-    <div class="card-body p-4">
+    <div class="card-body container">
         <form method="post" name="form1" onsubmit="return checkForm();">
             <input type="hidden" name="checkme" value="update">
-            <div class="form-group container">
-                <div class="d-flex">
-                    <label for="apply_pay" style="width:120px">付款狀態：</label>
-                    <input type="text" class="form-control" id="apply_pay" name="apply_pay" value="<?= $row['apply_pay'] ?>">
-                </div>
-
-                <small id="apply_payHelp" class="form-text text-muted" style="padding-left:120px">1=>已付款；空值=>未付款</small>
+            <!-- <div class="form-group form-row">
+                <label for="applyList_name" class="col-sm-6 col-md-2 ">參加人姓名 </label>
+                <div id="applyList_name" name="applyList_name" class="col-sm-6 col-md-10"><?= $row['applyList_name'] ?></div>
+            </div> -->
+            <div class="form-group form-row">
+                <label for="apply_pay" class="col-sm-4 col-md-2 ">付款狀態 </label>
+                <input type="text" class="form-control col-sm-4 col-md-6" id="apply_pay" name="apply_pay" value="<?= $row['apply_pay'] ?>">
+                <small id="apply_payHelp" class="form-text col-sm-4 col-md-4">1=>已付款；空值=>未付款</small>
             </div>
-            <div class="form-group container">
-                <div class="d-flex">
-                    <label for="apply_order" style="width:120px">取消訂單：</label>
-                    <input class="form-control" id="apply_order" name="apply_order" value="<?= $row['apply_order'] ?>">
-                </div>
-                <small id="apply_orderHelp" class="form-text text-muted" style="padding-left:120px">1=>取消訂單</small>
+            <div class="form-group form-row">
+                <label for="apply_order" class="col-sm-4 col-md-2 ">取消訂單 </label>
+                <input class="form-control col-sm-4 col-md-6" id="apply_order" name="apply_order" value="<?= $row['apply_order'] ?>">
+                <small id="apply_orderHelp" class="form-text col-sm-4 col-md-4" >1=>取消訂單</small>
             </div>
             <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary">確定修改</button>
@@ -107,7 +119,7 @@ if (isset($_POST['apply_pay'])) {
         </form>
 
     </div>
-</div>
+<!-- </div> -->
 
 
 <?php include __DIR__ . '/__md.php'; ?>
@@ -125,5 +137,14 @@ if (isset($_POST['apply_pay'])) {
 
         return isPassed;
     }
+    var windowWidth=$(window).width();      
+        console.log(windowWidth);
+        if(windowWidth<=768){
+            $("label").removeClass("text-right");
+            $("label").addClass("text-left");
+        }else{
+            $("label").removeClass("text-left");
+            $("label").addClass("text-right");
+        }
 </script>
 <?php include __DIR__ . '/__footer.php'; ?> 

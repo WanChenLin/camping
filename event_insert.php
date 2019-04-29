@@ -18,6 +18,7 @@ $event_price = '';
 $camp_id = '';
 $event_upLimit = '';
 $event_remark = '';
+$event_shelf = '';
 $event_img = '';
 
 
@@ -34,6 +35,7 @@ if (isset($_POST['checkme'])) {
     $event_price = htmlentities($_POST['event_price']);
     $camp_id = htmlentities($_POST['camp_id']);
     $event_upLimit = htmlentities($_POST['event_upLimit']);
+    $event_shelf = htmlentities($_POST['event_shelf']);
     $event_remark = htmlentities($_POST['event_remark']);
     $event_img = htmlentities($_POST['event_img']);
       
@@ -45,9 +47,9 @@ if (isset($_POST['checkme'])) {
     }
 
         $sql = "INSERT INTO `event_list`(
-            `event_name`, `event_intro`,`event_intro2`,`event_intro3`, `event_applyStart`, `event_applyEnd`,`event_dateStart`,`event_dateEnd`, `event_price`, `camp_id`, `event_upLimit`, `event_remark`,`event_img`
+            `event_name`, `event_intro`,`event_intro2`,`event_intro3`, `event_applyStart`, `event_applyEnd`,`event_dateStart`,`event_dateEnd`, `event_price`, `camp_id`, `event_upLimit`, `event_remark`,`event_img`,`event_shelf`
             ) VALUES (
-                ?,?,?,?,?,?,?,?,?,?,?,?,?
+                ?,?,?,?,?,?,?,?,?,?,?,?,?,?
                 )";
 
     try {
@@ -67,6 +69,7 @@ if (isset($_POST['checkme'])) {
             $_POST['event_upLimit'],
             $_POST['event_remark'],
             $_POST['event_img'],
+            $_POST['event_shelf'],
         ]);
 
         if ($pdo_pre->rowCount() == 1) {
@@ -93,8 +96,23 @@ if (isset($_POST['checkme'])) {
     .form-group small {
         color: red !important;
     }
-</style>
+    /* @media (max-width:768px) {
+        label{}
+    } */
 
+    @media (min-width:768px) {
+        /* .menu_box_sm {
+            display: none;
+        }
+        .nav_cross{
+            display: none;
+        } */
+        label{
+            text-align: right;
+        }
+    }
+</style>
+<!-- 
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link active" href="#">
@@ -106,7 +124,18 @@ if (isset($_POST['checkme'])) {
             <h5>活動列表</h5>
         </a>
     </li>
-</ul>
+</ul> -->
+
+<aside class="bg-warning">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb my-2">
+            <li class="breadcrumb-item">主題活動</li>
+            <li class="breadcrumb-item active" aria-current="page">新增活動</a></li>
+        </ol>
+    </nav>
+</aside>
+
+
 <?php if (isset($msg)) : ?>
 <div class="alert alert-<?= $msg['type'] ?>" role="alert">
     <?= $msg['info'] ?>
@@ -114,7 +143,7 @@ if (isset($_POST['checkme'])) {
 <?php endif ?>
 
 <!-- <div class="card m-2"> -->
-<div class="card-body p-4 container">
+<div class="card-body container">
     <form name="form1" method="post" onsubmit="return checkForm();">
         <input type="hidden" name="checkme" value="checkme">
         <div class="form-group">
@@ -123,36 +152,36 @@ if (isset($_POST['checkme'])) {
                 <div class="col-md-10"><img class="" id="myimg" src="" alt="" width="200px"></div>
             </div>
             <div class="form-row">
-                <label for="my_file" class="col-md-2">圖片上傳：</label>
+                <label for="my_file" class="col-md-2 ">圖片上傳</label>
                 <input class="col-md-10" type="file" name="my_file" id="my_file">
             </div>
             <div class="form-row d-none">
-                <label for="event_img" class="col-md-2"></label>
+                <label for="event_img" class="col-md-2 "></label>
                 <input class="form-control col-md-10" type="text" name="event_img" id="event_img" value="<?= $event_img ?>">
             </div>
         </div>
         <div class="form-group form-row">
-            <label for="event_name" class="col-md-2">活動名稱：</label>
+            <label for="event_name" class="col-md-2 ">活動名稱</label>
             <input type="text" class="form-control col-md-10" id="event_name" name="event_name" value="<?= $event_name ?>">
             <small id="event_nameHelp" class="form-text text-muted"></small>
         </div>
         <div class="form-group  form-row">
-            <label for="event_intro" class="col-md-2">活動內容一：</label>
+            <label for="event_intro" class="col-md-2 ">活動內容一</label>
             <textarea class="form-control col-md-10" id="event_intro" name="event_intro" style="height:150px"></textarea>
             <small id="event_introHelp" class="form-text text-muted"></small>
         </div>
         <div class="form-group  form-row">
-            <label for="event_intro2" class="col-md-2">活動內容二：</label>
+            <label for="event_intro2" class="col-md-2 ">活動內容二</label>
             <textarea class="form-control col-md-10" id="event_intro2" name="event_intro2" style="height:150px"></textarea>
             <small id="event_intro2Help" class="form-text text-muted"></small>
         </div>
         <div class="form-group  form-row">
-            <label for="event_intro3" class="col-md-2">活動內容三：</label>
+            <label for="event_intro3" class="col-md-2 ">活動內容三</label>
             <textarea class="form-control col-md-10" id="event_intro3" name="event_intro3" style="height:150px"></textarea>
             <small id="event_intro3Help" class="form-text text-muted"></small>
         </div>
         <div class="form-group  form-row">
-            <label for="camp_id" class="col-md-2">營地(編號)名稱：</label>
+            <label for="camp_id" class="col-md-2 ">營地(編號)名稱</label>
             <!-- <input type="text" class="form-control" id="camp_id" name="camp_id"> -->
             <select name="camp_id" id="camp_id" class="form-control col-md-10">
                 <?php foreach ($rows as $row) : ?>
@@ -164,14 +193,14 @@ if (isset($_POST['checkme'])) {
         <div class="form-row">
             <div class="form-group col-md-6">
                 <div class="form-row">
-                    <label for="event_applyStart" class=" col-md-4">開始報名日期：</label>
+                    <label for="event_applyStart" class=" col-md-4 ">開始報名日期</label>
                     <input type="date" class="form-control col-md-8" id="event_applyStart" name="event_applyStart">
                 </div>
                 <small id="event_applyStartHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group col-md-6">
                 <div class="form-row">
-                    <label for="event_applyEnd" class="col-md-4 text-right">截止報名日期：</label>
+                    <label for="event_applyEnd" class="col-md-4  ">截止報名日期</label>
                     <input type="date" class="form-control col-md-8" id="event_applyEnd" name="event_applyEnd">
                 </div>
                 <small id="event_applyEndHelp" class="form-text text-muted"></small>
@@ -180,35 +209,44 @@ if (isset($_POST['checkme'])) {
         <div class="form-row">
             <div class="form-group col-md-6">
                 <div class="form-row">
-                    <label for="event_dateStart" class=" col-md-4">活動開始日期：</label>
+                    <label for="event_dateStart" class=" col-md-4 ">活動開始日期</label>
                     <input type="date" class="form-control col-md-8" id="event_dateStart" name="event_dateStart">
                 </div>
                 <small id="event_dateStarttHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group col-md-6">
                 <div class="form-row">
-                    <label for="event_dateEnd" class="col-md-4 text-right">活動結束日期：</label>
+                    <label for="event_dateEnd" class="col-md-4  ">活動結束日期</label>
                     <input type="date" class="form-control col-md-8" id="event_dateEnd" name="event_dateEnd">
                 </div>
                 <small id="event_dateEndHelp" class="form-text text-muted"></small>
             </div>
         </div>
         <div class="form-group form-row form-row">
-            <label for="event_price" class="col-md-2">活動價格：</label>
+            <label for="event_price" class="col-md-2 ">活動價格</label>
             <input type="number" min=1 class="form-control col-md-10" id="event_price" name="event_price" value="<?= $event_price ?>">
             <small id="event_priceHelp" class="form-text text-muted"></small>
         </div>
         <div class="form-group  form-row">
-            <label for="event_upLimit" class="col-md-2">人數上限：</label>
+            <label for="event_upLimit" class="col-md-2 ">人數上限</label>
             <input type="number" min=1 class="form-control col-md-10" id="event_upLimit" name="event_upLimit" value="<?= $event_upLimit ?>">
             <small id="event_upLimitHelp" class="form-text text-muted"></small>
         </div>
-        <div class="form-group ">
-            <label for="event_remark" style="width:100px">備註</label>
-            <textarea class="form-control" id="event_remark" name="event_remark" style="height:100px"></textarea>
+        <div class="form-group form-row">
+            <label class="col-md-2 " for="event_shelf">是否上架</label>
+            <select name="event_shelf" id="event_shelf" class="form-control col-md-10">
+                <option value="0">上架</option>
+                <option value="1">下架</option>
+                <option value="3">頁面預告</option>
+            </select>
+            <small id="camp_idHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group form-row">
+            <label for="event_remark" class="col-md-2 ">備註</label>
+            <textarea class="form-control col-md-10" id="event_remark" name="event_remark"></textarea>
         </div>
         <div class="form-row justify-content-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">新增</button>
         </div>
     </form>
 
@@ -244,5 +282,28 @@ if (isset($_POST['checkme'])) {
     });
 
     
+    // var windowWidth=$(window).width();      
+    //     console.log(windowWidth);
+    //     if(windowWidth<=768){
+    //         $("label").removeClass("text-right");
+    //         $("label").addClass("text-left");
+    //     }else{
+    //         $("label").removeClass("text-left");
+    //         $("label").addClass("text-right");
+    //     }
+
+    $(window).resize(function(){
+        var windowWidth=$(this).width();
+        // console.log(windowWidth);
+        if(windowWidth<=768){
+            $("label").removeClass("text-right");
+            $("label").addClass("text-left");
+        }else{
+            $("label").removeClass("text-left");
+            $("label").addClass("text-right");
+        }
+    });
+
+
 </script>
 <?php include __DIR__ . '/__footer.php'; ?> 

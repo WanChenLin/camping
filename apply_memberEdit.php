@@ -76,9 +76,20 @@ if (isset($_POST['applyList_mobile']) and isset($_POST['applyList_email']) and i
     .form-group small {
         color: red !important;
     }
+    @media (min-width:768px) {
+        /* .menu_box_sm {
+            display: none;
+        }
+        .nav_cross{
+            display: none;
+        } */
+        label{
+            text-align: right;
+        }
+    }
 </style>
 
-<ul class="nav nav-tabs">
+<!-- <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link" href="event_insert.php">
             <h5>新增活動</h5>
@@ -94,48 +105,62 @@ if (isset($_POST['applyList_mobile']) and isset($_POST['applyList_email']) and i
             <h5>參加人資料修改</h5>
         </a>
     </li>
-</ul>
+</ul> -->
+
+<aside class="bg-warning">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb my-2">
+            <li class="breadcrumb-item">主題活動</li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="event_list_search.php">活動列表</a></li>
+            <li class="breadcrumb-item active" aria-current="page">報名資訊</li>
+            <li class="breadcrumb-item active" aria-current="page">報名名單</li>
+            <li class="breadcrumb-item active" aria-current="page">名單修改</li>
+        </ol>
+    </nav>
+</aside>
+
+
 <?php if (isset($msg)) : ?>
 <div class="alert alert-<?= $msg['type'] ?>" role="alert">
     <?= $msg['info'] ?>
 </div>
 <?php endif ?>
 
-<div class="card m-2">
-    <div class="card-body p-4">
+<!-- <div class="card m-2"> -->
+    <div class="card-body container">
 
         <form method="post" name="form1" onsubmit="return checkForm();">
             <input type="hidden" name="checkme">
             <div class="form-group form-row">
-                <label for="applyList_name" class="col-sm-6 col-md-2">參加人姓名：</label>
+                <label for="applyList_name" class="col-sm-6 col-md-2 ">參加人姓名 </label>
                 <div id="applyList_name" name="applyList_name" class="col-sm-6 col-md-10"><?= $row['applyList_name'] ?></div>
             </div>
             <div class="form-group form-row">
-                <label for="applyList_idn" class="col-md-2 col-sm-6">參加人身分證字號：</label>
+                <label for="applyList_idn" class="col-md-2 col-sm-6 ">參加人身分證字號 </label>
                 <div id="applyList_idn" name="applyList_idn" class="col-md-10 col-sm-6"><?= $row['applyList_idn'] ?></div>
             </div>
             <div class="form-group form-row">
-                <label for="applyList_mobile" class="col-md-2">參加人mobile：</label>
+                <label for="applyList_mobile" class="col-md-2 ">參加人mobile </label>
                 <input type="text" class="form-control col-md-10" id="applyList_mobile" name="applyList_mobile" value="<?= $row['applyList_mobile'] ?>">
                 <small id="applyList_mobileHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group form-row">
-                <label for="applyList_email" class="col-md-2">參加人email：</label>
+                <label for="applyList_email" class="col-md-2 ">參加人email </label>
                 <input class="form-control col-md-10" id="applyList_email" name="applyList_email" value="<?= $row['applyList_email'] ?>">
                 <small id="applyList_emailHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group form-row">
-                <label for="applyList_emg" class="col-md-2">緊急連絡人：</label>
+                <label for="applyList_emg" class="col-md-2 ">緊急連絡人 </label>
                 <input class="form-control col-md-10" id="applyList_emg" name="applyList_emg" value="<?= $row['applyList_emg'] ?>">
                 <small id="applyList_emgHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group form-row">
-                <label for="applyList_emgMobile" class="col-md-2">緊急連絡人電話：</label>
+                <label for="applyList_emgMobile" class="col-md-2 ">緊急連絡人電話 </label>
                 <input class="form-control col-md-10" id="applyList_emgMobile" name="applyList_emgMobile" value="<?= $row['applyList_emgMobile'] ?>">
                 <small id="applyList_emgMobileHelp" class="form-text text-muted"></small>
             </div>
             <div class="form-group form-row">
-                <label for="applyList_remark" class="col-md-2">備註：</label>
+                <label for="applyList_remark" class="col-md-2 ">備註 </label>
                 <textarea type="text" class="form-control col-md-10" id="applyList_remark" name="applyList_remark" style="height:150px"><?= $row['applyList_remark'] ?></textarea>
                 <small id="applyList_remarkHelp" class="form-text text-muted"></small>
             </div>
@@ -146,7 +171,7 @@ if (isset($_POST['applyList_mobile']) and isset($_POST['applyList_email']) and i
             </div>
         </form>
     </div>
-</div>
+<!-- </div> -->
 
 
 <?php include __DIR__ . '/__md.php'; ?>
@@ -205,6 +230,17 @@ if (isset($_POST['applyList_mobile']) and isset($_POST['applyList_email']) and i
 
             return isPassed;
         };
+        $(window).resize(function(){
+            var windowWidth=$(this).width();
+            // console.log(windowWidth);
+            if(windowWidth<=768){
+                $("label").removeClass("text-right");
+                $("label").addClass("text-left");
+            }else{
+                $("label").removeClass("text-left");
+                $("label").addClass("text-right");
+            }
+        });
 
     </script>
 <?php include __DIR__ . '/__footer.php'; ?> 
