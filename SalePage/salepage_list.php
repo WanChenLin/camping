@@ -32,31 +32,27 @@ $page_name = 'salepage_list.php';
 
 </style>
 <main class="col-10 bg-white ">
-        <aside class="my-2">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="salepage_list.php">商品清單</a>
-                </li>
-                <!-- <li class="nav-item">
-                <a class="nav-link" href="member_insert.php">新增資料</a>
-            </li> -->
-                <li class="nav-item">
-                    <a class="nav-link " href="salepage_creat.php">建立商品頁</a>
-                </li>
-            </ul>
-        </aside>
-        <div id="saleinfo_bar" class="alert alert-success " role="alert" style="display:none; "></div>
-        <!-- search input -->
+<!-- 取消原本的改為麵包屑 -->
+    <aside class="my-2">
+        <nav class="bread" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="salepage_list.php">商品管理</a></li>
+            <li class="breadcrumb-item active bread_list">商品清單</li>
+        </ol>
+        </nav>
+    </aside>
+    <div id="saleinfo_bar" class="alert alert-success " role="alert" style="display:none; "></div>
+        <!--搜尋商品的區塊-->
         <div class="form-group">
             <label for="salepage_salecateid" class="must" >選擇商品分類</label>
             <select id="salecateid" name="salecateid" class="custom-select custom-select-sm col-sm-2 ">
-                <option value="0" selected>請選擇</option>
+                <option value="" selected>請選擇</option>
                 <option value="1">冷凍食品</option>
                 <option value="2">冷藏食品</option>
                 <option value="3">生鮮食材</option>
                 <option value="4">素料理專區</option>
             </select>  
-            </div>
+        </div>
         <div class="form-group row">
             <label for="salepage_quility" class="col-form-label ml-3 ">搜尋商品名稱</label>
             <div class="ml-1">
@@ -73,11 +69,11 @@ $page_name = 'salepage_list.php';
         <!-- <button id="search_btn" type="submit" class="btn btn-primary btn-sm" >搜尋</button> -->
 
 <div class="container-fluid table-responsive " >
+    <!-- 分頁 -->
     <div class="row text-center">
         <div class="col-lg-12">
             <nav>
-                <ul class="pagination pagination-sm justify-content-end">                    
-                </ul>
+                <ul class="pagination pagination-sm justify-content-end"></ul>                 
             </nav>
         </div>
     </div>
@@ -108,13 +104,6 @@ $page_name = 'salepage_list.php';
                 </thead>
 
                 <tbody id="data_body" style="font-size:14px;" >
-                <!-- <tr>
-
-                </tr> -->
-                
-                    
-                    <!-- <i class="fas fa-trash-alt"></i>                                 -->
-                
                 </tbody>
 
             </table>
@@ -155,11 +144,7 @@ $page_name = 'salepage_list.php';
                             <a href="salepage_edit.php?salepage_id=<%= salepage_id %>"><i class="fas fa-info-circle"></i></a>
                             
                             </td>
-                        </tr>`;
-
-                        
-                        // tr_str.td.className = 'h';
-                        // h.style.height = size + 'px';                
+                        </tr>`;   
     
 
     
@@ -171,7 +156,7 @@ $page_name = 'salepage_list.php';
                     </li>`;
     const pagi_func = _.template(pagi_str);
 
-    //search    
+    //用jQuery search    
     function load_data(query,cate)
     {
         $.ajax({
@@ -191,6 +176,16 @@ $page_name = 'salepage_list.php';
                     str += tr_func(v);
                 }
                 data_body.innerHTML = str;
+
+                // $(document).on('click', '.pagination_link', function(){  
+                // var page = $(this).attr("id");  
+                // load_data(page);  
+                // });
+                // $(document).on('click', '#submitbtn', function(){  
+                //     var page = $(this).attr("id");
+                //     var search = $('#search').val();
+                //     load_data(page,search);  
+                // });
 
                 str = '';
                 for(let i=1; i<=ori_data.totalPages; i++)
@@ -246,6 +241,7 @@ $page_name = 'salepage_list.php';
         var search = $("#search_name").val();
         var search_cate =$("#salecateid").val();
         load_data(search,search_cate);
+      
         // if (search != '') 
         // {
             
@@ -273,7 +269,7 @@ $page_name = 'salepage_list.php';
     //     }
     // });    
 
-    //list
+    //list 顯示全部資料
     const myHashChange =() =>
     {
         let h = location.hash.slice(1);
@@ -314,6 +310,7 @@ $page_name = 'salepage_list.php';
         }) .fail(function() {
             alert( "error" );
         });
+
 
         // fetch('salepage_list_api.php?page=' + page)
         //     .then(response=>response.json())
