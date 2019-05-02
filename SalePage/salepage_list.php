@@ -32,7 +32,7 @@ $page_name = 'salepage_list.php';
 
 </style>
 <main class="col-10 bg-white ">
-<!-- 取消原本的改為麵包屑 -->
+<!--取消原本的改為麵包屑 -->
     <aside class="my-2">
         <nav class="bread" aria-label="breadcrumb">
         <ol class="breadcrumb">

@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/__salepage_connect_db.php';
 
-$per_page = 10;
+$per_page = 5;
 
 $result = [
     'success' => false,
