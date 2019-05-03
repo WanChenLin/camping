@@ -1,5 +1,4 @@
 <?php
-//require __DIR__.'/__cred.php';
 require __DIR__.'/__connect.php';
 
 //GET取得的值會顯示在URL上

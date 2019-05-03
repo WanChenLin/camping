@@ -6,11 +6,11 @@ require __DIR__.'/__connect.php';
  $per_page=10;
  $page=isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-//計算總筆數
+
  $t_sql="SELECT COUNT(1) FROM `campsite_type`";
  $t_stmt=$pdo->query($t_sql);
  $total_rows=$t_stmt->fetch(PDO::FETCH_NUM)[0];
-//計算總頁數
+
  $total_pages=ceil($total_rows/$per_page);
  $sql=sprintf("SELECT * FROM `campsite_type`ORDER BY `campArea_id`DESC LIMIT %s,%s",($page-1)*$per_page,$per_page);
 

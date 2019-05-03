@@ -7,7 +7,6 @@ header('Content-Type:application/json');
     'errorCode'=>0,
     'errorMsg'=>'資料輸入不完整',
     'post'=>[],
-
  ];
  
 if (isset($_POST['checkme'])){

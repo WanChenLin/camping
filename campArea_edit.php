@@ -31,7 +31,6 @@ require __DIR__.'/__connect.php';
          </ol>
         </nav>
 </aside>
-
 <div class="container">
 
 <div class="card" style="border:none">
