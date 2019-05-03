@@ -12,6 +12,7 @@ require __DIR__.'/__connect.php';
      exit;
  }
  $row=$stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
 <?php include __DIR__.'/__html_header.php'; ?>
 <?php include __DIR__.'/__html_navbar01.php'; ?>
@@ -33,37 +34,51 @@ require __DIR__.'/__connect.php';
 
      
       <div class="card" >
-        <div class="card-body">
+        <div class="card-body" style="border:none">
         <div id="info_bar" class="alert alert-success" role="alert" style="display:none"></div>
-            <h5 class="card-title">修改資料</h5>
+            <h5 class="card-title text-center col-sm-10">修改資料</h5>
             <form name="form2" method="post" onsubmit="return checkForm()" >
             <input type="hidden" name="campImg_id" value="<?= $row['campImg_id'] ?>">
-            <div class="form-group">
-                <label for="camp_name">1.營區名稱</label>
+            <div class="form-group row">
+                <label for="camp_name" class="col-sm-2 col-form-label text-right">營區名稱</label>
+                <div class="col-sm-6">
                 <input type="text" class="form-control" id="camp_name" name="camp_name" placeholder=""
                 value="<?= $row['camp_name'] ?>">
                 <small id="camp_nameHelp" class="form-text text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="campImg_name">2.圖片名稱</label>
+            <div class="form-group row">
+                <label for="campImg_name" class="col-sm-2 col-form-label text-right">圖片名稱</label>
+                <div class="col-sm-6">
                 <input type="text" class="form-control" id="campImg_name" name="campImg_name" placeholder=""
                 value="<?= $row['campImg_name'] ?>">
                 <small id="campImg_nameHelp" class="form-text text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="campImg_file">3.圖片說明</label>
+            <div class="form-group row">
+                <label for="campImg_file" class="col-sm-2 col-form-label text-right">圖片說明</label>
+                <div class="col-sm-6">
                 <textarea class="form-control" id="campImg_file" name="campImg_file" cols="30" rows="3"><?= $row['campImg_file'] ?></textarea>
                 <small id="campImg_fileHelp" class="form-text text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-                  <label for="picture" >4.圖片</label><br> 
+            <div class="form-group row">
+                  <label for="picture" class="col-sm-2 col-form-label text-right" >圖片</label><br> 
+                  <div class="col-sm-6">
                   <input type="hidden" id="camp_image" name="camp_image" value="<?= $row['camp_image'] ?>">
                       <img id="myimg" src="./<?= $row['camp_image'] ?>" alt="" width="400px">
                       <br>
                       <input type="file" name="my_file" id="my_file" accept="image/*">
-                       
+                 </div>  
             </div>
-            <button id="submit_btn" type="submit" class="btn btn-primary">Submit</button>
+
+            <div id="submit_btn" class="form-group row after_sub text-center">
+            <div class="col-sm-10">
+                <button  type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </div>
+
+           
             </form>
                        
         </div>
@@ -84,6 +99,23 @@ require __DIR__.'/__connect.php';
             // 'campImg_path'
         
         ];
+
+        const edit_success = () => {
+        Swal.fire({
+            type: 'success',
+            title: '資料修改成功',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+    const edit_error = () => {
+        Swal.fire({
+            type: 'error',
+            title: '資料修改失敗',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
 
         const ts = {};
         for(let v of field_image){
@@ -121,9 +153,11 @@ require __DIR__.'/__connect.php';
                         if(obj.success){
                             info_bar.className = 'alert alert-success';
                             info_bar.innerHTML = '資料修改成功';
+                            edit_success();
                         } else {
                             info_bar.className = 'alert alert-danger';
                             info_bar.innerHTML = obj.errorMsg;
+                            edit_error();
                         }
 
                         submit_btn.style.display = 'block';

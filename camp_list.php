@@ -17,11 +17,13 @@
     營地清單
   </a>
   <a href="./campImg_list.php" class="list-group-item list-group-item-action">圖片清單</a>
+  <a href="./campArea_list.php" class="list-group-item list-group-item-action">營地區域清單</a>
   <!-- <a href="#" class="list-group-item list-group-item-action">分類清單</a>
   <a href="#" class="list-group-item list-group-item-action">價格清單</a> -->
   
 </div>
  
 </main>
+
 
 <?php include __DIR__.'/__html_footer.php'; ?>

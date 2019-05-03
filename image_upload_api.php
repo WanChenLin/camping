@@ -11,7 +11,6 @@ if (empty($_FILES['my_file'])) {
     exit;
 }
 
-
   $filename = $_FILES['my_file']['name'];
   switch ($_FILES['my_file']['type']) {
     case 'image/jpeg':

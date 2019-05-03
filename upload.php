@@ -8,7 +8,6 @@
  if(empty ($_FILES['my_file'])){
      exit;
  }
- 
  $goto='campImg_list.php';
  //move_uploaded_file()將上傳的文件移動到新位置
  //執行成功，顯示檔名、類型、大小

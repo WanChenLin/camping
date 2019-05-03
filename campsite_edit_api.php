@@ -11,15 +11,12 @@ header('Content-Type:application/json');
 
  ];
 
- 
  $camp_id=isset($_POST['camp_id']) ? intval($_POST['camp_id']) : 0;
 
  if (isset($_POST['camp_name']) and !empty($camp_id)){
 
     $name = $_POST['camp_name'];
     $address = $_POST['camp_address'];
-    $city = $_POST['city'];
-    $dist = $_POST['dist'];
     $location = $_POST['camp_location'];
     $tel = $_POST['camp_tel'];
     $fax = $_POST['camp_fax'];
@@ -27,6 +24,7 @@ header('Content-Type:application/json');
     $ownerName = $_POST['camp_ownerName'];
     $openTime = $_POST['camp_openTime'];
     $target = $_POST['camp_target'];
+    $intro = $_POST['camp_intro'];
 
     $result['post']=$_POST;
 
@@ -83,8 +81,7 @@ header('Content-Type:application/json');
             `camp_ownerName`=?, 
             `camp_openTime`=?, 
             `camp_target`=?, 
-            `city`=?, 
-            `dist`=?
+            `camp_intro`=?
        
             WHERE `camp_id`=? ";
 
@@ -103,8 +100,7 @@ header('Content-Type:application/json');
             $_POST['camp_ownerName'],
             $_POST['camp_openTime'],
             $_POST['camp_target'],
-            $_POST['city'],
-            $_POST['dist'],
+            $_POST['camp_intro'],
             $camp_id
 
             ]);
@@ -113,9 +109,11 @@ header('Content-Type:application/json');
             $result['errorCode']=200;
             $result['errorMsg']='';
             
+            
         }else{ 
             $result['errorCode']=402;
             $result['errorMsg']='資料沒有修改';
+
         }
     }catch( PDOException $ex){
         $result['errorCode']=403;

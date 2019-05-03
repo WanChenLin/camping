@@ -6,6 +6,6 @@
 <?php include __DIR__.'/__html_navbar01.php'; ?>
 
 <div class="container">
-
+  
 </div>
 <?php include __DIR__.'/__html_footer.php'; ?>

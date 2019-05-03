@@ -12,14 +12,14 @@ require __DIR__.'/__connect.php';
     $ownerName = '';
     $openTime = '';
     $target = '';
+    $intro = '';
  //isset檢查變數是否設置
  if (isset($_POST['checkme'])){
 
     $name = $_POST['camp_name'];
     $address = $_POST['camp_address'];
-    $city = $_POST['city'];
-    $dist = $_POST['dist'];
     $location = $_POST['camp_location'];
+    $intro = $_POST['camp_intro'];
     $tel = $_POST['camp_tel'];
     $fax = $_POST['camp_fax'];
     $email = $_POST['camp_email'];
@@ -27,10 +27,11 @@ require __DIR__.'/__connect.php';
     $openTime = $_POST['camp_openTime'];
     $target = $_POST['camp_target'];
    
+
 $sql="INSERT INTO `campsite_list`(
-     `camp_name`, `camp_address`, `camp_location`, `camp_tel`, `camp_fax`, `camp_email`, `camp_ownerName`, `camp_openTime`, `camp_target`, `city`, `dist`
+     `camp_name`, `camp_address`, `camp_location`, `camp_tel`, `camp_fax`, `camp_email`, `camp_ownerName`, `camp_openTime`, `camp_target`, `camp_intro`
     ) VALUES (
-        ?,?,?,?,?,?,?,?,?,?,?
+        ?,?,?,?,?,?,?,?,?,?
         )";
 
     try{
@@ -40,7 +41,7 @@ $sql="INSERT INTO `campsite_list`(
         //執行$stmt，回傳陣列內容
         $stmt->execute([
             $_POST['camp_name'],
-            $_POST['camp_address'],
+            implode("", $_POST['camp_address']),
             $_POST['camp_location'],
             $_POST['camp_tel'],
             $_POST['camp_fax'],
@@ -48,8 +49,7 @@ $sql="INSERT INTO `campsite_list`(
             $_POST['camp_ownerName'],
             $_POST['camp_openTime'],
             $_POST['camp_target'],
-            $_POST['city'],
-            $_POST['dist']
+            $_POST['camp_intro']
 
             ]);
         if ($stmt->rowCount()==1 ){
@@ -63,6 +63,7 @@ $sql="INSERT INTO `campsite_list`(
                 $msg=[
                     'type'=>'success',
                     'info'=>'資料新增成功'
+                   
                 ];
             }
             
@@ -70,6 +71,7 @@ $sql="INSERT INTO `campsite_list`(
             $msg=[
                 'type'=>'danger',
                 'info'=>'資料新增錯誤'
+                
             ];
         }
     }catch( PDOException $ex){
@@ -77,17 +79,13 @@ $sql="INSERT INTO `campsite_list`(
             'type'=>'danger',
             'info'=>'資料重複輸入'
         ];
-    }        
-       
-        
+    }           
     }
-
-
 ?>
 <?php include __DIR__.'/__html_header.php'; ?>
 <?php include __DIR__.'/__html_navbar01.php'; ?>
 <style>
-.form-group span{
+span{
     color:red !important;
 }
 
@@ -102,94 +100,109 @@ $sql="INSERT INTO `campsite_list`(
          </ol>
         </nav>
 </aside>
-      <div class="card" >
+<div class="container">
+
+      <div class="card" style="border:none" >
         <div class="card-body">
-            <h5 class="card-title">新增資料
+            <h5 class="card-title text-center col-sm-10">新增營地資料
                 <?php if (isset( $msg)):?>
                 <div class="alert alert-<?= $msg['type'] ?>" role="alert">
                 <?= $msg['info'] ?>
                 </div>
                 <?php endif ?>
-
+                <span style="font-size:12px">*為必填欄位</span>
             </h5>
-            <form name="form1" method="post" onsubmit="return checkForm()">
+            <form name="form1" method="post" onsubmit="return checkForm()" >
             <input type="hidden" name="checkme" value="check123">
-            <div class="form-group">
-                <label for="camp_name">1.營區名稱<span>(必填)</span></label>
+            <div class="form-group row">
+                <label for="camp_name" class="col-sm-2 col-form-label text-right"><span>*</span>營區名稱</label>
+                <div class="col-sm-6">
                 <input type="text" class="form-control" id="camp_name" name="camp_name" placeholder=""
                 value="<?= $name ?>">
+                </div>
                 <small id="camp_nameHelp" class="form-text text-muted"></small>
-            </div>   
-            <div class="form-group">
-                <label for="city">2.城市</label>
-                <select class="custom-select  col-sm-4 " name="city" id="city" value="<?= $city ?>"  >
-                    <option value="">請選擇</option>
-                    <option value="臺北市" <?php echo ($city=="臺北市") ?'selected':''?>>臺北市</option>
-                    <option value="新北市" <?php echo ($city=="新北市") ?'selected':''?>>新北市</option>
-                    <option value="基隆市" <?php echo ($city=="基隆市") ?'selected':''?>>基隆市</option>
-                    <option value="桃園市" <?php echo ($city=="桃園市") ?'selected':''?>>桃園市</option>
-                    <option value="新竹縣" <?php echo ($city=="新竹縣") ?'selected':''?>>新竹縣</option>
-                    <option value="臺中市" <?php echo ($city=="臺中市") ?'selected':''?>>臺中市</option>
-                    <option value="苗栗縣" <?php echo ($city=="苗栗縣") ?'selected':''?>>苗栗縣</option>
-                    <option value="彰化縣" <?php echo ($city=="彰化縣") ?'selected':''?>>彰化縣</option>
-                    <option value="南投縣" <?php echo ($city=="南投縣") ?'selected':''?>>南投縣</option>
-                    <option value="雲林縣" <?php echo ($city=="雲林縣") ?'selected':''?>>雲林縣</option>
-                    <option value="高雄市" <?php echo ($city=="高雄市") ?'selected':''?>>高雄市</option>
-                    <option value="屏東縣" <?php echo ($city=="屏東縣") ?'selected':''?>>屏東縣</option>
-                    <option value="臺東縣" <?php echo ($city=="臺東縣") ?'selected':''?>>臺東縣</option>
-                    <option value="花蓮縣" <?php echo ($city=="花蓮縣") ?'selected':''?>>花蓮縣</option>
-                    <option value="宜蘭縣" <?php echo ($city=="宜蘭縣") ?'selected':''?>>宜蘭縣</option>
-            </select>
-                
-            </div>
-            <div class="form-group">
-                <label for="dist">3.地區</label>
-                <input type="text" class="form-control" id="dist" name="dist" placeholder=""
-                value="<?= $dist ?>">
-                <small id="distHelp" class="form-text text-muted"></small>
-            </div>
-            <div class="form-group">
-                <label for="camp_address">4.地址<span>(必填)</span></label>
-                <textarea class="form-control" id="camp_address" name="camp_address" cols="30" rows="3"><?= $address ?></textarea>
-                <small id="camp_addressHelp" class="form-text text-muted"></small>
-            </div>
-            <div class="form-group">
-                <label for="camp_location">5.經緯度</label>
+            </div>  
+             
+            <div class="form-group address_api">
+            <div class="row d-flex ">
+             <label for="camp_address" class="col-sm-2 col-form-label text-right "><span>*</span>地址</label>
+                    <div class="col-sm-4 d-flex">
+                        <input type="text" name="camp_address[]" class="zipcode border-0" readonly placeholder="郵遞區號" size="5" autocomplete="off">
+                    
+                    <div class="col-sm-5 d-flex p-1">
+                        <select class="form-control county" name="county"></select>
+                    </div>
+                    <div class="col-sm-5 d-flex p-1">
+                        <select class="form-control district" name="district"></select>
+                    </div>
+                    </div>
+            </div>  
+                   <div class="row d-flex">
+                   <div class="col-sm-2" ></div>
+                   <div class="col-sm-6 mt-2">
+                        <input type="text" class="form-control " id="camp_address" name="camp_address[]" placeholder="">
+                                    <small id="camp_addressHelp" class="form-text text-muted"></small>
+                   </div>
+                   
+                   </div>
+          </div>
+            <div class="form-group row">
+                <label for="camp_location" class="col-sm-2 col-form-label text-right">經緯度</label>
+                <div class="col-sm-6">
                 <input type="text" class="form-control" id="camp_location" name="camp_location" placeholder=""
                 value="<?= $location ?>">
                 <small id="camp_locationHelp" class="form-text text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="camp_tel">6.聯絡電話<span>(必填)</span></label>
+            <div class="form-group row">
+                <label for="camp_intro" class="col-sm-2 col-form-label text-right">簡介</label>
+                <div class="col-sm-6">
+                <textarea class="form-control" id="camp_intro" name="camp_intro" cols="30" rows="3"><?= $intro ?></textarea>
+                <small id="camp_introHelp" class="form-text text-muted"></small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="camp_tel" class="col-sm-2 col-form-label text-right"><span>*</span>聯絡電話</label>
+                <div class="col-sm-6">
                 <input type="text" class="form-control" id="camp_tel" name="camp_tel" placeholder=""
                 value="<?= $tel ?>">
                 <small id="camp_telHelp" class="form-text text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="camp_fax">7.傳真</label>
+            <div class="form-group row">
+                <label for="camp_fax" class="col-sm-2 col-form-label text-right">傳真</label>
+                <div class="col-sm-6">
                 <input type="text" class="form-control" id="camp_fax" name="camp_fax" placeholder=""
                 value="<?=  $fax ?>">
                 <small id="camp_faxHelp" class="form-text text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="camp_email">8.電子郵件<span>(必填)</span></label>
+            <div class="form-group row">
+                <label for="camp_email" class="col-sm-2 col-form-label text-right"><span>*</span>電子郵件</label>
+                <div class="col-sm-6">
                 <input type="text" class="form-control" id="camp_email" name="camp_email" placeholder=""
                 value="<?= $email ?>">
                 <small id="camp_emailHelp" class="form-text text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="camp_ownerName">9.聯絡人</label>
+            <div class="form-group row">
+                <label for="camp_ownerName" class="col-sm-2 col-form-label text-right">聯絡人</label>
+                <div class="col-sm-6">
                 <input type="text" class="form-control" id="camp_ownerName" name="camp_ownerName" placeholder=""
                 value="<?= $ownerName ?>">
                 <small id="camp_ownerNameHelp" class="form-text text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="camp_openTime">10.開放時間</label>
+            <div class="form-group row">
+                <label for="camp_openTime" class="col-sm-2 col-form-label text-right">開放時間</label>
+                <div class="col-sm-6">
                 <textarea class="form-control" id="camp_openTime" name="camp_openTime" cols="30" rows="3"><?= $openTime ?></textarea>
                 <small id="camp_openTimeHelp" class="form-text text-muted"></small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="camp_target">11.適合對象</label>
+            <div class="form-group row">
+                <label for="camp_target" class="col-sm-2 col-form-label text-right">適合對象</label>
+                <div class="col-sm-6">
                 <select class="custom-select  col-sm-4 " name="camp_target" id="camp_target" value="<?= $target ?>"  >
                     <option value="">請選擇</option>
                     <option value="小家庭" <?php echo ($target=="小家庭") ?'selected':''?>>小家庭</option>
@@ -198,9 +211,15 @@ $sql="INSERT INTO `campsite_list`(
                     <option value="工商團體" <?php echo ($target=="工商團體") ?'selected':''?>>工商團體</option>
             </select>
             </div>
-           
-            <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="form-group row after_sub text-center">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            
             </form>
+        </div>
         </div>
         </div>
 
@@ -209,10 +228,25 @@ $sql="INSERT INTO `campsite_list`(
   
 </main>
 <script>
+const add_success = () => {
+        Swal.fire({
+            type: 'success',
+            title: '資料新增成功',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+const add_error = () => {
+        Swal.fire({
+            type: 'error',
+            title: '資料新增錯誤',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+/*
 const fields=[
         'camp_name',    
-        'city',
-        'dist',
         'camp_address',
         'camp_location',
         'camp_tel',
@@ -221,9 +255,10 @@ const fields=[
         'camp_ownerName',
         'camp_openTime',
         'camp_target'
+        'camp_intro'
     ];
 
- 
+
 //檢查表格內容是否填寫
 const checkForm=()=>{
     let isPassed=true;
@@ -260,5 +295,23 @@ const checkForm=()=>{
 
             return isPassed;
         };
+
+        //地址
+        
+    });
+    /*
+</script>
+<script src="./tw-city-selector-master/dist/tw-city-selector.js"></script>
+<script>
+    new TwCitySelector({
+        el: '.address_api',
+        elCounty: '.county', // 在 el 裡查找 element
+        countyFieldName: 'camp_address[]',
+        elDistrict: '.district', // 在 el 裡查找 element
+        districtFieldName: 'cmap_address[]',
+        elZipcode: '.zipcode', // 在 el 裡查找 element
+        zipcodeFieldName: 'camp_address[]', // input區域裡的zipcode name也要改成address[]才能夠接上
+        // bootstrapStyle: true
+    });
 </script>
 <?php include __DIR__.'/__html_footer.php'; ?>

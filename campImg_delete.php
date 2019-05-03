@@ -10,4 +10,5 @@ $campImg_id=isset($_GET['campImg_id'])?intval($_GET['campImg_id']):0;//intval將
 if(isset($_SERVER['HTTP_REFERER'])){
     $goto=$_SERVER['HTTP_REFERER'];
 }
+
 header("Location:$goto");

@@ -1,10 +1,15 @@
 <?php
+// $db_host='localhost';
+// $db_name='go_camping';
+// $db_user='sammie';
+// $db_pass='admin';
+
 $db_host='localhost';
 $db_name='camp';
 $db_user='root';
 $db_pass='password';
-
 $dbn="mysql:host={$db_host};dbname={$db_name}";
+
 
 try{
     $pdo = new PDO ($dbn,$db_user,$db_pass);
