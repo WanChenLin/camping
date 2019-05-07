@@ -111,6 +111,9 @@ if($page>$total_pages) $page=$total_pages;
                 data-camp-address="<?= $row['camp_address']?>" 
                 data-camp-location="<?= $row['camp_location'] ?>" 
                 data-camp-intro="<?= $row['camp_intro'] ?>" 
+                data-camp-detail="<?= $row['camp_detail'] ?>" 
+                data-camp-device="<?= $row['camp_device'] ?>" 
+                data-camp-notice="<?= $row['camp_notice'] ?>" 
                 data-camp-tel="<?= $row['camp_tel'] ?>" 
                 data-camp-fax="<?= $row['camp_fax'] ?>" 
                 data-camp-email="<?= $row['camp_email'] ?>" 
@@ -134,9 +137,6 @@ if($page>$total_pages) $page=$total_pages;
 
  </section>
  </main>
-
-
-
 
 <script>
   // function delete_it(camp_id){
@@ -204,6 +204,9 @@ if($page>$total_pages) $page=$total_pages;
         let camp_openTime = $(this).data("campOpentime");
         let camp_target = $(this).data("campTarget");
         let camp_intro = $(this).data("campIntro");
+        let camp_detail = $(this).data("campDetail");
+        let camp_device = $(this).data("campDevice");
+        let camp_notice = $(this).data("campNotice");
         swalWithBootstrapButtons.fire({
             title: `${camp_name} 詳細資料`,
             html: `<div class="card my-3 p-2" style="border:none">
@@ -229,6 +232,18 @@ if($page>$total_pages) $page=$total_pages;
                                     <div class="row px-3 py-1 my-1 border-bottom">
                                         <div class="col-lg-4 p-0 d-flex align-items-center text-primary">簡介</div>
                                         <div class="col-lg-8 p-0 d-flex align-items-center ">${camp_intro}</div>
+                                    </div>
+                                    <div class="row px-3 py-1 my-1 border-bottom">
+                                        <div class="col-lg-4 p-0 d-flex align-items-center text-primary">設備</div>
+                                        <div class="col-lg-8 p-0 d-flex align-items-center ">${camp_device}</div>
+                                    </div>
+                                    <div class="row px-3 py-1 my-1 border-bottom">
+                                        <div class="col-lg-4 p-0 d-flex align-items-center text-primary">營地須知</div>
+                                        <div class="col-lg-8 p-0 d-flex align-items-center ">${camp_detail}</div>
+                                    </div>
+                                    <div class="row px-3 py-1 my-1 border-bottom">
+                                        <div class="col-lg-4 p-0 d-flex align-items-center text-primary">注意事項</div>
+                                        <div class="col-lg-8 p-0 d-flex align-items-center ">${camp_notice}</div>
                                     </div>
                                     <div class="row px-3 py-1 my-1 border-bottom">
                                         <div class="col-lg-4 p-0 d-flex align-items-center text-primary">連絡電話</div>

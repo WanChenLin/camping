@@ -25,10 +25,13 @@ header('Content-Type:application/json');
     $openTime = $_POST['camp_openTime'];
     $target = $_POST['camp_target'];
     $intro = $_POST['camp_intro'];
+    $notice = $_POST['camp_notice'];
+    $detail = $_POST['camp_detail'];
+    $device = $_POST['camp_device'];
 
     $result['post']=$_POST;
 
-    if(empty($name)or empty($address) or empty($email)){
+    if(empty($name)or empty($address) or empty($email)or empty($tel)){
         $result['errorCode']=400;
         echo json_encode($result,JSON_UNESCAPED_UNICODE);
         exit;
@@ -81,7 +84,10 @@ header('Content-Type:application/json');
             `camp_ownerName`=?, 
             `camp_openTime`=?, 
             `camp_target`=?, 
-            `camp_intro`=?
+            `camp_intro`=?,
+            `camp_detail`=?,
+            `camp_device`=?,
+            `camp_notice`=?
        
             WHERE `camp_id`=? ";
 
@@ -101,6 +107,9 @@ header('Content-Type:application/json');
             $_POST['camp_openTime'],
             $_POST['camp_target'],
             $_POST['camp_intro'],
+            $_POST['camp_detail'],
+            $_POST['camp_device'],
+            $_POST['camp_notice'],
             $camp_id
 
             ]);

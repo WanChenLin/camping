@@ -132,6 +132,28 @@ span{
                 </div>
             </div>
             <div class="form-group row">
+                <label for="camp_detail" class="col-sm-2 col-form-label text-right">營地須知</label>
+                <div class="col-sm-6">
+                <textarea class="form-control" id="camp_detail" name="camp_detail" cols="30" rows="5"><?= $row['camp_detail'] ?></textarea>
+                <small id="camp_detailHelp" class="form-text text-muted"></small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="camp_notice" class="col-sm-2 col-form-label text-right">注意事項</label>
+                <div class="col-sm-6">
+                <textarea class="form-control" id="camp_notice" name="camp_notice" cols="30" rows="5"><?= $row['camp_notice'] ?></textarea>
+                <small id="camp_noticeHelp" class="form-text text-muted"></small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="camp_device" class="col-sm-2 col-form-label text-right">設備</label>
+                <div class="col-sm-6">
+                <input type="text" class="form-control" id="camp_device" name="camp_device" placeholder=""
+                value="<?= $row['camp_device'] ?>">
+                <small id="camp_deviceHelp" class="form-text text-muted"></small>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="camp_tel" class="col-sm-2 col-form-label text-right"><span>*</span>聯絡電話</label>
                 <div class="col-sm-6">
                 <input type="text" class="form-control" id="camp_tel" name="camp_tel" placeholder=""
@@ -213,7 +235,11 @@ span{
         'camp_ownerName',
         'camp_openTime',
         'camp_target',
-        'camp_intro'
+        'camp_intro',
+        'camp_detail',
+        'camp_device',
+        'camp_notice'
+
         ];
 
         const edit_success = () => {
@@ -290,8 +316,8 @@ span{
         };
 
     </script>
-    <!-- <script src="./tw-city-selector-master/dist/tw-city-selector.js"></script>
-<script>
+    <script src="./tw-city-selector-master/dist/tw-city-selector.js"></script>
+<!-- <script>
     new TwCitySelector({
         el: '.address_api',
         elCounty: '.county', // 在 el 裡查找 element
