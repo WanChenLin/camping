@@ -1,5 +1,5 @@
 <?php
-// require __DIR__.'/__cred.php';
+require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 $sql_camp = "SELECT `camp_id`,`camp_name` FROM `campsite_list`";

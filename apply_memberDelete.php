@@ -1,5 +1,5 @@
 <?php
-// require __DIR__.'/__cred.php';
+require __DIR__.'/__cred.php';
 require __DIR__.'/__connect_acDB.php';
 
 

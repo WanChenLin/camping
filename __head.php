@@ -116,18 +116,24 @@
                                 </h2>
                             </div>
     
-                            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                 <!-- <a class="card-body ml-2 d-flex" href="..\event\event_insert.php">
                                     新增活動
                                 </a> -->
                                 <a class="card-body ml-2 d-flex" href="event_insert.php">
                                     新增活動
                                 </a>
-                                <!-- <a class="card-body ml-2 d-flex" href="..\event\event_list.php">
+                                <!-- <a class="card-body ml-2 d-flex" href="..\event\event_list_search.php">
                                     活動列表
                                 </a> -->
                                 <a class="card-body ml-2 d-flex" href="event_list_search.php">
                                     活動列表
+                                </a>
+                                <!-- <a class="card-body ml-2 d-flex" href="..\event\event_feedback.php">
+                                    活動列表
+                                </a> -->
+                                <a class="card-body ml-2 d-flex" href="event_feedback.php">
+                                    活動回饋
                                 </a>
                             </div>
                         </div>
@@ -206,6 +212,7 @@
                                 </a>
                             </div>
                         </div>
+                        <div class="card"><a href="logout.php" class="btn btn-info">登出</a></div>
 
                     </div>
                 </nav>

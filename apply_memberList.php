@@ -1,5 +1,5 @@
 <?php
- // require __DIR__.'/__cred.php';
+ require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 $apply_id = isset($_GET['apply_id']) ? substr($_GET['apply_id'], 0) : 0;
@@ -118,6 +118,7 @@ $event_name = $rows2->event_name;
             <th scope="col">參加人email</th>
             <th scope="col">緊急連絡人</th>
             <th scope="col">緊急連絡人電話</th>
+            <th scope="col">訂單狀態</th>
             <th scope="col">備註</th>
             <!-- <th scope="col"><i class="fas fa-edit"></i></th>
             <th><i class="fas fa-trash-alt"></i></th> -->
@@ -136,6 +137,7 @@ $event_name = $rows2->event_name;
             <td><?= $row['applyList_email'] ?></td>
             <td><?= $row['applyList_emg'] ?></td>
             <td><?= $row['applyList_emgMobile'] ?></td>
+            <td><?= $row['apply_order'] == 1 ? '取消訂單' : '訂單成立' ?></td>
             <td><?= $row['applyList_remark'] ?></td>
             <td>
                 <a href="apply_memberEdit.php?applyList_id=<?= $row['applyList_id'] ?>"><i class="fas fa-edit mx-1 p-1"></i></a>

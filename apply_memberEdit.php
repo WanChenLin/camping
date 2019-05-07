@@ -1,5 +1,5 @@
 <?php
- // require __DIR__.'/__cred.php';
+ require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 $applyList_id = isset($_GET['applyList_id']) ? intval($_GET['applyList_id']) : 0;

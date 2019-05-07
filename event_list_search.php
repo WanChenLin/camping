@@ -1,25 +1,8 @@
 <?php
-//  require __DIR__.'/__cred.php';
+require __DIR__ . '/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
-
-$per_page = 5;
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
-$t_sql = "SELECT COUNT(1) FROM `event_list`";
-$t_pdo_query = $pdo->query($t_sql);
-$total_rows = $t_pdo_query->fetch(PDO::FETCH_NUM)[0];
-
-$total_page = ceil($total_rows / $per_page);
-
-// $sql = sprintf("SELECT * FROM `event_list` JOIN `campsite_list` WHERE `campsite_list`.`camp_id`=`event_list`.`camp_id` ORDER BY event_id DESC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
-// $pdo_query = $pdo->query($sql);
-// $rows = $pdo_query->fetchAll(PDO::FETCH_ASSOC);
-
-// print_r($rows);
-
-
-$sql_countMem = "SELECT event_id, COUNT(event_id) num FROM event_applylist GROUP BY event_id";
+$sql_countMem = "SELECT event_id, COUNT(event_id) num FROM event_applylist WHERE `apply_order`=0 GROUP BY event_id ";
 $pdo_query_countMem = $pdo->query($sql_countMem);
 $rows_countMem = $pdo_query_countMem->fetchAll(PDO::FETCH_ASSOC);
 
@@ -31,25 +14,32 @@ foreach ($rows_countMem as $v) {
 }
 // echo print_r($num_data);
 
-// $sql_camp="SELECT `camp_name` FROM `campsite_list` JOIN `event_list` WHERE `campsite_list`.`camp_id`=`event_list`.`camp_id`";
 
-
-
-// isset($keyword)? $keyword = $_POST['keyword'] : $keyword='';
 $keyword = '';
-
+$per_page = 5;
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 if (@$_POST['keyword'] != '') {
     $keyword = $_POST['keyword'];
     // var_dump($keyword);
 
     $sql_search = "SELECT * FROM `event_list` JOIN `campsite_list` WHERE `campsite_list`.`camp_id`=`event_list`.`camp_id` and `event_name` like '%$keyword%' ORDER BY event_id  DESC ";
+
+    $t_sql = "SELECT COUNT(1) FROM `event_list` JOIN `campsite_list` WHERE `campsite_list`.`camp_id`=`event_list`.`camp_id` and `event_name` like '%$keyword%'";
+    $t_pdo_query = $pdo->query($t_sql);
+    $total_rows = $t_pdo_query->fetch(PDO::FETCH_NUM)[0];
+
 } else {
     $sql_search = sprintf("SELECT * FROM `event_list` JOIN `campsite_list` WHERE `campsite_list`.`camp_id`=`event_list`.`camp_id` ORDER BY event_id DESC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
+
+    $t_sql = "SELECT COUNT(1) FROM `event_list`";
+    $t_pdo_query = $pdo->query($t_sql);
+    $total_rows = $t_pdo_query->fetch(PDO::FETCH_NUM)[0];
 }
 $pdoSearch_query = $pdo->query($sql_search);
 $rows_search = $pdoSearch_query->fetchAll(PDO::FETCH_ASSOC);
 
+$total_page = ceil($total_rows / $per_page);
 ?>
 
 
@@ -137,16 +127,16 @@ $rows_search = $pdoSearch_query->fetchAll(PDO::FETCH_ASSOC);
                         <li class="text-primary nav-link check_info" style="cursor:pointer">查看內容</li>
                         <li class="nav-item">
                             <a class="nav-link" href="
-                                            <?php
-                                            $count_num = isset($num_data[$row_search['event_id']]) ? $num_data[$row_search['event_id']] : 0;
+                                                <?php
+                                                $count_num = isset($num_data[$row_search['event_id']]) ? $num_data[$row_search['event_id']] : 0;
 
-                                            if ((int)$count_num >= (int)$row_search['event_upLimit']) {
-                                                echo '';
-                                            } else {
-                                                echo 'apply_insert2.php?event_id=' . $row_search['event_id'];
-                                            }
-                                            ?>
-                                            ">
+                                                if ((int)$count_num >= (int)$row_search['event_upLimit']) {
+                                                    echo '';
+                                                } else {
+                                                    echo 'apply_insert2.php?event_id=' . $row_search['event_id'];
+                                                }
+                                                ?>
+                                                ">
                                 <?php
 
                                 $count_num = isset($num_data[$row_search['event_id']]) ? $num_data[$row_search['event_id']] : 0;
@@ -190,7 +180,7 @@ $rows_search = $pdoSearch_query->fetchAll(PDO::FETCH_ASSOC);
                         <td>$ <?= $row_search['event_price'] ?> /人</td>
                         <td><?= $row_search['event_upLimit'] ?></td>
                         <td>
-                            <?= isset($num_data[$row_search['event_id']]) ? $num_data[$row_search['event_id']] : 0 ?><br><a href="apply_orderList.php?event_id=<?= $row_search['event_id'] ?>" class="btn btn-outline-primary" role="button" aria-pressed="true" style="font-size:12px" target="_blank">報名資訊<?= $row_search['event_id'] ?></a>
+                            <?= isset($num_data[$row_search['event_id']]) ? $num_data[$row_search['event_id']] : 0 ?><br><a href="apply_orderList.php?event_id=<?= $row_search['event_id'] ?>" class="btn btn-outline-primary" role="button" aria-pressed="true" style="font-size:12px" target="_blank">報名資訊</a>
                         </td>
                         <td><?php $shelf = $row_search['event_shelf'];
                             switch ($shelf) {
@@ -263,16 +253,16 @@ $rows_search = $pdoSearch_query->fetchAll(PDO::FETCH_ASSOC);
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="
-                                            <?php
-                                            $count_num = isset($num_data[$row['event_id']]) ? $num_data[$row['event_id']] : 0;
+                                                <?php
+                                                $count_num = isset($num_data[$row['event_id']]) ? $num_data[$row['event_id']] : 0;
 
-                                            if ((int)$count_num >= (int)$row['event_upLimit']) {
-                                                echo '';
-                                            } else {
-                                                echo 'apply_insert2.php?event_id=' . $row['event_id'];
-                                            }
-                                            ?>
-                                            ">
+                                                if ((int)$count_num >= (int)$row['event_upLimit']) {
+                                                    echo '';
+                                                } else {
+                                                    echo 'apply_insert2.php?event_id=' . $row['event_id'];
+                                                }
+                                                ?>
+                                                ">
                             <?php
 
                             $count_num = isset($num_data[$row['event_id']]) ? $num_data[$row['event_id']] : 0;

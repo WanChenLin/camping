@@ -1,5 +1,5 @@
 <?php
-// require __DIR__.'/__cred.php';
+require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 $apply_id = isset($_GET['apply_id']) ? substr($_GET['apply_id'],0) : 0;
@@ -54,29 +54,7 @@ if (isset($_POST['apply_pay'])) {
 
 <?php include __DIR__ . '/__head.php'; ?>
 
-<!-- <style>
-    .form-group small {
-        color: red !important;
-    }
-</style> -->
-<!-- 
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link" href="event_insert.php">
-            <h5>新增活動</h5>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="event_list.php">
-            <h5>活動列表</h5>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" href="#">
-            <h5>訂單修改</h5>
-        </a>
-    </li>
-</ul> -->
+
 
 <aside class="bg-warning">
     <nav aria-label="breadcrumb">
@@ -89,7 +67,7 @@ if (isset($_POST['apply_pay'])) {
     </nav>
 </aside>
 
-<!-- <div class="card m-2"> -->
+
     <?php if (isset($msg)) : ?>
     <div class="alert alert-<?= $msg['type'] ?>" role="alert">
         <?= $msg['info'] ?>
@@ -98,10 +76,6 @@ if (isset($_POST['apply_pay'])) {
     <div class="card-body container">
         <form method="post" name="form1" onsubmit="return checkForm();">
             <input type="hidden" name="checkme" value="update">
-            <!-- <div class="form-group form-row">
-                <label for="applyList_name" class="col-sm-6 col-md-2 ">參加人姓名 </label>
-                <div id="applyList_name" name="applyList_name" class="col-sm-6 col-md-10"><?= $row['applyList_name'] ?></div>
-            </div> -->
             <div class="form-group form-row">
                 <label for="apply_pay" class="col-sm-4 col-md-2 ">付款狀態 </label>
                 <input type="text" class="form-control col-sm-4 col-md-6" id="apply_pay" name="apply_pay" value="<?= $row['apply_pay'] ?>">
@@ -119,7 +93,7 @@ if (isset($_POST['apply_pay'])) {
         </form>
 
     </div>
-<!-- </div> -->
+
 
 
 <?php include __DIR__ . '/__md.php'; ?>

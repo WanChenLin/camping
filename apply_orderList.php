@@ -1,5 +1,5 @@
 <?php
-// require __DIR__ . '/__cred.php';
+require __DIR__ . '/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 
@@ -115,6 +115,7 @@ $event_name = $rows2->event_name;
             <th>會員帳號</th>
             <th>報名人數</th>
             <th>報名日期</th>
+            <th>付款方式</th>
             <th>付款狀態</th>
             <th>訂單狀態</th>
             <th>訂單金額</th>
@@ -134,6 +135,21 @@ $event_name = $rows2->event_name;
                 </td>
                 <td><?= $row['apply_num'] ?> <a href="apply_memberList.php?apply_id=<?= $row['apply_id'] ?>" class="" target="_blank"><i class="fas fa-info-circle"></i></a></td>
                 <td><?= $row['apply_date'] ?></td>
+                <td><?php $payment = $row['apply_payment'];
+                            switch ($payment) {
+                                case '0':
+                                    echo '信用卡';
+                                    break;
+                                case '1':
+                                    echo 'ATM';
+                                    break;
+                                case '3':
+                                    echo 'ibon';
+                                    break;
+                                default:
+                                    echo '';
+                            }
+                            ?></td>
                 <td class="">
                     <?= $row['apply_pay'] == 1 ? '已付款' : '未付款' ?>
                     <a href="apply_orderEdit.php?apply_id=<?= $row['apply_id'] ?>">

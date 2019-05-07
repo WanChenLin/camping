@@ -1,4 +1,5 @@
 <?php
+require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 $mem_account = isset($_GET['mem_account']) ? substr($_GET['mem_account'], 0) : 0;

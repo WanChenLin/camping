@@ -1,5 +1,5 @@
 <?php
-// require __DIR__.'/__cred.php';
+require __DIR__.'/__cred.php';
 require __DIR__ . '/__connect_acDB.php';
 
 $camp_id = isset($_GET['camp_id']) ? intval($_GET['camp_id']) : 0;
