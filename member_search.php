@@ -1,9 +1,4 @@
-<?php
-
-include __DIR__ . '/__connect_db.php';
-
-?>
-
+<?php include __DIR__ . '/__connect_db.php'; ?>
 <?php include __DIR__ . '/html_head.php'; ?>
 <?php include __DIR__ . '/html_header.php'; ?>
 <?php include __DIR__ . '/html_navbar.php'; ?>

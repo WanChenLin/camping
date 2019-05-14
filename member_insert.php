@@ -1,9 +1,4 @@
-<?php
-
-include __DIR__ . '/__connect_db.php';
-
-?>
-
+<?php include __DIR__ . '/__connect_db.php'; ?>
 <?php include __DIR__ . '/html_head.php'; ?>
 <?php include __DIR__ . '/html_header.php'; ?>
 <?php include __DIR__ . '/html_navbar.php'; ?>
@@ -30,7 +25,7 @@ include __DIR__ . '/__connect_db.php';
         </nav>
     </aside>
 
-    <section class="">
+    <section>
 
         <div class="container">
             <div id="info_bar" role="alert"></div>
@@ -42,7 +37,6 @@ include __DIR__ . '/__connect_db.php';
                             <h5 class="card-title text-center">新增會員資料</h5>
                         </div>
                     </div>
-                    
 
                     <form name="formInsert" method="POST" onsubmit="return checkForm()">
                         <input type="hidden" name="gotodb" value="check">
@@ -336,13 +330,9 @@ include __DIR__ . '/__connect_db.php';
     })
 
     // function previewImage(input) {
-
     //     let preview = document.getElementById('preview');
-
     //     if (input.files && input.files[0]) {
-
     //     let reader = new FileReader();
-
     //     reader.onload = function (e) {
     //         preview.setAttribute('src', e.target.result);
     //     }

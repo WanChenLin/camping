@@ -190,133 +190,6 @@
         buttonsStyling: false,
     })
 
-    const myHashChange = () => {
-        let h = location.hash.slice(1);
-        // 頁碼切換
-        page = parseInt(h);
-        if (isNaN(page)) {
-            page = 1;
-        }
-        ul_pagi.innerHTML = page;
-
-        fetch('member_list_api.php?page=' + page)
-            .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                ori_data = json;
-
-                //  資料內的表格
-                let str = '';
-                for (let s in ori_data.data) {
-                    str += tr_func(ori_data.data[s]);
-                }
-                data_body.innerHTML = str;
-
-                // 頁碼
-                str = '';
-                for (let i = 1; i <= ori_data.totalPages; i++) {
-                    let active = ori_data.page === i ? 'active' : '';
-
-                    str += pagi_func({
-                        active: active,
-                        page: i
-                    });
-                }
-                ul_pagi.innerHTML = str;
-            });
-    };
-
-    // (預設:沒有輸入關鍵字) 抓出所有會員資料
-    window.addEventListener('hashchange', myHashChange);
-    myHashChange();
-
-    // 輸入關鍵字及選擇篩選條件後，按下搜尋或Enter鍵(keycode是13)
-    search_btn.addEventListener('mousedown', searching);
-    $("body").on('keydown', function() {
-        let keycode = event.which;
-        if (keycode == 13) { searching(); }
-    });
-
-    function searching(event) {
-        let fd = new FormData(document.formSearch)
-        let h = location.hash.slice(1);
-        // 頁碼切換
-        page = parseInt(h);
-        if (isNaN(page)) {
-            page = 1;
-        }
-        ul_pagi.innerHTML = page;
-
-        fetch('member_list_api.php?page=' + page, {
-                method: "POST",
-                body: fd
-            })
-            .then(response => {
-                return response.json();
-            })
-            .then(obj => {
-                ori_data = obj; // 讓ori_data的內容為SQL的資料
-                info_bar.style.display = 'block';
-
-                if (obj.success) {
-                    info_bar.className = 'alert alert-light text-center';
-                    info_bar.innerHTML = '';
-                } else {
-                    info_bar.className = 'alert alert-danger text-center';
-                    info_bar.innerHTML = obj.errorMsg;
-                }
-
-                //  資料內的表格
-                let str = '';
-                for (let s in ori_data.data) {
-                    str += tr_func(ori_data.data[s]);
-                }
-                data_body.innerHTML = str;
-
-                // 頁碼
-                str = '';
-                for (let i = 1; i <= ori_data.totalPages; i++) {
-                    let active = ori_data.page === i ? 'active' : '';
-
-                    str += pagi_func({
-                        active: active,
-                        page: i
-                    });
-                }
-                ul_pagi.innerHTML = str;
-            });
-            
-        // 改變麵包屑
-        let list_li = `<li class="breadcrumb-item active bread_list"><a href="member_list.php">會員清單</a></li>`;
-        let search_li = `<li class="breadcrumb-item active">搜尋會員</li>`;
-        if ($(".bread li").length == 2) {
-            $(".bread_list").css("display", "none");
-            $(".bread ol").append(list_li);
-            $(".bread ol").append(search_li);
-        }
-    }
-
-    function delete_row(mem_id) {
-        $.confirm.show({
-            "message": '確定要刪除 #會員編號(' + mem_id + ') 的資料嗎?', // 顯示內容
-            "type": "danger", //標題顏色類型  success:綠色  danger:紅色  warning:橘色  default:藍色
-            "yesText": "確定", // 「確認」按鈕文字
-            "noText": "取消", // 「取消」按鈕文字
-            "yes": function() { // 確認按鈕觸發方法 function(){}
-                $.confirm.show({
-                    "message": "注意：刪除後將無法復原",
-                    "type": "success",
-                    "yesText": "確認刪除",
-                    "noText": "返回",
-                    "yes": function() {
-                        location.href = 'member_delete.php?mem_id=' + mem_id;
-                    }
-                })
-            }
-        })
-    }
-
     $(".data_body").on("click", ".member_card", function() {
         let mem_id = $(this).data("memId");
         let mem_account = $(this).data("memAccount");
@@ -391,6 +264,135 @@
             confirmButtonText: 'OK',
         })
     })
+
+    const myHashChange = () => {
+        let h = location.hash.slice(1);
+        // 頁碼切換
+        page = parseInt(h);
+        if (isNaN(page)) {
+            page = 1;
+        }
+        ul_pagi.innerHTML = page;
+
+        fetch('member_list_api.php?page=' + page)
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                ori_data = json;
+
+                //  資料內的表格
+                let str = '';
+                for (let s in ori_data.data) {
+                    str += tr_func(ori_data.data[s]);
+                }
+                data_body.innerHTML = str;
+
+                // 頁碼
+                str = '';
+                for (let i = 1; i <= ori_data.totalPages; i++) {
+                    let active = ori_data.page === i ? 'active' : '';
+
+                    str += pagi_func({
+                        active: active,
+                        page: i
+                    });
+                }
+                ul_pagi.innerHTML = str;
+            });
+    };
+
+    // (預設:沒有輸入關鍵字) 抓出所有會員資料
+    window.addEventListener('hashchange', myHashChange);
+    myHashChange();
+
+    // 輸入關鍵字及選擇篩選條件後，按下搜尋或Enter鍵(keycode是13)
+    search_btn.addEventListener('mousedown', searching);
+    $("body").on('keydown', function() {
+        let keycode = event.which;
+        if (keycode == 13) {
+            searching();
+        }
+    });
+
+    function searching(event) {
+        let fd = new FormData(document.formSearch)
+        let h = location.hash.slice(1);
+        // 頁碼切換
+        page = parseInt(h);
+        if (isNaN(page)) {
+            page = 1;
+        }
+        ul_pagi.innerHTML = page;
+
+        fetch('member_list_api.php?page=' + page, {
+                method: "POST",
+                body: fd
+            })
+            .then(response => {
+                return response.json();
+            })
+            .then(obj => {
+                ori_data = obj; // 讓ori_data的內容為SQL的資料
+                info_bar.style.display = 'block';
+
+                if (obj.success) {
+                    info_bar.className = '';
+                    info_bar.innerHTML = '';
+                } else {
+                    info_bar.className = 'alert alert-danger text-center';
+                    info_bar.innerHTML = obj.errorMsg;
+                }
+
+                //  資料內的表格
+                let str = '';
+                for (let s in ori_data.data) {
+                    str += tr_func(ori_data.data[s]);
+                }
+                data_body.innerHTML = str;
+
+                // 頁碼
+                str = '';
+                for (let i = 1; i <= ori_data.totalPages; i++) {
+                    let active = ori_data.page === i ? 'active' : '';
+
+                    str += pagi_func({
+                        active: active,
+                        page: i
+                    });
+                }
+                ul_pagi.innerHTML = str;
+            });
+
+        // 改變麵包屑
+        let list_li = `<li class="breadcrumb-item active bread_list"><a href="member_list.php">會員清單</a></li>`;
+        let search_li = `<li class="breadcrumb-item active">搜尋會員</li>`;
+        if ($(".bread li").length == 2) {
+            $(".bread_list").css("display", "none");
+            $(".bread ol").append(list_li);
+            $(".bread ol").append(search_li);
+        }
+    }
+
+    function delete_row(mem_id) {
+        $.confirm.show({
+            "message": '確定要刪除 #會員編號(' + mem_id + ') 的資料嗎?', // 顯示內容
+            "type": "danger", //標題顏色類型  success:綠色  danger:紅色  warning:橘色  default:藍色
+            "yesText": "確定", // 「確認」按鈕文字
+            "noText": "取消", // 「取消」按鈕文字
+            "yes": function() { // 確認按鈕觸發方法 function(){}
+                $.confirm.show({
+                    "message": "注意：刪除後將無法復原",
+                    "type": "success",
+                    "yesText": "確認刪除",
+                    "noText": "返回",
+                    "yes": function() {
+                        location.href = 'member_delete.php?mem_id=' + mem_id;
+                    }
+                })
+            }
+        })
+    }
 </script>
 
 <?php include __DIR__ . '/html_foot.php'; ?>

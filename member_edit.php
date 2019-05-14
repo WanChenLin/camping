@@ -269,7 +269,6 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             document.querySelector('#emailHelp').innerHTML = '請輸入完整的電子郵件';
             ispassed = false;
         }
-
         if (password_check != password) {
             document.formInsert.password_check.style.borderColor = 'red';
             document.querySelector('#password_checkHelp').innerHTML = '與上列密碼不符';
@@ -328,16 +327,12 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 avatar_pictures.setAttribute('value', 'avatar_pictures/' + obj.filename);
                 // err.innerHTML = obj.info;
             })
-    })
+    });
 
     // function previewImage(input) {
-
     //     let preview = document.getElementById('preview');
-
     //     if (input.files && input.files[0]) {
-
     //     let reader = new FileReader();
-
     //     reader.onload = function (e) {
     //         preview.setAttribute('src', e.target.result);
     //     }

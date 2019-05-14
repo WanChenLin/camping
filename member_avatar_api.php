@@ -15,7 +15,6 @@ if (empty($_FILES['my_file'])) {
     exit;
 }
 
-// $filename = sha1($_FILES['my_file']['name'].uniqid());
 $filename = sha1($_FILES['my_file']['name'].uniqid());
 
 switch ($_FILES['my_file']['type']) {

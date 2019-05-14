@@ -13,7 +13,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="member_list.php">
                                 會員清單
@@ -21,18 +20,7 @@
                             <a class="card-body ml-2 d-flex" href="#">
                                 會員等級
                             </a>
-                            <a class="card-body ml-2 d-flex" href="#">
-                                收藏管理
-                            </a>
-                            <a class="card-body ml-2 d-flex" href="#">
-                                勳章管理
-                            </a>
-                            <a class="card-body ml-2 d-flex" href="#">
-                                活動管理
-                            </a>
-                            <a class="card-body ml-2 d-flex" href="#">
-                                訂單管理
-                            </a>
+
                         </div>
                     </div>
 
@@ -44,7 +32,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="..\event\event_insert.php">
                                 新增活動
@@ -63,7 +50,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="..\share_fun\post_list.php">
                                 新手指南
@@ -100,7 +86,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="..\campsite\camp_list.php">
                                 營地列表
@@ -119,7 +104,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="..\marketing\_plan_list.php">
                                 行銷方案管理
