@@ -1,6 +1,6 @@
 <?php
 
-include '../__connect_db.php';
+include '../../__connect_db.php';
 
 $mem_id = isset($_GET['mem_id']) ? intval($_GET['mem_id']) : 0;
 

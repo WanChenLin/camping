@@ -1,6 +1,6 @@
 <?php
-require '../__cred.php';
-require '../__connect_db.php';
+require '../../__cred.php';
+require '../../__connect_db.php';
 
 $event_id = isset($_GET['event_id']) ? intval($_GET['event_id']) : 0;
 
@@ -9,9 +9,9 @@ $pdo_query = $pdo->query($sql);
 $row = $pdo_query->fetch(PDO::FETCH_ASSOC);
 ?>
 
-<?php include '../__index_head.php'; ?>
-<?php include '../__index_header.php'; ?>
-<?php include '../__index_navbar.php'; ?>
+<?php include '../../__index_head.php'; ?>
+<?php include '../../__index_header.php'; ?>
+<?php include '../../__index_navbar.php'; ?>
 
 <main class="col-md-10 bg-white">
     <section>
@@ -53,4 +53,4 @@ $row = $pdo_query->fetch(PDO::FETCH_ASSOC);
     </section>
 </main>
 
-<?php include '../__index_foot.php'; ?>
+<?php include '../../__index_foot.php'; ?>

@@ -1,6 +1,6 @@
 <?php
-require '../__cred.php';
-require '../__connect_db.php';
+require '../../__cred.php';
+require '../../__connect_db.php';
 
 $sql_countMem = "SELECT event_id, COUNT(event_id) num FROM event_applylist WHERE `apply_order`=0 GROUP BY event_id ";
 $pdo_query_countMem = $pdo->query($sql_countMem);
@@ -36,9 +36,9 @@ $rows_search = $pdoSearch_query->fetchAll(PDO::FETCH_ASSOC);
 $total_page = ceil($total_rows / $per_page);
 ?>
 
-<?php include '../__index_head.php'; ?>
-<?php include '../__index_header.php'; ?>
-<?php include '../__index_navbar.php'; ?>
+<?php include '../../__index_head.php'; ?>
+<?php include '../../__index_header.php'; ?>
+<?php include '../../__index_navbar.php'; ?>
 
 <main class="col-md-10 bg-white">
     <section>
@@ -346,4 +346,4 @@ $total_page = ceil($total_rows / $per_page);
     </section>
 </main>
 
-<?php include '../__index_foot.php'; ?>
+<?php include '../../__index_foot.php'; ?>

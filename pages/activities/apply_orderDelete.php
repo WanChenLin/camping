@@ -1,5 +1,5 @@
 <?php
-require '../__connect_db.php';
+require '../../__connect_db.php';
 
 $apply_id = isset($_GET['apply_id']) ? substr($_GET['apply_id'], 0) : 0;
 

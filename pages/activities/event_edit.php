@@ -1,6 +1,6 @@
 <?php
-require '../__cred.php';
-require '../__connect_db.php';
+require '../../__cred.php';
+require '../../__connect_db.php';
 
 $sql_camp = "SELECT `camp_id`,`camp_name` FROM `campsite_list`";
 $pdo_query_camp = $pdo->query($sql_camp);
@@ -97,9 +97,9 @@ if (isset($_POST['event_name']) and isset($_POST['event_intro']) and isset($_POS
 }
 ?>
 
-<?php include '../__index_head.php'; ?>
-<?php include '../__index_header.php'; ?>
-<?php include '../__index_navbar.php'; ?>
+<?php include '../../__index_head.php'; ?>
+<?php include '../../__index_header.php'; ?>
+<?php include '../../__index_navbar.php'; ?>
 
 <main class="col-md-10 bg-white">
     <section>
@@ -303,4 +303,4 @@ if (isset($_POST['event_name']) and isset($_POST['event_intro']) and isset($_POS
     </section>
 </main>
 
-<?php include '../__index_foot.php'; ?>
+<?php include '../../__index_foot.php'; ?>

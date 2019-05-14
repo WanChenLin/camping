@@ -1,5 +1,5 @@
 <?php
-require '../__connect_db.php';
+require '../../__connect_db.php';
 
 $applyList_id = isset($_GET['applyList_id']) ? intval($_GET['applyList_id']) : 0;
 

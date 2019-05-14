@@ -1,6 +1,6 @@
 <?php
-require '../__cred.php';
-require '../__connect_db.php';
+require '../../__cred.php';
+require '../../__connect_db.php';
 
 $sql = "SELECT * FROM  `event_feedback` JOIN `event_list` ON `event_feedback`.`event_id`=`event_list`.`event_id` ORDER BY eventFB_id DESC";
 $pdo_query = $pdo->query($sql);
@@ -8,9 +8,9 @@ $rows = $pdo_query->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
-<?php include '../__index_head.php'; ?>
-<?php include '../__index_header.php'; ?>
-<?php include '../__index_navbar.php'; ?>
+<?php include '../../__index_head.php'; ?>
+<?php include '../../__index_header.php'; ?>
+<?php include '../../__index_navbar.php'; ?>
 
 <main class="col-md-10 bg-white">
     <section>
@@ -69,4 +69,4 @@ $rows = $pdo_query->fetchAll(PDO::FETCH_ASSOC);
     </section>
 </main>
 
-<?php include '../__index_foot.php'; ?>
+<?php include '../../__index_foot.php'; ?>

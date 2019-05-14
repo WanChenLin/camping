@@ -1,8 +1,8 @@
-<?php include '../__connect_db.php'; ?>
+<?php include '../../__connect_db.php'; ?>
 
-<?php include '../__index_head.php'; ?>
-<?php include '../__index_header.php'; ?>
-<?php include '../__index_navbar.php'; ?>
+<?php include '../../__index_head.php'; ?>
+<?php include '../../__index_header.php'; ?>
+<?php include '../../__index_navbar.php'; ?>
 
 <style>
     .asterisk {
@@ -341,4 +341,4 @@
     });
 </script>
 
-<?php include '../__index_foot.php'; ?>
+<?php include '../../__index_foot.php'; ?>

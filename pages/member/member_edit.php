@@ -1,6 +1,6 @@
 <?php
 
-include '../__connect_db.php';
+include '../../__connect_db.php';
 
 $mem_id = isset($_GET['mem_id']) ? intval($_GET['mem_id']) : 0;
 
@@ -15,9 +15,9 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
-<?php include '../__index_head.php'; ?>
-<?php include '../__index_header.php'; ?>
-<?php include '../__index_navbar.php'; ?>
+<?php include '../../__index_head.php'; ?>
+<?php include '../../__index_header.php'; ?>
+<?php include '../../__index_navbar.php'; ?>
 
 <style>
     .asterisk {
@@ -337,4 +337,4 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     });
 </script>
 
-<?php include '../__index_foot.php'; ?>
+<?php include '../../__index_foot.php'; ?>

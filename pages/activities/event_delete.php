@@ -1,6 +1,6 @@
 <?php
-require '../__cred.php';
-require '../__connect_db.php';
+require '../../__cred.php';
+require '../../__connect_db.php';
 
 $event_id = isset($_GET['event_id']) ? intval($_GET['event_id']) : 0;
 

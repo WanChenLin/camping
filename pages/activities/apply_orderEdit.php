@@ -1,6 +1,6 @@
 <?php
-require '../__cred.php';
-require '../__connect_db.php';
+require '../../__cred.php';
+require '../../__connect_db.php';
 
 $apply_id = isset($_GET['apply_id']) ? substr($_GET['apply_id'], 0) : 0;
 
@@ -43,9 +43,9 @@ if (isset($_POST['apply_pay'])) {
 }
 ?>
 
-<?php include '../__index_head.php'; ?>
-<?php include '../__index_header.php'; ?>
-<?php include '../__index_navbar.php'; ?>
+<?php include '../../__index_head.php'; ?>
+<?php include '../../__index_header.php'; ?>
+<?php include '../../__index_navbar.php'; ?>
 
 <main class="col-md-10 bg-white">
     <section>
@@ -116,4 +116,4 @@ if (isset($_POST['apply_pay'])) {
     </section>
 </main>
 
-<?php include '../__index_foot.php'; ?>
+<?php include '../../__index_foot.php'; ?>

@@ -1,6 +1,6 @@
 <?php
 
-include '../__connect_db.php';
+include '../../__connect_db.php';
 
 header('Content-Type: application/json');
 
