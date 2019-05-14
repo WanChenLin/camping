@@ -256,7 +256,7 @@
                 info_bar.style.display = 'block';
 
                 if (obj.success) {
-                    info_bar.className = 'alert alert-light text-center';
+                    info_bar.className = '';
                     info_bar.innerHTML = '';
                 } else {
                     info_bar.className = 'alert alert-danger text-center';
