@@ -1,3 +1,5 @@
+<!-- 全站介面上方結構與字樣 -->
+
 <header class="bg-dark">
     <div class="container-fluid">
         <div class="row d-flex justify-content-center">

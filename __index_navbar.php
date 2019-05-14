@@ -1,3 +1,6 @@
+<!-- 全站左方導覽列 -->
+<!-- 連結必須使用完整網址，不能用相對路徑去找 -->
+
 <div class="bg-white py-3">
     <div class="container-fluid">
         <div class="row d-flex">
@@ -13,7 +16,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="http://localhost/master/pages/member/member_list.php">
                                 會員清單
@@ -32,7 +34,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="http://localhost/master/pages/activities/event_insert.php">
                                 新增活動
@@ -54,7 +55,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="..\share_fun\post_list.php">
                                 新手指南
@@ -91,7 +91,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="">
                                 營地列表
@@ -110,7 +109,6 @@
                                 </button>
                             </h2>
                         </div>
-
                         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
                             <a class="card-body ml-2 d-flex" href="..\marketing\_plan_list.php">
                                 行銷方案管理
