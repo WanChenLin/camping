@@ -15,7 +15,7 @@
                         </div>
 
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <a class="card-body ml-2 d-flex" href="http://localhost/master/member/member_list.php">
+                            <a class="card-body ml-2 d-flex" href="http://localhost/master/pages/member/member_list.php">
                                 會員清單
                             </a>
                             <a class="card-body ml-2 d-flex" href="#">
@@ -34,13 +34,13 @@
                         </div>
 
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <a class="card-body ml-2 d-flex" href="http://localhost/master/activities/event_insert.php">
+                            <a class="card-body ml-2 d-flex" href="http://localhost/master/pages/activities/event_insert.php">
                                 新增活動
                             </a>
-                            <a class="card-body ml-2 d-flex" href="http://localhost/master/activities/event_list_search.php">
+                            <a class="card-body ml-2 d-flex" href="http://localhost/master/pages/activities/event_list_search.php">
                                 活動列表
                             </a>
-                            <a class="card-body ml-2 d-flex" href="http://localhost/master/activities/event_feedback.php">
+                            <a class="card-body ml-2 d-flex" href="http://localhost/master/pages/activities/event_feedback.php">
                                 活動回饋
                             </a>
                         </div>
