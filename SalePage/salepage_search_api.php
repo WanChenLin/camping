@@ -16,13 +16,14 @@ $result = [
 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
+
 $where_sql = " WHERE 1 = 1 ";
 if(isset($_POST["query"]) && strlen($_POST["query"]) > 0)
 {
     $q = $_POST["query"];
     $where_sql .= sprintf(" AND salepage_name LIKE '%%%s%%' ", $q);
 }
-
+//用if else判斷如何顯示
 if(isset($_POST["cate"]) && strlen($_POST["cate"]) > 0)
 {
     $c = $_POST["cate"];

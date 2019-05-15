@@ -25,6 +25,17 @@ $page_name = 'salepage_list.php';
    margin:5px;
 }
 
+.salepage_creat {
+    color: white;
+    font-size: 16px;
+}
+
+.salepage_creat:hover {
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+}
+
 .table-hidden thead th[data-th="其他"]{ width:400px;}
 /*因為 tbody 多了卷軸 尺寸多了 17px*/
 .table-hidden tbody td[data-th="其他"]{ width:383px;}
@@ -41,9 +52,40 @@ $page_name = 'salepage_list.php';
         </ol>
         </nav>
     </aside>
+
     <div id="saleinfo_bar" class="alert alert-success " role="alert" style="display:none; "></div>
-        <!--搜尋商品的區塊-->
-        <div class="form-group">
+    <section class="postition-relative">
+        <!--搜尋&新增商品的區塊-->
+        <div class="d-flex justify-content-between align-items-center my-3">
+            <div>
+                <a href="salepage_creat.php" class="salepage_creat">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> 新增商品
+                    </button>
+                </a>
+            </div>
+            <form name="formSearch" id="formSearch" class="form-inline" onsubmit="return false">
+            <label for="salepage_quility" class="col-form-label ml-3 ">搜尋商品名稱</label>
+            <input type="text" class="form-control mr-sm-2" id="search_name" name="search_name" placeholder="請輸入關鍵字"
+                value="" > 
+                <!--  -->
+                <label for="salepage_salecateid" class="must" >選擇商品分類</label>
+            <select id="salecateid" name="salecateid" class="custom-select custom-select-sm col-sm-2 mr-sm-2 ">
+                <option value="" selected>請選擇</option>
+                <option value="1">冷凍食品</option>
+                <option value="2">冷藏食品</option>
+                <option value="3">生鮮食材</option>
+                <option value="4">素料理專區</option>
+            </select>  
+            <button id="search_btn" type="submit" class="btn btn-primary " > <i class="fas fa-search"></i> </button>
+            </div>
+
+                  
+            
+        
+           
+
+        <!-- <div class="form-group">
             <label for="salepage_salecateid" class="must" >選擇商品分類</label>
             <select id="salecateid" name="salecateid" class="custom-select custom-select-sm col-sm-2 ">
                 <option value="" selected>請選擇</option>
@@ -52,69 +94,77 @@ $page_name = 'salepage_list.php';
                 <option value="3">生鮮食材</option>
                 <option value="4">素料理專區</option>
             </select>  
-        </div>
-        <div class="form-group row">
+        </div> -->
+        <!-- <div class="form-group row">
             <label for="salepage_quility" class="col-form-label ml-3 ">搜尋商品名稱</label>
             <div class="ml-1">
             <input type="text" class="form-control" id="search_name" name="search_name" placeholder="請輸入關鍵字"
                 value="" >       
             </div>
-        </div>
+        </div> -->
 
-        <div class="form-group row after_sub text-center mr-2 ml-2">
+        <!-- <div class="form-group row after_sub text-center mr-2 ml-2">
             <div class="">
             <button id="search_btn" type="submit" class="btn btn-primary btn-sm" >  搜尋  </button>
             </div>
-        </div>
+        </div> -->
         <!-- <button id="search_btn" type="submit" class="btn btn-primary btn-sm" >搜尋</button> -->
 
-<div class="container-fluid table-responsive " >
+
     <!-- 分頁 -->
-    <div class="row text-center">
+    <div class="d-flex justify-content-end">
+        <nav aria-label="Page navigation">
+            <ul class="pagination pagination-sm">
+
+            </ul>
+        </nav>
+    </div>
+    <!-- 舊分頁 -->
+    <!-- <div class="row text-center">
         <div class="col-lg-12">
             <nav>
-                <ul class="pagination pagination-sm justify-content-end"></ul>                 
+                <ul class="pagination pagination-sm justify-content-end">
+                </ul>                 
             </nav>
         </div>
-    </div>
+    </div> -->
 
+    <!-- 顯示清單 -->
     <div class="row table-responsive ">
-        <div class="col-lg-12">
-            <table class="table table-striped table-bordered table-hove table-hidden ">
-                <thead>
-                <tr  style=" white-space:nowrap;" >
-                <!--  加就不自動換行了style=" white-space:nowrap" -->
-                                        
-                    <th scope="col" style= "width:20px;">商品頁序號</th>
-                    <th scope="col"  style= "width:100px;">商品主圖</th>
-                    <th  style="height:100px; width:100px; overflow:hidden; " scope="col">產品名稱</th>
-                    <th scope="col">商品數量</th>
-                    <th scope="col">建議售價</th>
-                    <th scope="col">售價</th>
-                    <th scope="col">成本</th>
-                    <th scope="col">顯示設定</th>
-                    <th scope="col">商品特色</th>
-                    <!-- <th scope="col">詳細說明</th> -->
-                    <!-- <th scope="col">商品規格</th>
-                    <th scope="col">付款方式</th>
-                    <th scope="col">配送方式</th> -->
-                    <th scope="col">商品分類名稱</th>
-                    <th scope="col">操作</th>
-                </tr>
-                </thead>
-
-                <tbody id="data_body" style="font-size:14px;" >
-                </tbody>
-
-            </table>
-            
-        </div>
-        
+        <table class="table table-striped table-bordered table-hove table-hidden ">
+            <thead>
+            <tr  style=" white-space:nowrap;" >
+            <!--  加就不自動換行了style=" white-space:nowrap" -->
+                <th scope="col" style= "width:20px;">商品頁序號</th>
+                <th scope="col"  style= "width:100px;">商品主圖</th>
+                <th  style="height:100px; width:100px; overflow:hidden; " scope="col">產品名稱</th>
+                <th scope="col">商品數量</th>
+                <th scope="col">建議售價</th>
+                <th scope="col">售價</th>
+                <th scope="col">成本</th>
+                <th scope="col">顯示設定</th>
+                <th scope="col">商品特色</th>
+                <!-- <th scope="col">詳細說明</th> -->
+                <!-- <th scope="col">商品規格</th>
+                <th scope="col">付款方式</th>
+                <th scope="col">配送方式</th> -->
+                <th scope="col">商品分類名稱</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody id="data_body" style="font-size:14px;" >
+            </tbody>
+        </table>
     </div>
-
-   
-</div>
+    <div class="userbook_wrap position-absolute"></div>
+</section>
 </main>
+
+<!-- SweetAlert2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<!-- Tiny Nice Confirmation -->
+<link rel="stylesheet" href="HPCF/H-confirm-alert.css" />
+<script type="text/javascript" src="HPCF/H-confirm-alert.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>    
@@ -135,14 +185,17 @@ $page_name = 'salepage_list.php';
                             <td><%= salepage_state == 1 ? "顯示" : "不顯示" %></td>
                             <td><%= salepage_feature %></td>
                             <td><%= salecate_name %></td>
-                            <td>
-                            <a href="salepage_edit.php?salepage_id=<%= salepage_id %>"><i class="fas fa-edit"></i></a>
-                            
-                            <a href="javascript: saledelete(<%= salepage_id %>)">
-                            <i class="fas fa-trash-alt"></i></a>
-                            <br>
-                            <a href="salepage_edit.php?salepage_id=<%= salepage_id %>"><i class="fas fa-info-circle"></i></a>
-                            
+
+                            <td style="font-size: 18px;">
+                           
+                               
+                                <a href="javascript: saledelete(<%= salepage_id %>)"><i class="fas fa-info-circle"></i>
+                                </a>
+                                <a href="salepage_edit.php?salepage_id=<%= salepage_id %>"><i class="fas fa-edit"></i>
+                                </a>
+                                <a href="javascript: saledelete(<%= salepage_id %>)"><i class="fas fa-trash-alt"></i>
+                                </a>
+                                
                             </td>
                         </tr>`;   
     
@@ -341,6 +394,43 @@ $page_name = 'salepage_list.php';
         //         ul_pagi.innerHTML = str;
         //     });
     };
+
+    //sweet-alert
+    // $(".data_body").on("click", ".member_card", function() {
+    //     let salepage_id = $(this).data("salepage_id");
+    //     let salepage_name = $(this).data("salepage_name");
+    //     let salepage_proddetails = $(this).data("salepage_proddetails");
+    //     let salepage_image = $(this).data("salepage_image");
+    //     swalWithBootstrapButtons.fire({
+    //         title: `#${salepage_id} 商品詳細資料`,
+    //         html: `<div class="card my-3 p-2">
+    //                 <div class="row no-gutters position-relative">
+    //                     <div class="col-md-3 d-flex align-items-center">
+    //                         <img src="./${salepage_image}" class="card-img">
+    //                     </div>
+    //                     <div class="col-md-9">
+    //                         <div class="card-body">
+    //                             <div class="">
+    //                                 <div class="row px-3 py-1 my-1 border-bottom">
+    //                                     <div class="col-lg-2 p-0 d-flex align-items-center text-primary">商品名稱</div>
+    //                                     <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${salepage_name}</div>
+    //                                 </div>
+    //                                 <div class="row px-3 py-1 my-1 border-bottom">
+    //                                     <div class="col-lg-2 p-0 d-flex align-items-center text-primary">商品詳細資料</div>
+    //                                     <div class="col-lg-10 p-0 d-flex align-items-center ">&nbsp;${salepage_proddetails}</div>
+    //                                 </div>
+    //                             </div>
+                               
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>`,
+    //         showCloseButton: true,
+    //         confirmButtonText: 'OK',
+    //     })
+    // })
+
+
     window.addEventListener("hashchange", myHashChange);
     myHashChange();
 
