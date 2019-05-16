@@ -12,14 +12,20 @@ $stmt = $pdo->prepare($sql);
         ]);
 
         if($stmt->rowCount()==1) {
-            $result['success'] = true;
-            $result['errorCode'] = 200;
-            $result['errorMsg'] = '';
+            // $result['success'] = true;
+            // $result['errorCode'] = 200;
+            // $result['errorMsg'] = '';
+
         } else {
             $result['errorCode'] = 402;
             $result['errorMsg'] = '資料刪除錯誤';
         }
 
-echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    if(isset($_SERVER['HTTP_REFERER'])){ 
+        $goto = $_SERVER['HTTP_REFERER'];
+    }
+    header("Location: $goto");
+    
+// echo json_encode($result, JSON_UNESCAPED_UNICODE);
 //
 
