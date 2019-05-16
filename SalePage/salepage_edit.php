@@ -16,142 +16,156 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 <?php include __DIR__.'/__html_dbheader.php';?>
 <?php include __DIR__.'/__html_dbnavbar.php';?>
 <style>
-    
+    .asterisk{
+        color:red;
+    }
 </style>
 
 <main class="col-10 bg-white ">
+<!--取消原本的改為麵包屑 -->
     <aside class="my-2">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link" href="salepage_list.php">商品清單</a>
-            </li>
-            <!-- <li class="nav-item">
-            <a class="nav-link" href="member_insert.php">新增資料</a>
-        </li> -->
-            <li class="nav-item">
-                <a class="nav-link active" href="#">修改商品頁</a>
-            </li>
-        </ul>
+        <nav class="bread" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="salepage_list.php">商品管理</a></li>
+                <li class="breadcrumb-item bread_list"><a href="salepage_list.php">商品清單</a></li>
+                <li class="breadcrumb-item active bread_list">修改商品</li>
+            </ol>
+        </nav>
     </aside>
-
-    <section>
+    <!-- edit product -->
+    <section class="">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12"> 
-                <!-- <div id="saleinfo_bar" class="alert alert-success" role="alert" style="display: none"> -->
-                </div>
-                    <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">修改資料</h3>
+                            <div class="row d-flex justify-content-center">
+                                <h5 class="card-title">修改商品資料</h5>
+                            </div>
 
                             <form name="saleform" method="post" action="" onsubmit="return salecheckForm();"> 
                                 <input type="hidden" name="checksale" value="checkcheck">
                                 <input type="hidden" name="salepage_id" value="<?= $row['salepage_id']?>">
-                                
-                                <label for="salepage_salecateid" >*商品分類</label>
-                                <select id="salepage_salecateid" name="salepage_salecateid" class="custom-select custom-select-sm col-sm-4 ">
-                                    <option value="5" selected>請選擇</option>
-                                    <option value="1" <?php echo ($row['salepage_salecateid']==1)?'selected':'' ?>>冷凍食品</option>
-                                    <option value="2" <?php echo ($row['salepage_salecateid']==2)?'selected':'' ?>>冷藏食品</option>
-                                    <option value="3" <?php echo ($row['salepage_salecateid']==3)?'selected':'' ?>>生鮮食材</option>
-                                    <option value="4" <?php echo ($row['salepage_salecateid']==4)?'selected':'' ?>>素料理專區</option>
-                                </select>
-                                <br><br>
-                                <!-- https://stackoverflow.com/questions/6197377/how-to-set-the-value-for-radio-buttons-when-edit -->
-
-                                <div class="form-group">
-                                    <label for="salepage_name">*產品名稱</label>
-                                    <textarea class="form-control" id="salepage_name" name="salepage_name" cols="30" rows="3" placeholder=""
-                                        value=""><?= $row['salepage_name']?></textarea>
-                                    <small id="salepage_nameHelp" class="form-text text-muted"></small>
+                                <!-- 商品分類 -->
+                                <div class="form-group row d-flex justify-content-center">
+                                    <label for="salepage_salecateid" class="col-sm-2 col-form-label" >商品分類 <span class="asterisk"> *</span></label>
+                                    <div class="col-sm-6">
+                                    <select id="salepage_salecateid" name="salepage_salecateid" class="custom-select custom-select-sm ">
+                                        <option value="5" selected>請選擇</option>
+                                        <option value="1" <?php echo ($row['salepage_salecateid']==1)?'selected':'' ?>>冷凍食品</option>
+                                        <option value="2" <?php echo ($row['salepage_salecateid']==2)?'selected':'' ?>>冷藏食品</option>
+                                        <option value="3" <?php echo ($row['salepage_salecateid']==3)?'selected':'' ?>>生鮮食材</option>
+                                        <option value="4" <?php echo ($row['salepage_salecateid']==4)?'selected':'' ?>>素料理專區</option>
+                                    </select>
+                                    </div>
+                                    
+                                    <br><br>
+                                    <!-- https://stackoverflow.com/questions/6197377/how-to-set-the-value-for-radio-buttons-when-edit -->
                                 </div>
-
-                                <div class="form-group row">
-                                    <label for="salepage_quility" class="col-sm-4 col-form-label">商品數量</label>
-                                    <div class="col-sm-4">
+                               <!-- 商品品牌 -->
+                               <div class="form-group row d-flex justify-content-center">
+                                <label for="salepage_salebrand" class="col-sm-2 col-form-label">商品品牌 <span class="asterisk"> *</span></label>
+                                <div class="col-sm-6">
+                                <select id="salepage_salebrand" name="salepage_salebrand" class="custom-select custom-select-sm">
+                                        <option value="5" selected>請選擇</option>
+                                        <option value="1" <?php echo ($row['salepage_salebrand']==1)?'selected':'' ?>>桂冠</option>
+                                        <option value="2" <?php echo ($row['salepage_salebrand']==2)?'selected':'' ?>>紅龍</option>
+                                        <option value="3" <?php echo ($row['salepage_salebrand']==3)?'selected':'' ?>>七里香</option>
+                                        <option value="4" <?php echo ($row['salepage_salebrand']==4)?'selected':'' ?>>西北</option>
+                                    </select>
+                                </div>
+                                    
+                               </div>
+                               <!-- 商品名稱 -->
+                                <div class="form-group row d-flex justify-content-center">
+                                    <label for="salepage_name" class="col-sm-2 col-form-label">商品名稱 <span class="asterisk"> *</span></label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" id="salepage_name" name="salepage_name" cols="10" rows="3" placeholder=""
+                                        value=""><?= $row['salepage_name']?></textarea>
+                                        <small id="salepage_nameHelp" class="form-text text-muted"></small>
+                                    </div>
+                                </div>
+                                <!-- 商品數量 -->
+                                <div class="form-group row d-flex justify-content-center">
+                                    <label for="salepage_quility" class="col-sm-2 col-form-label" >商品數量</label>
+                                    <div class="col-sm-6">
                                     <input type="text" class="form-control" id="salepage_quility" name="salepage_quility" placeholder=""
                                         value="<?= $row['salepage_quility']?>" >
                                         <small id="salepage_quilityHelp" class="form-text text-muted"></small>       
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
-                                    <label for="salepage_suggestprice" class="col-sm-4 col-form-label">商品建議售價</label>
-                                    <div class="col-sm-4">
+                                <!-- 商品建議售價 -->
+                                <div class="form-group row d-flex justify-content-center">
+                                    <label for="salepage_suggestprice" class="col-sm-2 col-form-label">商品建議售價</label>
+                                    <div class="col-sm-6">
                                     <input type="text" class="form-control" id="salepage_suggestprice" name="salepage_suggestprice" placeholder=""
                                         value="<?= $row['salepage_suggestprice']?>" >
                                         <small id="salepage_suggestpriceHelp" class="form-text text-muted"></small>       
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
-                                    <label for="salepage_price" class="col-sm-4 col-form-label">售價</label>
-                                    <div class="col-sm-4">
+                                <!-- 商品售價 -->
+                                <div class="form-group row d-flex justify-content-center">
+                                    <label for="salepage_price" class="col-sm-2 col-form-label">售價</label>
+                                    <div class="col-sm-6">
                                     <input type="text" class="form-control" id="salepage_price" name="salepage_price" placeholder=""
                                         value="<?= $row['salepage_price']?>" >
                                         <small id="salepage_priceHelp" class="form-text text-muted"></small>       
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
-                                    <label for="salepage_cost" class="col-sm-4 col-form-label">成本</label>
-                                    <div class="col-sm-4">
+                                <!-- 成本 -->
+                                <div class="form-group row d-flex justify-content-center">
+                                    <label for="salepage_cost" class="col-sm-2 col-form-label">成本</label>
+                                    <div class="col-sm-6">
                                     <input type="text" class="form-control" id="salepage_cost" name="salepage_cost" placeholder=""
                                         value="<?= $row['salepage_cost']?>" >
                                         <small id="salepage_costHelp" class="form-text text-muted"></small>       
                                     </div>
                                 </div>
-
-
-                                <div class="form-group row">
+                                <!-- 商品圖 -->
+                                <div class="form-group row d-flex justify-content-center">
                                     <label for="saleimg" class="col-sm-2 col-form-label">商品圖</label>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-6">
                                         <input type="hidden" id="salepage_image" name="salepage_image" value="<?= $row['salepage_image']?>">
                                         <img id="myimg" src="<?= $row['salepage_image']?>" alt="" width="100px">                                
                                         <input type="file" id="my_file" name="my_file">
                                     </div>
                                 </div>
-
-                                <!-- 修改網站顯示設定 -->
-
-                                <div class="form-group">
-                                    <label for="salepage_feature">商品特色</label>
+                                <!-- 商品特色 -->
+                                <div class="form-group row d-flex justify-content-center">
+                                    <label for="salepage_feature" class="col-sm-2 col-form-label" >商品特色</label>
                                     <small id="salepage_featureHelp" class="form-text text-muted"></small>
-                                    <textarea class="form-control" id="salepage_feature" name="salepage_feature" cols="30" rows="3"><?= $row['salepage_feature']?></textarea><br>
+                                    <div class="col-sm-6" >
+                                    <textarea class="form-control " id="salepage_feature" name="salepage_feature" cols="30" rows="3"><?= $row['salepage_feature']?></textarea><br>
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="salepage_state">網站顯示設定</label>
-                                    <div class="form-check form-check-inline">
+                                <!-- 網站顯示設定 -->
+                                <div class="form-group row d-flex justify-content-center">
+                                    <label for="salepage_state" class="col-sm-2 col-form-label" >網站顯示設定</label>
+                                    <div class="form-check form-check-inline col-sm-6"><div>
                                         <input class="form-check-input" type="radio" name="salepage_state" id="salepage_state" value=1 <?php echo ($row['salepage_state']==1)?'checked':'' ?>>
                                         <label class="form-check-label" for="salepage_state">顯示</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="salepage_state" id="salepage_state" value=0 <?php echo ($row['salepage_state']==0)?'checked':'' ?>>
-                                        <label class="form-check-label" for="salepage_state">不顯示</label>
-                                        </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="salepage_proddetails">詳細說明</label>
-                                    <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
-                                    <textarea class="form-control" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ><?= $row['salepage_proddetails']?></textarea><br>
-                                </div>
-
-                                <div id="saleinfo_bar" class="alert alert-success " role="alert" style="display:none; "></div>    
-                                    
-                                    <div class="form-group row after_sub text-center">
-                                        <div class="col-sm-12">
-                                            <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定修改'>
-                                            <!-- <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定新增'> -->
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="salepage_state" id="salepage_state" value=0 <?php echo ($row['salepage_state']==0)?'checked':'' ?>>
+                                            <label class="form-check-label" for="salepage_state">不顯示</label>
                                         </div>
                                     </div>
-                                            
+                                </div>
+                                <!-- 詳細說明 -->
+                                <div class="form-group row d-flex justify-content-center">
+                                    <label for="salepage_proddetails" class="col-sm-2 col-form-label" >詳細說明</label>
+                                    <small id="salepage_proddetailsHelp" class="form-text text-muted"></small>
+                                </div>
+                                <textarea class="form-control col-sm-8" id="salepage_proddetails" name="salepage_proddetails" cols="30" rows="3" ><?= $row['salepage_proddetails']?></textarea><br>
+                                <!-- 修改成功/失敗顯示info -->
+                                <div id="saleinfo_bar" class="alert alert-success " role="alert" style="display:none; "></div>    
+                                <!-- 確定修改地按鈕 -->
+                                <div class="form-group row after_sub text-center">
+                                    <div class="col-sm-12">
+                                        <input id="salesubmit_btn" type="submit" class="btn btn-primary" onClick="CKupdate()" value='確定修改'>
+                                        <!-- <input id="salesubmit_btn" type="submit" class="btn btn-primary" value='確定新增'> -->
+                                    </div>
+                                </div>          
                             </form>
                         </div>
-                    </div>
                 </div>
-            </div>
         </div>
     </section>  
 </main>

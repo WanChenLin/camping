@@ -15,6 +15,7 @@ $salepage_id = isset($_POST['salepage_id']) ? intval($_POST['salepage_id']) : 0;
 if(isset($_POST['salepage_name']) and !empty($salepage_id))
 {
     $salecateid = $_POST['salepage_salecateid'];
+    $salebrand = $_POST['salepage_salebrand'];
     $name = $_POST['salepage_name'];
     $sutprice = $_POST['salepage_suggestprice'];
     $price = $_POST['salepage_price'];
@@ -25,7 +26,7 @@ if(isset($_POST['salepage_name']) and !empty($salepage_id))
 
     $result['post'] = $_POST;  // 做 echo 檢查
 
-    if(empty($name) or empty($price)){
+    if(empty($name) or empty($price) or empty($salebrand)){
         $result['errorCode'] = 400;
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
         exit;
@@ -33,6 +34,7 @@ if(isset($_POST['salepage_name']) and !empty($salepage_id))
 
     $sql = "UPDATE `salepage` SET 
                 `salepage_salecateid`=?,
+                `salepage_salebrand`=?,
                 `salepage_name`=?,
                 `salepage_suggestprice`=?,
                 `salepage_price`=?,
@@ -49,6 +51,7 @@ if(isset($_POST['salepage_name']) and !empty($salepage_id))
 
         $stmt->execute([
             $_POST['salepage_salecateid'],
+            $_POST['salepage_salebrand'],
             $_POST['salepage_name'],
             $_POST['salepage_suggestprice'],
             $_POST['salepage_price'],
