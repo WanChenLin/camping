@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery H-confirm-alert Demo</title>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<link rel="stylesheet" href="HPCF/H-confirm-alert.css" />
+		<script type="text/javascript" src="HPCF/H-confirm-alert.js" ></script>
+        <style>
+        body { font-family:'Open Sans';}
+        </style>
+	</head>
+	<body>
+    <h1 style="margin:70px auto; text-align:center">jQuery H-confirm-alert Demo</h1>
+    <!-- <div class="jquery-script-ads" align="center"> -->
+			<!-- <script type="text/javascript">
+			google_ad_client = "ca-pub-2783044520727903";
+			/* jQuery_demo */
+			google_ad_slot = "2780937993";
+			google_ad_width = 728;
+			google_ad_height = 90;
+			</script> -->
+			<script>
+
+					$(function () {
+						$.confirm.show({
+							"message": "You Must Be At Least 18 Years Old.", // 顯示內容
+							"type": "danger", //標題顏色類型  success:綠色  danger:紅色  warning:橘色  default:藍色
+							"yes": function () { // 確認按鈕觸發方法 function(){}
+								$.confirm.show({
+									"message": "Welcome!",
+									"noText": "Cancel", // 「取消」按鈕文字
+									"type": "success"
+								})
+							},
+							// "yesText":"是", // 「確認」按鈕文字
+							// "hideYes":false, // 是否隱藏「確認」按鈕	
+							// "no":undefined, // 取消按鈕觸發方法 function(){}
+							// "noText": "Cancel", // 「取消」按鈕文字
+							// "hideNo":false, // 是否隱藏「取消」按鈕
+						})
+					})
+			
+					var _gaq = _gaq || [];
+					_gaq.push(['_setAccount', 'UA-36251023-1']);
+					_gaq.push(['_setDomainName', 'jqueryscript.net']);
+					_gaq.push(['_trackPageview']);
+			
+					(function () {
+						var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+						ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+					})();
+			
+				</script>
+</html>
