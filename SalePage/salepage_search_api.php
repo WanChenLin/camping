@@ -23,6 +23,12 @@ if(isset($_POST["query"]) && strlen($_POST["query"]) > 0)
     $q = $_POST["query"];
     $where_sql .= sprintf(" AND salepage_name LIKE '%%%s%%' ", $q);
 }
+//搜尋品牌名稱
+// if(isset($_POST["query"]) && strlen($_POST["query"]) > 0)
+// {
+//     $b = $_POST["query"];
+//     $where_brand .= sprintf(" AND salepage_salebrand LIKE '%%%s%%' ", $q);
+// }
 //用if else判斷如何顯示
 if(isset($_POST["cate"]) && strlen($_POST["cate"]) > 0)
 {
@@ -60,7 +66,8 @@ salepage_paymenttype,
 salepage_deliverytype, 
 -- 括號裡是一個 statemen, 用 AS 給他一個欄位名稱                    
 (SELECT salecate_name FROM salecategory WHERE salecate_id = salepage_salecateid) AS salecate_name,
-salepage_image
+salepage_image,
+(SELECT salebrand_name FROM salebrand WHERE salebrand_id = salepage_salebrand) AS salebrand_name
 FROM salepage 
 %s
 ORDER BY salepage_id DESC LIMIT %s, %s", $where_sql, ($page-1)*$per_page, $per_page);    
