@@ -20,7 +20,8 @@ $result = [
     $state = $_POST['salepage_state'];
     //ckeditor
     $details = $_POST['salepage_proddetails'];
-    $salecateid = $_POST['salepage_salecateid'];    
+    $salecateid = $_POST['salepage_salecateid']; 
+    $salebrand = $_POST['salepage_salebrand'];    
 
     $result['post'] = $_POST;  // 做 echo 檢查
 
@@ -38,6 +39,14 @@ $result = [
         exit;
     }
 
+    //未選擇品牌
+    if(empty($salebrand) ){
+        $result['errorCode'] = 400;
+        $result['errorMsg'] = '請選擇品牌';
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
     // $filename = sha1($_FILES['my_file']['name']);
     // $file = "/sale_pictures/".$filename;
 
@@ -46,9 +55,9 @@ $result = [
             `salepage_price`, `salepage_cost`, 
             `salepage_feature`, `salepage_state`,
             `salepage_proddetails`, `salepage_salecateid`,
-            `salepage_image`, `salepage_quility`
+            `salepage_image`, `salepage_quility`,`salepage_salebrand`
             ) VALUES (
-              ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+              ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             )";    
 
         $stmt = $pdo->prepare($sql);
@@ -63,7 +72,8 @@ $result = [
             $_POST['salepage_proddetails'],
             $_POST['salepage_salecateid'],
             $_POST['salepage_image'],
-            $_POST['salepage_quility']
+            $_POST['salepage_quility'],
+            $_POST['salepage_salebrand']
         ]);
 
         if($stmt->rowCount()==1) {
