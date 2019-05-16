@@ -13,7 +13,7 @@
     <script src="./bootstrap/js/bootstrap.bundle.js"></script>
     <script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
 
-    <title>Document</title>
+    <title>商品管理</title>
 
     <style>
         body {
