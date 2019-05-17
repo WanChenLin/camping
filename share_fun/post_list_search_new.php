@@ -89,10 +89,15 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a class="<?= $page_name == 'data_insert' ? 'active' : '' ?>" href="new_post_jq.php"><button type="button" class="btn btn-primary">新增文章</button></a>
             </div>
             <div>
+                <!-- <<<<<<< HEAD
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="搜尋文章" aria-label="Search">
                     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-
+======= -->
+                <form class="form-inline my-2 my-lg-0" method="get">
+                    <input class="form-control mr-sm-2" type="search" placeholder="搜尋文章" aria-label="Search" name="search" value="<?= $search ?>">
+                    <input class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="搜尋">
+                    <!-- >>>>>>> c63b19d33d86a395236a73690ba72bff53bb57bb -->
                 </form>
             </div>
         </div>
@@ -165,10 +170,10 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?= htmlentities($row['post_time']) ?></td>
                             <td><?= htmlentities($row['post_editTime']) ?></td>
                             <!-- <td><?= html_entity_decode($row['post_content']) ?></td>
-                                                                                <td><?= htmlentities($row['browse_num']) ?></td>
-                                                                                <td><?= htmlentities($row['share_num']) ?></td>
-                                                                                <td><?= htmlentities($row['cmt_num']) ?></td>
-                                                                                <td><?= htmlentities($row['post_tag']) ?></td> -->
+                                                                            <td><?= htmlentities($row['browse_num']) ?></td>
+                                                                            <td><?= htmlentities($row['share_num']) ?></td>
+                                                                            <td><?= htmlentities($row['cmt_num']) ?></td>
+                                                                            <td><?= htmlentities($row['post_tag']) ?></td> -->
                             <td><?= htmlentities($row['post_visible']) ?></td>
                             <td class="edit">
                                 <a class="to_preview mx-1 p-1" href="">
