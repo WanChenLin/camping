@@ -23,6 +23,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     .asterisk {
         color: red;
     }
+
     .avatar_upload {
         color: red;
     }
@@ -49,7 +50,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="row d-flex justify-content-center">
                     <div class="col-sm-8">
                         <h5 class="card-title text-center">修改會員資料</h5>
-                    </div>  
+                    </div>
                 </div>
 
                 <form name="formInsert" method="POST" onsubmit="return checkForm()">
@@ -327,6 +328,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 err.innerHTML = obj.info;
             })
     })
+    }
 </script>
 
 <!-- tw-city-selector.js -->

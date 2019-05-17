@@ -56,10 +56,10 @@
                             </h2>
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                            <a class="card-body ml-2 d-flex" href="..\share_fun\post_list.php">
+                            <a class="card-body ml-2 d-flex" href="">
                                 新手指南
                             </a>
-                            <a class="card-body ml-2 d-flex" href="#">
+                            <a class="card-body ml-2 d-flex" href="">
                                 達人帶路
                             </a>
                         </div>
@@ -74,10 +74,10 @@
                             </h2>
                         </div>
                         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                            <a class="card-body ml-2 d-flex" href="..\SalePage\salepage_list.php">
+                            <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/saleProduct/salepage_list.php">
                                 商品清單
                             </a>
-                            <a class="card-body ml-2 d-flex" href="..\SalePage\salepage_creat.php">
+                            <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/saleProduct/salepage_creat.php">
                                 建立商品頁
                             </a>
                         </div>
@@ -95,7 +95,7 @@
                             <a class="card-body ml-2 d-flex" href="">
                                 營地列表
                             </a>
-                            <a class="card-body ml-2 d-flex" href="..\host_menu.php">
+                            <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/host/host_list.php">
                                 營地主管理
                             </a>
                         </div>
@@ -110,11 +110,17 @@
                             </h2>
                         </div>
                         <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-                            <a class="card-body ml-2 d-flex" href="..\marketing\_plan_list.php">
-                                行銷方案管理
+                            <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/promo/promo_list.php">
+                                優惠方案管理
                             </a>
-                            <a class="card-body ml-2 d-flex" href="..\marketing\_list_coupon.php">
-                                Coupon管理
+                            <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/promo/promo_apply_list.php">
+                                優惠方案參加紀錄管理
+                            </a>
+                            <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/coupon/coupon_genre_list.php">
+                                優惠券管理
+                            </a>
+                            <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/coupon/coupon_gain_list.php">
+                                優惠券獲取紀錄管理
                             </a>
                         </div>
                     </div>
