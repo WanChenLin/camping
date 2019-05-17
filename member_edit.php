@@ -23,6 +23,9 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     .asterisk {
         color: red;
     }
+    .avatar_upload {
+        color: red;
+    }
 </style>
 
 <main class="col-10 bg-white">
@@ -45,35 +48,37 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             <!-- <div class="card"> -->
                 <div class="card-body">
                     <div class="row d-flex justify-content-center">
-                        <h5 class="card-title">修改會員資料</h5>
+                        <div class="col-sm-8">
+                            <h5 class="card-title text-center">修改會員資料</h5>
+                        </div>
                     </div>
 
                     <form name="formInsert" method="POST" onsubmit="return checkForm()">
                         <input type="hidden" name="gotodb" value="check">
                         <input type="hidden" name="mem_id" value="<?= $row['mem_id'] ?>">
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="account" class="col-sm-2 col-form-label">帳號名稱<span class="asterisk"> *</span></label>
+                            <label for="account" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>帳號名稱</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="account" name="account" placeholder="" value="<?= $row['mem_account'] ?>">
                                 <small id="accountHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="password" class="col-sm-2 col-form-label">密碼<span class="asterisk"> *</span></label>
+                            <label for="password" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>密碼</label>
                             <div class="col-sm-6">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="" value="<?= $row['mem_password'] ?>">
                                 <small id="passwordHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="password_check" class="col-sm-2 col-form-label">確認密碼<span class="asterisk"> *</span></label>
+                            <label for="password_check" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>確認密碼</label>
                             <div class="col-sm-6">
                                 <input type="password" class="form-control" id="password_check" name="password_check" placeholder="" value="">
                                 <small id="password_checkHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="avatar" class="col-sm-2 col-form-label">大頭貼</label>
+                            <label for="avatar" class="col-sm-2 col-form-label text-right rwd-text">大頭貼</label>
                             <div class="col-sm-6">
                                 <input type="hidden" id="avatar_pictures" name="avatar_pictures" value="<?= $row['mem_avatar'] ?>">
                                 <img id="myimg" src="./<?= $row['mem_avatar'] ?>" height="100px">
@@ -83,17 +88,18 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <!-- <img id="myimg" src="" alt="" height="100px">
                                 <p class="avatar_upload d-inline" id="err"></p>
                                 <input type="file" id="my_file" name="my_file"> -->
+                                <span class="avatar_upload d-block" id="err"></span>
                             </div>
                         </div>
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="name" class="col-sm-2 col-form-label">姓名<span class="asterisk"> *</span></label>
+                            <label for="name" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>姓名</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="" value="<?= $row['mem_name'] ?>">
                                 <small id="nameHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="nickname" class="col-sm-2 col-form-label">暱稱</label>
+                            <label for="nickname" class="col-sm-2 col-form-label text-right rwd-text">暱稱</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nickname" name="nickname" placeholder="此暱稱將同步用於分享樂" value="<?= $row['mem_nickname'] ?>">
                                 <small id="nicknameHelp" class="form-text text-muted"></small>
@@ -101,7 +107,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         </div>
                         <fieldset class="form-group">
                             <div class="row d-flex justify-content-center">
-                                <label for="gender" class="col-form-label col-sm-2 pt-0">性別</label>
+                                <label for="gender" class="col-form-label col-sm-2 pt-0 text-right rwd-text">性別</label>
                                 <div class="col-sm-2">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="gender" id="gender" value="male" <?= ($row['mem_gender']=='male') ? 'checked':'' ?>>
@@ -118,21 +124,21 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                             </div>
                         </fieldset>
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="birthday" class="col-sm-2 col-form-label">生日</label>
+                            <label for="birthday" class="col-sm-2 col-form-label text-right rwd-text">生日</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="birthday" name="birthday" placeholder="格式: YYYY-MM-DD" value="<?= $row['mem_birthday'] ?>">
                                 <small id="birthdayHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="mobile" class="col-sm-2 col-form-label">手機<span class="asterisk"> *</span></label>
+                            <label for="mobile" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>手機</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="mobile" name="mobile" placeholder="格式: 0912345678" value="<?= $row['mem_mobile'] ?>">
                                 <small id="mobileHelp" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="email" class="col-sm-2 col-form-label">信箱<span class="asterisk"> *</span></label>
+                            <label for="email" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>信箱</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="email" name="email" placeholder="" value="<?= $row['mem_email'] ?>">
                                 <small id="emailHelp" class="form-text text-muted"></small>
@@ -141,7 +147,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         <div role="tw-city-selector" data-bootstrap-style data-has-zipcode>
                             <div class="form-group address_api">
                                 <div class="row d-flex justify-content-center">
-                                    <label for="address" class="col-sm-2 col-form-label">地址</label>
+                                    <label for="address" class="col-sm-2 col-form-label text-right rwd-text">地址</label>
                                     <div class="col-sm-1 d-flex">
                                         <input type="text" name="address[]" class="zipcode border-0" readonly placeholder="郵遞區號" size="5" autocomplete="off">
                                     </div>
@@ -163,7 +169,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                         <div class="form-group row d-flex justify-content-center">
-                            <label for="email" class="col-sm-2 col-form-label">等級<span class="asterisk"> *</span></label>
+                            <label for="email" class="col-sm-2 col-form-label text-right rwd-text"><span class="asterisk">* </span>等級</label>
                             <div class="col-sm-6">
                                 <select class="form-control" name="level" id="level">
                                     <option value="1" <?= ($row['memLevel_id']=='1') ? 'selected':'' ?>>1 露營新手</option>
@@ -204,6 +210,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     const info_bar = document.querySelector('#info_bar');
     const submit_btn = document.querySelector('#submit_btn');
+    const err = document.querySelector('#err');
 
     const edit_success = () => {
         Swal.fire({
@@ -325,7 +332,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 console.log(obj);
                 myimg.setAttribute('src', 'avatar_pictures/' + obj.filename); // 設定img屬性
                 avatar_pictures.setAttribute('value', 'avatar_pictures/' + obj.filename);
-                // err.innerHTML = obj.info;
+                err.innerHTML = obj.info;
             })
     });
 
