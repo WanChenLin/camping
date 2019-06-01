@@ -18,8 +18,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- CKeditor -->
     <script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
+    <!-- LightBox -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
 
-    <title>Go Camping 後台管理系統</title>
+
+    <title>GO CAMPING 趣露營 - 後台管理系統</title>
 
     <style>
         body {

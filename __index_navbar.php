@@ -56,10 +56,10 @@
                             </h2>
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                            <a class="card-body ml-2 d-flex" href="">
+                            <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/share_fun/post_list_search_new.php">
                                 新手指南
                             </a>
-                            <a class="card-body ml-2 d-flex" href="">
+                            <a class="card-body ml-2 d-flex" href="#">
                                 達人帶路
                             </a>
                         </div>
