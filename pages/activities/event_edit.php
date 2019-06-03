@@ -228,8 +228,17 @@ if (isset($_POST['event_name']) and isset($_POST['event_intro']) and isset($_POS
                                 case '1':
                                     echo '下架中';
                                     break;
+                                case '2':
+                                    echo '活動結束下架';
+                                    break;
                                 case '3':
                                     echo '頁面預告';
+                                    break;
+                                case '4':
+                                    echo '活動取消(未達基本人數)';
+                                    break;
+                                case '5':
+                                    echo '活動取消(不可抗力因素)';
                                     break;
                                 default:
                                     echo '';
@@ -238,7 +247,10 @@ if (isset($_POST['event_name']) and isset($_POST['event_intro']) and isset($_POS
 
                         <option value="0">上架</option>
                         <option value="1">下架</option>
+                        <option value="2">活動結束下架</option>
                         <option value="3">頁面預告</option>
+                        <option value="4">活動取消(未達基本人數)</option>
+                        <option value="5">活動取消(不可抗力因素)</option>
                     </select>
                     <small id="camp_idHelp" class="form-text text-muted"></small>
                 </div>

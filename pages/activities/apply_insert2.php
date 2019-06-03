@@ -210,7 +210,7 @@ if (isset($_POST['checkme'])) {
             </div>
             <div class="form-row justify-content-center mt-2 d-none" id="submit_btns">
                 <button type="submit" class="btn btn-primary mr-2" id="submit">確定報名</button>
-                <a class="btn btn-outline-primary" id="back" style="color:blue">回上一頁</a>
+                <a class="btn btn-outline-primary" id="back">回上一頁</a>
             </div>
         </form>
 

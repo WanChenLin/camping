@@ -21,12 +21,151 @@
     <!-- LightBox -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
 
-
     <title>GO CAMPING 趣露營 - 後台管理系統</title>
 
     <style>
         body {
             font-family: Arial, "微軟正黑體";
+        }
+
+        header {
+            box-shadow: 0px 2px 1px 0 #ccc;
+        }
+        .logo {
+            width: 260px;
+        }
+        .header_title {
+            color: #707070;
+        }
+
+        .accordion .card .card-header .btn {
+            color: #707070;
+        }
+        .accordion .card .card-header .btn:hover {
+            color: #f2ce63;
+        }
+        .accordion .card .collapsing a.card-body {
+            color: #ba7438;
+        }
+        .accordion .card .collapse a.card-body {
+            color: #ba7438;
+        }
+
+        /* 按鈕樣式 */
+        .btn.btn-primary {
+            color: #ffffff;
+            background-color: #87b061;
+            border: 1px solid transparent;
+        }
+        .btn.btn-primary:hover,
+        .btn.btn-primary:active, .btn.btn-primary.active,
+        .btn.btn-primary:focus, .btn.btn-primary.focus,
+        .btn.btn-primary:active:focus, .btn.btn-primary.active:focus {
+            color: #ffffff;
+            background-color: #027252;
+            border: 1px solid transparent;
+            outline: none;
+            box-shadow: none;
+        }
+        .btn.btn-danger {
+            color: #ffffff;
+            background-color: #f26666;
+            border: 1px solid transparent;
+        }
+        .btn.btn-danger:hover,
+        .btn.btn-danger:active, .btn.btn-danger.active,
+        .btn.btn-danger:focus, .btn.btn-danger.focus,
+        .btn.btn-danger:active:focus, .btn.btn-danger.active:focus {
+            color: #ffffff;
+            background-color: #db1c1c;
+            border: 1px solid transparent;
+            outline: none;
+            box-shadow: none;
+        }
+        .btn-outline-primary {
+            color: #87b061;
+            background-color: #ffffff;
+            border: 1px solid #87b061;
+        }
+        .btn.btn-outline-primary:hover,
+        .btn.btn-outline-primary:active, .btn.btn-outline-primary.active,
+        .btn.btn-outline-primary:focus, .btn.btn-outline-primary.focus,
+        .btn.btn-outline-primary:active:focus, .btn.btn-outline-primary.active:focus {
+            color: #ffffff;
+            background-color: #87b061;
+            border: 1px solid #87b061;
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* 頁碼樣式 */
+        .pagination .page-item:hover .page-link {
+            background-color: #027252;
+            border-color: #027252; 
+            color: #ffffff;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #87b061;    
+            border-color: #87b061; 
+            color: #ffffff;
+        }
+        .pagination .page-item a.page-link {
+            color: #027252;
+        }
+
+        /* 麵包屑 */
+        .breadcrumb-item a {
+            color: #87b061;
+        }
+        .breadcrumb-item a:hover {
+            color: #027252;
+        }
+
+        /* 操作各icon樣式 */
+        .fas.fa-user-circle, .fas.fa-edit, .fas.fa-trash-alt, .fas.fa-info-circle, .fas.fa-eye {
+            color: #87b061;
+        }
+        .fas.fa-user-circle:hover, .fas.fa-edit:hover, .fas.fa-trash-alt:hover, .fas.fa-info-circle:hover, .fas.fa-eye:hover {
+            color: #027252;
+        }
+
+        /* sweetalert內頁 */
+        .text-primary { color: #87b061 !important; }
+
+        /* 活動 */
+        .text-primary.nav-link.check_info:hover {
+            color:#027252 !important;
+        }
+        tbody#myTable tr td a {
+            color: #87b061;
+        }
+        tbody#myTable tr td a:hover {
+            color: #027252;
+        }
+        #submit_btns #back {
+            color: #87b061;
+        }
+        #submit_btns #back:hover {
+            color: #ffffff;
+        }
+        a.cost_a {
+            color: #87b061;
+        }
+        a.cost_a:hover {
+            color: #027252;
+        }
+        /* 分享樂 */
+        td.post_title a {
+            text-decoration: none;
+            color: #87b061;
+        }
+        td.post_title a:hover { color: #027252; }
+        /* 營地列表 */
+        li.nav-item a.nav-link {
+            color: #87b061;
+        }
+        li.nav-item a.nav-link:hover {
+            color: #027252;
         }
 
         .box {

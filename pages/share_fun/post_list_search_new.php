@@ -177,7 +177,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <a class="to_preview mx-1 p-1" href="">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a class="mx-1 p-1" href="javascript: delete_it(<?= $row['post_id'] ?>)">
+                                    <a class="mx-1 p-1 delete_it" data-delete="<?= $row['post_id'] ?>" href="#">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     <a class="mx-1 p-1" href="post_edit_jq.php?post_id=<?= $row['post_id'] ?>">
@@ -200,7 +200,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <script>
     // $(window).ready();
 
-    $("table").on("click", ".delete", function delete_it(post_id) {
+    $("table").on("click", ".edit", function delete_it(post_id) {
         let post_title = $(this).closest("tr").find(".post_title").data("title");
         let delete_it = $(this).find(".delete_it").data("delete");
 

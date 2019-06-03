@@ -60,9 +60,7 @@
         <div class="d-flex justify-content-between align-items-center my-3">
             <div>
                 <a href="member_insert.php" class="add_member">
-                    <button class="btn btn-primary">
-                        <i class="fas fa-user-plus"></i> 新增會員
-                    </button>
+                    <button class="btn btn-primary">新增會員</button>
                 </a>
             </div>
             <div>

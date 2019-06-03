@@ -113,7 +113,7 @@ $event_name = $rows2->event_name;
                                 <?= $row['mem_account'] ?>
                             </a>
                         </td>
-                        <td><?= $row['apply_num'] ?> <a href="apply_memberList.php?apply_id=<?= $row['apply_id'] ?>" class="" target="_blank"><i class="fas fa-info-circle"></i></a></td>
+                        <td><?= $row['apply_num'] ?> <a href="apply_memberList.php?apply_id=<?= $row['apply_id'] ?>" class="" ><i class="fas fa-info-circle"></i></a></td>
                         <td><?= $row['apply_date'] ?></td>
                         <td><?php $payment = $row['apply_payment'];
                             switch ($payment) {

@@ -84,7 +84,9 @@ $total_page = ceil($total_rows / $per_page);
 
         <ul class="nav nav-pills mt-2 justify-content-between" id="searchBar">
             <li>
-                <h3><a class="nav-link" href="event_insert.php"><i class="fas fa-plus-circle"></i></a></h3>
+                <a href="event_insert.php" class="add_member">
+                    <button class="btn btn-primary">新增文章</button>
+                </a>
             </li>
             <li>
                 <form name="form1" id="form1" method="post" class="form-inline my-2 my-lg-0">
@@ -93,13 +95,13 @@ $total_page = ceil($total_rows / $per_page);
                 </form>
             </li>
         </ul>
-        <ul class="nav nav-pills mt-2 justify-content-end">
+        <ul class="pagination pagination-sm mt-2 justify-content-end">
             <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
                 <a class="page-link" href="?page=<?= $page - 1 ?>">&lt;</a>
             </li>
             <?php for ($i = 1; $i <= $total_page; $i++) : ?>
-                <li class="nav-item">
-                    <a class="nav-link  <?= $i == $page ? 'active' : '' ?>" href="?page=<?= $i ?>"><?= $i ?></a>
+                <li class="page-item  <?= $i == $page ? 'active' : '' ?>">
+                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
                 </li>
             <?php endfor; ?>
             <li class="page-item <?= $page >= $total_page ? 'disabled' : '' ?>">
@@ -155,13 +157,13 @@ $total_page = ceil($total_rows / $per_page);
                         <thead>
                             <tr style="font-size:14px">
                                 <th scope="col" style="width:12vw">活動名稱( <?= $row_search['event_id'] ?> )</th>
-                                <th scope="col">報名日期</th>
-                                <th scope="col">活動日期</th>
-                                <th scope="col">營地名稱(編號)</th>
-                                <th scope="col">活動價格</th>
-                                <th scope="col">人數上限</th>
-                                <th scope="col">已報名人數</th>
-                                <th scope="col">上/下架</th>
+                                <th scope="col"  style="width:10vw">報名日期</th>
+                                <th scope="col"  style="width:10vw">活動日期</th>
+                                <th scope="col"  style="width:12vw">營地名稱(編號)</th>
+                                <th scope="col"  style="width:10vw">活動價格</th>
+                                <th scope="col"  style="width:10vw">人數上限</th>
+                                <th scope="col"  style="width:8vw">已報名人數</th>
+                                <th scope="col"  style="width:10vw">上/下架</th>
                                 <th scope="col" style="width:15vw">備註</th>
                             </tr>
                         </thead>
@@ -174,7 +176,7 @@ $total_page = ceil($total_rows / $per_page);
                                 <td>$ <?= $row_search['event_price'] ?> /人</td>
                                 <td><?= $row_search['event_upLimit'] ?></td>
                                 <td>
-                                    <?= isset($num_data[$row_search['event_id']]) ? $num_data[$row_search['event_id']] : 0 ?><br><a href="apply_orderList.php?event_id=<?= $row_search['event_id'] ?>" class="btn btn-outline-primary" role="button" aria-pressed="true" style="font-size:12px" target="_blank">報名資訊</a>
+                                    <?= isset($num_data[$row_search['event_id']]) ? $num_data[$row_search['event_id']] : 0 ?><br><a href="apply_orderList.php?event_id=<?= $row_search['event_id'] ?>" class="btn btn-outline-primary" role="button" aria-pressed="true" style="font-size:12px" >報名資訊</a>
                                 </td>
                                 <td><?php $shelf = $row_search['event_shelf'];
                                     switch ($shelf) {
@@ -184,8 +186,17 @@ $total_page = ceil($total_rows / $per_page);
                                         case '1':
                                             echo '下架中';
                                             break;
+                                        case '2':
+                                            echo '活動結束下架';
+                                            break;
                                         case '3':
-                                            echo '頁面預告';
+                                            echo '頁面預告中';
+                                            break;
+                                        case '4':
+                                            echo '活動取消(未達基本人數)';
+                                            break;
+                                        case '5':
+                                            echo '活動取消(不可抗力因素)';
                                             break;
                                         default:
                                             echo '';
@@ -313,19 +324,6 @@ $total_page = ceil($total_rows / $per_page);
             </div>
         <?php endforeach ?>
 
-        <ul class="nav nav-pills  mt-2 justify-content-center">
-            <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
-                <a class="page-link" href="?page=<?= $page - 1 ?>">&lt;</a>
-            </li>
-            <?php for ($i = 1; $i <= $total_page; $i++) : ?>
-                <li class="nav-item">
-                    <a class="nav-link  <?= $i == $page ? 'active' : '' ?>" href="?page=<?= $i ?>"><?= $i ?></a>
-                </li>
-            <?php endfor; ?>
-            <li class="page-item <?= $page >= $total_page ? 'disabled' : '' ?>">
-                <a class="page-link" href="?page=<?= $page + 1 ?>">&gt;</a>
-            </li>
-        </ul>
         </div>
         </div>
 

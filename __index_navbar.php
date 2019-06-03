@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             <h2 class="mb-0">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     會員
                                 </button>
                             </h2>
@@ -44,6 +44,9 @@
                             <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/activities/event_feedback.php">
                                 活動回饋
                             </a>
+                            <a class="card-body ml-2 d-flex" href="http://localhost/camping-master/pages/activities/event_listCost.php">
+                                活動收益
+                            </a>
                         </div>
                     </div>
 
@@ -68,7 +71,7 @@
                     <div class="card">
                         <div class="card-header" id="headingFour">
                             <h2 class="mb-0">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                     商品管理
                                 </button>
                             </h2>
